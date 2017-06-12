@@ -2,6 +2,10 @@
 
 class sweet{
 
+    private $module;
+    private $controller;
+    private $action;
+
     public function __autoload($hlClassname) {
         if (class_exists($hlClassname) && interface_exists($hlClassname)) {
             return $hlClassname;
@@ -28,16 +32,28 @@ class sweet{
         }
     }
 
+    public function __construct()
+    {
+        $this->route();
+    }
+
+    private function route()
+    {
+        if(!defined('MODULE') || MODULE == '') defined("MODULE","home");
+        if(!defined('CONTROLLER') || CONTROLLER == '') defined("CONTROLLER","Index");
+        if(!defined('ACTION') || ACTION == '') defined("ACTION","Index");
+        $this->module = empty($_GET['m'])?MODULE:$_GET['m'];
+        $this->controller = empty($_GET['c'])?CONTROLLER:ucfirst($_GET['c']);
+        $this->action = empty($_GET['a'])?ACTION:ucfirst($_GET['a']);
+    }
+
     public function run()
     {
-        $m = isset($_GET['m'])?$_GET['m']:'admin';
-        $a = isset($_GET['a'])?$_GET['a']:'Index';
-        $c = isset($_GET['c'])?$_GET['c']:'index';
-
-        include ROOT_PATH.'/app/'.$m.'/'.$a.'Controller.php';
-        $a = $a.'Controller';
-        $controller = new $a();
-        $controller -> $c();
+        include ROOT_PATH.'/app/'.$this->module.'/'.$this->controller.'Controller.php';
+        $controller = $this->controller.'Controller';
+        $controller = new $controller();
+        $a = $this->action;
+        $controller -> $a();
     }
 
 }
