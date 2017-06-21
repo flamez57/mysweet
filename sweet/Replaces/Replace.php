@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * Computer: Administrator
+ * Date: 2017/6/21 20:12
+ * Author: Flamez57 <1050355217@qq.com>
+ */
 class Replace{
   function hidtel($phone){
     $IsWhat = preg_match('/(0[0-9]{2,3}[\-]?[2-9][0-9]{6,7}[\-]?[0-9]?)/i',$phone); //固定电话
