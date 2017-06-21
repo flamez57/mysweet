@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * Computer: Administrator
+ * Date: 2017/6/21 20:12
+ * Author: Flamez57 <1050355217@qq.com>
+ */
 const DB = 'weixin2';
 const HOST = 'localhost';
 const PORT = '3306';
@@ -150,10 +156,7 @@ class Model
 	}
 }
 
-class UserModel extends Model{
-	public $tablename = 'user_finance';
-	public $pk = 'uid';
-}
+
 
 
 
