@@ -5,20 +5,25 @@
  * Date: 2017/6/21 20:12
  * Author: Flamez57 <1050355217@qq.com>
  */
-const DB = 'weixin2';
-const HOST = 'localhost';
-const PORT = '3306';
-const USER = 'root';
-const PASS = '';
-const FIX = 'ims_';
+
 class Model
 {
 	private $db;
 	public $tablename;
 	public $pk;
+	private $fix;
 
-	public function __construct($conf)
+	public function __construct()
 	{
+	    $this->fix = defined('TABLE_FIX')?TABLE_FIX:'';
+	    $conf = array(
+	        'host'=>defined('HOST')?HOST:'127.0.0.1',
+            'user'=>defined('USERNAME')?USERNAME:'root',
+            'prot'=>defined('PORT')?PORT:'3306',
+            'db'=>defined('DB_NAME')?DB_NAME:'mysweet',
+            'pass'=>defined('PASSWORD')?PASSWORD:''
+        );
+
 		$dsn="mysql:dbname={$conf['db']};host={$conf['host']};port={$conf['port']}";
 		try{
 		 	$this->db =  new PDO($dsn,$conf['user'],$conf['pass'],array(PDO::MYSQL_ATTR_INIT_COMMAND => "set names utf8"));
@@ -27,9 +32,36 @@ class Model
 		}
 	}
 
-	public function insert()
-	{
+	/****
+	 *过滤参数
+     * @param array
+     * @return bool
+     */
+	private function _filter(&$datas)
+    {
+        $fields = $this->getFields();
+        foreach($datas as $_k=>$_v){
+            if(isset($datas)){
 
+            }else{
+                unset($datas[$_k]);
+            }
+        }
+        return $datas ? true : false;
+    }
+    /****
+     * 插入数据
+     * @param array
+     * @return string 如果插入返回插入的id，失败返回0
+     * */
+	public function insert($datas)
+	{
+        if($this->_filter($datas)){
+            if($this->exec("INSERT INTO {$this->tablename} (".join(',',array_keys($datas)).") VALUES (".join(',',$datas).")")){
+                return $this->db->lastInsertId();
+            }
+        }
+        return 0;
 	}
 
 	public function update()
@@ -51,7 +83,11 @@ class Model
 	//查全部
 	public function fetchAll()
 	{
-
+        $sql = "SELECT * FROM ".$this->tablename;
+//        return $sql;
+        $pre = $this->db->prepare($sql);
+        $pre->execute();
+        return $pre->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	//查一行
@@ -139,7 +175,7 @@ class Model
 	}
 
 	// 获取表字段
-	private function getField($conf,$table_name,$db)
+	private function getFields($conf,$table_name,$db)
 	{
 		$stmt = $this->db->prepare("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '{$this->tablename}' AND table_schema = '{$db}'");  
 		$stmt->execute();  

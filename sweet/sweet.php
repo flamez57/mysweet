@@ -5,41 +5,43 @@
  * Date: 2017/6/21 20:12
  * Author: Flamez57 <1050355217@qq.com>
  */
+function __autoload($hlClassname) {
+    if (class_exists($hlClassname) && interface_exists($hlClassname)) {
+        return $hlClassname;
+    }
+    __loadClass($hlClassname);
+    if (!class_exists($hlClassname) && !interface_exists($hlClassname)) {
+        trigger_error($hlClassname . ' not found.');
+    }
+}
+
+function __loadClass($hlClassname) {
+    $iLocation = strpos($hlClassname, 'Model');
+//    var_dump($hlClassname,$iLocation);echo '<hr>';
+    if (is_numeric($iLocation)) {
+//        $hlClassname = strtr($hlClassname, '_', '/');
+        $hlFilePath = ROOT_PATH . '/model/' . $hlClassname . '.php';
+    } else {
+        $hlFilePath = ROOT_PATH . '/sweet/' . $hlClassname . '.php';
+    }
+    if (file_exists($hlFilePath)) {
+        require($hlFilePath);
+        return true;
+    } else {
+        return false;
+    }
+}
+
 class sweet{
 
     private $module;
     private $controller;
     private $action;
 
-    public function __autoload($hlClassname) {
-        if (class_exists($hlClassname) && interface_exists($hlClassname)) {
-            return $hlClassname;
-        }
-        $this -> __loadClass($hlClassname);
-        if (!class_exists($hlClassname) && !interface_exists($hlClassname)) {
-            trigger_error($hlClassname . ' not found.');
-        }
-    }
-
-    public function __loadClass($hlClassname) {
-        $iLocation = strpos($hlClassname, '_');
-        if ($iLocation) {
-            $hlClassname = strtr($hlClassname, '_', '/');
-            $hlFilePath = ROOT_PATH . '/model/' . $hlClassname . '.class.php'; //这里自定义类
-        } else {
-            $hlFilePath = ROOT_PATH . '/sweet/' . $hlClassname . 's/'.$hlClassname.'.php';
-        }
-        if (file_exists($hlFilePath)) {
-            require($hlFilePath);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function __construct()
     {
         $this->route();
+        $_GPT=$_POST;
     }
 
     private function route()

@@ -6,10 +6,11 @@
  * Author: Flamez57 <1050355217@qq.com>
  */
 // MySQL配置
+const HOST = 'localhost';
 const USERNAME = 'root';
 const PASSWORD = '';
 const PORT = '3306';
-const DB_NAME = 'test';
+const DB_NAME = 'mysweet95';
 const TABLE_FIX = 'hl_';
 
 //设置默认值
