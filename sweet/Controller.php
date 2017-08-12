@@ -9,6 +9,16 @@ class Controller
 {
     public function index()
     {
-
+        echo 'ok';
+    }
+    
+    public function get($field, $default='')
+    {
+        $get = $_GET[$field];
+        if ($get) {
+            return $get;
+        } else {
+            return $default;
+        }
     }
 }

@@ -9,10 +9,16 @@ class IndexController extends Controller{
 	public function Index()
 	{
 		echo 'hello world';
+		$articles = new ArticleModel;
+//        var_dump($articles);
+
+        $a = $articles->order('id', false)->page(5,3)->findAll();
+echo $articles->lastSql;
+        var_dump($a);
 	}
 	public function Test()
 	{
-		$mUF = new User_Finance;
+		/*$mUF = new User_Finance;
 $mUF->fRow(1);
 $mUF->insert(array('uid'=>1, 'money'=>9999));
 $mUF->update(array('uid'=>1, 'money'=>9));
@@ -61,6 +67,6 @@ $mArticle->fHash('id,name,email'); # array(1=>array(id=>1,name=>张洋,email=>'2
 # 事务
 $mArticle->begin();
 $mArticle->insert(..);
-$mArticle->commit();
+$mArticle->commit();*/
 	}
 }

@@ -13,10 +13,11 @@ class ArticleController extends Controller
         $page = empty($_GPT['page'])?intval($_GPT['page']):1;
         $pagesize = empty($_GPT['pagesize'])?intval($_GPT['pagesize']):'20';
         $articles = new ArticleModel;
+        $articles->getArticleList();
 //        var_dump($articles);
         $a = $articles->fetchAll();
 //        echo json_encode($a);
-        echo Response::getInstance()->json(ErrorCode::SUCCESS, $a);
+        echo Response::getInstance()->json(ErrorCode::SUCCESS, '', $a);
     }
 
     public function articleSave()

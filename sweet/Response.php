@@ -21,9 +21,10 @@ class Response
         return self::$_instance;
     }
 
-    public function json($errorCode, $data)
+    public function json($errorCode, $msg, $data)
     {
         $response['code'] = $errorCode;
+        $response['msg'] = $msg;
         $response['data'] = $data;
         echo json_encode($response);
     }

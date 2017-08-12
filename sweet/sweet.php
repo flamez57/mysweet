@@ -41,7 +41,6 @@ class sweet{
     public function __construct()
     {
         $this->route();
-        $_GPT=$_POST;
     }
 
     private function route()
