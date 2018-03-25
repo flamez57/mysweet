@@ -21,8 +21,11 @@ class HLBootstrap
     
     public function controllers($class) 
     {
+        var_dump($class);
         $class = preg_replace ( '/_controller$/ui', '', $class );
-        set_include_path ( get_include_path () . PATH_SEPARATOR . '/controllers/' );
+        var_dump($class);
+        var_dump(get_include_path () . PATH_SEPARATOR . ROOT_PATH.'application'.DIRECTORY_SEPARATOR.'controllers'.DIRECTORY_SEPARATOR );
+        set_include_path ( get_include_path () . PATH_SEPARATOR . ROOT_PATH.'application'.DIRECTORY_SEPARATOR.'controllers'.DIRECTORY_SEPARATOR );
         spl_autoload_extensions ( '.php' );
         spl_autoload ( $class );
     }

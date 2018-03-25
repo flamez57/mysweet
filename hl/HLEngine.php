@@ -21,16 +21,17 @@ class HLEngine
     
     public function mvc($module = '', $controller = '', $action = '')
     {
-        $this->module = empty($module) ? ($this->config['common']['module'] ?? 'application') : $module;
-        $this->controller = empty($controller) ? ($this->config['common']['controller'] ?? 'index') : $controller;
-        $this->action = empty($action) ? ($this->config['common']['action'] ?? 'index') : $action;
+        $this->module = empty($module) ? (isset($this->config['common']['module']) ? $this->config['common']['module'] : 'application') : $module;
+        $this->controller = empty($controller) ? (isset($this->config['common']['controller']) ? $this->config['common']['controller'] : 'index') : $controller;
+        $this->action = empty($action) ? (isset($this->config['common']['action']) ? $this->config['common']['action'] : 'index') : $action;
     }
     public function run()
     {
         include(ROOT_PATH.'hl/HLBootstrap.php');
+        include_once(ROOT_PATH.'hl/HLController.php');
         include(ROOT_PATH.$this->module.'/Bootstrap.php');
         $bootstrap = new \application\Bootstrap();
-        var_dump($bootstrap->loader);
+        var_dump(\application\IndexController::getInstance());
         $bootstrap -> run();
 //        echo '<pre>';
 //        var_dump($_SERVER);
@@ -44,45 +45,7 @@ class HLEngine
             
     }
 }
-// class autoloader {
-//   public static $loader;
-//   public static function init() {
-//     if (self::$loader == NULL)
-//       self::$loader = new self ();
-//     return self::$loader;
-//   }
-//   public function __construct() {
-//     spl_autoload_register ( array ($this, 'model' ) );
-//     spl_autoload_register ( array ($this, 'helper' ) );
-//     spl_autoload_register ( array ($this, 'controller' ) );
-//     spl_autoload_register ( array ($this, 'library' ) );
-//   }
-//   public function library($class) {
-//     set_include_path ( get_include_path () . PATH_SEPARATOR . '/lib/' );
-//     spl_autoload_extensions ( '.library.php' );
-//     spl_autoload ( $class );
-//   }
-//   public function controller($class) {
-//     $class = preg_replace ( '/_controller$/ui', '', $class );
-//     set_include_path ( get_include_path () . PATH_SEPARATOR . '/controller/' );
-//     spl_autoload_extensions ( '.controller.php' );
-//     spl_autoload ( $class );
-//   }
-//   public function model($class) {
-//     $class = preg_replace ( '/_model$/ui', '', $class );
-//     set_include_path ( get_include_path () . PATH_SEPARATOR . '/model/' );
-//     spl_autoload_extensions ( '.model.php' );
-//     spl_autoload ( $class );
-//   }
-//   public function helper($class) {
-//     $class = preg_replace ( '/_helper$/ui', '', $class );
-//     set_include_path ( get_include_path () . PATH_SEPARATOR . '/helper/' );
-//     spl_autoload_extensions ( '.helper.php' );
-//     spl_autoload ( $class );
-//   }
-// }
-// //call
-// autoloader::init ();
+
 // function core_autoload($class_name) {
 //     $prefix = substr($class_name,0,2);
 //     switch($prefix){

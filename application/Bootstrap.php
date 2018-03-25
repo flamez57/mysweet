@@ -29,8 +29,8 @@ class Bootstrap extends HLBootstrap
 //		//在这里注册自己的view控制器，例如smarty,firekylin
 //	}
     
-//    public function run()
-//    {
-//        echo 'ok';
-//    }
+    public function run()
+    {
+        echo 'ok';
+    }
 }
