@@ -31,37 +31,19 @@ class HLBootstrap
     */
     public function __construct() 
     {
-        spl_autoload_register(array($this, 'models'));
         spl_autoload_register(array($this, 'controllers'));
-        spl_autoload_register(array($this, 'services'));
     }
     
     /*
-    ** 加载控制器
+    ** 惰性加载类（加载控制器前身）
     */
     public function controllers($class) 
     {
-        $cutRoom = strrpos($class, DIRECTORY_SEPARATOR);
-        $classPath = substr($class, 0, $cutRoom);
-        $className = substr($class, $cutRoom + 1, strlen($class));
-        set_include_path(get_include_path () . PATH_SEPARATOR . ROOT_PATH.$classPath.DIRECTORY_SEPARATOR.'controllers');
-        spl_autoload_extensions('.php');
-        spl_autoload($className);
-    }
-    
-    public function models($class)
-    {
-        $class = preg_replace ( '/_model$/ui', '', $class );
-        set_include_path ( get_include_path () . PATH_SEPARATOR . '/models/' );
-        spl_autoload_extensions ( '.php' );
-        spl_autoload ( $class );
-    }
-    
-    public function services($class) 
-    {
-        $class = preg_replace ( '/_helper$/ui', '', $class );
-        set_include_path ( get_include_path () . PATH_SEPARATOR . '/services/' );
-        spl_autoload_extensions ( '.php' );
-        spl_autoload ( $class );
+        //$cutRoom = strrpos($class, DIRECTORY_SEPARATOR);
+        //$classPath = substr($class, 0, $cutRoom);
+        //$className = substr($class, $cutRoom + 1, strlen($class));
+        //set_include_path(get_include_path () . PATH_SEPARATOR . ROOT_PATH.$classPath.DIRECTORY_SEPARATOR.'controllers');
+        //spl_autoload_extensions('.php');
+        spl_autoload($class);
     }
 }

@@ -35,16 +35,12 @@ class HLEngine
      */
     public function run()
     {
-        include(ROOT_PATH.'hl/HLBootstrap.php');
-        include_once(ROOT_PATH.'hl/HLController.php');
+        include_once(ROOT_PATH.'hl/HLBootstrap.php');
         
         $bootstrap = $this->bootstrapFactory('application');
         
         $aaa = $this->controllerFactory('application', 'index');
-        $aaa->index();
-//        $bootstrap -> run();
-        
-            
+        $aaa->index();   
     }
     
     /*
@@ -57,9 +53,12 @@ class HLEngine
         return new $class;
     }
     
+    /*
+    ** 控制器工厂
+    */
     private function controllerFactory($module, $controller)
     {
-        $class = DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . ucfirst($controller) . 'Controller';
+        $class = DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'controllers'. DIRECTORY_SEPARATOR . ucfirst($controller) . 'Controller';
         return $class::getInstance();
     }
 }
