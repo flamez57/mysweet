@@ -1,33 +1,52 @@
 <?php
 namespace hl;
+/**
+** @ClassName: HLBootstrap
+** @Description:自动加载器
+** @author flamez57 <flamez57@mysweet95.com>
+** @date 2018年3月26日 晚上21:49
+** @version V1.0
+*/
 
 class HLBootstrap
 {
+    /*
+    ** 加载器实例
+    */
     public static $loader;
     
-    public static function init() {
+    /*
+    ** 实例化自身
+    */
+    public static function init()
+    {
         if (self::$loader == NULL) {
-            self::$loader = new self ();
+            self::$loader = new self();
         }
         return self::$loader;
     }
     
+    /*
+    ** 注册类
+    */
     public function __construct() 
     {
-        spl_autoload_register ( array ($this, 'models' ) );
-        spl_autoload_register ( array ($this, 'controllers' ) );
-        spl_autoload_register ( array ($this, 'services' ) );
+        spl_autoload_register(array($this, 'models'));
+        spl_autoload_register(array($this, 'controllers'));
+        spl_autoload_register(array($this, 'services'));
     }
     
+    /*
+    ** 加载控制器
+    */
     public function controllers($class) 
     {
-        var_dump($class);
-        $class = preg_replace ( '/_controller$/ui', '', $class );
-        var_dump($class);
-        var_dump(get_include_path () . PATH_SEPARATOR . ROOT_PATH.'application'.DIRECTORY_SEPARATOR.'controllers'.DIRECTORY_SEPARATOR );
-        set_include_path ( get_include_path () . PATH_SEPARATOR . ROOT_PATH.'application'.DIRECTORY_SEPARATOR.'controllers'.DIRECTORY_SEPARATOR );
-        spl_autoload_extensions ( '.php' );
-        spl_autoload ( $class );
+        $cutRoom = strrpos($class, DIRECTORY_SEPARATOR);
+        $classPath = substr($class, 0, $cutRoom);
+        $className = substr($class, $cutRoom + 1, strlen($class));
+        set_include_path(get_include_path () . PATH_SEPARATOR . ROOT_PATH.$classPath.DIRECTORY_SEPARATOR.'controllers');
+        spl_autoload_extensions('.php');
+        spl_autoload($className);
     }
     
     public function models($class)
@@ -45,55 +64,4 @@ class HLBootstrap
         spl_autoload_extensions ( '.php' );
         spl_autoload ( $class );
     }
-   
-    public function HLinitConfig()
-	{
-		//把配置保存起来
-	}
-
-	public function HLinitPlugin()
-	{
-		//注册一个插件
-	}
-
-	public function HLinitRoute()
-	{
-		//在这里注册自己的路由协议,默认使用简单路由
-	}
-
-	public function HLinitView()
-	{
-		//在这里注册自己的view控制器，例如smarty,firekylin
-	}
-    
-    public function run()
-    {
-        echo 'bootstrap run';
-    }
 }
-// class autoloader {
-  
-
-// }
-// //call
-// autoloader::init ();
-// function core_autoload($class_name) {
-//     $prefix = substr($class_name,0,2);
-//     switch($prefix){
-//         case 'm_':
-//             $file_name = ROOT_PATH . '/app/models/' . substr($class_name, 2) . '.php';
-//         break;
-//         case 'a_':
-//             $file_name = ROOT_PATH . '/app/actions/' . substr($class_name, 2) . '.php';
-//         break;
-//         case 'u_':
-//             $file_name = ROOT_PATH . '/app/lib/usr/' . substr($class_name, 2) . '.php';
-//         break;
-//         default:
-//             $file_name =  get_include_path() . str_replace('_', '/', $class_name).'.php';
-//     }
-//     if( file_exists($file_name) )
-//             require_once $file_name;
-//     else spl_autoload($class_name);
-// }
-// spl_autoload_register('core_autoload');
