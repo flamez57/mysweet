@@ -20,10 +20,10 @@ class IndexController extends HLController
         exampleServices::getInstance()->todo();
         echo 'hello world!<br>';
         
-        for($i=0;$i<33;$i++){
+        for($i=0;$i<=25;$i++){
             echo '<img src="mm/640 ('.$i.').webp" width="200px">';
         }
-        for($i=0;$i<225;$i++){
+        for($i=0;$i<=20;$i++){
             echo '<img src="mm/jpg/'.$i.'.jpg" width="200px">';
         }
     }
