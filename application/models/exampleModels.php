@@ -11,8 +11,14 @@ use hl\HLModel;
 
 class exampleModels extends HLModel
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    
     public function todo()
     {
         echo "exampleModels run<br>";
+        echo $this->db->connect('config');
     }
 }

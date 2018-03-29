@@ -1,5 +1,7 @@
 <?php
 namespace hl;
+
+use hl\HLSington;
 /**
 ** @ClassName: HLController
 ** @Description: 控制器基类
@@ -8,18 +10,7 @@ namespace hl;
 ** @version V1.0
 */
 
-class HLController
+class HLController extends HLSington
 {
-    private static $_instance = NULL;
-    /**
-     * @return HLController
-     */
-    final public static function getInstance()
-    {
-        $class = get_called_class();
-        if (!isset(self::$_instance) || !self::$_instance instanceof self) {
-            self::$_instance[$class] = new $class();
-        }
-        return self::$_instance[$class];
-    }
+
 }

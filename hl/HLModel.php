@@ -1,5 +1,8 @@
 <?php
 namespace hl;
+
+use hl\HLSington;
+use hl\library\Db\HLDBFactory;
 /**
 ** @ClassName: HLModel
 ** @Description: 数据模型基类
@@ -8,18 +11,15 @@ namespace hl;
 ** @version V1.0
 */
 
-class HLModel
+class HLModel extends HLSington
 {
-    private static $_instance = NULL;
-    /**
-     * @return HLModel
-     */
-    final public static function getInstance()
+    /*
+    ** 数据库对象
+    */
+    public $db;
+
+    public function __construct()
     {
-        $class = get_called_class();
-        if (!isset(self::$_instance) || !self::$_instance instanceof self) {
-            self::$_instance[$class] = new $class();
-        }
-        return self::$_instance[$class];
+        $this->db = HLDBFactory::factory('Mysqli');
     }
 }
