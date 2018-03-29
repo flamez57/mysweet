@@ -11,6 +11,16 @@ use hl\HLModel;
 
 class exampleModels extends HLModel
 {
+    /*
+    ** 选择数据库
+    */
+    public $_db = 'default';
+    
+    /*
+    ** 数据表
+    */
+    public $tableName = '';
+    
     public function __construct()
     {
         parent::__construct();
@@ -19,6 +29,5 @@ class exampleModels extends HLModel
     public function todo()
     {
         echo "exampleModels run<br>";
-        echo $this->db->connect('config');
     }
 }

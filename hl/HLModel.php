@@ -17,9 +17,16 @@ class HLModel extends HLSington
     ** 数据库对象
     */
     public $db;
+    
+    /*
+    ** 所选数据库
+    */
+    public $_db;
 
     public function __construct()
     {
+        $config = self::$config;
         $this->db = HLDBFactory::factory('Mysqli');
+        $this->db->connect($config['db'][$this->_db]);
     }
 }

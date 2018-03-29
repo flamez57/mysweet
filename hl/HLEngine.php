@@ -95,6 +95,6 @@ class HLEngine
     private function controllerFactory($module, $controller)
     {
         $class = DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'controllers'. DIRECTORY_SEPARATOR . ucfirst($controller) . 'Controller';
-        return $class::getInstance();
+        return $class::getInstance($this->config);
     }
 }
