@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine on
+
+RewriteRule ([a-zA-Z0-9]{1,})_([a-zA-Z0-9]{1,})_([a-zA-Z0-9]{1,}).html$ index.php?m=$1&c=$2&a=$3
+
+</IfModule>
