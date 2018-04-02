@@ -35,31 +35,12 @@ class HLEngine
     public function __construct($config)
     {
         $this->config = $config;
-        if (isset($config['common']['module'])) $this->module = $config['common']['module'];
-        if (isset($config['common']['controller'])) $this->controller = $config['common']['controller'];
-        if (isset($config['common']['action'])) $this->action = $config['common']['action'];
-        $this->route();
-    }
-    
-    /*
-    ** 路由
-    */
-    public function route()
-    {
-        $m = isset($_GET['m']) ? $_GET['m'] : '';
-        $c = isset($_GET['c']) ? $_GET['c'] : '';
-        $a = isset($_GET['a']) ? $_GET['a'] : '';
-        $this->mvc($m, $c, $a);
-    }
-    
-    /*
-    ** 访问控制
-    */
-    public function mvc($module, $controller, $action)
-    {
-        if (!empty($module)) $this->module = $module;
-        if (!empty($controller)) $this->controller = $controller;
-        if (!empty($action)) $this->action = $action;
+        include_once('HLRoute.php');
+        HLRoute::init($config['common']);      
+        $mca = HLRoute::getMCA();
+        $this->module = $mca['module'];
+        $this->controller = $mca['controller'];
+        $this->action = $mca['action'];
     }
     
     /*

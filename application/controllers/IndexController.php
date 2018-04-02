@@ -19,7 +19,8 @@ class IndexController extends HLController
     {
         exampleServices::getInstance()->todo();
         echo 'hello world!<br>';
-        
+        echo \hl\HLRoute::makeUrl('user', 'manger', 'index');
+        echo '<br>';
         for($i=0;$i<=25;$i++){
             echo '<img src="mm/640 ('.$i.').webp" width="200px">';
         }
