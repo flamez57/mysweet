@@ -1,5 +1,5 @@
 # mysweet
-cms系统
+<h5>环境需要</h5>
 注意需要支持命名空间
 
 <h6>Apache 配置</h6>
@@ -23,3 +23,19 @@ cms系统
     # nginx rewrite  rule 
     rewrite ^(.*)/(.*)_(.*)_(.*).html$ $1/index.php?m=$2&c=$3&a=$4 last;
     # end nginx rewrite rule
+
+<h5>框架结构</h5>
+
+    application 应用示例
+    hl 框架核心
+    config 框架配置
+
+<h5>路由</h5>
+
+1)生成连接
+
+    \hl\HLRoute::makeUrl($model, $controller, $action);
+
+2)获取参数
+
+    \hl\HLRoute::getParam($key, $value);
