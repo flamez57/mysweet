@@ -12,5 +12,43 @@ use hl\HLSington;
 
 class HLView extends HLSington
 {
-
+    /*
+     * 
+     */
+    public function html()
+    {
+        var_dump(get_class(), $this, __FUNCTION__);
+    }
+    
+    /*
+     * js文件引入
+     */
+    public function js()
+    {
+        
+    }
+    
+    /*
+     * css文件引入
+     */
+    public function css()
+    {
+        
+    }
+    
+    /*
+     * 传入模板参数
+     */
+    public function param()
+    {
+        
+    }
+    
+    /*
+     * 引入模板
+     */
+    public function showTpl()
+    {
+        
+    }
 }

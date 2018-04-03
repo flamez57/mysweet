@@ -21,6 +21,7 @@ class IndexController extends HLController
         echo 'hello world!<br>';
         echo \hl\HLRoute::makeUrl('user', 'manger', 'index');
         echo '<br>';
+        \hl\HLView::getInstance()->html();
         for($i=0;$i<=25;$i++){
             echo '<img src="mm/640 ('.$i.').webp" width="200px">';
         }
