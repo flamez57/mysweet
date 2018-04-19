@@ -39,3 +39,16 @@
 2)获取参数
 
     \hl\HLRoute::getParam($key, $value);
+
+<h5>数据响应</h5>
+1)json
+
+    \hl\library\Tools\HLResponse::json(200, 'success', $data);
+
+2)xml
+
+    \hl\library\Tools\HLResponse::xmlToEncode(200, 'success', $data);
+
+3)综合
+
+    \hl\library\Tools\HLResponse::show(200, 'success', $data, 'xml');
