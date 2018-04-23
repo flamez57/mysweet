@@ -17,9 +17,6 @@ class IndexController extends HLController
     */
     public function index()
     {
-//        $data = ['test'=>'this is data', 'test2' => '阿卡护理后牙厚本', '4' => 'i was number','data' => ['1'=>'aa','cc']];
-//        \hl\library\Tools\HLResponse::show(200, 'success', $data, 'xml');
-        echo \hl\library\Functions\Sha2::sha256('123455');
         exampleServices::getInstance()->todo();
         echo 'hello world!<br>';
         echo \hl\HLRoute::makeUrl('user', 'manger', 'index');
