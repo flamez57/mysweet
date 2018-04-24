@@ -17,20 +17,7 @@ class IndexController extends HLController
     */
     public function index()
     {
-        $private_key = ROOT_PATH.'data'.DIRECTORY_SEPARATOR.'key'.DIRECTORY_SEPARATOR.'private_key.pem'; // 私钥路径
-    $public_key = ROOT_PATH.'data'.DIRECTORY_SEPARATOR.'key'.DIRECTORY_SEPARATOR.'public_key.pem'; // 公钥路径
-    $rsa = new \hl\library\Functions\Rsa($private_key, $public_key);
-//var_dump($rsa);
-    $origin_data = 'this is a test data';
 
-    $ecryption_data = $rsa->privEncrypt($origin_data);
-
-    $decryption_data = $rsa->publicDecrypt($ecryption_data);
-
-    echo '私钥加密后的数据为：' . $ecryption_data;
-    echo PHP_EOL;
-    echo '公钥解密后的数据为: ' . $decryption_data;
-    echo PHP_EOL;
         exampleServices::getInstance()->todo();
         echo 'hello world!<br>';
         echo \hl\HLRoute::makeUrl('user', 'manger', 'index');
