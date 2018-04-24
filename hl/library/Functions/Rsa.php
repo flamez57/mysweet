@@ -18,11 +18,17 @@ class Rsa
     ** 私钥
     */
     private $privateKey;
+    
+    /*
+    ** 证书密码
+    */
+    private $passphrase;
 
-    public function __construct($private_key_filepath, $public_key_filepath) 
+    public function __construct($private_key_filepath, $public_key_filepath, $passphrase = '') 
     {
         $this->privateKey = $this->_getContents($private_key_filepath);
         $this->publicKey = $this->_getContents($public_key_filepath);
+        $this->passphrase = $passphrase;
     }
 
     /**
@@ -44,8 +50,13 @@ class Rsa
     */ 
     private function _getPrivateKey() 
     {
-       $priv_key = $this->privateKey;
-       return openssl_pkey_get_private($priv_key);
+        $priv_key = $this->privateKey;
+        if ($this->passphrase) {
+            return openssl_pkey_get_private($priv_key);
+        } else {
+            return openssl_pkey_get_private($priv_key, $this->passphrase);
+        }
+       
     }
 
     /**     
