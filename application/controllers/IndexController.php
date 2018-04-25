@@ -17,7 +17,7 @@ class IndexController extends HLController
     */
     public function index()
     {
-
+        \hl\library\Functions\Helper::dump('sdf');
         exampleServices::getInstance()->todo();
         echo 'hello world!<br>';
         echo \hl\HLRoute::makeUrl('user', 'manger', 'index');
