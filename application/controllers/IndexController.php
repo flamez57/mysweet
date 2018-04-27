@@ -15,7 +15,7 @@ class IndexController extends HLController
     /*
     ** 默认首页
     */
-    public function index()
+    public function indexAction()
     {
         \hl\library\Functions\Helper::dump('sdf');
         exampleServices::getInstance()->todo();
