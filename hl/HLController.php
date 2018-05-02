@@ -18,10 +18,20 @@ class HLController extends HLSington
     private $callFunction;
     
     /*
+    ** 默认木模板目录路径
+    */
+    private $viewPath;
+    
+    /*
     ** 指向到最终的方法
     */
     public function __call($method, $avgs)
     {
+        $class = get_called_class();
+        $class = explode(DIRECTORY_SEPARATOR, $class);
+        $this->viewPath = ROOT_PATH.$class[0].DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR. 
+                lcfirst(rtrim($class[2], 'Controller')).DIRECTORY_SEPARATOR;
+        HLView::init($class[0], $this->viewPath);
         $this->callFunction = $method;
         $method .= 'Action';
         if ($avgs) {
@@ -36,11 +46,6 @@ class HLController extends HLSington
     */
     public function __destruct()
     {
-        $class = get_called_class();
-        $class = explode(DIRECTORY_SEPARATOR, $class);
-        $path = $class[0].DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR. lcfirst(rtrim($class[2], 'Controller')).DIRECTORY_SEPARATOR;
-        $path .= $this->callFunction;
-        $path .= '.html';
-        var_dump($path);
+        HLView::html($this->callFunction);
     }
 }

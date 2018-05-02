@@ -13,42 +13,113 @@ use hl\HLSington;
 class HLView extends HLSington
 {
     /*
-     * 
-     */
-    public function html()
+    ** 模块
+    */
+    private $module;
+    
+    /*
+    ** 视图目录
+    */
+    private $viewPath;
+    
+    /*
+    ** 公共文件目录
+    */
+    private $publicPath;
+    
+    /*
+    ** 是否默认模板
+    */
+    private $default;
+    
+    /*
+    ** 输出参数
+    */
+    public $putout;
+
+    /*
+    ** 初始化
+    ** @param $module string
+    ** @param $viewPath string
+    ** @return void
+    */
+    public function init($module, $viewPath)
     {
-        var_dump(get_class(), $this, __FUNCTION__);
+        $this->default = true;
+        $this->module = $module;
+        $this->viewPath = $viewPath;
+        $this->publicPath = 'http://'.HTTP_HOST.'public'.DIRECTORY_SEPARATOR.$this->module.DIRECTORY_SEPARATOR;
     }
     
     /*
-     * js文件引入
-     */
-    public function js()
+    ** 引入默认模板
+    */
+    public function html($path)
     {
-        
+        if (!empty($path) && $this->default) {
+            include_once($this->viewPath.$path.'.tpl');
+        }
     }
     
     /*
-     * css文件引入
-     */
-    public function css()
+    ** js文件引入
+    ** @param $path 文件路径
+    ** @return void
+    */
+    public function js($path)
     {
-        
+        $path = $this->publicPath.'js'.DIRECTORY_SEPARATOR.$path;      
+        echo '<script type="text/javascript" src="'.$path.'"></script>';
     }
     
     /*
-     * 传入模板参数
-     */
-    public function param()
+    ** css文件引入
+    ** @param $path 文件路径
+    ** @return void
+    */
+    public function css($path)
     {
-        
+        $path = $this->publicPath.'css'.DIRECTORY_SEPARATOR.$path;
+        echo '<link type="text/css" href="'.$path.'" rel="stylesheet" />';
     }
     
     /*
-     * 引入模板
-     */
-    public function showTpl()
+    ** 图片引入
+    ** @param $path 文件路径
+    ** @return void
+    */
+    public function img($path, $param)
     {
-        
+        $path = $this->publicPath.'img'.DIRECTORY_SEPARATOR.$path;
+        $str = '<img src="'.$path.'" ';
+        if (isset($param) && is_array($param)) {
+            foreach ($param as $_key => $_value) {
+                $str .= $_key.'="'.$_value.'" ';
+            }
+        }
+        $str .= '>';
+        echo $str;
+    }
+    
+    /*
+    ** 传入模板参数
+    ** @param $key 键
+    ** @param $value 值
+    ** @return void
+    */
+    public function param($key, $value)
+    {
+        $this->putout[$key] = $value;
+    }
+    
+    /*
+    ** 引入模板
+    ** @param $path 文件路径
+    ** @return void
+    */
+    public function showTpl($path)
+    {
+        $this->default = false;
+        include_once($this->viewPath.$path.'.tpl');
     }
 }

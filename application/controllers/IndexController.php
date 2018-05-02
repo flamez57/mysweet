@@ -22,12 +22,11 @@ class IndexController extends HLController
         echo 'hello world!<br>';
         echo \hl\HLRoute::makeUrl('user', 'manger', 'index');
         echo '<br>';
-        \hl\HLView::getInstance()->html();
         for($i=0;$i<=25;$i++){
-            echo '<img src="mm/640 ('.$i.').webp" width="200px">';
+            \hl\HLView::img('640 ('.$i.').webp', ['width' => '200px']);
         }
         for($i=0;$i<=20;$i++){
-            echo '<img src="mm/jpg/'.$i.'.jpg" width="200px">';
+            \hl\HLView::img('jpg'.DIRECTORY_SEPARATOR.$i.'.jpg', ['width' => '200px']);
         }
     }
 }
