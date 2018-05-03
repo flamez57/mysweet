@@ -10,32 +10,32 @@ use hl\HLSington;
 ** @version V1.0
 */
 
-class HLView extends HLSington
+class HLView
 {
     /*
     ** 模块
     */
-    private $module;
+    private static $module;
     
     /*
     ** 视图目录
     */
-    private $viewPath;
+    private static $viewPath;
     
     /*
     ** 公共文件目录
     */
-    private $publicPath;
+    private static $publicPath;
     
     /*
     ** 是否默认模板
     */
-    private $default;
+    private static $default;
     
     /*
     ** 输出参数
     */
-    public $putout;
+    public static $putout;
 
     /*
     ** 初始化
@@ -43,21 +43,21 @@ class HLView extends HLSington
     ** @param $viewPath string
     ** @return void
     */
-    public function init($module, $viewPath)
+    public static function init($module, $viewPath)
     {
-        $this->default = true;
-        $this->module = $module;
-        $this->viewPath = $viewPath;
-        $this->publicPath = 'http://'.HTTP_HOST.'public'.DIRECTORY_SEPARATOR.$this->module.DIRECTORY_SEPARATOR;
+        self::$default = true;
+        self::$module = $module;
+        self::$viewPath = $viewPath;
+        self::$publicPath = 'http://'.HTTP_HOST.'public'.DIRECTORY_SEPARATOR.self::$module.DIRECTORY_SEPARATOR;
     }
     
     /*
     ** 引入默认模板
     */
-    public function html($path)
+    public static function html($path)
     {
-        if (!empty($path) && $this->default) {
-            include_once($this->viewPath.$path.'.tpl');
+        if (!empty($path) && self::$default) {
+            include_once(self::$viewPath.$path.'.tpl');
         }
     }
     
@@ -66,9 +66,9 @@ class HLView extends HLSington
     ** @param $path 文件路径
     ** @return void
     */
-    public function js($path)
+    public static function js($path)
     {
-        $path = $this->publicPath.'js'.DIRECTORY_SEPARATOR.$path;      
+        $path = self::$publicPath.'js'.DIRECTORY_SEPARATOR.$path;      
         echo '<script type="text/javascript" src="'.$path.'"></script>';
     }
     
@@ -77,9 +77,9 @@ class HLView extends HLSington
     ** @param $path 文件路径
     ** @return void
     */
-    public function css($path)
+    public static function css($path)
     {
-        $path = $this->publicPath.'css'.DIRECTORY_SEPARATOR.$path;
+        $path = self::$publicPath.'css'.DIRECTORY_SEPARATOR.$path;
         echo '<link type="text/css" href="'.$path.'" rel="stylesheet" />';
     }
     
@@ -88,9 +88,9 @@ class HLView extends HLSington
     ** @param $path 文件路径
     ** @return void
     */
-    public function img($path, $param)
+    public static function img($path, $param)
     {
-        $path = $this->publicPath.'img'.DIRECTORY_SEPARATOR.$path;
+        $path = self::$publicPath.'img'.DIRECTORY_SEPARATOR.$path;
         $str = '<img src="'.$path.'" ';
         if (isset($param) && is_array($param)) {
             foreach ($param as $_key => $_value) {
@@ -107,9 +107,9 @@ class HLView extends HLSington
     ** @param $value 值
     ** @return void
     */
-    public function param($key, $value)
+    public static function param($key, $value)
     {
-        $this->putout[$key] = $value;
+        self::$putout[$key] = $value;
     }
     
     /*
@@ -119,7 +119,7 @@ class HLView extends HLSington
     */
     public function showTpl($path)
     {
-        $this->default = false;
-        include_once($this->viewPath.$path.'.tpl');
+        self::$default = false;
+        include_once(self::$viewPath.$path.'.tpl');
     }
 }

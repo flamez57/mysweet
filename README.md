@@ -52,3 +52,43 @@
 3)综合
 
     \hl\library\Tools\HLResponse::show(200, 'success', $data, 'xml');
+
+<h5>配置</h5>
+
+1)common
+
+    'url_mode' => 0, 0非美化url  1美化后url
+	'module' => 'application', 默认模块
+	'controller' => 'index', 默认控制器
+	'action' => 'index' 默认方法
+
+2)db
+
+    'default' => [ 默认连接库
+        'host' => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'charset' => 'utf8',
+        'port' => '3306'
+    ], 
+
+<h5>视图</h5>
+
+1)js文件引入
+
+    \hl\HLView::js($path)
+
+2)css文件引入
+
+    \hl\HLView::css($path)
+
+3)图片引入
+
+    \hl\HLView::img($path, $param)
+4)传入模板参数
+
+    \hl\HLView::param($key, $value)
+
+5)引入模板
+
+    \hl\HLView::showTpl($path)

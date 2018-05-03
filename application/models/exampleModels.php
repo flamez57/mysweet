@@ -28,6 +28,6 @@ class exampleModels extends HLModel
     
     public function todo()
     {
-        echo "exampleModels run<br>";
+        return "exampleModels run<br>";
     }
 }

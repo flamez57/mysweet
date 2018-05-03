@@ -17,16 +17,9 @@ class IndexController extends HLController
     */
     public function indexAction()
     {
-        \hl\library\Functions\Helper::dump('sdf');
-        exampleServices::getInstance()->todo();
-        echo 'hello world!<br>';
-        echo \hl\HLRoute::makeUrl('user', 'manger', 'index');
-        echo '<br>';
-        for($i=0;$i<=25;$i++){
-            \hl\HLView::img('640 ('.$i.').webp', ['width' => '200px']);
-        }
-        for($i=0;$i<=20;$i++){
-            \hl\HLView::img('jpg'.DIRECTORY_SEPARATOR.$i.'.jpg', ['width' => '200px']);
-        }
+        $str = exampleServices::getInstance()->todo();
+        //传递值到模板
+        \hl\HLView::param('out', $str);
+//        \hl\library\Functions\Helper::dump('sdf');  
     }
 }

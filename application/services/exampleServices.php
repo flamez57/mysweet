@@ -14,7 +14,8 @@ class exampleServices extends HLServices
 {
     public function todo()
     {
-        echo 'exampleServices Run <br>';
-        exampleModels::getInstance()->todo();
+        $str = exampleModels::getInstance()->todo();
+        $str .= 'exampleServices Run <br>';
+        return $str;
     }
 }
