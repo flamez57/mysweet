@@ -1,0 +1,21 @@
+*{
+    margin:0; /*清除body身上的8px*/
+    padding:0; /*input*/
+    text-decoration: none;  /*清除a的*/
+    /*默认值box-sizing: content-box;*/
+    box-sizing: border-box;
+    list-style: none; /*清除列表标签的默认样式*/
+
+    /*一下清除字体默认样式*/
+    font-weight: normal;
+    font-style: normal;
+
+    border:0; /*清除input上的border*/
+    /*清除样式的时候是值的话是0，不是数值的时候是none*/
+}
+img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+

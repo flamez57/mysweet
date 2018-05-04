@@ -88,7 +88,7 @@ class HLView
     ** @param $path 文件路径
     ** @return void
     */
-    public static function img($path, $param)
+    public static function img($path, $param = [])
     {
         $path = self::$publicPath.'img'.DIRECTORY_SEPARATOR.$path;
         $str = '<img src="'.$path.'" ';

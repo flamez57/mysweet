@@ -1,0 +1,298 @@
+header{
+    width: 1200px;
+    height: 118px;
+    margin: 0 auto;
+}
+.head-left{
+    width: 192px;
+    height: 118px;
+    background: red;
+    float: left;
+}
+.head-right{
+    width: 980px;
+    height: 118px;
+    padding-top: 40px;
+    float:right;
+    display: flex;
+    justify-content: space-between;
+}
+.head-right li{
+    width: 100px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+.head-right li a{
+    color: black;
+    font-size: 16px;
+}
+.head-right li a:hover{
+    color: #D0000E;
+    padding-bottom:14px;
+    border-bottom: 2px solid #D0000E;
+}
+/*导航结束*/
+/*banner开始*/
+.banner-box{
+    width: 100%;
+    height: 492px;
+    position: relative;
+}
+.banner{
+    width: 100%;
+    height: 492px;
+}
+.banner li{
+    width: 100%;
+    height: 492px;
+    opacity: 0;
+    transition: all 1s;
+    position:absolute;
+    left:0;
+    top:0;
+}
+.banner li.qy-active{
+    z-index: 9;
+    opacity: 1;
+}
+.qy-dianbox{
+    width: 80px;
+    height: 14px;
+    position: absolute;
+    left:50%;
+    margin-left:-40px;
+    bottom:20px;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+}
+.qy-dianbox li{
+    width: 14px;
+    height: 14px;
+    background:rgba(255,255,255,0);
+    border-radius: 50%;
+    border: solid 2px #fff;
+}
+.qy-dianbox li:hover{
+    background: white;
+}
+.qy-dianbox .dian-active{
+    background: white;
+}
+/*banner结束*/
+/*主体内容开始*/
+.twopage-title{
+    width: 1200px;
+    height: 104px;
+    padding-top:30px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.bottom-line{
+    width: 100%;
+    height:1px;
+    background: #CCCCCC;
+    margin-bottom:50px;
+}
+.twopage-inner-l{
+    width:600px;
+    height: 100%;
+}
+.twopage-inner-l span{
+    color: #404040;
+    font-size: 34px;
+    font-weight: bold;
+    height: 74px;
+    line-height: 50px;
+}
+.twopage-inner-l span:nth-child(1){
+    width: 136px;
+    margin-right:10px;
+    padding-bottom: 24px;
+    border-bottom: 4px solid #C8000A;
+}
+.twopage-title .twopage-inner-r>span{
+    color: #333;
+    font-size: 15px;
+    line-height: 50px;
+}
+.add-color{
+    color: #c7000a;
+    font-size: 15px;
+    line-height: 24px;
+}
+.twopage-inner-r span.address{
+    font-size: 24px;
+}
+/*标题开始*/
+.three-nav{
+    width: 1200px;
+    height: 42px;
+    margin: 0 auto 50px;
+    display: flex;
+    justify-content: space-between;
+    padding:0 360px;
+    text-align: center;
+    line-height: 42px;
+}
+.three-nav li{
+    width: 140px;
+    height: 42px;
+    border-radius: 5px;
+    color: white;
+    font-size: 17px;
+    background: #404040;
+}
+.three-nav li.first-nav{
+    background: #C7000A;
+}
+.three-nav li:hover{
+    background: #C7000A;
+}
+/*标题结束*/
+/*主体咨询内容开始*/
+.message-inner{
+    width: 1200px;
+    height: 148px;
+    margin: 0 auto;
+    background: #FBFBFB;
+    border-bottom: 2px solid #E8E8E8;
+    border-top: 2px solid #E8E8E8;
+    padding: 32px 2px 30px;
+}
+.mess-inner-l{
+    width: 147px;
+    height: 84px;
+    margin-right: 50px;
+    float: left;
+}
+.mess-inner-c{
+    width: 860px;
+    height: 84px;
+    float: left;
+}
+.mess-inner-r{
+    width: 84px;
+    height: 84px;
+    float: left;
+    text-align: center;
+    line-height: 84px;
+}
+.mess-inner-l h4{
+    color: #d8000f;
+    font-size: 38px;
+    line-height: 50px;
+    text-align: right;
+}
+.mess-inner-l div{
+    width:50px;
+    padding-top: 4px;
+    margin-right:6px;
+    border-top:2px solid #BDBDBD;
+    float: right;
+    color:#BDBDBD;
+    font-size: 20px;
+}
+.mess-inner-c h4{
+    color: #525252;
+    font-size: 18px;
+    line-height: 36px;
+}
+.mess-inner-c span{
+    color: #818181;
+    font-size: 14px;
+    line-height: 24px;
+    text-indent: 2em;
+}
+#del-bottomline1,#del-bottomline2{
+    border-top: 0;
+}
+.message-inner:hover,#del-bottomline1:hover,#del-bottomline2:hover{
+    border:2px solid #d8000f;
+}
+.mess-inner-r  .jiantou-icon{
+    font-size: 40px;
+    color: #D3D3D3;
+}
+.message-inner:hover .jiantou-icon{
+    color:#d8000f;
+}
+
+/*主体咨询内容结束*/
+/*底部开始*/
+.footer{
+    margin-top: 100px;
+    width: 100%;
+    height: 276px;
+    background: #2e2d29;
+    padding: 70px 0 42px 0;
+}
+.footer-inner{
+    width: 1200px;
+    height: 164px;
+    margin: 0 auto;
+    position: relative;
+}
+.foot-left{
+    width: 820px;
+    height: 132px;
+    padding-left: 90px;
+    display: flex;
+}
+.foot-left-inner{
+    width: 198px;
+}
+.foot-left-inner li:nth-child(1){
+    line-height: 34px;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 18px;
+}
+.foot-txt{
+    color: #737373;
+    line-height: 26px;
+    font-size: 15px;
+}
+#call{
+    width: 220px;
+    height: 42px;
+    background: url("../img/call.jpg");
+    margin-bottom: 4px;
+}
+/*底部左边结束*/
+/*底部右边开始*/
+.foot-right-pc1{
+    width: 124px;
+    height: 124px;
+    position: absolute;
+    right:0;
+    top:0;
+}
+.foot-right-pc2{
+    width: 124px;
+    height: 124px;
+    position: absolute;
+    right:170px;
+    top:0;
+}
+.foot-right-pc1 span,.foot-right-pc2 span{
+    text-align: center;
+    color: #737373;
+    font-size: 14px;
+}
+/*底部右边结束*/
+.footer-bottom{
+    width: 100%;
+    height: 49px;
+    text-align: center;
+    background: #3c3c3a;
+    border-top: solid 1px #343330;
+    line-height: 48px;
+    color: #737373;
+    font-size: 14px;
+}
+
+
+

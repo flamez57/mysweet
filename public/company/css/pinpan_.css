@@ -1,0 +1,71 @@
+.twopage-title{
+    width: 1200px;
+    height: 104px;
+    padding-top:30px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.bottom-line{
+    width: 100%;
+    height:1px;
+    background: #CCCCCC;
+    margin-bottom:50px;
+}
+.twopage-inner-l{
+    width:600px;
+    height: 100%;
+}
+.twopage-inner-l span{
+    color: #404040;
+    font-size: 34px;
+    font-weight: bold;
+    height: 74px;
+    line-height: 50px;
+}
+.twopage-inner-l span:nth-child(1){
+    width: 136px;
+    margin-right: 6px;
+    border-bottom: 4px solid #C8000A;
+}
+.twopage-title .twopage-inner-r>span{
+    color: #333;
+    font-size: 15px;
+    margin-top: 6px;
+}
+.add-color{
+    color: #c7000a;
+    font-size: 15px;
+    line-height: 24px;
+}
+.twopage-inner-r span.address{
+    font-size: 24px;
+}
+/*主体内容开始*/
+.main-body{
+    width: 1200px;
+    height: 704px;
+    margin: 0 auto;
+    padding:0 15px;
+}
+.main-body-title{
+    width: 140px;
+    height: 42px;
+    margin: 0 auto 60px;
+    text-align: center;
+    color: white;
+    background: #C7000A;
+    line-height: 42px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+.main-body-inner{
+    width: 100%;
+    height:auto;
+    line-height: 32px;
+}
+.main-body-inner p.add-strong{
+    font-weight: 700;
+    text-indent:2em;
+}
+/*主体内容结束*/

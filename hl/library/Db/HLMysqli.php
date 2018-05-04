@@ -21,7 +21,7 @@ class HLMysqli implements HLDBAdapter
     */
     public function connect($config)
     {
-        var_dump($config);
+//        var_dump($config);
     }
     
     /**
