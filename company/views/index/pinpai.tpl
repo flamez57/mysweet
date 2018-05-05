@@ -1,45 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>品牌溯源</title>
-    <?=\hl\HLView::css('iconfont.css');?>
-    <?=\hl\HLView::css('base.css');?>
-    <?=\hl\HLView::css('index-eat_.css');?>
-    <?=\hl\HLView::css('pinpan_.css');?>
-</head>
-<body>
-<header>
-    <div class="head-left">
-        <?=\hl\HLView::img('logo.jpg');?>
-    </div>
-    <ul class="head-right">
-        <li><a href="<?=\hl\HLRoute::makeUrl('company', 'index', 'index')?>">网站首页</a></li>
-        <li><a href="<?=\hl\HLRoute::makeUrl('company', 'index', 'pinpai')?>">品牌溯源</a></li>
-        <li><a href="<?=\hl\HLRoute::makeUrl('company', 'index', 'jingdian')?>">经典美食</a></li>
-        <li><a href="<?=\hl\HLRoute::makeUrl('company', 'index', 'menmiancaifeng')?>">门店风采</a></li>
-        <li><a href="<?=\hl\HLRoute::makeUrl('company', 'index', 'moveche')?>">移动店车</a></li>
-        <li><a href="<?=\hl\HLRoute::makeUrl('company', 'index', 'jiameng')?>">加盟咨询</a></li>
-        <li><a href="<?=\hl\HLRoute::makeUrl('company', 'index', 'service')?>">服务支持</a></li>
-        <li><a href="<?=\hl\HLRoute::makeUrl('company', 'index', 'new')?>">资讯中心</a></li>
-        <li><a href="<?=\hl\HLRoute::makeUrl('company', 'index', 'callme')?>">联系我们</a></li>
-    </ul>
-</header>
-<!--导航结束-->
-<!--banner开始-->
-<div class="banner-box">
-    <ul class="banner">
-        <li class="qy-active"><?=\hl\HLView::img('banner-pc1.jpg', ['alt' => '']);?></li>
-        <li><?=\hl\HLView::img('banner-pc2.jpg', ['alt' => '']);?></li>
-        <li><?=\hl\HLView::img('banner-pc3.jpg', ['alt' => '']);?></li>
-    </ul>
-    <ul class="qy-dianbox">
-        <li class="dian-active"></li>
-        <li></li>
-        <li></li>
-    </ul>
-</div>
-<!--banner结束-->
+<?=\hl\HLView::css('index-eat_.css');?>
+<?=\hl\HLView::css('pinpan_.css');?>
 <!--内容标题开始-->
 <div class="twopage-title">
     <div class="twopage-inner-l">
@@ -70,44 +30,5 @@
         <p>　　公司创始人是晋商的后代，深受晋商“诚信义利”经营理念的影响，加之对晋商的代表人乔致庸非常崇拜，所以注册了“乔一碗”商标，并立志将其打造成中式快餐第一品牌。</p>
         <p>　　我们在继承晋商文化的精髓的基础上，将管理和先进的设备应用到“乔一碗”，并改良了凉皮、肉夹馍、刀削面等传统特色美食的制作技术，凭借我们具有创新精神的专业团队和服务加盟商的丰富经验，一定能在竞争中取胜—在帮助加盟商取得较高的投资回报的同时，将“乔一碗”开到全国。</p>
     </div>
-
-
-
-
 </div>
 <!--底部开始-->
-<div class="footer">
-    <div class="footer-inner">
-        <div class="foot-left">
-            <ul class="foot-left-inner">
-                <li>服务支持</li>
-                <li class="foot-txt">开店服务</li>
-                <li class="foot-txt">全程支持</li>
-            </ul>
-            <ul class="foot-left-inner">
-                <li>加盟咨询</li>
-                <li class="foot-txt">加盟须知</li>
-                <li class="foot-txt">加盟政策</li>
-                <li class="foot-txt">经济效益</li>
-            </ul>
-            <ul class="foot-left-inner">
-                <li>咨询热线</li>
-                <li id="call"></li>
-                <li class="foot-txt">
-                    周一到周日08:00-22:00
-                </li>
-            </ul>
-        </div>
-        <div class="foot-right-pc1">
-            <?=\hl\HLView::img('erweima-pc1.png', ['alt' => '']);?>
-        </div>
-        <div class="foot-right-pc2">
-            <?=\hl\HLView::img('erweima-pc2.png', ['alt' => '']);?>
-        </div>
-    </div>
-</div>
-<div class="footer-bottom">版权所有：北京乔一碗餐饮管理有限公司 技术支持：龙采科技</div>
-<!--底部结束-->
-</body>
-<?=\hl\HLView::js('qy.js');?>
-</html>

@@ -13,10 +13,27 @@ use company\services\exampleServices;
 class IndexController extends HLController
 {
     /*
+    ** 公共头
+    */
+    public function header()
+    {
+        \hl\HLView::html('header');
+    }
+    
+    /*
+    ** 公共底部
+    */
+    public function footer()
+    {
+        \hl\HLView::html('footer');
+    }
+    
+    /*
     ** 默认首页
     */
     public function indexAction()
     {
+        $this->header();
         $str = exampleServices::getInstance()->todo();
         //传递值到模板
         \hl\HLView::param('out', $str); 
@@ -27,7 +44,7 @@ class IndexController extends HLController
     */
     public function pinpaiAction()
     {
-        
+        $this->header();
     }
     
     /*
@@ -35,7 +52,7 @@ class IndexController extends HLController
     */
     public function jingdianAction()
     {
-        
+        $this->header();
     }
     
     /*
@@ -43,7 +60,7 @@ class IndexController extends HLController
     */
     public function menmiancaifengAction()
     {
-        
+        $this->header();
     }
     
     /*
@@ -51,7 +68,7 @@ class IndexController extends HLController
     */
     public function movecheAction()
     {
-        
+        $this->header();
     }
     
     /*
@@ -59,7 +76,7 @@ class IndexController extends HLController
     */
     public function jiamengAction()
     {
-        
+        $this->header();
     }
     
     /*
@@ -67,7 +84,7 @@ class IndexController extends HLController
     */
     public function serviceAction()
     {
-        
+        $this->header();
     }
     
     /*
@@ -75,7 +92,7 @@ class IndexController extends HLController
     */
     public function newAction()
     {
-        
+        $this->header();
     }
     
     /*
@@ -83,7 +100,7 @@ class IndexController extends HLController
     */
     public function newxiangqingAction()
     {
-        
+        $this->header();
     }
     
     /*
@@ -91,6 +108,15 @@ class IndexController extends HLController
     */
     public function callmeAction()
     {
-        
+        $this->header();
+    }
+    
+    /*
+    ** 引入尾部
+    */
+    public function __destruct()
+    {
+        parent::__destruct();
+        $this->footer();
     }
 }
