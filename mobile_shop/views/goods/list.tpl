@@ -5,11 +5,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="UTF-8">
 		<title>摆件</title>
-		<link href="css/base.css" type="text/css" rel="stylesheet">
-		<link href="css/kind.css" type="text/css" rel="stylesheet">
+		<?=\hl\HLView::css('base.css')?>
+        <?=\hl\HLView::css('kind.css')?>
 		<!--[if lt IE 9]>
-	      <script src="js/html5shiv.js"></script>
-	      <script src="js/respond.js"></script>
+            <?=\hl\HLView::js('html5shiv.js')?>
+            <?=\hl\HLView::js('respond.js')?>
 	    <![endif]-->
 	</head>
 	<body>
@@ -20,55 +20,55 @@
 				<a href="#"><i class="iconfont">&#xe64b;</i></a>
 			</header>
 			<div class="list01 clearfix">
-				<a href="proDetail.html">
+				<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'goods', 'detail')?>">
 					<dl>
-						<dt><img src="img/temp/pro03.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro03.jpg');?></dt>
 						<dd class="clearfix"><span class="fl">创意白瓷花瓶</span><span class="fr">￥17.90</span></dd>
 						
 					</dl>
 				</a>
-				<a href="proDetail.html">
+				<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'goods', 'detail')?>">
 					<dl>
-						<dt><img src="img/temp/pro02.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro02.jpg');?></dt>
 						<dd class="clearfix"><span class="fl">茶几陶瓷花瓶</span><span class="fr">￥17.90</span></dd>
 					</dl>
 				</a>
-				<a href="proDetail.html">
+				<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'goods', 'detail')?>">
 					<dl>
-						<dt><img src="img/temp/pro04.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro04.jpg');?></dt>
 						<dd class="clearfix"><span class="fl">仿木纹漆花瓶</span><span class="fr">￥17.90</span></dd>
 						
 					</dl>
 				</a>
-				<a href="proDetail.html">
+				<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'goods', 'detail')?>">
 					<dl>
-						<dt><img src="img/temp/pro05.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro05.jpg');?></dt>
 						<dd class="clearfix"><span class="fl">复古做旧花瓶</span><span class="fr">￥17.90</span></dd>
 					</dl>
 				</a>
-				<a href="proDetail.html">
+				<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'goods', 'detail')?>">
 					<dl>
-						<dt><img src="img/temp/pro06.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro06.jpg');?></dt>
 						<dd class="clearfix"><span class="fl">创意白瓷花瓶</span><span class="fr">￥17.90</span></dd>
 						
 					</dl>
 				</a>
-				<a href="proDetail.html">
+				<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'goods', 'detail')?>">
 					<dl>
-						<dt><img src="img/temp/pro07.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro07.jpg');?></dt>
 						<dd class="clearfix"><span class="fl">茶几陶瓷花瓶</span><span class="fr">￥17.90</span></dd>
 					</dl>
 				</a>
-				<a href="proDetail.html">
+				<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'goods', 'detail')?>">
 					<dl>
-						<dt><img src="img/temp/pro08.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro08.jpg');?></dt>
 						<dd class="clearfix"><span class="fl">地中海落地花瓶</span><span class="fr">￥17.90</span></dd>
 						
 					</dl>
 				</a>
-				<a href="proDetail.html">
+				<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'goods', 'detail')?>">
 					<dl>
-						<dt><img src="img/temp/pro02.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro02.jpg');?></dt>
 						<dd class="clearfix"><span class="fl">仿木竖面花瓶</span><span class="fr">￥17.90</span></dd>
 					</dl>
 				</a>
@@ -117,6 +117,7 @@
 			</div>
 		</div>
 	</body>
-	<script src="js/public.js"></script>
-	<script src="js/jquery-1.12.4.min.js"></script>
+    <?=\hl\HLView::js('jquery-1.12.4.min.js');?>
+    <?=\hl\HLView::js('public.js');?>
+    
 </html>

@@ -6,13 +6,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="UTF-8">
 		<title>评价</title>
-		<link href="css/base.css" type="text/css" rel="stylesheet">
-		 <link rel="stylesheet" href="css/swiper.min.css">
-		<link href="css/swiper.css" type="text/css" rel="stylesheet">
-		<link href="css/kind.css" type="text/css" rel="stylesheet">
+		<?=\hl\HLView::css('base.css')?>
+        <?=\hl\HLView::css('swiper.css')?>
+        <?=\hl\HLView::css('kind.css')?>
 		<!--[if lt IE 9]>
-	      <script src="js/html5shiv.js"></script>
-	      <script src="js/respond.js"></script>
+            <?=\hl\HLView::js('html5shiv.js')?>
+            <?=\hl\HLView::js('respond.js')?>
 	    <![endif]-->
 	</head>
 
@@ -24,10 +23,9 @@
 				<a href="#"><i class="iconfont">&#xe64b;</i></a>
 			</header>
 		</div>
-	
-	<script src="js/jquery-1.12.4.min.js"></script>
-	<script src="js/swiper.jquery.min.js"></script>
-	<script src="js/public.js"></script>
+	<?=\hl\HLView::js('swiper.jquery.min.js');?>
+    <?=\hl\HLView::js('jquery-1.12.4.min.js');?>
+    <?=\hl\HLView::js('public.js');?>
 	<script>
 	$(function(){
 		var swiper = new Swiper('.swiper-container', {

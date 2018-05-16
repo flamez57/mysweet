@@ -5,11 +5,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="UTF-8">
 		<title>购物车</title>
-		<link rel="stylesheet" type="text/css" href="css/base.css"/>
-		<link rel="stylesheet" type="text/css" href="css/cart.css"/>
+        <?=\hl\HLView::css('base.css')?>
+        <?=\hl\HLView::css('cart.css')?>
 		<!--[if lt IE 9]>
-	      <script src="js/html5shiv.js"></script>
-	      <script src="js/respond.js"></script>
+            <?=\hl\HLView::js('html5shiv.js')?>
+            <?=\hl\HLView::js('respond.js')?>
 	    <![endif]-->
 	</head>
 	<body>
@@ -30,7 +30,7 @@
 						<span></span>
 					</label>
 				</div>
-				<a href="#" class="img fl"><img src="img/flo3.jpg"/></a>
+				<a href="#" class="img fl"><?=\hl\HLView::img('flo3.jpg');?></a>
 				<div class="price fl">
 					<a href="#" class="word">现代简约工艺花瓶欧洲时尚客厅摆件摆件</a>
 					<a href="#" class="word">颜色分类：<span>白色瓷瓶+白色串枚</span></a>
@@ -44,7 +44,7 @@
 						<span></span>
 					</label>
 				</div>
-				<a href="#" class="img fl"><img src="img/flo3.jpg"/></a>
+				<a href="#" class="img fl"><?=\hl\HLView::img('flo3.jpg');?></a>
 				<div class="price fl">
 					<a href="#" class="word">现代简约工艺花瓶欧洲时尚客厅摆件摆件</a>
 					<a href="#" class="word">颜色分类：<span>白色瓷瓶+白色串枚</span></a>
@@ -58,7 +58,7 @@
 						<span></span>
 					</label>
 				</div>
-				<a href="#" class="img fl"><img src="img/flo3.jpg"/></a>
+				<a href="#" class="img fl"><?=\hl\HLView::img('flo3.jpg');?></a>
 				<div class="price fl">
 					<a href="#" class="word">现代简约工艺花瓶欧洲时尚客厅摆件摆件</a>
 					<a href="#" class="word">颜色分类：<span>白色瓷瓶+白色串枚</span></a>
@@ -83,14 +83,14 @@
 		<div style="padding-top: 4rem;"></div>
 		<!--------------------------footer----------------------->
 		<footer>
-			<a href="index.html" class="on"><i class="iconfont">&#xe60d;</i><br /><span>首页</span></a>
-			<a href="#"><i class="iconfont">&#xe6f4;</i><br /><span>分类</span></a>
-			<a href="#"><i class="iconfont">&#xe601;</i><br /><span>搭配</span></a>
-			<a href="#"><i class="iconfont">&#xe6cc;</i><br /><span>购物车</span></a>
-			<a href="#"><i class="iconfont">&#xe607;</i><br /><span>我</span></a>
+			<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'index', 'index')?>" class="on"><i class="iconfont">&#xe60d;</i><br /><span>首页</span></a>
+			<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'goods', 'list')?>"><i class="iconfont">&#xe6f4;</i><br /><span>分类</span></a>
+			<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'match', 'index')?>"><i class="iconfont">&#xe601;</i><br /><span>搭配</span></a>
+			<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'cart', 'index')?>"><i class="iconfont">&#xe6cc;</i><br /><span>购物车</span></a>
+			<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'my', 'index')?>"><i class="iconfont">&#xe607;</i><br /><span>我</span></a>
 		</footer>
 	</body>
-	<script src="js/jquery-1.12.4.min.js"></script>
-	<script src="js/public.js"></script>
-	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+	<?=\hl\HLView::js('rem.js');?>
+    <?=\hl\HLView::js('jquery-1.12.4.min.js');?>
+    <?=\hl\HLView::js('public.js');?>
 </html>

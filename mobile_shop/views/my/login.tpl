@@ -5,16 +5,16 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>登陆</title>
-		<link rel="stylesheet" href="css/base.css">
-		<link rel="stylesheet" href="css/login.css">
+		<?=\hl\HLView::css('base.css')?>
+        <?=\hl\HLView::css('login.css')?>
 		<!--[if lt IE 9]>
-	      	<script src="js/html5shiv.js"></script>
-	      	<script src="js/respond.js"></script>
+            <?=\hl\HLView::js('html5shiv.js')?>
+            <?=\hl\HLView::js('respond.js')?>
 	    <![endif]-->
 	</head>
 	<body>
 		<div class="login">
-			<h1><a href="#"><img src="img/logo.png"/></a></h1>
+			<h1><a href="#"><?=\hl\HLView::img('logo.png');?></a></h1>
 			<form action="#" method="post" class="clearfix">
 				<p><i class="iconfont">&#xe607;</i><input type="text" name="" id="" value="" autocomplete="" placeholder="用户名/邮箱地址/手机号" /></p>
 				<p><i class="iconfont">&#xe6b7;</i><input type="text" name="" id="" value="" placeholder="请输入密码" /></p>
@@ -30,8 +30,7 @@
 			</p>
 			<div class="footer">Copyright&copy;2013-2017 MINGDE</div>
 		</div>
-		<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+        <?=\hl\HLView::js('rem.js');?>
+        <?=\hl\HLView::js('public.js');?>
 	</body>
 </html>

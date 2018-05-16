@@ -5,11 +5,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="UTF-8">
 		<title>我的</title>
-		<link href="css/base.css" type="text/css" rel="stylesheet">
-		<link href="css/address.css" type="text/css" rel="stylesheet">
+        <?=\hl\HLView::css('base.css')?>
+        <?=\hl\HLView::css('address.css')?>
 		<!--[if lt IE 9]>
-	      <script src="js/html5shiv.js"></script>
-	      <script src="js/respond.js"></script>
+            <?=\hl\HLView::js('html5shiv.js')?>
+            <?=\hl\HLView::js('respond.js')?>
 	    <![endif]-->
 	</head>
 	<body>
@@ -125,15 +125,15 @@
 		<div style="padding-top: 4rem;"></div>
 		<!--------------------------footer----------------------->
 		<footer>
-			<a href="index.html" class="on"><i class="iconfont">&#xe60d;</i><br /><span>首页</span></a>
-			<a href="#"><i class="iconfont">&#xe6f4;</i><br /><span>分类</span></a>
-			<a href="#"><i class="iconfont">&#xe601;</i><br /><span>搭配</span></a>
-			<a href="#"><i class="iconfont">&#xe6cc;</i><br /><span>购物车</span></a>
-			<a href="#"><i class="iconfont">&#xe607;</i><br /><span>我</span></a>
+			<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'index', 'index')?>" class="on"><i class="iconfont">&#xe60d;</i><br /><span>首页</span></a>
+			<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'goods', 'list')?>"><i class="iconfont">&#xe6f4;</i><br /><span>分类</span></a>
+			<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'match', 'index')?>"><i class="iconfont">&#xe601;</i><br /><span>搭配</span></a>
+			<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'cart', 'index')?>"><i class="iconfont">&#xe6cc;</i><br /><span>购物车</span></a>
+			<a href="<?=\hl\HLRoute::makeUrl('mobile_shop', 'my', 'index')?>"><i class="iconfont">&#xe607;</i><br /><span>我</span></a>
 		</footer>
 		
 	</body>
-	<script src="js/jquery-1.12.4.min.js"></script>
-	<script src="js/public.js"></script>
-	<script src="js/rem.js" type="text/javascript" charset="utf-8"></script>
+    <?=\hl\HLView::js('rem.js');?>
+    <?=\hl\HLView::js('jquery-1.12.4.min.js');?>
+    <?=\hl\HLView::js('public.js');?>
 </html>

@@ -6,12 +6,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="UTF-8">
 		<title>创意白瓷干花花瓶摆件</title>
-		<link href="css/base.css" type="text/css" rel="stylesheet">
-		<link href="css/swiper.css" type="text/css" rel="stylesheet">
-		<link href="css/kind.css" type="text/css" rel="stylesheet">
+		<?=\hl\HLView::css('base.css')?>
+        <?=\hl\HLView::css('kind.css')?>
+        <?=\hl\HLView::css('swiper.css')?>
 		<!--[if lt IE 9]>
-	      <script src="js/html5shiv.js"></script>
-	      <script src="js/respond.js"></script>
+            <?=\hl\HLView::js('html5shiv.js')?>
+            <?=\hl\HLView::js('respond.js')?>
 	    <![endif]-->
 	</head>
 	<body>
@@ -29,7 +29,7 @@
 					<div class="swiper-slide">
 						<a href="proDetail.html">
 							<dl>
-								<dt><img src="img/temp/prodet05.jpg"></dt>
+								<dt><?=\hl\HLView::img('temp/prodet05.jpg');?></dt>
 								<dd class="clearfix">
 									<span class="fl">创意白瓷花瓶</span>
 									<span class="fr">￥17.90</span>
@@ -40,7 +40,7 @@
 					<div class="swiper-slide">
 						<a href="#">
 							<dl>
-								<dt><img src="img/temp/prodet06.jpg"></dt>
+								<dt><?=\hl\HLView::img('temp/prodet06.jpg');?></dt>
 								<dd class="clearfix">
 									<span class="fl">创意白瓷花瓶</span>
 									<span class="fr">￥17.90</span>
@@ -51,7 +51,7 @@
 					<div class="swiper-slide">
 						<a href="#">
 							<dl>
-								<dt><img src="img/temp/prodet07.jpg"></dt>
+								<dt><?=\hl\HLView::img('temp/prodet07.jpg');?></dt>
 								<dd class="clearfix">
 									<span class="fl">创意白瓷花瓶</span>
 									<span class="fr">￥17.90</span>
@@ -62,7 +62,7 @@
 					<div class="swiper-slide">
 						<a href="#">
 							<dl>
-								<dt><img src="img/temp/prodet08.jpg"></dt>
+								<dt><?=\hl\HLView::img('temp/prodet08.jpg');?></dt>
 								<dd class="clearfix">
 									<span class="fl">创意白瓷花瓶</span>
 									<span class="fr">￥17.90</span>
@@ -73,7 +73,7 @@
 					<div class="swiper-slide">
 						<a href="#">
 							<dl>
-								<dt><img src="img/temp/prodet09.jpg"></dt>
+								<dt><?=\hl\HLView::img('temp/prodet09.jpg');?></dt>
 								<dd class="clearfix">
 									<span class="fl">创意白瓷花瓶</span>
 									<span class="fr">￥17.90</span>
@@ -94,10 +94,10 @@
 				<div class="kinds clearfix">
 					<span class="fl">颜色分类</span>
 					<div class="imgs fr">
-						<img src="img/temp/prodet05.jpg">
-						<img src="img/temp/prodet06.jpg">
-						<img src="img/temp/prodet07.jpg">
-						<img src="img/temp/prodet08.jpg">
+                        <?=\hl\HLView::img('temp/prodet05.jpg');?>
+                        <?=\hl\HLView::img('temp/prodet06.jpg');?>
+                        <?=\hl\HLView::img('temp/prodet07.jpg');?>
+                        <?=\hl\HLView::img('temp/prodet08.jpg');?>
 					</div>
 				</div>
 				<div class="num clearfix">
@@ -114,10 +114,10 @@
 				</div>
 			</div>
 		</div>
-	<script src="js/jquery-1.12.4.min.js"></script>
-	<script src="js/swiper.jquery.min.js"></script>
-	<script src="js/public.js"></script>
-	<script src="js/pro.js"></script>
+        <?=\hl\HLView::js('jquery-1.12.4.min.js');?>
+        <?=\hl\HLView::js('swiper.jquery.min.js');?>
+        <?=\hl\HLView::js('public.js');?>
+        <?=\hl\HLView::js('pro.js');?>
 	<script>
 	$(function(){
 		var swiper = new Swiper('.swiper-container', {

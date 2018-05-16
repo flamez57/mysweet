@@ -6,11 +6,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="UTF-8">
 		<title>个人资料</title>
-		<link href="css/base.css" type="text/css" rel="stylesheet">
-		<link href="css/kind.css" type="text/css" rel="stylesheet">
+		<?=\hl\HLView::css('base.css')?>
+        <?=\hl\HLView::css('kind.css')?>
 		<!--[if lt IE 9]>
-	      <script src="js/html5shiv.js"></script>
-	      <script src="js/respond.js"></script>
+            <?=\hl\HLView::js('html5shiv.js')?>
+            <?=\hl\HLView::js('respond.js')?>
 	    <![endif]-->
 	</head>
 
@@ -23,14 +23,13 @@
 			</header>
 		</div>
 		<ul class="msgList">
-			<li><span>个人头像</span><span><img src="img/temp/pic.jpg" /><i class="iconfont">&#xe64b;</i></span></li>
+			<li><span>个人头像</span><span><?=\hl\HLView::img('temp/pic.jpg');?><i class="iconfont">&#xe64b;</i></span></li>
 			<li><span>会员名</span><span>尤物范儿<i class="iconfont">&#xe64b;</i></span></li>
 			<li><span>性别</span><span><i class="iconfont">&#xe64b;</i></span></li>
 			<li><span>生日</span><span>1995-06-06<i class="iconfont">&#xe64b;</i></span></li>
 		</ul>
 		
-	
-	<script src="js/jquery-1.12.4.min.js"></script>
-	<script src="js/rem.js"></script>
+	<?=\hl\HLView::js('rem.js');?>
+    <?=\hl\HLView::js('jquery-1.12.4.min.js');?>
 	</body>
 </html>
