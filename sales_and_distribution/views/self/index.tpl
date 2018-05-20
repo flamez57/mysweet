@@ -52,7 +52,7 @@
 		</a>
 		<div class="p-bottom p-bottom1 clearfloat">
 			<ul class="clearfloat">
-				<a href="fx-center1.html">
+				<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'fxcenter1')?>">
 					<li class="box-s">
 						<span class="opa6"></span>
 						<p class="bt">我的佣金</p>
@@ -119,28 +119,28 @@
 			
 			<ul class="self-icon">
 				<li>
-					<a href="datum.html">
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'datum')?>">
 						<?=\hl\HLView::img('images/self-icon01.png');?>
 						<p>个人信息</p>
 						<span><?=\hl\HLView::img('images/right.png');?></span>
 					</a>
 				</li>
 				<li>
-					<a href="mycollect.html">
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'mycollect')?>">
 						<?=\hl\HLView::img('images/self-icon02.png');?>
 						<p>我的收藏</p>
 						<span><?=\hl\HLView::img('images/right.png');?></span>
 					</a>
 				</li>
 				<li>
-					<a href="balance.html">
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'balance')?>">
 						<?=\hl\HLView::img('images/self-icon012.png');?>
 						<p>消费记录</p>
 						<span><?=\hl\HLView::img('images/right.png');?></span>
 					</a>
 				</li>
 				<li>
-					<a href="addres.html">
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'addres')?>">
 						<?=\hl\HLView::img('images/self-icon04.png');?>
 						<p>地址管理</p>
 						<span><?=\hl\HLView::img('images/right.png');?></span>
@@ -149,14 +149,14 @@
 			</ul>
 			<ul class="self-icon">
 				<li>
-					<a href="gobuy.html">
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'gobuy')?>">
 						<?=\hl\HLView::img('images/self-icon05.png');?>
 						<p>我的分销</p>
 						<span><?=\hl\HLView::img('images/right.png');?></span>
 					</a>
 				</li>
 				<li>
-					<a href="sign.html">
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'sign')?>">
 						<?=\hl\HLView::img('images/self-icon011.png');?>
 						<p>修改密码</p>
 						<span><?=\hl\HLView::img('images/right.png');?></span>
@@ -170,7 +170,7 @@
 					</a>
 				</li>
 			</ul>
-			<a href="login.html"><input type="button" value="退出" /></a>
+			<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'login')?>"><input type="button" value="退出" /></a>
 			
 		</section>
 		

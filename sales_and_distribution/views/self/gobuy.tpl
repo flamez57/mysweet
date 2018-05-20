@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>登录</title>
-    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>我的分销</title>
+    <?=\hl\HLView::css('loaders.min.css');?>
+    <?=\hl\HLView::css('loading.css');?>
+    <?=\hl\HLView::css('base.css');?>
+    <?=\hl\HLView::css('style.css');?>
+    <?=\hl\HLView::js('jquery.min.js');?>
     <script type="text/javascript">
     	$(window).load(function(){
     		$(".loading").addClass("loader-chanage")
@@ -32,7 +32,7 @@
 <body>
 	<header class="top-header">
 		<a class="icona" href="javascript:history.go(-1)">
-				<img src="images/left.png"/>
+				<?=\hl\HLView::img('images/left.png');?>
 		</a>
 		<h3>购买成为分销商</h3>
 		<a class="iconb" href="shopcar.html">
@@ -42,7 +42,7 @@
 	<div class="login" style="margin-top: 0;">
 		<form>
 			<div class="buybanner clearfloat">
-				<img src="images/fxbanner.jpg"/>
+                <?=\hl\HLView::img('images/fxbanner.jpg');?>
 			</div>
 			<a href="fx-center.html" class="gobuy-btn">
 				立即购买成为分销商

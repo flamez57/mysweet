@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>修改密码</title>
-    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <?=\hl\HLView::css('loaders.min.css');?>
+    <?=\hl\HLView::css('loading.css');?>
+    <?=\hl\HLView::css('base.css');?>
+    <?=\hl\HLView::css('style.css');?>
+    <?=\hl\HLView::js('jquery.min.js');?>
     <script type="text/javascript">
     	$(window).load(function(){
     		$(".loading").addClass("loader-chanage");
@@ -42,15 +42,15 @@
 			
 			<ul>
 				<li>
-					<img src="images/login.png"/>
+					<?=\hl\HLView::img('images/login.png');?>
 					<input type="text" placeholder="输入原密码"/>
 				</li>
 				<li>
-					<img src="images/password.png"/>
+					<?=\hl\HLView::img('images/password.png');?>
 					<input type="password" placeholder="输入新密码"/>
 				</li>
 				<li>
-					<img src="images/password.png"/>
+					<?=\hl\HLView::img('images/password.png');?>
 					<input type="password" placeholder="输入确认密码"/>
 				</li>
 			</ul>

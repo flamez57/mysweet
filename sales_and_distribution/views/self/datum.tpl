@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>男装专区</title>
-    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>个人信息</title>
+    <?=\hl\HLView::css('loaders.min.css');?>
+    <?=\hl\HLView::css('loading.css');?>
+    <?=\hl\HLView::css('base.css');?>
+    <?=\hl\HLView::css('style.css');?>
+    <?=\hl\HLView::js('jquery.min.js');?>
     <script type="text/javascript">
     	$(window).load(function(){
     		$(".loading").addClass("loader-chanage")
@@ -32,7 +32,7 @@
 <body>
 	<header class="top-header">
 			<a class="icona" href="javascript:history.go(-1)">
-					<img src="images/left.png"/>
+                <?=\hl\HLView::img('images/left.png');?>
 				</a>
 			<h3>我的资料</h3>
 			<a class="iconb" href="shopcar.html">
@@ -44,14 +44,14 @@
 			<li>
 				<a href="#">
 					<p>头像</p>
-					<span><img src="images/right.png"/></span>					
-					<figure><img src="images/detail-tou.png"/></figure>
+					<span><?=\hl\HLView::img('images/right.png');?></span>					
+					<figure><?=\hl\HLView::img('images/detail-tou.png');?></figure>
 				</a>
 			</li>
 			<li>
-				<a href="namechange.html">
+				<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'namechange')?>">
 					<p>昵称</p>
-					<span><img src="images/right.png"/></span>
+					<span><?=\hl\HLView::img('images/right.png');?></span>
 					<small>瑾晨</small>
 					
 				</a>
@@ -59,7 +59,7 @@
 			<li>
 				<a href="#">
 					<p>性别</p>
-					<span><img src="images/right.png"/></span>
+					<span><?=\hl\HLView::img('images/right.png');?></span>
 					<select>
 						<option>男</option>
 						<option>女</option>

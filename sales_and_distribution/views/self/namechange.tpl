@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>男装专区</title>
-    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>修改个人信息</title>
+    <?=\hl\HLView::css('loaders.min.css');?>
+    <?=\hl\HLView::css('loading.css');?>
+    <?=\hl\HLView::css('base.css');?>
+    <?=\hl\HLView::css('style.css');?>
+    <?=\hl\HLView::js('jquery.min.js');?>
     <script type="text/javascript">
     	$(window).load(function(){
     		$(".loading").addClass("loader-chanage")
@@ -32,7 +32,7 @@
 <body>
 	<header class="top-header">
 		<a class="icona" href="javascript:history.go(-1)">
-				<img src="images/left.png"/>
+				<?=\hl\HLView::img('images/left.png');?>
 			</a>
 		<h3>修改昵称</h3>
 			
@@ -43,7 +43,7 @@
 	<div class="contaniner">
 		<form action="" method="post" class="nameform">
 			<div class="namechange">
-				<img src="images/a-icon01.png"/>
+                <?=\hl\HLView::img('images/a-icon01.png');?>
 				<input type="text" placeholder="瑾晨"/>
 			</div>
 			<p>推荐使用中文，5-25个字符</p>
