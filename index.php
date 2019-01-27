@@ -6,3 +6,4 @@ include(ENGINE_PATH.'HLEngine.php');
 $config = require(ROOT_PATH.'config/console.php');
 $e = new hl\HLEngine($config);
 $e->run();
+// test

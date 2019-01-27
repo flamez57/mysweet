@@ -108,7 +108,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="go-assess.html">
+								<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'assess', 'index')?>">
 									<?=\hl\HLView::img('images/order-icon04.png');?>
 									<p>待评价</p>
 								</a>
