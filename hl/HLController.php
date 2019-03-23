@@ -28,7 +28,7 @@ class HLController extends HLSington
     public function __call($method, $avgs)
     {
         $class = get_called_class();
-        $class = explode(DIRECTORY_SEPARATOR, $class);
+        $class = explode('\\', $class);
         $this->viewPath = ROOT_PATH.$class[0].DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR. 
                 lcfirst(substr($class[2],0,strlen($class[2])-10)).DIRECTORY_SEPARATOR;
         HLView::init($class[0], $this->viewPath);

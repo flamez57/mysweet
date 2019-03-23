@@ -29,7 +29,7 @@ class HLBootstrap
     /*
     ** 注册类
     */
-    public function __construct() 
+    public function __construct()
     {
         spl_autoload_register(array($this, 'controllers'));
     }
@@ -37,7 +37,7 @@ class HLBootstrap
     /*
     ** 惰性加载类（加载控制器前身）
     */
-    public function controllers($class) 
+    private function controllers($class)
     {
         //$cutRoom = strrpos($class, DIRECTORY_SEPARATOR);
         //$classPath = substr($class, 0, $cutRoom);

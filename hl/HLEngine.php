@@ -1,5 +1,7 @@
 <?php
 namespace hl;
+use application\Bootstrap;
+
 /**
 ** @ClassName: HLEngine
 ** @Description: 引擎
@@ -53,7 +55,7 @@ class HLEngine
     public function run()
     {
         include_once(ROOT_PATH.'hl/HLBootstrap.php');
-        
+        HLBootstrap::init();
         $bootstrap = $this->bootstrapFactory($this->module);
         
         $controller = $this->controllerFactory($this->module, $this->controller);
@@ -65,9 +67,12 @@ class HLEngine
     */
     private function bootstrapFactory($module)
     {
-        include(ROOT_PATH.$this->module.'/Bootstrap.php');
+        HLBootstrap::init();
+        $path = ROOT_PATH.$this->module.'/Bootstrap.php';
+        include_once("{$path}");
         $class = DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'Bootstrap';
-        return new $class;
+        $class = '\\'.$module.'\\Bootstrap';
+        return new $class();
     }
     
     /*
@@ -76,6 +81,7 @@ class HLEngine
     private function controllerFactory($module, $controller)
     {
         $class = DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'controllers'. DIRECTORY_SEPARATOR . ucfirst($controller) . 'Controller';
+        $class = '\\' . $module . '\\' . 'controllers'. '\\' . ucfirst($controller) . 'Controller';
         return $class::getInstance($this->config);
     }
 }
