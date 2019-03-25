@@ -19,7 +19,7 @@ class exampleModels extends HLModel
     /*
     ** 数据表
     */
-    public $tableName = '';
+    public $tableName = 'example';
     
     public function __construct()
     {
@@ -28,6 +28,14 @@ class exampleModels extends HLModel
     
     public function todo()
     {
+        $sql = "select * from {$this->tableName}";
+        $a = $this->query($sql);
+        echo '<pre>';
+        var_dump($a);
+        echo '</pre>';
+        foreach ($a as $_v) {
+            echo $_v['id'].'--'.$_v['aa'].'<hr>';
+        }
         return "exampleModels run<br>";
     }
 }

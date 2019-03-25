@@ -27,6 +27,14 @@ class HLModel extends HLSington
     {
         $config = self::$config;
         $this->db = HLDBFactory::factory('Mysqli');
+        if (!isset($config['db'][$this->_db])) {
+            die("{$this->_db}配置信息不存在");
+        }
         $this->db->connect($config['db'][$this->_db] + ['dbname' => $this->_db]);
+    }
+
+    public function query($sql)
+    {
+        return $this->db->query($sql, '');
     }
 }
