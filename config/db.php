@@ -4,7 +4,7 @@ return [
     'default' => [
         'host' => 'localhost',
         'username' => 'root',
-        'password' => '',
+        'password' => 'shunlian',
         'charset' => 'utf8',
         'port' => '3306'
     ], 

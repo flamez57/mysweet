@@ -21,7 +21,19 @@ class HLMysqli implements HLDBAdapter
     */
     public function connect($config)
     {
-//        var_dump($config);
+        if (!isset($this->_dbLink)) {
+            $this->_dbLink = new \mysqli(
+                $config['host'],
+                $config['username'],
+                $config['password'],
+                $config['dbname'],
+                $config['port']
+            );
+            if($this->_dbLink->connect_errno){
+                die("链接错误：({$this->_dbLink->connect_errno}){$this->_dbLink->connect_error}");
+            }
+        }
+        $this->_dbLink->set_charset($config['charset']);
     }
     
     /**
@@ -32,6 +44,12 @@ class HLMysqli implements HLDBAdapter
     */
     public function query($query, $handle)
     {
-        
+        $res = $this->_dbLink->query($query);
+        while ($row = $res->fetch_assoc()) {
+            $data[] = $row;
+        }
+        $res->free();
+        $this->_dbLink->close();
+        return $data ?? [];
     }
 }

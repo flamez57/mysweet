@@ -27,6 +27,6 @@ class HLModel extends HLSington
     {
         $config = self::$config;
         $this->db = HLDBFactory::factory('Mysqli');
-        $this->db->connect($config['db'][$this->_db]);
+        $this->db->connect($config['db'][$this->_db] + ['dbname' => $this->_db]);
     }
 }
