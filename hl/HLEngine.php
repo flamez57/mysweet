@@ -67,10 +67,7 @@ class HLEngine
     */
     private function bootstrapFactory($module)
     {
-        HLBootstrap::init();
-        $path = ROOT_PATH.$this->module.'/Bootstrap.php';
-        include_once("{$path}");
-        $class = DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'Bootstrap';
+        include_once(ROOT_PATH.$this->module.'/Bootstrap.php');
         $class = '\\'.$module.'\\Bootstrap';
         return new $class();
     }
@@ -80,7 +77,6 @@ class HLEngine
     */
     private function controllerFactory($module, $controller)
     {
-        $class = DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR . 'controllers'. DIRECTORY_SEPARATOR . ucfirst($controller) . 'Controller';
         $class = '\\' . $module . '\\' . 'controllers'. '\\' . ucfirst($controller) . 'Controller';
         return $class::getInstance($this->config);
     }

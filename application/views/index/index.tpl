@@ -12,12 +12,13 @@
     <div><a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'index', 'index')?>">分销商城</a></div>
         <?=\hl\HlView::$putout['out']?>
         <?php
+        /*
         for($i=0;$i<=25;$i++){
             \hl\HLView::img('640 ('.$i.').webp', ['width' => '200px']);
         }
         for($i=0;$i<=20;$i++){
             \hl\HLView::img('jpg'.DIRECTORY_SEPARATOR.$i.'.jpg', ['width' => '200px']);
-        }
+        }*/
         ?>
 </body>
 </html>
