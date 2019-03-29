@@ -20,68 +20,6 @@ class DbManager
         return $this->mysqli->insert_id;
     }
 
-
-    /*
-    **  @function lastError    --  returns error  of last query transaction
-    */
-    public function lastError()
-    {
-        return $this->mysqli->error;
-    }
-
-    /*
-    **  @function __call    --  when no method is found in current class, it calls method of mysqli class if found in mysqli class
-    **  @param string $name  -- method name 
-    **  @param array $arguments  -- array of arguments
-    **  @thrown BadMethodCallException  -- if no method is found in mysqli class
-    */
-    public function __call($name, $arguments)
-    {
-        if(method_exists($this->mysqli, $name)){
-            return call_user_func_array(array($this->mysqli,$name), $arguments);
-        }
-        throw new \BadMethodCallException("Called to undefined method $name!");
-    }
-    
-
-    /*
-    **  @function __get -- when no property is found in current class, it returns property mysqli class
-    **  @param string $name  -- property name 
-    **  @thrown exception if property is not found in mysqli Class
-    */
-    public function __get($name)
-    {
-        if(property_exists(array($this->mysqli, $name))){
-            return $this->mysqli->$name;
-        }
-        throw new \Exception("Called to undefined property $name!");
-    }
-
-    /*
-    **  @function escape    -- escapes string or elements of array
-    **  @param  $var    --  can be array or string  --  the string or array to be escaped
-    **  @param bool $recurse_escape --  if set to true and $var is array, escapes all elements of $var array
-    */
-    public function escape($var, $recurse_escape=TRUE)
-    {
-       
-        if (!is_array($var)) {
-            $res = $this->mysqli->real_escape_string($var);
-        } else {
-            $res = array();
-            foreach ($var as $key=>$value) {
-                if ($recurse_escape) {
-                    $res[$key] = $this->escape($value, $recurse_escape);
-                } else {
-                    $res[$key] = $value;
-                }
-                
-            }
-        }
-        return $res;
-    }
-
-
     /*
     **  @function insert   --  inserts new set of data to table by escaping data
     **  @param associative array $data  --   data to be inserted in table 
@@ -214,14 +152,6 @@ class DbManager
 
         $query = "UPDATE " . $table . " SET " . implode(", ", $query_v) . "$where_condition";
         return $this->safeQuery($query, array_merge(array_values($data), array_values($where)));
-    }
-
-    /*
-    **  @function updateFromQuery   -- updates table using query as argument
-    */  
-    public function updateFromQuery($query)
-    {
-        return $this->query($query);
     }
 
     /*
@@ -400,25 +330,11 @@ class DbManager
     */
     public function delete($table, $where=array())
     {
-        if (empty($where)) {
-            return $this->query($query);
-        }
         $where_condition = $this->getPreparingWhereCondition($where);
         $query = "DELETE FROM $table ".$where_condition;
         return $this->safeQuery($query, array_values($where));
     }
 
-    /*
-    **  @function __destruct   --  when script execution is finished, this is called
-    **  @closes connection with mysql
-    */
-    public function __destruct()
-    {
-        if(isset($this->mysqli)){
-            $this->mysqli->close();
-        }
-        
-    }
 
     /*
     **  @function safeQuery  -- prepares query, bind params and executes
@@ -495,30 +411,6 @@ class DbManager
     }
 
     /*
-    **  @function prepareSelect -- calls safeQuery and returns multiple rows 
-    **  @param string $query --  query to be issued
-    **  @param (array or string) bindParams -- bind params
-    **  @param (array or string) (optional) paramType --  types of bind params
-    **  @returns multiple rows 
-    */
-    public function prepareMultiRow($query, $bindParams, $paramType=NULL)
-    {
-        return $this->prepareSelect(2, $query, $bindParams, $paramType);
-    }
-
-    /*
-    **  @function prepareSelect -- calls safeQuery and returns one row 
-    **  @param string $query --  query to be issued
-    **  @param (array or string) bindParams -- bind params
-    **  @param (array or string) (optional) paramType --  types of bind params
-    **  @returns one row 
-    */
-    public function prepareRow($query, $bindParams, $paramType=NULL)
-    {
-        return $this->prepareSelect(1, $query, $bindParams, $paramType);
-    }
-
-    /*
     **  @function prepareValue -- calls safeQuery and returns one value 
     **  @param string $query --  query to be issued
     **  @param (array or string) bindParams -- bind params
@@ -543,34 +435,6 @@ class DbManager
         return $this->convertRowsToColumn($this->prepareRow($query, $bindParams, $paramType=NULL));
     }
 
-    /*
-    **  @function determineType -- determines type of bind params to prepared query
-    **  @param string $item --  string whose type is to be determined
-    **  @copied from from https://github.com/ajillion/PHP-MySQLi-Database-Class
-    */
-    protected function determineType($item)
-    {
-        switch (gettype($item)) {
-            case 'NULL':
-            case 'string':
-                return 's';
-                break;
-
-            case 'integer':
-                return 'i';
-                break;
-
-            case 'blob':
-                return 'b';
-                break;
-
-            case 'double':
-                return 'd';
-                break;
-        }
-        return '';
-    }
-
 
     /**
     **  @function refValues
@@ -593,8 +457,9 @@ class DbManager
 
 
     /*
-    **  @function isArrayAssoc  --  used to check is array is associative
-    **  @returns true if array is associative, else not
+    ** 检查是否关联数组
+    ** @param $array array 要检查的数组
+    ** @return bool 如果数组是关联的，则为真，否则为假
     */
     private function isArrayAssoc($array){
         return (bool) count(array_filter(array_keys($array), 'is_string'));
