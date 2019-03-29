@@ -23,6 +23,11 @@ class HLModel extends HLSington
     */
     public $_db;
 
+    /*
+    ** 查询上次连接数据库请求的查询
+    */
+    private $lastQuery = '';
+
     public function __construct()
     {
         $config = self::$config;
@@ -33,8 +38,28 @@ class HLModel extends HLSington
         $this->db->connect($config['db'][$this->_db] + ['dbname' => $this->_db]);
     }
 
+    /*
+    ** 获取最后执行的sql
+    */
+    public function getLastQuery()
+    {
+        return $this->lastQuery;
+    }
+
+    /*
+    ** 写入最后执行的sql
+    */
+    public function setLastQuery($query)
+    {
+        $this->lastQuery=$query;
+    }
+
+    /*
+    ** 执行sql返回结果
+    */
     public function query($sql)
     {
-        return $this->db->query($sql, '');
+        $this->setLastQuery($sql);
+        return $this->db->query($sql);
     }
 }

@@ -19,10 +19,10 @@ class HLMysqli implements HLDBAdapter
     private $port;
 
     /**
-    * 数据库连接函数
-    * @param $config 数据库配置
-    * @throws DbException
-    * @return resource
+    ** 数据库连接函数
+    ** @param $config 数据库配置
+    ** @throws DbException
+    ** @return resource
     */
     public function connect($config)
     {
@@ -47,13 +47,17 @@ class HLMysqli implements HLDBAdapter
     }
     
     /**
-    * 执行数据库查询
-    * @param string $query 数据库查询SQL字符串
-    * @param mixed $handle 连接对象
-    * @return resource
+    ** 执行数据库查询
+    ** @param string $query 数据库查询SQL字符串
+    ** @param mixed $handle 连接对象
+    ** @return resource
     */
-    public function query($query, $handle)
+    public function query($query, $handle = '')
     {
+        //更换数据库
+        if (!empty($handle)) {
+            $this->_dbLink->select_db($this->_dbLink, $handle);
+        }
         $res = $this->_dbLink->query($query);
         while ($row = $res->fetch_assoc()) {
             $data[] = $row;
