@@ -60,11 +60,15 @@ class HLMysqli implements HLDBAdapter
             $this->_dbLink->select_db($this->_dbLink, $handle);
         }
         $res = $this->_dbLink->query($query);
-        while ($row = $res->fetch_assoc()) {
-            $data[] = $row;
+        if (stripos($query, "SELECT") !== false) {
+            while ($row = $res->fetch_assoc()) {
+                $data[] = $row;
+            }
+        } else {
+            $data = true;
         }
         $res->free();
-        return $data ?? [];
+        return $data ?? false;
     }
 
     /*
@@ -202,8 +206,11 @@ class HLMysqli implements HLDBAdapter
         if (!$stmt->execute()) {
             return false;
         }
-        if (stripos($query, "SELECT") !== FALSE) {
-            $return_value = $stmt->get_result();
+        if (stripos($query, "SELECT") !== false) {
+            $return = $stmt->get_result();
+            while($row = $return->fetch_assoc()){
+                $return_value[] = $row;
+            }
         } else {
             $return_value = true;
         }
@@ -235,7 +242,7 @@ class HLMysqli implements HLDBAdapter
         $data = $this->escape($data);
         foreach ($data as $k => $v) {
             $query_col[] = "`" . $k . "`";
-            $query_v[] = '';
+            $query_v[] = '?';
             $bindProm[] = $v;
         }
         if ($isReplace) {
@@ -395,7 +402,6 @@ class HLMysqli implements HLDBAdapter
                     $query_w[] = "`{$k}`=?";
                     $bindParam[] = $v;
                 }
-
             }
             return $whereStr.implode(" AND ", $query_w)." ";
         }

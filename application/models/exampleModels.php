@@ -28,14 +28,23 @@ class exampleModels extends HLModel
     
     public function todo()
     {
-        $sql = "select * from {$this->tableName}";
-        $a = $this->query($sql);
-        echo '<pre>';
-        var_dump($a);
-        echo '</pre>';
-        foreach ($a as $_v) {
+//        $sql = "select * from {$this->tableName}";
+//        $a = $this->query($sql);
+//        echo '<pre>';
+//        var_dump($a);
+//        echo '</pre>';
+//        foreach ($a as $_v) {
+//            echo $_v['id'].'--'.$_v['aa'].'<hr>';
+//        }
+        for ($i = 0; $i < 100; $i++) {
+            $this->db->insert($this->tableName, ['aa' => 'sdfsd'.$i]);
+        }
+        $c = $this->db->select($this->tableName, '*', ['id' => ['lt', 5]]);
+        foreach ($c as $_v) {
             echo $_v['id'].'--'.$_v['aa'].'<hr>';
         }
+        $this->db->update($this->tableName, ['aa' => '李白'], ['id' => 3]);
+        $this->db->delete($this->tableName, ['id' => 2]);
         return "exampleModels run<br>";
     }
 }
