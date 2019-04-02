@@ -32,6 +32,7 @@ class HLBootstrap
     public function __construct()
     {
         spl_autoload_register(array($this, 'controllers'));
+        spl_autoload_register(array($this, 'library'));
     }
     
     /*
@@ -39,11 +40,18 @@ class HLBootstrap
     */
     private function controllers($class)
     {
-        //$cutRoom = strrpos($class, DIRECTORY_SEPARATOR);
-        //$classPath = substr($class, 0, $cutRoom);
-        //$className = substr($class, $cutRoom + 1, strlen($class));
-        //set_include_path(get_include_path () . PATH_SEPARATOR . ROOT_PATH.$classPath.DIRECTORY_SEPARATOR.'controllers');
-        //spl_autoload_extensions('.php');
+        spl_autoload($class);
+    }
+
+    /*
+    ** 加在library里面的
+    */
+    private function library($class)
+    {
+        $class = explode('\\', $class);
+        $class = implode(DIRECTORY_SEPARATOR, $class);
+        set_include_path(get_include_path () . PATH_SEPARATOR . ROOT_PATH . $class);
+        spl_autoload_extensions('.php');
         spl_autoload($class);
     }
 }

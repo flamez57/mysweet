@@ -36,15 +36,25 @@ class exampleModels extends HLModel
 //        foreach ($a as $_v) {
 //            echo $_v['id'].'--'.$_v['aa'].'<hr>';
 //        }
-        for ($i = 0; $i < 100; $i++) {
-            $this->db->insert($this->tableName, ['aa' => 'sdfsd'.$i]);
-        }
+//        for ($i = 0; $i < 100; $i++) {
+//            $this->db->insert($this->tableName, ['aa' => 'sdfsd'.$i]);
+//        }
         $c = $this->db->select($this->tableName, '*', ['id' => ['lt', 5]]);
-        foreach ($c as $_v) {
-            echo $_v['id'].'--'.$_v['aa'].'<hr>';
-        }
-        $this->db->update($this->tableName, ['aa' => '李白'], ['id' => 3]);
-        $this->db->delete($this->tableName, ['id' => 2]);
+//        foreach ($c as $_v) {
+//            echo $_v['id'].'--'.$_v['aa'].'<hr>';
+//        }
+        /*
+        //实例化类
+        $csv = new \hl\library\Tools\Excel\HLPutoutCsv();
+        //设置表名
+        $csv->setTableName('aa22');
+        //设置表头
+        $csv->setTableHead(['id', 'aa']);
+        //导出数据
+        $csv->putout($c);*/
+        die();
+        //$this->db->update($this->tableName, ['aa' => '李白'], ['id' => 3]);
+        //$this->db->delete($this->tableName, ['id' => 2]);
         return "exampleModels run<br>";
     }
 }

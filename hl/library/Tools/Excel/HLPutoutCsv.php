@@ -1,6 +1,6 @@
 <?php
 
-namespace hl\library\Tool\Excel;
+namespace hl\library\Tools\Excel;
 
 /**
 ** @ClassName: HLPutoutCsv
@@ -52,7 +52,7 @@ class HLPutoutCsv
     public function setTableHead($tableHead)
     {
         if (is_array($tableHead)) {
-            $this->tableName = array_values($tableHead);
+            $this->tableHead = array_values($tableHead);
         }
     }
 

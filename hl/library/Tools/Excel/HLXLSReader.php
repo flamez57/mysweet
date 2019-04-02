@@ -1,6 +1,6 @@
 <?php
 
-namespace hl\library\Tool\Excel;
+namespace hl\library\Tools\Excel;
 
 /**
 ** @ClassName: HLXLSReader

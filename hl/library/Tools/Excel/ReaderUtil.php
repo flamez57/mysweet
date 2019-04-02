@@ -8,7 +8,7 @@
  * @version    0.1.1
  */
 
-namespace hl\library\Tool\Excel;
+namespace hl\library\Tools\Excel;
 
 /**
  * Helpers
