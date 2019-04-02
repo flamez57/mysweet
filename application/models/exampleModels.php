@@ -28,21 +28,24 @@ class exampleModels extends HLModel
     
     public function todo()
     {
-//        $sql = "select * from {$this->tableName}";
-//        $a = $this->query($sql);
-//        echo '<pre>';
-//        var_dump($a);
-//        echo '</pre>';
-//        foreach ($a as $_v) {
-//            echo $_v['id'].'--'.$_v['aa'].'<hr>';
-//        }
-//        for ($i = 0; $i < 100; $i++) {
-//            $this->db->insert($this->tableName, ['aa' => 'sdfsd'.$i]);
-//        }
-        $c = $this->db->select($this->tableName, '*', ['id' => ['lt', 5]]);
-//        foreach ($c as $_v) {
-//            echo $_v['id'].'--'.$_v['aa'].'<hr>';
-//        }
+        /*$sql = "select * from {$this->tableName}";
+        $a = $this->query($sql);
+        echo '<pre>';
+        var_dump($a);
+        echo '</pre>';
+        foreach ($a as $_v) {
+            echo $_v['id'].'--'.$_v['aa'].'<hr>';
+        }
+        for ($i = 0; $i < 100; $i++) {
+            $this->db->insert($this->tableName, ['aa' => 'sdfsd'.$i]);
+        }*/
+        /*
+        $c = $this->db->select($this->tableName, '*', ['id' => ['lt', 30]]);
+        foreach ($c as $_v) {
+            echo $_v['id'].'--'.$_v['aa'].'<hr>';
+        }*/
+        //$this->db->update($this->tableName, ['aa' => '李白'], ['id' => 3]);
+        //$this->db->delete($this->tableName, ['id' => 2]);
         /*
         //实例化类
         $csv = new \hl\library\Tools\Excel\HLPutoutCsv();
@@ -52,9 +55,31 @@ class exampleModels extends HLModel
         $csv->setTableHead(['id', 'aa']);
         //导出数据
         $csv->putout($c);*/
-        die();
-        //$this->db->update($this->tableName, ['aa' => '李白'], ['id' => 3]);
-        //$this->db->delete($this->tableName, ['id' => 2]);
+        //$path = '/vagrant/data/eg.csv';
+        /* $xlsx = new \hl\library\Tools\Excel\HLXLSXReader($path);
+        //获取表名
+        $sheetNames = $xlsx->getSheetNames();
+        //读取第一个表数据
+        $sheet = $xlsx->getSheet($sheetNames[3]);
+        //读取数据
+        $excels = $sheet->getData();
+        //去除第一个行
+        array_shift($excels);
+        var_dump($excels);*/
+        /*
+        $reader = new \hl\library\Tools\Excel\HLXlsReader($path);
+        //默认读取第一张表
+        $excels_tmp = $reader->dump();
+        //去除第一个行
+        array_shift($excels_tmp);
+        foreach ($excels_tmp as $_excel) {
+            $excels[] = array_values($_excel);
+        }
+        var_dump($excels);*/
+        /*$csv = new \hl\library\Tools\Excel\HLCsvReader();
+        $data = $csv->getData($path);
+        var_dump($data);*/
+
         return "exampleModels run<br>";
     }
 }

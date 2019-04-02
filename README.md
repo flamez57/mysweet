@@ -220,23 +220,20 @@ Excel
 数据读取
 ### xlsx
 ```php
-$xlsx = new hl\library\Tool\Excel\XLSXReader($path);
+$xlsx = new \hl\library\Tools\Excel\HLXLSXReader($path);
 //获取表名
 $sheetNames = $xlsx->getSheetNames();
 //读取第一个表数据
 $sheet = $xlsx->getSheet($sheetNames[1]);
-foreach ($sheetNames as $key => $value) {
-    if ($value == "顺联动力标准发货表") {
-        $sheet = $xlsx->getSheet($sheetNames[$key]);
-    }
-}
+//读取数据
 $excels = $sheet->getData();
 //去除第一个行
 array_shift($excels);
+var_dump($excels);
 ```
 ### xls
 ```php
-$reader = new hl\library\Tool\Excel\XlsReader($path);
+$reader = new \hl\library\Tools\Excel\HLXlsReader($path);
 //默认读取第一张表
 $excels_tmp = $reader->dump();
 //去除第一个行
@@ -244,4 +241,24 @@ array_shift($excels_tmp);
 foreach ($excels_tmp as $_excel) {
     $excels[] = array_values($_excel);
 }
+var_dump($excels);
+```
+
+### csv
+```php
+$csv = new \hl\library\Tools\Excel\HLCsvReader();
+$data = $csv->getData($path);
+var_dump($data);
+```
+
+### csv 导出
+```php
+//实例化类
+$csv = new \hl\library\Tools\Excel\HLPutoutCsv();
+//设置表名
+$csv->setTableName('aa22');
+//设置表头
+$csv->setTableHead(['id', 'aa']);
+//导出数据
+$csv->putout($c);
 ```

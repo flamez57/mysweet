@@ -14,7 +14,7 @@ class XLSXWorksheet
     public $rowCount;
     protected $config;
 
-    public function __construct($xml, $sheetName, XLSXReader $workbook)
+    public function __construct($xml, $sheetName, HLXLSXReader $workbook)
     {
         $this->config = $workbook->config;
         $this->sheetName = $sheetName;
