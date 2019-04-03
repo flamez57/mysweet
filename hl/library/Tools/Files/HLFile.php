@@ -11,6 +11,16 @@ namespace hl\library\Tools\Files;
 */
 class HLFile
 {
+    /*
+    ** 当前时间
+    */
+    private $nowTime;
+
+    public function __construct()
+    {
+        $this->nowTime = time();
+    }
+
     /**
     ** 创建多级目录
     ** @param $dir string 文件
@@ -23,25 +33,24 @@ class HLFile
     }
 
     /**
-     * 创建指定路径下的指定文件
-     * @param string $path(需要包含文件名和后缀)
-     * @param boolean $over_write 是否覆盖文件
-     * @param int $time 设置时间。默认是当前系统时间
-     * @param int $atime 设置访问时间。默认是当前系统时间
-     * @return boolean
-     */
-    public function create_file($path, $over_write = FALSE, $time = NULL, $atime = NULL)
+    ** 创建指定路径下的指定文件
+    ** @param $path string (需要包含文件名和后缀)
+    ** @param $overWrite bool 是否覆盖文件
+    ** @param $utime int 设置修改时间。默认是当前系统时间 时间戳
+    ** @param $atime int 设置访问时间。默认是当前系统时间 时间戳
+    ** @return bool
+    */
+    public function createFile($path, $overWrite = false, $utime = 0, $atime = 0)
     {
-        $path = $this->dir_replace($path);
-        $time = empty($time) ? time() : $time;
-        $atime = empty($atime) ? time() : $atime;
-        if(file_exists($path) && $over_write)
-        {
-            $this->unlink_file($path);
+        $path = $this->dirReplace($path);
+        $utime = empty($utime) ? $this->nowTime : $utime;
+        $atime = empty($atime) ? $this->nowTime : $atime;
+        if (file_exists($path) && $overWrite) {
+            $this->unlinkFile($path);
         }
         $aimDir = dirname($path);
         $this->createDir($aimDir);
-        return touch($path, $time, $atime);
+        return touch($path, $utime, $atime);
     }
 
     /**
@@ -55,71 +64,54 @@ class HLFile
     }
 
     /**
-     * 读取文件操作
-     * @param string $file
-     * @return boolean
-     */
-    public function read_file($file)
+    ** 读取文件操作
+    ** @param $file string 文件
+    ** @return string
+    */
+    public function readFile($file)
     {
         return @file_get_contents($file);
     }
 
     /**
-     * 确定服务器的最大上传限制（字节数）
-     * @return int 服务器允许的最大上传字节数
-     */
-    public function allow_upload_size()
+    ** 确定服务器的最大上传限制（字节数）
+    ** @return string 服务器允许的最大上传字节数
+    */
+    public function allowUploadSize()
     {
-        $val = trim(ini_get('upload_max_filesize'));
-        return $val;
+        return trim(ini_get('upload_max_filesize'));
     }
 
     /**
-     * 字节格式化 把字节数格式为 B K M G T P E Z Y 描述的大小
-     * @param int $size 大小
-     * @param int $dec 显示类型
-     * @return int
-     */
-    public function byte_format($size,$dec=2)
+    ** 字节格式化 把字节数格式为 B K M G T P E Z Y 描述的大小
+    ** @param $size int 字节数
+    ** @param $precision int 保留小数位数
+    ** @return string
+    */
+    public function byteFormat($size, $precision = 2)
     {
-        $a = array("B", "KB", "MB", "GB", "TB", "PB","EB","ZB","YB");
+        $units = ["B", "KB", "MB", "GB", "TB", "PB","EB","ZB","YB"];
         $pos = 0;
-        while ($size >= 1024)
-        {
+        while ($size >= 1024) {
              $size /= 1024;
              $pos++;
         }
-        return round($size,$dec)." ".$a[$pos];
+        return round($size, $precision) . " " . $units[$pos];
     }
 
     /**
-     * 删除非空目录
-     * 说明:只能删除非系统和特定权限的文件,否则会出现错误
-     * @param string $dirName 目录路径
-     * @param boolean $is_all 是否删除所有
-     * @param boolean $del_dir 是否删除目录
-     * @return boolean
-     */
-    public function remove_dir($dir_path,$is_all=FALSE)
+    ** 删除非空目录 (有权限就可以删除)
+    ** @param $dirPath string 目录路径
+    ** @return bool
+    */
+    public function removeDir($dirPath)
     {
-        $dirName = $this->dir_replace($dir_path);
+        $dirName = $this->dirReplace($dirPath);
         $handle = @opendir($dirName);
-        while (($file = @readdir($handle)) !== FALSE)
-        {
-            if($file != '.' && $file != '..')
-            {
+        while (($file = @readdir($handle)) !== false) {
+            if ($file != '.' && $file != '..') {
                 $dir = $dirName . '/' . $file;
-                if($is_all)
-                {
-                    is_dir($dir) ? $this->remove_dir($dir) : $this->unlink_file($dir);
-                }
-                else
-                {
-                    if(is_file($dir))
-                    {
-                        $this->unlink_file($dir);
-                    }
-                }
+                is_dir($dir) ? $this->removeDir($dir) : $this->unlinkFile($dir);
             }
         }
         closedir($handle);
@@ -127,283 +119,268 @@ class HLFile
     }
 
     /**
-     * 获取完整文件名
-     * @param string $fn 路径
-     * @return string
-     */
-    public function get_basename($file_path)
+    ** 获取完整文件名
+    ** @param $filePath string 文件路径
+    ** @return string
+    */
+    public function getBasename($filePath)
     {
-        $file_path = $this->dir_replace($file_path);
-        return basename(str_replace('\\', '/', $file_path));
-        //return pathinfo($file_path,PATHINFO_BASENAME);
+        $filePath = $this->dirReplace($filePath);
+        return basename($filePath);
     }
 
     /**
-     * 获取文件后缀名
-     * @param string $file_name 文件路径
-     * @return string
-     */
-    public function get_ext($file)
+    ** 获取文件后缀名
+    ** @param $filePath string 文件路径
+    ** @return string
+    */
+    public function getExt($filePath)
     {
-        $file = $this->dir_replace($file);
-        //return strtolower(substr(strrchr(basename($file), '.'),1));
-        //return end(explode(".",$filename ));
-        //return strtolower(trim(array_pop(explode('.', $file))));//取得后缀
-        //return preg_replace('/.*\.(.*[^\.].*)*/iU','\\1',$file);
-        return pathinfo($file,PATHINFO_EXTENSION);
+        $filePath = $this->dirReplace($filePath);
+        return pathinfo($filePath, PATHINFO_EXTENSION);
     }
 
     /**
-     * 取得指定目录名称
-     * @param string $path 文件路径
-     * @param int $num 需要返回以上级目录的数
-     * @return string
-     */
-    public function father_dir($path,$num=1)
+    ** 取得指定目录名称
+    ** @param $filePath string 文件路径
+    ** @param $num int 需要返回以上级目录的数
+    ** @return string
+    */
+    public function fatherDir($filePath, $num = 1)
     {
-        $path = $this->dir_replace($path);
-        $arr = explode('/',$path);
-        if ($num == 0 || count($arr)<$num) return pathinfo($path,PATHINFO_BASENAME);
-        return substr(strrev($path),0,1) == '/' ? $arr[(count($arr)-(1+$num))] : $arr[(count($arr)-$num)];
+        $filePath = $this->dirReplace($filePath);
+        $arr = explode('/', $filePath);
+        if ($num == 0) {
+            return pathinfo($filePath, PATHINFO_BASENAME);
+        } elseif (count($arr) < $num) {
+            return '';
+        }
+        return $arr[(count($arr) - (1 + $num))];
     }
 
     /**
-     * 删除文件
-     * @param string $path
-     * @return boolean
-     */
-    public function unlink_file($path)
+    ** 删除文件
+    ** @param $filePath string 文件路径
+    ** @return bool
+    */
+    public function unlinkFile($filePath)
     {
-        $path = $this->dir_replace($path);
-        if (file_exists($path))
-        {
-            return unlink($path);
+        $filePath = $this->dirReplace($filePath);
+        if (file_exists($filePath)) {
+            return unlink($filePath);
         }
     }
 
     /**
-     * 文件操作(复制/移动)
-     * @param string $old_path 指定要操作文件路径(需要含有文件名和后缀名)
-     * @param string $new_path 指定新文件路径（需要新的文件名和后缀名）
-     * @param string $type 文件操作类型
-     * @param boolean $overWrite 是否覆盖已存在文件
-     * @return boolean
-     */
-    public function handle_file($old_path,$new_path,$type='copy',$overWrite=FALSE)
+    ** 文件操作(复制/移动)
+    ** @param $oldPath string 指定要操作文件路径(需要含有文件名和后缀名)
+    ** @param $newPath string 指定新文件路径（需要新的文件名和后缀名）
+    ** @param $type string 文件操作类型
+    ** @param $overWrite bool 是否覆盖已存在文件
+    ** @return bool
+    */
+    public function handleFile($oldPath, $newPath, $type = 'copy', $overWrite = false)
     {
-        $old_path = $this->dir_replace($old_path);
-        $new_path = $this->dir_replace($new_path);
-        if(file_exists($new_path) && $overWrite=FALSE)
-        {
-            return FALSE;
-        }
-        else if(file_exists($new_path) && $overWrite=TRUE)
-        {
-            $this->unlink_file($new_path);
+        $oldPath = $this->dirReplace($oldPath);
+        $newPath = $this->dirReplace($newPath);
+        if(file_exists($newPath) && $overWrite == false) {
+            return false;
+        } elseif (file_exists($newPath) && $overWrite == true) {
+            $this->unlinkFile($newPath);
         }
 
-        $aimDir = dirname($new_path);
-        $this->create_dir($aimDir);
-        switch ($type)
-        {
+        $aimDir = dirname($newPath);
+        $this->createDir($aimDir);
+        switch ($type) {
             case 'copy':
-                return copy($old_path,$new_path);
+                return copy($oldPath, $newPath);
                 break;
             case 'move':
-                return rename($old_path,$new_path);
+                return rename($oldPath, $newPath);
                 break;
         }
     }
 
     /**
-     * 文件夹操作(复制/移动)
-     * @param string $old_path 指定要操作文件夹路径
-     * @param string $aimDir 指定新文件夹路径
-     * @param string $type 操作类型
-     * @param boolean $overWrite 是否覆盖文件和文件夹
-     * @return boolean
-     */
-    public function handle_dir($old_path,$new_path,$type='copy',$overWrite=FALSE)
+    ** 文件夹操作(复制/移动)
+    ** @param $oldPath string 指定要操作文件夹路径
+    ** @param $newPath string 指定新文件夹路径
+    ** @param $type string 操作类型
+    ** @param $overWrite bool 是否覆盖文件和文件夹
+    ** @return bool
+    */
+    public function handleDir($oldPath, $newPath, $type = 'copy', $overWrite = false)
     {
-        $new_path = $this->check_path($new_path);
-        $old_path = $this->check_path($old_path);
-        if (!is_dir($old_path)) return FALSE;
-
-        if (!file_exists($new_path)) $this->create_dir($new_path);
-
-        $dirHandle = opendir($old_path);
-
-        if (!$dirHandle) return FALSE;
-
-        $boolean = TRUE;
-
-        while(FALSE !== ($file=readdir($dirHandle)))
-        {
-            if ($file=='.' || $file=='..') continue;
-
-            if (!is_dir($old_path.$file))
-            {
-                $boolean = $this->handle_file($old_path.$file,$new_path.$file,$type,$overWrite);
+        $newPath = $this->checkPath($newPath);
+        $oldPath = $this->checkPath($oldPath);
+        if (!is_dir($oldPath)) {
+            return false;
+        }
+        if (!file_exists($newPath)) {
+            $this->createDir($newPath);
+        }
+        $dirHandle = opendir($oldPath);
+        if (!$dirHandle) {
+            return false;
+        }
+        $boolean = true;
+        while (false !== ($file = readdir($dirHandle))) {
+            if ($file=='.' || $file=='..') {
+                continue;
             }
-            else
-            {
-                $this->handle_dir($old_path.$file,$new_path.$file,$type,$overWrite);
+            if (!is_dir($oldPath.$file)) {
+                $boolean = $this->handleFile($oldPath.$file, $newPath.$file, $type, $overWrite);
+            } else {
+                $this->handleDir($oldPath.$file, $newPath.$file, $type, $overWrite);
             }
         }
-        switch ($type)
-        {
+        switch ($type) {
             case 'copy':
                 closedir($dirHandle);
                 return $boolean;
                 break;
             case 'move':
                 closedir($dirHandle);
-                return rmdir($old_path);
+                return rmdir($oldPath);
                 break;
         }
     }
 
     /**
-     * 替换相应的字符
-     * @param string $path 路径
-     * @return string
-     */
-    public function dir_replace($path)
+    ** 替换相应的字符
+    ** @param string $path 路径
+    ** @return string
+    */
+    public function dirReplace($path)
     {
-        return str_replace('//','/',str_replace('\\','/',$path));
+        return str_replace('//', '/', str_replace('\\', '/', $path));
     }
 
     /**
-     * 读取指定路径下模板文件
-     * @param string $path 指定路径下的文件
-     * @return string $rstr
-     */
-    public function get_templtes($path)
+    ** 读取指定路径下模板文件
+    ** @param $filePath string 指定路径下的文件
+    ** @return string
+    */
+    public function getTempltes($filePath)
     {
-        $path = $this->dir_replace($path);
-        if(file_exists($path))
-        {
-            $fp = fopen($path,'r');
-            $rstr = fread($fp,filesize($path));
+        $filePath = $this->dirReplace($filePath);
+        if (file_exists($filePath)) {
+            $fp = fopen($filePath, 'r');
+            $rstr = @fread($fp, filesize($filePath));
             fclose($fp);
             return $rstr;
-        }
-        else
-        {
+        } else {
             return '';
         }
     }
 
     /**
-     * 文件重命名
-     * @param string $oldname
-     * @param string $newname
-     */
-    public function rename($oldname,$newname)
+    ** 文件重命名
+    ** @param $oldName string 原名
+    ** @param $newName string 新名
+    ** @return bool
+    */
+    public function reName($oldName, $newName)
     {
-        if(($newname!=$oldname) && is_writable($oldname))
-        {
-            return rename($oldname,$newname);
+        $oldName = $this->dirReplace($oldName);
+        $newName = $this->dirReplace($newName);
+        if (($newName != $oldName) && is_writable($oldName)) {
+            return rename($oldName, $newName);
+        } else {
+            return false;
         }
     }
 
     /**
-     * 获取指定路径下的信息
-     * @param string $dir 路径
-     * @return ArrayObject
-     */
-    public function get_dir_info($dir)
+    ** 获取指定路径下的信息
+    ** @param $dir string 路径
+    ** @return array
+    */
+    public function getDirInfo($dir)
     {
         $handle = @opendir($dir);//打开指定目录
-        $directory_count = 0;
-        while (FALSE !== ($file_path = readdir($handle)))
-        {
-            if($file_path != "." && $file_path != "..")
-            {
-                //is_dir("$dir/$file_path") ? $sizeResult += $this->get_dir_size("$dir/$file_path") : $sizeResult += filesize("$dir/$file_path");
-                $next_path = $dir.'/'.$file_path;
-                if (is_dir($next_path))
-                {
-                    $directory_count++;
-                    $result_value = self::get_dir_info($next_path);
-                    $total_size += $result_value['size'];
-                    $file_cout += $result_value['filecount'];
-                    $directory_count += $result_value['dircount'];
-                }
-                elseif (is_file($next_path))
-                {
-                    $total_size += filesize($next_path);
-                    $file_cout++;
+        $totalSize = 0; //大小
+        $fileCout = 0; //文件数
+        $directoryCount = 0; //目录数
+        while (false !== ($filePath = readdir($handle))) {
+            if ($filePath != "." && $filePath != "..") {
+                $nextPath = $dir.'/'.$filePath;
+                if (is_dir($nextPath)) {
+                    $directoryCount++;
+                    $resultValue = $this->getDirInfo($nextPath);
+                    $totalSize += $resultValue['size'];
+                    $fileCout += $resultValue['filecount'];
+                    $directoryCount += $resultValue['dircount'];
+                } elseif (is_file($nextPath)) {
+                    $totalSize += filesize($nextPath);
+                    $fileCout++;
                 }
             }
         }
         closedir($handle);//关闭指定目录
-        $result_value['size'] = $total_size;
-        $result_value['filecount'] = $file_cout;
-        $result_value['dircount'] = $directory_count;
-        return $result_value;
+        $resultValue['size'] = $totalSize;
+        $resultValue['filecount'] = $fileCout;
+        $resultValue['dircount'] = $directoryCount;
+        return $resultValue;
     }
 
     /**
-     * 指定文件编码转换
-     * @param string $path 文件路径
-     * @param string $input_code 原始编码
-     * @param string $out_code 输出编码
-     * @return boolean
-     */
-    public function change_file_code($path,$input_code,$out_code)
+    ** 指定文件编码转换
+    ** @param string $filePath 文件路径
+    ** @param string $inputCode 原始编码
+    ** @param string $outCode 输出编码
+    ** @return bool
+    */
+    public function changeFileCode($filePath, $outCode, $inputCode = '')
     {
-        if(is_file($path))//检查文件是否存在,如果存在就执行转码,返回真
-        {
-            $content = file_get_contents($path);
-            $content = string::chang_code($content,$input_code,$out_code);
-            $fp = fopen($path,'w');
-            return fputs($fp,$content) ? TRUE : FALSE;
+        $filePath = $this->dirReplace($filePath);
+        //检查文件是否存在,如果存在就执行转码,返回真
+        if (is_file($filePath)) {
+            $content = file_get_contents($filePath);
+            if (empty($inputCode)) {
+                //获取当前字符串的编码
+                $inputCode = mb_detect_encoding($content, ["ASCII",'UTF-8',"GB2312","GBK",'BIG5']);
+            }
+            //将字符编码改为utf-8
+            $content = mb_convert_encoding($content, $outCode, $inputCode);
+            $fp = fopen($filePath, 'w');
+            return fputs($fp, $content) ? true : false;
             fclose($fp);
         }
     }
 
     /**
-     * 指定目录下指定条件文件编码转换
-     * @param string $dirname 目录路径
-     * @param string $input_code 原始编码
-     * @param string $out_code 输出编码
-     * @param boolean $is_all 是否转换所有子目录下文件编码
-     * @param string $exts 文件类型
-     * @return boolean
-     */
-    public function change_dir_files_code($dirname,$input_code,$out_code,$is_all=TRUE,$exts='')
+    ** 指定目录下指定条件文件编码转换
+    ** @param $dirname string 目录路径
+    ** @param $inputCode string 原始编码
+    ** @param $outCode string 输出编码
+    ** @param $isAll bool 是否转换所有子目录下文件编码
+    ** @param $exts string 文件类型 文件后缀
+    ** @return bool
+    */
+    public function changeDirFilesCode($dirname, $outCode, $inputCode, $isAll = true, $exts = '')
     {
-        if(is_dir($dirname))
-        {
+        $dirname = $this->dirReplace($dirname);
+        if (is_dir($dirname)) {
             $fh = opendir($dirname);
-            while (($file = readdir($fh)) !== FALSE)
-            {
-                if (strcmp($file , '.')==0 || strcmp($file , '..')==0)
-                {
+            while (($file = readdir($fh)) !== false) {
+                if (strcmp($file , '.') == 0 || strcmp($file , '..') == 0) {
                     continue;
                 }
                 $filepath = $dirname.'/'.$file;
-
-                if (is_dir($filepath) && $is_all==TRUE)
-                {
-                    $files = $this->change_dir_files_code($filepath,$input_code,$out_code,$is_all,$exts );
-                }
-                else
-                {
-                    if($this->get_ext($filepath) == $exts && is_file($filepath))
-                    {
-                        $boole = $this->change_file_code($filepath,$input_code,$out_code,$is_all,$exts);
+                if (is_dir($filepath) && $isAll == true) {
+                    $this->changeDirFilesCode($filepath, $inputCode, $outCode, $isAll, $exts);
+                } else {
+                    if($this->getExt($filepath) == $exts && is_file($filepath)) {
+                        $boole = $this->changeFileCode($filepath, $outCode, $inputCode);
                         if(!$boole) continue;
                     }
                 }
             }
             closedir($fh);
-            return TRUE;
-        }
-        else
-        {
-            return FALSE;
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -419,8 +396,7 @@ class HLFile
     {
         //处理多于的/号
         $new = strrev($dirname);
-        if(strpos($new,'/')==0)
-        {
+        if(strpos($new,'/')==0) {
             $new = substr($new,1);
         }
         $dirname = strrev($new);
@@ -433,56 +409,43 @@ class HLFile
         if(is_dir($dirname))
         {
             $fh = opendir($dirname);
-            while (($file = readdir($fh)) !== FALSE)
-            {
+            while (($file = readdir($fh)) !== FALSE) {
                 if (strcmp($file, '.')==0 || strcmp($file, '..')==0) continue;
 
                 $filepath = $dirname.'/'.$file;
 
-                switch ($exts)
-                {
+                switch ($exts) {
                     case '*':
-                        if (is_dir($filepath) && $is_all==TRUE)
-                        {
+                        if (is_dir($filepath) && $is_all==TRUE) {
                             $files = array_merge($files,self::list_dir_info($filepath,$is_all,$exts,$sort));
                         }
                         array_push($files,$filepath);
                         break;
                     case 'folder':
-                        if (is_dir($filepath) && $is_all==TRUE)
-                        {
+                        if (is_dir($filepath) && $is_all==TRUE) {
                             $files = array_merge($files,self::list_dir_info($filepath,$is_all,$exts,$sort));
                             array_push($files,$filepath);
-                        }
-                        elseif (is_dir($filepath))
-                        {
+                        } elseif (is_dir($filepath)) {
                             array_push($files,$filepath);
                         }
                         break;
                     case 'file':
-                        if (is_dir($filepath) && $is_all==TRUE)
-                        {
+                        if (is_dir($filepath) && $is_all==TRUE) {
                             $files = array_merge($files,self::list_dir_info($filepath,$is_all,$exts,$sort));
-                        }
-                        elseif (is_file($filepath))
-                        {
+                        } elseif (is_file($filepath)) {
                             array_push($files, $filepath);
                         }
                         break;
                     default:
-                        if (is_dir($filepath) && $is_all==TRUE)
-                        {
+                        if (is_dir($filepath) && $is_all==TRUE) {
                             $files = array_merge($files,self::list_dir_info($filepath,$is_all,$exts,$sort));
-                        }
-                        elseif(preg_match("/\.($exts)/i",$filepath) && is_file($filepath))
-                        {
+                        } elseif (preg_match("/\.($exts)/i",$filepath) && is_file($filepath)) {
                             array_push($files, $filepath);
                         }
                         break;
                 }
 
-                switch ($sort)
-                {
+                switch ($sort) {
                     case 'asc':
                         sort($files);
                         break;
@@ -496,9 +459,7 @@ class HLFile
             }
             closedir($fh);
             return $files;
-        }
-        else
-        {
+        } else {
             return FALSE;
         }
     }
@@ -638,7 +599,7 @@ class HLFile
         $info['size']  = $file_info['size'];//取得上传文件大小
         $info['error'] = $file_info['error'];//取得文件上传错误
         $info['name']  = $file_info['name'];//取得上传文件名
-        $info['ext']   = $this->get_ext($file_info['name']);//取得上传文件后缀
+        $info['ext']   = $this->getExt($file_info['name']);//取得上传文件后缀
         return $info;
     }
 
@@ -666,7 +627,7 @@ class HLFile
      * 文件保存路径处理
      * @return string
      */
-    public function check_path($path)
+    public function checkPath($path)
     {
         return (preg_match('/\/$/',$path)) ? $path : $path . '/';
     }
