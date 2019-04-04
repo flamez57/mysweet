@@ -465,43 +465,44 @@ class HLFile
     }
 
     /**
-     * 返回指定路径的文件夹信息，其中包含指定路径中的文件和目录
-     * @param string $dir
-     * @return ArrayObject
-     */
-    public function dir_info($dir)
+    ** 返回指定路径的文件夹信息，其中包含指定路径中的文件和目录
+    ** @param $dir string 路径
+    ** @return array
+    */
+    public function dirInfo($dir)
     {
+        $dir = $this->dirReplace($dir);
         return scandir($dir);
     }
 
     /**
-     * 判断目录是否为空
-     * @param string $dir
-     * @return boolean
-     */
-    public function is_empty($dir)
+    ** 判断目录是否为空
+    ** @param $dir string 路径
+    ** @return bool
+    */
+    public function isEmpty($dir)
     {
+        $dir = $this->dirReplace($dir);
         $handle = opendir($dir);
-        while (($file = readdir($handle)) !== false)
-        {
-            if ($file != '.' && $file != '..')
-            {
+        while (($file = readdir($handle)) !== false) {
+            if ($file != '.' && $file != '..') {
                 closedir($handle);
-                return true;
+                return false;
             }
         }
         closedir($handle);
-        return false;
+        return true;
     }
 
     /**
-     * 返回指定文件和目录的信息
-     * @param string $file
-     * @return ArrayObject
-     */
-    public function list_info($file)
+    ** 返回指定文件和目录的信息
+    ** @param $file string
+    ** @return ArrayObject
+    */
+    public function listInfo($file)
     {
-        $dir = array();
+        $dir = [];
+        $file = $this->dirReplace($file);
         $dir['filename']   = basename($file);//返回路径中的文件名部分。
         $dir['pathname']   = realpath($file);//返回绝对路径名。
         $dir['owner']      = fileowner($file);//文件的 user ID （所有者）。
@@ -526,156 +527,192 @@ class HLFile
     }
 
     /**
-     * 返回关于打开文件的信息
-     * @param $file
-     * @return ArrayObject
-     * 数字下标     关联键名（自 PHP 4.0.6）     说明
-     * 0     dev     设备名
-     * 1     ino     号码
-     * 2     mode     inode 保护模式
-     * 3     nlink     被连接数目
-     * 4     uid     所有者的用户 id
-     * 5     gid     所有者的组 id
-     * 6     rdev     设备类型，如果是 inode 设备的话
-     * 7     size     文件大小的字节数
-     * 8     atime     上次访问时间（Unix 时间戳）
-     * 9     mtime     上次修改时间（Unix 时间戳）
-     * 10     ctime     上次改变时间（Unix 时间戳）
-     * 11     blksize     文件系统 IO 的块大小
-     * 12     blocks     所占据块的数目
-     */
-    public function open_info($file)
+    ** 返回关于打开文件的信息
+    ** @param $file 文件路径
+    ** @return array
+    ** 数字下标     关联键名（自 PHP 4.0.6）     说明
+    ** 0            dev                     设备名
+    ** 1            ino                     号码
+    ** 2            mode                    inode 保护模式
+    ** 3            nlink                   被连接数目
+    ** 4            uid                     所有者的用户 id
+    ** 5            gid                     所有者的组 id
+    ** 6            rdev                    设备类型，如果是 inode 设备的话
+    ** 7            size                    文件大小的字节数
+    ** 8            atime                   上次访问时间（Unix 时间戳）
+    ** 9            mtime                   上次修改时间（Unix 时间戳）
+    ** 10           ctime                   上次改变时间（Unix 时间戳）
+    ** 11           blksize                 文件系统 IO 的块大小
+    ** 12           blocks                  所占据块的数目
+    */
+    public function openInfo($file)
     {
-        $file = fopen($file,"r");
+        $file = $this->dirReplace($file);
+        $file = fopen($file, "r");
         $result = fstat($file);
         fclose($file);
         return $result;
     }
 
     /**
-     * 改变文件和目录的相关属性
-     * @param string $file 文件路径
-     * @param string $type 操作类型
-     * @param string $ch_info 操作信息
-     * @return boolean
-     */
-    public function change_file($file,$type,$ch_info)
+    ** 改变文件和目录的相关属性
+    ** @param $file string 文件路径
+    ** @param $type string 操作类型
+    ** @param $chInfo string 操作信息
+    ** @return bool
+    */
+    public function changeFile($file, $type, $chInfo)
     {
-        switch ($type)
-        {
-            case 'group' : $is_ok = chgrp($file,$ch_info);//改变文件组。
+        $file = $this->dirReplace($file);
+        switch ($type) {
+            case 'group':
+                $isOk = chgrp($file, $chInfo);//改变文件组。$chInfo 组名
                 break;
-            case 'mode' : $is_ok = chmod($file,$ch_info);//改变文件模式。
+            case 'mode':
+                /*  改变文件模式。$chInfo的值
+                    第一个数字永远是 0
+                    第二个数字规定所有者的权限
+                    第二个数字规定所有者所属的用户组的权限
+                    第四个数字规定其他所有人的权限
+                    可能的值（如需设置多个权限，请对下面的数字进行总计）：
+                    1 - 执行权限
+                    2 - 写权限
+                    4 - 读权限
+                */
+                $isOk = chmod($file, $chInfo);
                 break;
-            case 'ower' : $is_ok = chown($file,$ch_info);//改变文件所有者。
+            case 'ower':
+                $isOk = chown($file, $chInfo);//改变文件所有者。$chInfo 所有者用户名
                 break;
         }
+        return $isOk;
     }
 
     /**
-     * 取得文件路径信息
-     * @param $full_path 完整路径
-     * @return ArrayObject
-     */
-    public function get_file_type($path)
+    ** 取得文件路径信息
+    ** @param $path string 完整路径
+    ** @return array
+    */
+    public function getFileType($path)
     {
-        //pathinfo() 函数以数组的形式返回文件路径的信息。
-        //---------$file_info = pathinfo($path); echo file_info['extension'];----------//
-        //extension取得文件后缀名【pathinfo($path,PATHINFO_EXTENSION)】-----dirname取得文件路径【pathinfo($path,PATHINFO_DIRNAME)】-----basename取得文件完整文件名【pathinfo($path,PATHINFO_BASENAME)】-----filename取得文件名【pathinfo($path,PATHINFO_FILENAME)】
+        $path = $this->dirReplace($path);
+        //-----extension取得文件后缀名【pathinfo($path,PATHINFO_EXTENSION)】
+        //-----dirname取得文件路径【pathinfo($path,PATHINFO_DIRNAME)】
+        //-----basename取得文件完整文件名【pathinfo($path,PATHINFO_BASENAME)】
+        //-----filename取得文件名【pathinfo($path,PATHINFO_FILENAME)】
         return pathinfo($path);
     }
 
     /**
-     * 取得上传文件信息
-     * @param $file file属性信息
-     * @return array
-     */
-    public function get_upload_file_info($file)
+    ** 取得上传文件信息
+    ** @param $file file属性信息
+    ** @return array
+    */
+    public function getUploadFileInfo($file)
     {
-        $file_info = $_FILES[$file];//取得上传文件基本信息
+        $fileInfo = $_FILES[$file];//取得上传文件基本信息
         $info = array();
-        $info['type']  = strtolower(trim(stripslashes(preg_replace("/^(.+?);.*$/", "\\1", $file_info['type'])), '"'));//取得文件类型
-        $info['temp']  = $file_info['tmp_name'];//取得上传文件在服务器中临时保存目录
-        $info['size']  = $file_info['size'];//取得上传文件大小
-        $info['error'] = $file_info['error'];//取得文件上传错误
-        $info['name']  = $file_info['name'];//取得上传文件名
-        $info['ext']   = $this->getExt($file_info['name']);//取得上传文件后缀
+        $info['type']  = strtolower(
+            trim(
+                stripslashes(
+                    preg_replace("/^(.+?);.*$/", "\\1", $fileInfo['type'])
+                ),
+                '"'
+            )
+        );//取得文件类型
+        $info['temp']  = $fileInfo['tmp_name'];//取得上传文件在服务器中临时保存目录
+        $info['size']  = $fileInfo['size'];//取得上传文件大小
+        $info['error'] = $fileInfo['error'];//取得文件上传错误
+        $info['name']  = $fileInfo['name'];//取得上传文件名
+        $info['ext']   = $this->getExt($fileInfo['name']);//取得上传文件后缀
         return $info;
     }
 
     /**
-     * 设置文件命名规则
-     * @param string $type 命名规则
-     * @param string $filename 文件名
-     * @return string
-     */
-    public function set_file_name($type)
+    ** 文件命名
+    ** @param $type string 命名规则
+    ** @return string
+    */
+    public function setFileName($type)
     {
-        switch ($type)
-        {
-            case 'hash' : $new_file = md5(uniqid(mt_rand()));//mt_srand()以随机数md5加密来命名
+        switch ($type) {
+            case 'hash':
+                $name = md5(uniqid(mt_rand()));//mt_srand()以随机数md5加密来命名
                 break;
-            case 'time' : $new_file = time();
+            case 'time':
+                $name = time();
                 break;
-            default : $new_file = date($type,time());//以时间格式来命名
+            default:
+                $name = date($type.'YmdHis', time());
                 break;
         }
-        return $new_file;
+        return $name;
     }
 
     /**
-     * 文件保存路径处理
-     * @return string
-     */
+    ** 文件保存路径处理
+    ** @param $path string 文件路径
+    ** @return string
+    */
     public function checkPath($path)
     {
-        return (preg_match('/\/$/',$path)) ? $path : $path . '/';
+        //如果不是/结尾就加一个/
+        return (preg_match('/\/$/', $path)) ? $path : $path . '/';
     }
 
-	public function down_remote_file($url,$save_dir='',$filename='',$type=0){
+    /**
+    ** 下载远程文件
+    ** @param $url string 远程文件路径
+    ** @param $saveDir string 保存文件路径
+    ** @param $fileName string 保存成的文件名
+    ** @param $type int 获取方式 0 readfile | 1 curl
+    ** @return array
+    */
+    public function downRemoteFile($url, $saveDir='', $fileName='', $type = 0)
+    {
+        //远程地址为空
+        if (trim($url) == '') {
+            return ['file_name'=>'', 'save_path'=>'', 'error'=>1, 'msg' => '远程地址为空'];
+        }
+        //保存路径为空就存在当前文件
+        if (trim($saveDir) == '') {
+            $saveDir='./';
+        }
+        $saveDir = $this->dirReplace($saveDir);
+        //保存文件名
+        if (trim($fileName) == '') {
+            $ext = strrchr($url, '.');
+            if (!$ext) {
+                return ['file_name'=>'', 'save_path'=>'', 'error'=>3, 'msg' => '未知文件类型'];
+            }
+            $fileName = $this->setFileName('hash') . $ext;
+        }
+        //如果地址不是/结尾加个/
+        if (0 !== strrpos($saveDir, '/')) {
+            $saveDir .= '/';
+        }
+        //创建保存目录
+        $this->createDir($saveDir);
+        //获取远程文件所采用的方法
+        if ($type) {
+            $ch = curl_init();
+            $timeout = 5;
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+            $img = curl_exec($ch);
+            curl_close($ch);
+        } else {
+            ob_start();
+            readfile($url);
+            $img = ob_get_contents();
+            ob_end_clean();
+        }
 
-		if(trim($url)==''){
-			return array('file_name'=>'','save_path'=>'','error'=>1);
-		}
-		if(trim($save_dir)==''){
-			$save_dir='./';
-		}
-		if(trim($filename)==''){//保存文件名
-			$ext=strrchr($url,'.');
-		//    if($ext!='.gif'&&$ext!='.jpg'){
-		//        return array('file_name'=>'','save_path'=>'','error'=>3);
-		//    }
-			$filename=time().$ext;
-		}
-		if(0!==strrpos($save_dir,'/')){
-			$save_dir.='/';
-		}
-		//创建保存目录
-		if(!file_exists($save_dir)&&!mkdir($save_dir,0777,true)){
-			return array('file_name'=>'','save_path'=>'','error'=>5);
-		}
-		//获取远程文件所采用的方法
-		if($type){
-			$ch=curl_init();
-			$timeout=5;
-			curl_setopt($ch,CURLOPT_URL,$url);
-			curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-			curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
-			$img=curl_exec($ch);
-			curl_close($ch);
-		}else{
-			ob_start();
-			readfile($url);
-			$img=ob_get_contents();
-			ob_end_clean();
-		}
-		//$size=strlen($img);
-		//文件大小
-		$fp2=fopen($save_dir.$filename,'a');
-
-		fwrite($fp2,$img);
-		fclose($fp2);
-		unset($img,$url);
-		return array('file_name'=>$filename,'save_path'=>$save_dir.$filename,'error'=>0);
-	}
+        $fp2 = fopen($saveDir.$fileName, 'a');
+        fwrite($fp2, $img);
+        fclose($fp2);
+        unset($img, $url);
+        return ['file_name' => $fileName, 'save_path' => $saveDir.$fileName, 'error' => 0, 'msg' => 'success'];
+    }
 }

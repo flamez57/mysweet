@@ -77,7 +77,7 @@ echo '<hr>取得指定条件的文件夹中的文件:list_dir_info()<br>';
 echo '<hr>取得文件夹信息:dir_info()<br>';
 //print_r($file->dir_info($create_path));
 echo '<hr>判断文件夹是否为空:is_empty()<br>';
-//if($file->is_empty($create_path)) echo '不为空'; else echo'为空';
+//if($file->is_empty($create_path)) echo '为空'; else echo'不为空';
 echo '<hr>返回指定文件和目录的信息:list_info()<br>';
 //print_r($file->list_info($create_path));
 echo '<hr>返回关于打开文件的信息:open_info()<br>';
