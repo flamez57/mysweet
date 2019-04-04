@@ -67,24 +67,38 @@ class exampleServices extends HLServices
         print_r($f->getDirInfo('/vagrant/data/掌声'));
         //替换统一格式路径
         echo $f->dirReplace("c:\d/d\\e/d\h");
+        //取得指定条件的文件夹中的文件
+        print_r($f->listDirInfo($create_path,true));
+        //取得文件夹信息
+        print_r($f->dirInfo($create_path));
+        //判断文件夹是否为空
+        if($f->isEmpty($create_path)) echo '为空'; else echo'不为空';
+        //返回指定文件和目录的信息
+        print_r($f->listInfo($create_path));
+        //返回关于打开文件的信息
+        print_r($f->openInfo($create_path.'没事看这里.txt'));
+        //取得文件路径信息
+        print_r($f->getFileType($create_path));
+        //改变文件和目录的相关属性
+        $f->changeFile($create_path, 'mode', '0777');
+        //取得上传文件信息
+        var_dump($f->getUploadFileInfo('name'));
+        //文件命名
+        echo $f->setFileName('hash');
+        //下载远程文件
+        var_dump($f->downRemoteFile('https://img01.sldlcdn.com/G0/M02/00/0F/CgIAiFt28-yIKIdWAAAAPDaASdYAAAG0gM22p0AAABU885.jpg', $create_path));
+        //指定文件编码
+        $f->changeFileCode($create_path.'没事看这里.txt','utf-8');
+        //指定文件编码
+        $f->changeDirFilesCode($create_path, 'utf-8');
         */
 
 
-        /*
 
-echo '<hr>取得指定条件的文件夹中的文件:list_dir_info()<br>';
-//print_r($file->list_dir_info($create_path,true));
-echo '<hr>取得文件夹信息:dir_info()<br>';
-//print_r($file->dir_info($create_path));
-echo '<hr>判断文件夹是否为空:is_empty()<br>';
-//if($file->is_empty($create_path)) echo '为空'; else echo'不为空';
-echo '<hr>返回指定文件和目录的信息:list_info()<br>';
-//print_r($file->list_info($create_path));
-echo '<hr>返回关于打开文件的信息:open_info()<br>';
-//print_r($file->open_info($create_path.'/index.php'));
-echo '<hr>取得文件路径信息:get_file_type()<br>';
-//print_r($file->get_file_type($create_path));
- * */
+
+
+
+
         $str .= 'exampleServices Run <br>';
         return $str;
     }
