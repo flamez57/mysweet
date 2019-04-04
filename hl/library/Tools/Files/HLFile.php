@@ -385,61 +385,62 @@ class HLFile
     }
 
     /**
-     * 列出指定目录下符合条件的文件和文件夹
-     * @param string $dirname 路径
-     * @param boolean $is_all 是否列出子目录中的文件
-     * @param string $exts 需要列出的后缀名文件
-     * @param string $sort 数组排序
-     * @return ArrayObject
-     */
-    public function list_dir_info($dirname,$is_all=FALSE,$exts='',$sort='ASC')
+    ** 列出指定目录下符合条件的文件和文件夹
+    ** @param $dirName string 路径
+    ** @param $isAll bool 是否列出子目录中的文件
+    ** @param $exts string 需要列出的后缀名文件
+    ** @param $sort string 数组排序
+    ** @return array
+    */
+    public function listDirInfo($dirName, $isAll = false, $exts = '', $sort = 'ASC')
     {
-        //处理多于的/号
-        $new = strrev($dirname);
+        //处理多余的/号
+        $new = strrev($dirName);
         if(strpos($new,'/')==0) {
             $new = substr($new,1);
         }
-        $dirname = strrev($new);
+        $dirName = strrev($new);
 
-        $sort = strtolower($sort);//将字符转换成小写
+        //将字符转换成小写
+        $sort = strtolower($sort);
 
         $files = array();
-        $subfiles = array();
 
-        if(is_dir($dirname))
-        {
-            $fh = opendir($dirname);
-            while (($file = readdir($fh)) !== FALSE) {
-                if (strcmp($file, '.')==0 || strcmp($file, '..')==0) continue;
+        if (is_dir($dirName)) {
+            $fh = opendir($dirName);
+            while (($file = readdir($fh)) !== false) {
+                if (strcmp($file, '.') == 0 || strcmp($file, '..') == 0) {
+                    continue;
+                }
 
-                $filepath = $dirname.'/'.$file;
+                $filepath = $dirName.'/'.$file;
 
                 switch ($exts) {
-                    case '*':
-                        if (is_dir($filepath) && $is_all==TRUE) {
-                            $files = array_merge($files,self::list_dir_info($filepath,$is_all,$exts,$sort));
+                    case '*': //全部
+                        if (is_dir($filepath) && $isAll == true) {
+                            $files = array_merge($files, $this->listDirInfo($filepath, $isAll, $exts, $sort));
                         }
-                        array_push($files,$filepath);
+                        array_push($files, $filepath);
                         break;
-                    case 'folder':
-                        if (is_dir($filepath) && $is_all==TRUE) {
-                            $files = array_merge($files,self::list_dir_info($filepath,$is_all,$exts,$sort));
-                            array_push($files,$filepath);
+                    case 'folder': //文件夹
+                        if (is_dir($filepath) && $isAll == true) {
+                            $files = array_merge($files, $this->listDirInfo($filepath, $isAll, $exts, $sort));
+                            array_push($files, $filepath);
                         } elseif (is_dir($filepath)) {
-                            array_push($files,$filepath);
+                            array_push($files, $filepath);
                         }
                         break;
-                    case 'file':
-                        if (is_dir($filepath) && $is_all==TRUE) {
-                            $files = array_merge($files,self::list_dir_info($filepath,$is_all,$exts,$sort));
+                    case 'file': //文件
+                        if (is_dir($filepath) && $isAll == true) {
+                            $files = array_merge($files, $this->listDirInfo($filepath, $isAll, $exts, $sort));
                         } elseif (is_file($filepath)) {
                             array_push($files, $filepath);
                         }
                         break;
-                    default:
-                        if (is_dir($filepath) && $is_all==TRUE) {
-                            $files = array_merge($files,self::list_dir_info($filepath,$is_all,$exts,$sort));
-                        } elseif (preg_match("/\.($exts)/i",$filepath) && is_file($filepath)) {
+                    default: //指定后缀文件
+                        if (is_dir($filepath) && $isAll == true) {
+                            $files = array_merge($files, $this->listDirInfo($filepath, $isAll, $exts, $sort));
+                        } elseif (preg_match("/\.($exts)/i", $filepath) && is_file($filepath)) {
                             array_push($files, $filepath);
                         }
                         break;
@@ -458,10 +459,8 @@ class HLFile
                 }
             }
             closedir($fh);
-            return $files;
-        } else {
-            return FALSE;
         }
+        return $files;
     }
 
     /**
