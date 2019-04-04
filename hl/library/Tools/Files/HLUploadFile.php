@@ -1,21 +1,30 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: flamez57
- * Date: 2019/4/4
- * Time: 16:51
- */
 
 namespace hl\library\Tools\Files;
 
-
+use hl\library\Tools\Files\HLFile;
+/**
+** @ClassName: HLUploadFile
+** @Description: 文件上传类
+** @author flamez57 <flamez57@mysweet95.com>
+** @date 2019年4月4日 晚上22:49
+** @version V1.0
+*/
 class HLUploadFile
 {
+    /*
+    ** 文件操作类
+    */
+    private $hlFile;
+
+    public function aa()
+    {
+        $this->hlFile = new HLFile(); //文件操作类
+    }
     private $path = "./uploads";          //上传文件保存的路径
     private $allowtype = array('jpg', 'gif', 'png'); //设置限制上传文件的类型
     private $maxsize = 1000000;           //限制文件上传大小（字节）
     private $israndname = true;           //设置是否随机重命名文件， false不随机
-
     private $originName;              //源文件名
     private $tmpFileName;              //临时文件名
     private $fileType = "jpg";               //文件类型(文件后缀)
@@ -272,6 +281,37 @@ class HLUploadFile
             }
         } else {
             return false;
+        }
+    }
+
+    /*
+    ** 上传失败原因
+    */
+    public function errorMsg()
+    {
+        switch ($_FILES['aaaa']['error']) {
+            case UPLOAD_ERR_OK:  //0 正常，上传成功
+                break;
+            case UPLOAD_ERR_INI_SIZE: //1 上传文件大小超过服务器允许上传的最大值，php.ini中设置upload_max_filesize选项限制的值
+                $this->setError("The file is too large (server).");
+                break;
+            case UPLOAD_ERR_FORM_SIZE: //2 上传文件大小超过HTML表单中隐藏域MAX_FILE_SIZE选项指定的值
+                $this->setError("The file is too large (form).");
+                break;
+            case UPLOAD_ERR_PARTIAL: //3 文件只有部分被上传
+                $this->setError("The file was only partially uploaded.");
+                break;
+            case UPLOAD_ERR_NO_FILE: //4 没有文件被上传
+                $this->setError("No file was uploaded.");
+                break;
+            case UPLOAD_ERR_NO_TMP_DIR: //6 没有找不到临时文件夹
+                $this->setError("The servers temporary folder is missing.");
+                break;
+            case UPLOAD_ERR_CANT_WRITE: //7 文件写入失败
+                $this->setError("Failed to write to the temporary folder.");
+                break;
+            case UPLOAD_ERR_EXTENSION: //8 php文件上传扩展没有打开
+                break;
         }
     }
 
