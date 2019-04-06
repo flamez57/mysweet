@@ -65,6 +65,11 @@ class HLUploadFile
     */
     private $errorMsg = "";
 
+    /*
+    ** 新文件信息
+    */
+    private $newFileInfo = [];
+
     /**
     ** @param $savePath string 保存路径
     ** @param $allowType array|string 允许类型
@@ -92,68 +97,76 @@ class HLUploadFile
 
 
     /**
-     * 调用该方法上传文件
-     * @param  string $fileFile 上传文件的表单名称
-     * @return bool        如果上传成功返回数true
-     */
-
+    ** 调用该方法上传文件
+    ** @param  $fileField string 上传文件的表单名称
+    ** @return bool        如果上传成功返回数true
+    */
     function upload($fileField)
     {
         $return = true;
         $this->hlFile->createDir($this->savePath);
-        /* 将文件上传的信息取出赋给变量 */
-        $name =$fileField['file']['name'];
-        $tmp_name = $fileField['file']['tmp_name'];
-        $size = $fileField['file']['size'];
-        $error = $fileField['file']['error'];
-        /* 如果是多个文件上传则$file["name"]会是一个数组 */
-        if (is_Array($name)) {
-            $errors = array();
-            /*多个文件上传则循环处理 ， 这个循环只有检查上传文件的作用，并没有真正上传 */
+
+        // 将文件上传的信息取出赋给变量
+        $name = $_FILES[$fileField]['name'];
+        $tmp_name = $_FILES[$fileField]['tmp_name'];
+        $size = $_FILES[$fileField]['size'];
+        $error = $_FILES[$fileField]['error'];
+
+        //如果是多个文件上传则$name会是一个数组
+        if (is_array($name)) {
+            $errors = [];
+            // 多个文件上传则循环检查上传文件
             for ($i = 0; $i < count($name); $i++) {
-                /*设置文件信息 */
+                //设置文件信息
                 if ($this->setFiles($name[$i], $tmp_name[$i], $size[$i], $error[$i])) {
                     if (!$this->checkFileSize() || !$this->checkFileType()) {
-                        $errors[] = $this->getError();
+                        $errors[] = $this->errorMsg();
                         $return = false;
                     }
                 } else {
-                    $errors[] = $this->getError();
+                    $errors[] = $this->errorMsg();
                     $return = false;
                 }
-                /* 如果有问题，则重新初使化属性 */
-                if (!$return)
-                    $this->setFiles();
+                //重新初使化属性
+                $this->setFiles();
             }
 
             if ($return) {
-                /* 存放所有上传后文件名的变量数组 */
-                $fileNames = array();
-                /* 如果上传的多个文件都是合法的，则通过销魂循环向服务器上传文件 */
+                //存放所有上传后文件名的变量数组
+                $fileNames = [];
+                //如果上传的多个文件都是合法的，则通过循环向服务器上传文件
                 for ($i = 0; $i < count($name); $i++) {
                     if ($this->setFiles($name[$i], $tmp_name[$i], $size[$i], $error[$i])) {
                         $this->setNewFileName();
                         if (!$this->copyFile()) {
-                            $errors[] = $this->getError();
+                            $errors[] = $this->errorMsg();
                             $return = false;
                         }
                         $fileNames[] = $this->newFileName;
+                        $this->newFileInfo[] = [
+                            'name' => $this->newFileName,
+                            'type' => $this->fileType,
+                            'size' => $this->fileSize,
+                        ];
                     }
                 }
                 $this->newFileName = $fileNames;
             }
-            $this->errorMess = $errors;
+            $this->errorMsg = $errors;
             return $return;
-            /*上传单个文件处理方法*/
-        } else {
-            /* 设置文件信息 */
+        } else { //上传单个文件处理
+            //设置文件信息
             if ($this->setFiles($name, $tmp_name, $size, $error)) {
-                /* 上传之前先检查一下大小和类型 */
+                //上传之前先检查一下大小和类型
                 if ($this->checkFileSize() && $this->checkFileType()) {
-                    /* 为上传文件设置新文件名 */
+                    //为上传文件设置新文件名
                     $this->setNewFileName();
-                    /* 上传文件  返回0为成功， 小于0都为错误 */
                     if ($this->copyFile()) {
+                        $this->newFileInfo[] = [
+                            'name' => $this->newFileName,
+                            'type' => $this->fileType,
+                            'size' => $this->fileSize,
+                        ];
                         return true;
                     } else {
                         $return = false;
@@ -165,47 +178,42 @@ class HLUploadFile
                 $return = false;
             }
             //如果$return为false, 则出错，将错误信息保存在属性errorMess中
-            if (!$return)
-                $this->errorMess = $this->getError();
-
+            if (!$return) {
+                $this->errorMsg = $this->errorMsg();
+            }
             return $return;
         }
     }
 
     /**
-     * 获取上传后的文件名称
-     * @param  void   没有参数
-     * @return string 上传后，新文件的名称， 如果是多文件上传返回数组
-     */
+    ** 获取上传后的文件名称
+    ** @param  void   没有参数
+    ** @return string 上传后，新文件的名称， 如果是多文件上传返回数组
+    */
     public function getFileName()
     {
         return $this->newFileName;
     }
 
-    /* 设置上传出错信息 */
-    private function getError()
+    /**
+    ** 获取上传后的文件名称
+    ** @param  void   没有参数
+    ** @return string 上传后，新文件的信息 二维数组 name文件名  type文件类型  size大小
+    */
+    public function getFileInfo()
     {
-        $str = "上传文件<font color='red'>{$this->originName}</font>时出错 : ";
-        switch ($this->errorNum) {
-
-            case -4:
-                $str .= "建立存放上传文件目录失败，请重新指定上传目录";
-                break;
-            case -5:
-                $str .= "必须指定上传文件的路径";
-                break;
-            default:
-                $str .= "未知错误";
-        }
-        return $str . '<br>';
+        return $this->newFileInfo;
     }
 
-    /* 设置和$_FILES有关的内容 */
+    /*
+    ** 设置和$_FILES有关的内容
+    */
     private function setFiles($name = "", $tmp_name = "", $size = 0, $error = 0)
     {
         $this->errorNum = $error;
-        if ($error)
+        if ($error) {
             return false;
+        }
         $this->originName = $name;
         $this->tmpFileName = $tmp_name;
         $aryStr = explode(".", $name);
