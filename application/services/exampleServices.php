@@ -91,7 +91,7 @@ class exampleServices extends HLServices
         $f->changeFileCode($create_path.'没事看这里.txt','utf-8');
         //指定文件编码
         $f->changeDirFilesCode($create_path, 'utf-8');
-        */
+
         //@param $savePath string 保存路径
         //@param $allowType array|string 允许类型
         //@param $maxSize int 允许上传文件大小
@@ -105,11 +105,21 @@ class exampleServices extends HLServices
         } else {
             //失败的错误信息
             $upload->getErrorMsg();
-        }
+        }*/
 
 
 
+        $start_time = microtime(1);
+        $py = new \hl\library\Tools\Pinyin\HLPinyin();
+        var_dump($py->pinyin('对多音字无能为力'));
+        var_dump($py->pinyin('最全的PHP汉字转拼音库，比百度词典还全（dict.baidu.com）'));
+        var_dump($py->pinyin('试试：㐀㐁㐄㐅㐆㐌㐖㐜'));
+        var_dump($py->pinyin('一起开始数：12345'));
+        var_dump($py->pinyin('海南'));
+        var_dump($py->pinyin('乌鲁木齐'));
+        var_dump($py->pinyin('前总理朱镕基'));
 
+        echo number_format(microtime(1) - $start_time, 6);
 
 
 
