@@ -341,3 +341,24 @@ File
         $f->changeFileCode($create_path.'没事看这里.txt','utf-8');
 ### 指定文件编码
         $f->changeDirFilesCode($create_path, 'utf-8');
+
+### 文件上传
+@param $savePath string 保存路径
+
+@param $allowType array|string 允许类型
+
+@param $maxSize int 允许上传文件大小
+        
+@param $isOrigin bool 是否保持文件原名
+        
+        //实例化
+        $upload = new \hl\library\Tools\Files\HLUploadFile('','','','');
+        if ($upload->upload('')) {
+            //上传后的文件信息 name size type
+            $upload->getFileInfo();
+            //上传后的文件名
+            $upload->getFileName();
+        } else {
+            //失败的错误信息
+            $upload->getErrorMsg();
+        }
