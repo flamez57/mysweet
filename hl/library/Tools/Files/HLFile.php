@@ -90,13 +90,34 @@ class HLFile
     */
     public function byteFormat($size, $precision = 2)
     {
-        $units = ["B", "KB", "MB", "GB", "TB", "PB","EB","ZB","YB"];
+        $units = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
         $pos = 0;
         while ($size >= 1024) {
              $size /= 1024;
              $pos++;
         }
         return round($size, $precision) . " " . $units[$pos];
+    }
+
+    /*
+     * 转字节数
+     */
+    public function toByte($size)
+    {
+        $number = intval($size);
+        $unit = strtoupper(preg_replace( '/[\W\d]/', '', $size));
+        $unit1 = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+        $unit2 = ["B", "K", "M", "G", "T", "P", "E", "Z", "Y"];
+        $key = array_search($unit, $unit1);
+        if ($key === false) {
+            $key = array_search($unit, $unit2);
+        }
+        if ($key) {
+            for ($i = 0; $i < $key; $i++) {
+                $number *= 1024;
+            }
+        }
+        return $number;
     }
 
     /**
