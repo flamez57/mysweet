@@ -120,9 +120,34 @@ class exampleServices extends HLServices
         var_dump($py->pinyin('前总理朱镕基'));
 
         echo number_format(microtime(1) - $start_time, 6);
+echo '<hr>';
+        $pym = new \hl\library\Tools\Pinyin\HLPinyinMs();
+        var_dump($pym->pinyin('对多音字无能为力'));
+        var_dump($pym->pinyin('最全的PHP汉字转拼音库，比百度词典还全（dict.baidu.com）'));
+        var_dump($pym->pinyin('试试：㐀㐁㐄㐅㐆㐌㐖㐜'));
+        var_dump($pym->pinyin('一起开始数：12345'));
+        var_dump($pym->pinyin('海南'));
+        var_dump($pym->pinyin('乌鲁木齐'));
+        var_dump($pym->pinyin('前总理朱镕基'));
+echo '<hr>';
+        $pymi = new \hl\library\Tools\Pinyin\HLPinyinMini();
+        var_dump($pymi->utf8To('朱镕基'));
+        var_dump($pymi->utf8To('我是中国人'));
+        var_dump($pymi->utf8To('PHP汉字转拼音类'));
+        var_dump($pymi->utf8To('GB2312标准共收录6763个汉字，不在范围内的汉字是无法转换，如：中国前总理朱镕基的“镕”字。'));
+        var_dump($pymi->utf8To('`1234567890-=QWERTYUIOP[]ASDFGHJKL;ZXCVBNM,./abcdefghijklmnopqrstuvwxyz'));
 
+        var_dump($pymi->utf8To('朱镕基', 1));
+        var_dump($pymi->utf8To('我是中国人', 1));
+        var_dump($pymi->utf8To('PHP汉字转拼音类', 1));
+        var_dump($pymi->utf8To('GB2312标准共收录6763个汉字，不在范围内的汉字是无法转换，如：中国前总理朱镕基的“镕”字。', 1));
+        var_dump($pymi->utf8To('`1234567890-=QWERTYUIOP[]ASDFGHJKL;ZXCVBNM,./abcdefghijklmnopqrstuvwxyz', 1));
 
-
+        var_dump($pymi->toFirst('朱镕基'));
+        var_dump($pymi->toFirst('我是中国人'));
+        var_dump($pymi->toFirst('PHP汉字转拼音类'));
+        var_dump($pymi->toFirst('GB2312标准共收录6763个汉字，不在范围内的汉字是无法转换，如：中国前总理朱镕基的“镕”字。'));
+        var_dump($pymi->toFirst('▂▃▄▅▆▇█▉`1234567890-=QWERTYUIOP[]ASDFGHJKL;ZXCVBNM,./abcdefghijklmnopqrstuvwxyz'));
 
         $str .= 'exampleServices Run <br>';
         return $str;
