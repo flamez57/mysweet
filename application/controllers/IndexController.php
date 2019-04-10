@@ -44,9 +44,36 @@ class IndexController extends HLController
    </body>
 </html>
 HTML;
+ $html = file_get_contents('http://tablesorter.com/docs/');
         $hta = new \hl\library\Tools\Html2Array\HLHtmlToArray($html);
-        \hl\library\Functions\Helper::dump($hta->getDom());
-        \hl\library\Functions\Helper::dump($hta->getArray());
+        \hl\library\Functions\Helper::dump($hta->toJson());
+        \hl\library\Functions\Helper::dump($hta->toArray());
+        /**
+ * Get html source from tablesorter.com
+ */
+
+/**
+ * Print array of table rows for each table
+ */
+print_r($hta->getArrayOfTr());
+
+/**
+ * Print array of table columns for each table
+ */
+print_r($hta->getArrayOfTd(true));
+
+/**
+ * Print array of table headers for each table
+ */
+print_r($hta->getArrayOfTh(true));
+
+/**
+ * Returns array of tables
+ *
+ * @param bool $get_only_text (optional)
+ * @return array
+ */
+print_r($hta->getArrayOfTables(false));
         $str = exampleServices::getInstance()->todo();
         //传递值到模板
         \hl\HLView::param('out', $str);

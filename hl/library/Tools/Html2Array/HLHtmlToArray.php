@@ -3,6 +3,7 @@
 namespace hl\library\Tools\Html2Array;
 
 use DOMDocument;
+use DOMElement;
 
 /**
 ** @ClassName: HLHtmlToArray
@@ -27,6 +28,21 @@ class HLHtmlToArray
     ** 错误信息
     */
     private $errorMsg;
+
+    /*
+    ** 是否去除空格
+    */
+    protected $_removeEmptyStrings = true;
+
+    /*
+    ** 是否解析行内样式
+    */
+    protected $_parseCss = true;
+
+    /*
+    ** 转换成的数组
+    */
+    protected $_array = null;
 
     /*
     ** @param $html string HTML页面代码
@@ -171,5 +187,241 @@ class HLHtmlToArray
             return (array) $xml;
         }
         return $array;
+    }
+
+    /**
+    ** 转成联合数组
+    ** @return array
+    */
+    public function toArray()
+    {
+        if (null === $this->_array) {
+            $array = $this->_domElementToArray($this->body);
+            if (empty($array) || !isset($array['children'])) {
+                $this->_array = [];
+            } else {
+                $this->_array = $array['children'];
+            }
+        }
+        return $this->_array;
+    }
+
+    /**
+    ** HTML转JSON
+    ** @return string
+    */
+    public function toJson()
+    {
+        return json_encode($this->toArray());
+    }
+
+    /**
+    ** 设置是否解析行内样式
+    ** @param bool $value
+    */
+    public function parseCss($value = true)
+    {
+        $this->_parseCss = boolval($value);
+    }
+
+    /**
+    ** 设置是否去除空格
+    ** @param bool $value
+    */
+    public function removeEmptyStrings($value = true)
+    {
+        $this->_removeEmptyStrings = boolval($value);
+    }
+
+    /**
+    ** 解析行内样式
+    ** @param $css string style样式
+    ** @return array
+    */
+    protected function _parseInlineCss($css)
+    {
+        $urls = [];
+        // 修正了url()中“;”符号的问题
+        $css = preg_replace_callback('/url(\s+)?\(.*\)/i', function ($match) use (&$urls) {
+            $index = count($urls) + 1;
+            $index = "%%$index%%";
+            $urls[$index] = $match[0];
+            return $index;
+        }, $css);
+
+        $arr = array_filter(array_map('trim', explode(';', $css)));
+
+        $result = [];
+        foreach ($arr as $item) {
+            list ($attribute, $value) = array_map('trim', explode(':', $item));
+            if (preg_match('/%%\d+%%/', $value)) {
+                $value = preg_replace_callback('/%%\d+%%/', function ($match) use ($urls) {
+                    if (isset($urls[$match[0]])) {
+                        return $urls[$match[0]];
+                    } else {
+                        return $match[0];
+                    }
+                }, $value);
+            }
+            $result[$attribute] = $value;
+        }
+        return $result;
+    }
+
+
+    /**
+    ** DOM对象转数组
+    ** @param $element DOMElement
+    ** @return array
+    */
+    protected function _domElementToArray(DOMElement $element)
+    {
+        $node = mb_strtolower($element->tagName);
+        $attributes = [];
+        foreach ($element->attributes as $attribute) {
+            $attr = mb_strtolower($attribute->name);
+            $value = $attribute->value;
+            if ('style' == $attr && $this->_parseCss) {
+                $value = $this->_parseInlineCss($value);
+            }
+            $attributes[$attr] = $value;
+        }
+
+        $children = [];
+        if ($element->hasChildNodes()) {
+            foreach ($element->childNodes as $childNode) {
+                if (XML_ELEMENT_NODE === $childNode->nodeType) {
+                    $children[] = $this->_domElementToArray($childNode);
+                } elseif (XML_TEXT_NODE === $childNode->nodeType ) {
+                    $text = $childNode->nodeValue;
+                    if (!$this->_removeEmptyStrings || "" != trim($text)) {
+                        $children[] = [
+                            'node' => 'text',
+                            'text' => $text
+                        ];
+                    }
+                }
+            }
+        }
+
+        $result = ['node' => $node];
+        if (count($attributes) > 0) {
+            $result['attributes'] = $attributes;
+        }
+        if (count($children) > 0) {
+            $result['children'] = $children;
+        }
+        return $result;
+    }
+
+    /**
+    ** 返回表格的数组
+    ** @param $getOnlyText bool 是否只获取文本
+    ** @return array
+    */
+    public function getArrayOfTables($getOnlyText = false)
+    {
+        return $this->getArrayByXPath('//table', $getOnlyText);
+    }
+
+
+    /**
+    ** 返回表格的每一行
+    ** @param $getOnlyText bool 是否只获取文本
+    ** @return array
+    */
+    public function getArrayOfTr($getOnlyText = false)
+    {
+        $tablesArr = $this->getArrayByXPath('//table');
+        $outArr = [];
+        foreach ($tablesArr as $_ta) {
+            $outArr[] = $this->getArrayByXPath('//tr', $getOnlyText, $_ta);
+        }
+        return $outArr;
+    }
+
+
+    /**
+    ** 返回表格每一行的每一列
+    ** @param $getOnlyText bool 是否只获取文本
+    ** @return array
+    */
+    public function getArrayOfTd($getOnlyText = false)
+    {
+        $tableArr = $this->getArrayByXPath('//table');
+        $outArr = [];
+        foreach ($tableArr as $_k => $_ta) {
+            $row = $this->getArrayByXPath('//tr', $getOnlyText, $_ta);
+            foreach($row as $_rk => $_rv) {
+                $parsedTd = $this->getArrayByXPath('//td', $getOnlyText, $_rv);
+                if (!$parsedTd ) {
+                    continue;
+                }
+                $outArr[$_k][$_rk] = $parsedTd;
+            }
+            unset($row);
+        }
+        return $outArr;
+    }
+
+    /**
+    ** 返回表格的头
+    ** @param $getOnlyText bool 是否只获取文本
+    ** @return array
+    */
+    public function getArrayOfTh($getOnlyText = false)
+    {
+        $tableArr = $this->getArrayByXPath('//table');
+        $outArr = [];
+        foreach ($tableArr as $_k => $_ta) {
+            $row = $this->getArrayByXPath('//tr', $getOnlyText, $_ta);
+            foreach($row as $_rk => $_rv) {
+                $parsedTh = $this->getArrayByXPath('//th', $getOnlyText, $_rv);
+                if (!$parsedTh ) {
+                    continue;
+                }
+                $outArr[$_k][$_rk] = $parsedTh;
+            }
+            unset($row);
+        }
+        return $outArr;
+    }
+
+
+    /**
+    ** 解析器 基于DOMXpath
+    ** @param $xPathString string //标签名
+    ** @param  $getOnlyText bool 是否只获取文本
+    ** @param $html string HTML代码
+    ** @return array|null
+    */
+    private function getArrayByXPath($xPathString = null, $getOnlyText = false, $html = '')
+    {
+        if (!class_exists('\DOMXPath')) {
+            $this->errorMsg .= "DOMXPath 扩展未开启";
+            return [];
+        }
+        if (empty($html)) {
+            $xPath = new \DOMXPath($this->dom);
+        } else {
+            $xPath = new \DOMXPath($html);
+        }
+        $outArr = [];
+        foreach ($xPath->query($xPathString) as $item) {
+            if ($getOnlyText) {
+                $outArr[] = $item->textContent;
+                continue;
+            }
+            $outArr[] = $this->dom->saveHTML($item);
+        }
+        return $outArr;
+    }
+
+    /*
+    ** 获取错误信息
+    */
+    public function getErrorMsg()
+    {
+        return $this->errorMsg;
     }
 }
