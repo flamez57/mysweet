@@ -41,32 +41,55 @@ class IndexController extends HLController
       <li class=""><a href="/get-involved" >Get Involved</a></li>
       <li class=""><a href="/support">Help</a></li>
     </ul>
+    <table>
+        <tr>
+            <th>a</th>
+            <th>b</th>
+            <th>e</th>
+            <th>d</th>
+            <th>c</th>
+        </tr>
+        <tr>
+            <td>sdf</td>
+            <td>ssdfdf</td>
+            <td>sfgdf</td>
+            <td>svbdf</td>
+            <td>sbndf</td>
+        </tr>
+        <tr>
+            <td>s士大夫df</td>
+            <td>sd士大夫f</td>
+            <td>s法的规定df</td>
+            <td>s法国和df</td>
+            <td>s房管局df</td>
+        </tr>
+    </table>
    </body>
 </html>
 HTML;
- $html = file_get_contents('http://tablesorter.com/docs/');
+ //$html = file_get_contents('http://tablesorter.com/docs/');
         $hta = new \hl\library\Tools\Html2Array\HLHtmlToArray($html);
         \hl\library\Functions\Helper::dump($hta->toJson());
         \hl\library\Functions\Helper::dump($hta->toArray());
         /**
  * Get html source from tablesorter.com
  */
-
+echo '<hr>';
 /**
  * Print array of table rows for each table
  */
 print_r($hta->getArrayOfTr());
-
+echo '<hr>';
 /**
  * Print array of table columns for each table
  */
 print_r($hta->getArrayOfTd(true));
-
+echo '<hr>';
 /**
  * Print array of table headers for each table
  */
 print_r($hta->getArrayOfTh(true));
-
+echo '<hr>';
 /**
  * Returns array of tables
  *
@@ -74,6 +97,7 @@ print_r($hta->getArrayOfTh(true));
  * @return array
  */
 print_r($hta->getArrayOfTables(false));
+echo '<hr>';
         $str = exampleServices::getInstance()->todo();
         //传递值到模板
         \hl\HLView::param('out', $str);

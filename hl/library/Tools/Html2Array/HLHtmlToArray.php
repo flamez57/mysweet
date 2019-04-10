@@ -351,7 +351,7 @@ class HLHtmlToArray
         $tableArr = $this->getArrayByXPath('//table');
         $outArr = [];
         foreach ($tableArr as $_k => $_ta) {
-            $row = $this->getArrayByXPath('//tr', $getOnlyText, $_ta);
+            $row = $this->getArrayByXPath('//tr', false, $_ta);
             foreach($row as $_rk => $_rv) {
                 $parsedTd = $this->getArrayByXPath('//td', $getOnlyText, $_rv);
                 if (!$parsedTd ) {
@@ -374,7 +374,7 @@ class HLHtmlToArray
         $tableArr = $this->getArrayByXPath('//table');
         $outArr = [];
         foreach ($tableArr as $_k => $_ta) {
-            $row = $this->getArrayByXPath('//tr', $getOnlyText, $_ta);
+            $row = $this->getArrayByXPath('//tr', false, $_ta);
             foreach($row as $_rk => $_rv) {
                 $parsedTh = $this->getArrayByXPath('//th', $getOnlyText, $_rv);
                 if (!$parsedTh ) {
@@ -397,6 +397,9 @@ class HLHtmlToArray
     */
     private function getArrayByXPath($xPathString = null, $getOnlyText = false, $html = '')
     {
+        if (!$xPathString) {
+            return null;
+        }
         if (!class_exists('\DOMXPath')) {
             $this->errorMsg .= "DOMXPath 扩展未开启";
             return [];
@@ -404,7 +407,13 @@ class HLHtmlToArray
         if (empty($html)) {
             $xPath = new \DOMXPath($this->dom);
         } else {
-            $xPath = new \DOMXPath($html);
+            $dom = new DOMDocument('1.0', 'UTF-8');
+            //函数禁用标准的 libxml 错误，并启用用户错误处理。
+            @libxml_use_internal_errors(true);
+            $dom->loadHTML('<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'.$html);
+            //函数清空 libxml 错误缓冲。
+            @libxml_clear_errors();
+            $xPath = new \DOMXPath($dom);
         }
         $outArr = [];
         foreach ($xPath->query($xPathString) as $item) {
@@ -412,7 +421,11 @@ class HLHtmlToArray
                 $outArr[] = $item->textContent;
                 continue;
             }
-            $outArr[] = $this->dom->saveHTML($item);
+            if (empty($html)) {
+                $outArr[] = $this->dom->saveHTML($item);
+            } else {
+                $outArr[] = $dom->saveHTML($item);
+            }
         }
         return $outArr;
     }
