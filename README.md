@@ -401,3 +401,77 @@ File
         var_dump($pymi->toFirst('PHP汉字转拼音类'));
         var_dump($pymi->toFirst('GB2312标准共收录6763个汉字，不在范围内的汉字是无法转换，如：中国前总理朱镕基的“镕”字。'));
         var_dump($pymi->toFirst('▂▃▄▅▆▇█▉`1234567890-=QWERTYUIOP[]ASDFGHJKL;ZXCVBNM,./abcdefghijklmnopqrstuvwxyz'));
+
+
+HTML2ARRAY
+========
+```php
+   $html = <<<HTML
+<html>
+   <head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+     <title>PHP: Hypertext Preprocessor</title>
+
+ <link rel="shortcut icon" href="http://php.net/favicon.ico">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://php.net/phpnetimprovedsearch.src" title="Add PHP.net search">
+ <link rel="alternate" type="application/atom+xml" href="http://php.net/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="http://php.net/feed.atom" title="PHP: Hypertext Preprocessor">
+
+ <link rel="canonical" href="http://php.net/index.php">
+ <link rel="shorturl" href="http://php.net/index">
+ <link rel="alternate" href="http://php.net/index" hreflang="x-default">
+   </head>
+   <body>       
+    <ul class="nav">
+      <li class=""><a href="/downloads">Downloads</a></li>
+      <li class=""><a href="/docs.php">Documentation</a></li>
+      <li class=""><a href="/get-involved" >Get Involved</a></li>
+      <li class=""><a href="/support">Help</a></li>
+    </ul>
+    <table>
+        <tr>
+            <th>a</th>
+            <th>b</th>
+            <th>e</th>
+            <th>d</th>
+            <th>c</th>
+        </tr>
+        <tr>
+            <td>sdf</td>
+            <td>ssdfdf</td>
+            <td>sfgdf</td>
+            <td>svbdf</td>
+            <td>sbndf</td>
+        </tr>
+        <tr>
+            <td>s士大夫df</td>
+            <td>sd士大夫f</td>
+            <td>s法的规定df</td>
+            <td>s法国和df</td>
+            <td>s房管局df</td>
+        </tr>
+    </table>
+   </body>
+</html>
+HTML;
+    //从网络获取代码
+    //$html = file_get_contents('http://mysweet95.com/');
+    //实例化
+    $hta = new \hl\library\Tools\Html2Array\HLHtmlToArray($html);
+    //转成json
+    \hl\library\Functions\Helper::dump($hta->toJson());
+    //转成数组
+    \hl\library\Functions\Helper::dump($hta->toArray());
+    //获取页面表格
+    print_r($hta->getArrayOfTables(false));
+    //获取表格的行
+    print_r($hta->getArrayOfTr());
+    //获取表格列
+    print_r($hta->getArrayOfTd(true));
+    //获取表格表头
+    print_r($hta->getArrayOfTh(true));
+```
+
+
