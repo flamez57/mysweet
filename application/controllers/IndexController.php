@@ -17,6 +17,9 @@ class IndexController extends HLController
     */
     public function indexAction()
     {
+        //亲求的时间
+        \hl\library\Functions\Helper::dump(REQUEST_TIME_FLOAT);
+        die;
         $html = <<<HTML
 <html>
    <head>
