@@ -11,7 +11,6 @@
     <div><a href="<?=\hl\HLRoute::makeUrl('pc_shop', 'index', 'index')?>">pc商城</a></div>
     <div><a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'index', 'index')?>">分销商城</a></div>
     <div><a href="<?=\hl\HLRoute::makeUrl('application', 'index', 'install')?>">安装</a></div>
-    <div><a href="<?=\hl\HLRoute::makeUrl('application', 'index', 'test')?>">测试用</a></div>
         <?=\hl\HlView::$putout['out']?>
         <?php
         /*

@@ -9,6 +9,7 @@ namespace application\controllers;
 */
 use hl\HLController;
 use application\services\exampleServices;
+use application\services\installServices;
 
 class IndexController extends HLController
 {
@@ -105,5 +106,18 @@ echo '<hr>';
         //传递值到模板
         \hl\HLView::param('out', $str);
 //        \hl\library\Functions\Helper::dump('sdf');  
+    }
+
+    //安装
+    public function installAction()
+    {
+        //链接数据库
+        installServices::getInstance()->wdbConfig('localhost', 'root', 'vagrant');
+        echo 'ok';
+    }
+
+    public function testAction()
+    {
+        echo '这里写测试代码';
     }
 }

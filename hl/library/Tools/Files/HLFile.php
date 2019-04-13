@@ -74,6 +74,23 @@ class HLFile
     }
 
     /**
+    ** 文件写入内容
+    ** @param $file string 文件
+    ** @param $content string 内容
+    ** @return bool
+    */
+    public function writeFile($file, $content)
+    {
+        $myfile = fopen($file, "w");
+        if (!$myfile) {
+            return false;
+        }
+        fwrite($myfile, $content);
+        fclose($myfile);
+        return true;
+    }
+
+    /**
     ** 确定服务器的最大上传限制（字节数）
     ** @return string 服务器允许的最大上传字节数
     */
