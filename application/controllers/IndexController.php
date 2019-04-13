@@ -113,6 +113,8 @@ echo '<hr>';
     {
         //链接数据库
         installServices::getInstance()->wdbConfig('localhost', 'root', 'vagrant');
+        //建表插入基础数据
+        installServices::getInstance()->createTableAndInsertData();
         echo 'ok';
     }
 

@@ -82,4 +82,9 @@ class exampleModels extends HLModel
 
         return "exampleModels run<br>";
     }
+
+    public function aa($sql)
+    {
+        $this->query($sql);
+    }
 }

@@ -59,15 +59,16 @@ class HLMysqli implements HLDBAdapter
         if (!empty($handle)) {
             $this->_dbLink->select_db($this->_dbLink, $handle);
         }
+
         $res = $this->_dbLink->query($query);
         if (stripos($query, "SELECT") !== false) {
             while ($row = $res->fetch_assoc()) {
                 $data[] = $row;
             }
+            $res->free();
         } else {
             $data = true;
         }
-        $res->free();
         return $data ?? false;
     }
 
