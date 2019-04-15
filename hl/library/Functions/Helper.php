@@ -10,13 +10,13 @@ namespace hl\library\Functions;
 class Helper
 {
     /**
- * 浏览器友好的变量输出
- * @param mixed $var 变量
- * @param boolean $echo 是否输出 默认为True 如果为false 则返回输出字符串
- * @param string $label 标签 默认为空
- * @param boolean $strict 是否严谨 默认为true
- * @return void|string
- */
+     * 浏览器友好的变量输出
+     * @param mixed $var 变量
+     * @param boolean $echo 是否输出 默认为True 如果为false 则返回输出字符串
+     * @param string $label 标签 默认为空
+     * @param boolean $strict 是否严谨 默认为true
+     * @return void|string
+     */
     static public function dump($var, $echo = true, $label = null, $strict = true) {
         $label = ( $label === null ) ? '' : rtrim($label) . ' ';
         if (!$strict) {
@@ -40,6 +40,20 @@ class Helper
             return null;
         } else
             return $output;
+    }
+
+    /**
+    ** 去除PHP代码注释
+    ** @param string $content 代码内容
+    ** @return string 去除注释之后的内容
+    */
+    static public function removeComment($content)
+    {
+        return preg_replace(
+            ['/\/\*.*?\*\//s', '/#.*?\n/', '/\/\/.*?\n/', '/\-\-.*?\n/'],
+            '',
+            str_replace(array("\r\n", "\r"), "\n", $content)
+        );
     }
 
     /**

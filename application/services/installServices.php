@@ -10,6 +10,7 @@ namespace application\services;
 use hl\HLServices;
 use hl\library\Tools\Files\HLFile;
 use application\Models\exampleModels;
+use hl\library\Functions\Helper;
 
 class installServices extends HLServices
 {
@@ -50,32 +51,13 @@ EOF;
         $sqlf = ROOT_PATH.'data/default.sql';
         $f = new HLFile();
         $a = $f->readFile($sqlf);
-        $a = explode("\n", $a);
-        preg_replace('/^\/\**\*\/$/', '', $a);
-        $cc = false; //是否开始注释
-        $i = 0; //可执行sql计数器
-        $bb = ''; //可执行sql集
-        foreach ($a as $_k => $_v) {
-           // echo '<pre>';
-            $_v = trim($_v);
-            $c = strpos($_v, '--');
-            //echo '</pre>';
-            //var_dump($_v, $c);
-            if (empty($_v) || $c === 0) {
-                unset($a[$_k]);
-            }
-            if (!empty($_v) && $c !== 0) {
-                if ($c) {
-                    $bb .= substr($_v, 0, $c);
-                }
-                echo $_v.'<br>';
+        $a = Helper::removeComment($a);
+        $a = explode(";", $a);
+        foreach ($a as $_ak => $_av) {
+            $_av = trim($_av);
+            if (!empty($_av)) {
+                exampleModels::getInstance()->aa($_av);
             }
         }
-        $a = array_values($a);
-        foreach ($a as $_a) {
-            echo $_a.'<br>';
-        }
-        //exampleModels::getInstance()->aa($a);
-        echo '2';
     }
 }
