@@ -3,6 +3,7 @@
 return [
     'default' => [
         'host' => 'localhost',
+        'dbname' => 'qwerty',
         'username' => 'root',
         'password' => 'vagrant',
         'charset' => 'utf8',

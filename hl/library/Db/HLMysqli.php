@@ -50,14 +50,14 @@ class HLMysqli implements HLDBAdapter
     /**
     ** 执行数据库查询
     ** @param string $query 数据库查询SQL字符串
-    ** @param mixed $handle 连接对象
+    ** @param mixed $handle 库名
     ** @return resource
     */
     public function query($query, $handle = '')
     {
         //更换数据库
         if (!empty($handle)) {
-            $this->_dbLink->select_db($this->_dbLink, $handle);
+            $this->_dbLink->select_db($handle);
         }
 
         $res = $this->_dbLink->query($query);

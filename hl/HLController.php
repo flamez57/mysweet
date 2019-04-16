@@ -48,4 +48,18 @@ class HLController extends HLSington
     {
         HLView::html($this->callFunction);
     }
+
+    /**
+    ** 获取post传值
+    ** @param $key string
+    ** @param $value string|array
+    ** @return string|array
+    */
+    public function getPost($key = '', $value = '')
+    {
+        if (empty($key)) {
+            return $_POST;
+        }
+        return $_POST[$key] ?? $value;
+    }
 }

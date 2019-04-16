@@ -35,7 +35,7 @@ class HLModel extends HLSington
         if (!isset($config['db'][$this->_db])) {
             die("{$this->_db}配置信息不存在");
         }
-        $this->db->connect($config['db'][$this->_db] + ['dbname' => $this->_db]);
+        $this->db->connect($config['db'][$this->_db]);
     }
 
     /*
@@ -57,9 +57,9 @@ class HLModel extends HLSington
     /*
     ** 执行sql返回结果
     */
-    public function query($sql)
+    public function query($sql, $db = '')
     {
         $this->setLastQuery($sql);
-        return $this->db->query($sql);
+        return $this->db->query($sql, $db);
     }
 }

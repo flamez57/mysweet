@@ -7,6 +7,7 @@ namespace application\controllers;
 ** @date 2018年3月26日 晚上21:49
 ** @version V1.0
 */
+use application\models\installModels;
 use hl\HLController;
 use application\services\exampleServices;
 use application\services\installServices;
@@ -111,18 +112,27 @@ echo '<hr>';
     //安装
     public function installAction()
     {
-        //
+        //显示安装页面
     }
 
-    //安装
+    //执行安装
     public function installDoAction()
     {
-        var_dump($_POST);
+        $host = $this->getPost('host', 'localhost');
+        $dbname = $this->getPost('dbname', 'mysweet');
+        $username = $this->getPost('username', 'root');
+        $password = $this->getPost('password', 'vagrant');
+        $adminName = $this->getPost('adminm', 'admin');
+        $adminPwd = $this->getPost('adminp', 'admin');
+        $adminPwd2 = $this->getPost('adminpt', 'admin');
         //链接数据库
-        installServices::getInstance()->wdbConfig('localhost', 'root', 'vagrant');
+        installServices::getInstance()->wdbConfig($host, $username, $password, '');
         //建表插入基础数据
-        installServices::getInstance()->createTableAndInsertData();
-        echo 'ok';
+        installServices::getInstance()->createTableAndInsertData($dbname, 'default');
+        //链接数据库
+        installServices::getInstance()->wdbConfig($host, $username, $password, $dbname);
+        //创建管理员账号
+        installServices::getInstance()->createAdmin($adminName, $adminPwd, $adminPwd2);
     }
 
     public function testAction()
