@@ -111,19 +111,11 @@
     </style>
 </head>
 <body>
-    <div><h1>MySweet</h1></div>
-    <form id="payment" action="<?=\hl\HLRoute::makeUrl('application', 'index', 'installDo')?>" method="POST">
+    <div><h1>MySweet 安装成功</h1></div>
+    <form id="payment" action="<?=\hl\HLRoute::makeUrl('admin', 'index', 'index')?>" method="POST">
         <fieldset>
-            <legend>数据库信息</legend>
+            <legend>登陆后台</legend>
             <ol>
-                <li>
-                    <label for="host">IP：</label>
-                    <input id="host" name="host" type="text" placeholder="localhost" required autofocus>
-                </li>
-                <li>
-                    <label for="dbname">库  名：</label>
-                    <input id="dbname" name="dbname" type="text" placeholder="default" required>
-                </li>
                 <li>
                     <label for="username">用户名：</label>
                     <input id="username" name="username" type="text" placeholder="root" required>
@@ -135,24 +127,7 @@
             </ol>
         </fieldset>
         <fieldset>
-            <legend>后台管理员账号：</legend>
-            <ol>
-                <li>
-                    <label for="adminm">管理员名称：</label>
-                    <input id="adminm" name="adminm" type="text" placeholder="admin" required>
-                </li>
-                <li>
-                    <label for="adminp">管理员密码：</label>
-                    <input id="adminp" name="adminp" type="password" placeholder="******" required>
-                </li>
-                <li>
-                    <label for="adminpt">管理员密码：</label>
-                    <input id="adminpt" name="adminpt" type="password" placeholder="******" required>
-                </li>
-            </ol>
-        </fieldset>
-        <fieldset>
-            <button type="submit">立即安装</button>
+            <button type="submit">登陆管理后台</button>
             <button type="submit"><a href="<?=\hl\HLRoute::makeUrl('application', 'index', 'index')?>">返回首页</a></button>
         </fieldset>
     </form>

@@ -111,6 +111,13 @@ echo '<hr>';
     //安装
     public function installAction()
     {
+        //
+    }
+
+    //安装
+    public function installDoAction()
+    {
+        var_dump($_POST);
         //链接数据库
         installServices::getInstance()->wdbConfig('localhost', 'root', 'vagrant');
         //建表插入基础数据
