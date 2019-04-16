@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>安装</title>
+    <link rel="shortcut icon" href="./favicon.png" type="image/png">
     <style type="text/css">
         /*分别定义HTML中和标记之的距离样式*/
         html, body, h1, form, fieldset, legend, ol, li {

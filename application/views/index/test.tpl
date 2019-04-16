@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>首页模板</title>
+    <link rel="shortcut icon" href="./favicon.png" type="image/png">
 </head>
 <body>
     <div><a href="<?=\hl\HLRoute::makeUrl('application', 'index', 'index')?>">hello world!</a></div>

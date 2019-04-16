@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>首页模板</title>
+    <link rel="shortcut icon" href="./favicon.png" type="image/png">
     <style type="text/css">
         body{
             display:flex;
