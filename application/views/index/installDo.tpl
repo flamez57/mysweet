@@ -111,7 +111,10 @@
     </style>
 </head>
 <body>
-    <div><h1>MySweet 安装成功</h1></div>
+    <div style="margin:50px;">
+        <?=\hl\HLView::img('deer.gif', ['width' => '200px']);?>
+        <?=\hl\HLView::img('mysweet.png', ['width' => '200px']);?>
+    </div>
     <form id="payment" action="<?=\hl\HLRoute::makeUrl('admin', 'index', 'index')?>" method="POST">
         <fieldset>
             <legend>登陆后台</legend>

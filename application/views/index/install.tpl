@@ -111,7 +111,10 @@
     </style>
 </head>
 <body>
-    <div><h1>MySweet</h1></div>
+    <div style="margin:50px;">
+        <?=\hl\HLView::img('deer.gif', ['width' => '200px']);?>
+        <?=\hl\HLView::img('mysweet.png', ['width' => '200px']);?>
+    </div>
     <form id="payment" action="<?=\hl\HLRoute::makeUrl('application', 'index', 'installDo')?>" method="POST">
         <fieldset>
             <legend>数据库信息</legend>

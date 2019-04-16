@@ -19,6 +19,38 @@ class IndexController extends HLController
     */
     public function indexAction()
     {
+        //框架欢迎页
+    }
+
+    //安装
+    public function installAction()
+    {
+        //显示安装页面
+    }
+
+    //执行安装
+    public function installDoAction()
+    {
+        $host = $this->getPost('host', 'localhost');
+        $dbname = $this->getPost('dbname', 'mysweet');
+        $username = $this->getPost('username', 'root');
+        $password = $this->getPost('password', 'vagrant');
+        $adminName = $this->getPost('adminm', 'admin');
+        $adminPwd = $this->getPost('adminp', 'admin');
+        $adminPwd2 = $this->getPost('adminpt', 'admin');
+        //链接数据库
+        installServices::getInstance()->wdbConfig($host, $username, $password, '');
+        //建表插入基础数据
+        installServices::getInstance()->createTableAndInsertData($dbname, 'default');
+        //链接数据库
+        installServices::getInstance()->wdbConfig($host, $username, $password, $dbname);
+        //创建管理员账号
+        installServices::getInstance()->createAdmin($adminName, $adminPwd, $adminPwd2);
+    }
+
+    public function testAction()
+    {
+        echo '这里写测试代码';
         //亲求的时间
         \hl\library\Functions\Helper::dump(REQUEST_TIME_FLOAT);
         die;
@@ -106,37 +138,6 @@ echo '<hr>';
         $str = exampleServices::getInstance()->todo();
         //传递值到模板
         \hl\HLView::param('out', $str);
-//        \hl\library\Functions\Helper::dump('sdf');  
-    }
-
-    //安装
-    public function installAction()
-    {
-        //显示安装页面
-    }
-
-    //执行安装
-    public function installDoAction()
-    {
-        $host = $this->getPost('host', 'localhost');
-        $dbname = $this->getPost('dbname', 'mysweet');
-        $username = $this->getPost('username', 'root');
-        $password = $this->getPost('password', 'vagrant');
-        $adminName = $this->getPost('adminm', 'admin');
-        $adminPwd = $this->getPost('adminp', 'admin');
-        $adminPwd2 = $this->getPost('adminpt', 'admin');
-        //链接数据库
-        installServices::getInstance()->wdbConfig($host, $username, $password, '');
-        //建表插入基础数据
-        installServices::getInstance()->createTableAndInsertData($dbname, 'default');
-        //链接数据库
-        installServices::getInstance()->wdbConfig($host, $username, $password, $dbname);
-        //创建管理员账号
-        installServices::getInstance()->createAdmin($adminName, $adminPwd, $adminPwd2);
-    }
-
-    public function testAction()
-    {
-        echo '这里写测试代码';
+//        \hl\library\Functions\Helper::dump('sdf');
     }
 }
