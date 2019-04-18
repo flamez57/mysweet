@@ -100,6 +100,16 @@ class HLView
         $str .= '>';
         echo $str;
     }
+
+    /**
+    ** 图片链接
+    ** @param $path 文件路径
+    ** @return void
+    */
+    public static function url($path)
+    {
+        return self::$publicPath.'img'.DIRECTORY_SEPARATOR.$path;
+    }
     
     /*
     ** 传入模板参数

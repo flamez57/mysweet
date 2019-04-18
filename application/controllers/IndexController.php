@@ -53,7 +53,7 @@ class IndexController extends HLController
         echo '这里写测试代码';
         //亲求的时间
         \hl\library\Functions\Helper::dump(REQUEST_TIME_FLOAT);
-        die;
+
         $html = <<<HTML
 <html>
    <head>
@@ -135,7 +135,8 @@ echo '<hr>';
  */
 print_r($hta->getArrayOfTables(false));
 echo '<hr>';
-        $str = exampleServices::getInstance()->todo();
+        //$str = exampleServices::getInstance()->todo();
+        $str = \hl\library\Functions\Helper::alert('sdfsdf', 'sfsdfsd', 'http://mysweet95.com');
         //传递值到模板
         \hl\HLView::param('out', $str);
 //        \hl\library\Functions\Helper::dump('sdf');

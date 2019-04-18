@@ -57,6 +57,78 @@ class Helper
     }
 
     /**
+    ** 信息弹框
+    ** @param $title
+    ** @param $content string
+    ** @param $url
+    ** @return string
+    */
+    static public function alert($title, $content, $url = '#')
+    {
+        $top = \hl\HLView::url('top.png');
+        $main = \hl\HLView::url('main.jpg');
+        $bottom = \hl\HLView::url('bottom.png');
+        $html = <<<HTML
+<style type="text/css">
+    .top{ 
+        background-image: url({$top});
+        background-repeat: no-repeat;
+        list-style-type:none;
+        height:40px;
+        width:390px;
+    }
+    .main{ 
+        background-image: url({$main}); 
+        background-repeat: repeat-y;  
+        list-style-type:none;
+        width:340px;
+        padding:5px 25px;
+        max-width:340px;
+    }
+    .bottom{ 
+        background-image: url({$bottom});
+        background-repeat: no-repeat;
+        list-style-type:none;
+        height:20px;
+        width:390px;
+    }
+    #hl_alert{
+        width:440px;position:absolute; 
+        top: 50px; 
+        left: 200px; 
+        z-index: 99999;
+    }
+    .closebutton{
+        width:80px;
+        height:40px;
+        float:right
+    }
+</style>
+<ul id="hl_alert">
+    <li class="top">
+        <div class="closebutton" onclick="hlHidden()"></div>
+    </li>
+    <li class="main">
+        <h3 style="color:red;margin:0px;padding:0px;">{$title}:</h3>
+        <p style="width:320px;pxmargin:0px;padding:0px;">{$content}</p>
+    </li>
+    <li class="main">
+        <button onclick="hlHidden()"><a href="{$url}" style="text-decoration:none; ">确定</a></button>
+        <button onclick="hlHidden()"><a href="#" style="text-decoration:none; ">取消</a></button>
+    </li>
+    <li class="bottom"></li>
+</ul>
+<script type="text/javascript">
+    function hlHidden(){
+        var obj = document.getElementById('hl_alert');
+        obj.style.display = "none";
+    }
+</script>
+HTML;
+        return $html;
+    }
+
+    /**
      * 获取客户端IP地址
      */
     static public function getClientIP() {
