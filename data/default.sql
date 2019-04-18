@@ -3,7 +3,7 @@
 --
 -- 表的结构 `hl_admin`
 --
-CREATE TABLE IF NOT EXISTS `hl_admin` (
+CREATE TABLE IF NOT EXISTS `hl_auth_admin` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录标识',
   `group_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '组id',
   `role_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '角色id',
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `hl_admin` (
 --
 -- 表的结构 `hl_role`
 --
-CREATE TABLE IF NOT EXISTS `hl_role` (
+CREATE TABLE IF NOT EXISTS `hl_auth_role` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色id',
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父级角色id',
   `role_name` varchar(64) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '角色名称',
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `hl_role` (
 --
 -- 表的结构 `hl_node`
 --
-CREATE TABLE IF NOT EXISTS `hl_node` (
+CREATE TABLE IF NOT EXISTS `hl_auth_node` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '节点id',
   `menu_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '菜单id',
   `node_name` varchar(64) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '节点名',
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `hl_node` (
 --
 -- 表的结构 `hl_group`
 --
-CREATE TABLE IF NOT EXISTS `hl_group` (
+CREATE TABLE IF NOT EXISTS `hl_auth_group` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '组id',
   `role_name` varchar(64) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '组名称',
   `description` varchar(200) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '组描述',
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `hl_group` (
 --
 -- 表的结构 `hl_menu`
 --
-CREATE TABLE IF NOT EXISTS `hl_menu` (
+CREATE TABLE IF NOT EXISTS `hl_auth_menu` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '菜单id',
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父级菜单id',
   `menu_name` varchar(64) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '菜单名',
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `hl_menu` (
 --
 -- 表的结构 `hl_group_role`
 --
-CREATE TABLE IF NOT EXISTS `hl_group_role` (
+CREATE TABLE IF NOT EXISTS `hl_auth_group_role` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录标识',
   `group_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '组id',
   `role_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '角色id',
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `hl_group_role` (
 --
 -- 表的结构 `hl_group_menu`
 --
-CREATE TABLE IF NOT EXISTS `hl_group_menu` (
+CREATE TABLE IF NOT EXISTS `hl_auth_group_menu` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录标识',
   `group_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '组id',
   `menu_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '菜单id',
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `hl_group_menu` (
 --
 -- 表的结构 `hl_role_node`
 --
-CREATE TABLE IF NOT EXISTS `hl_role_node` (
+CREATE TABLE IF NOT EXISTS `hl_auth_role_node` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '记录标识',
   `node_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '节点id',
   `role_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '角色id',
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `hl_role_node` (
 --
 -- 表的结构 `hl_log`
 --
-CREATE TABLE IF NOT EXISTS `hl_log` (
+CREATE TABLE IF NOT EXISTS `hl_auth_log` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '日志id',
   `node_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '操作类型 节点id',
   `content` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT '' COMMENT '操作内容',

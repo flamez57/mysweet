@@ -3,7 +3,7 @@
 return [
     'default' => [
         'host' => 'localhost',
-        'dbname' => 'qwerty',
+        'dbname' => 'mysweet',
         'username' => 'root',
         'password' => 'vagrant',
         'charset' => 'utf8',
