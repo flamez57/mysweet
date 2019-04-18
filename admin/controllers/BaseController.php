@@ -1,7 +1,7 @@
 <?php
 namespace admin\controllers;
 /**
-** @ClassName: IndexController
+** @ClassName: BaseController
 ** @Description: 默认首选控制器
 ** @author flamez57 <flamez57@mysweet95.com>
 ** @date 2018年3月26日 晚上21:49
