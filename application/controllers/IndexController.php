@@ -51,7 +51,11 @@ class IndexController extends HLController
     public function testAction()
     {
         echo '这里写测试代码';
-        \hl\library\Functions\Helper::message();
+        //\hl\library\Functions\Helper::message();
+        echo \hl\library\Functions\Helper::getClientIP();
+        echo \hl\library\Functions\Helper::execTime();
+
+        die;
         //亲求的时间
         \hl\library\Functions\Helper::dump(REQUEST_TIME_FLOAT);
 
@@ -136,7 +140,7 @@ echo '<hr>';
  */
 print_r($hta->getArrayOfTables(false));
 echo '<hr>';
-        //$str = exampleServices::getInstance()->todo();
+        $str = exampleServices::getInstance()->todo();
 
         $str = \hl\library\Functions\Helper::alert('sdfsdf', 'sfsdfsd', 'http://mysweet95.com');
         //传递值到模板

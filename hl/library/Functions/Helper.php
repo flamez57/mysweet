@@ -10,14 +10,15 @@ namespace hl\library\Functions;
 class Helper
 {
     /**
-     * 浏览器友好的变量输出
-     * @param mixed $var 变量
-     * @param boolean $echo 是否输出 默认为True 如果为false 则返回输出字符串
-     * @param string $label 标签 默认为空
-     * @param boolean $strict 是否严谨 默认为true
-     * @return void|string
-     */
-    static public function dump($var, $echo = true, $label = null, $strict = true) {
+    ** 浏览器友好的变量输出
+    ** @param mixed $var 变量
+    ** @param $echo bool 是否输出 默认为True 如果为false 则返回输出字符串
+    ** @param $label string 标签 默认为空
+    ** @param $strict bool 是否严谨 默认为true
+    ** @return void|string
+    */
+    static public function dump($var, $echo = true, $label = null, $strict = true)
+    {
         $label = ( $label === null ) ? '' : rtrim($label) . ' ';
         if (!$strict) {
             if (ini_get('html_errors')) {
@@ -27,9 +28,10 @@ class Helper
                 $output = $label . print_r($var, true);
             }
         } else {
-            ob_start();
+            ob_start();//打开输出缓冲区
             var_dump($var);
-            $output = ob_get_clean();
+            $output = ob_get_clean(); //获取当前缓冲区内容并清除当前的输出缓冲
+            //extension_loaded — 检查一个扩展是否已经加载
             if (!extension_loaded('xdebug')) {
                 $output = preg_replace("/\]\=\>\n(\s+)/m", "] => ", $output);
                 $output = '<pre>' . $label . htmlspecialchars($output, ENT_QUOTES) . '</pre>';
@@ -38,13 +40,14 @@ class Helper
         if ($echo) {
             echo $output;
             return null;
-        } else
+        } else {
             return $output;
+        }
     }
 
     /**
     ** 去除PHP代码注释
-    ** @param string $content 代码内容
+    ** @param $content string 代码内容
     ** @return string 去除注释之后的内容
     */
     static public function removeComment($content)
@@ -128,18 +131,17 @@ HTML;
         return $html;
     }
 
-    /**
-     * 获取客户端IP地址
-     */
-    static public function getClientIP() {
-        static $ip = NULL;
-        if ($ip !== NULL)
-            return $ip;
+    /*
+    ** 获取客户端IP地址
+    */
+    static public function getClientIP()
+    {
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
             $arr = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
             $pos = array_search('unknown', $arr);
-            if (false !== $pos)
+            if (false !== $pos) {
                 unset($arr[$pos]);
+            }
             $ip = trim($arr[0]);
         } elseif (isset($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -149,6 +151,16 @@ HTML;
         // IP地址合法验证
         $ip = ( false !== ip2long($ip) ) ? $ip : '0.0.0.0';
         return $ip;
+    }
+
+    /**
+    ** 脚本执行时间
+    ** @param $start int|float 开始计时时间
+    ** @return void
+    */
+    static public function execTime($start = REQUEST_TIME_FLOAT)
+    {
+        echo number_format(microtime(1) - $start, 6).'秒';
     }
 
     /**
@@ -297,20 +309,6 @@ html,body,div,p,a,h3{margin:0;padding:0;}
     }
 
     /**
-     * 查询字符生成
-     */
-    static public function buildCondition(array $getArray, array $keys = array()) {
-        if ($getArray) {
-            foreach ($getArray as $key => $value) {
-                if (in_array($key, $keys) && $value) {
-                    $arr[$key] = CHtml::encode(strip_tags($value));
-                }
-            }
-            return $arr;
-        }
-    }
-
-    /**
      * base64_encode
      */
     static function b64encode($string) {
@@ -433,16 +431,7 @@ html,body,div,p,a,h3{margin:0;padding:0;}
         return preg_match('#(http|https|ftp|ftps)://([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?#i', $str) ? true : false;
     }
 
-    /**
-     * 根据ip获取地理位置
-     * @param $ip
-     * return :ip,beginip,endip,country,area
-     */
-    public static function getlocation($ip = '') {
-        $ip = new XIp();
-        $ipArr = $ip->getlocation($ip);
-        return $ipArr;
-    }
+
 
     /**
      * 拆分sql
@@ -544,17 +533,6 @@ html,body,div,p,a,h3{margin:0;padding:0;}
         return $strcut . $dot;
     }
 
-    /**
-     * 描述格式化
-     * @param  $subject
-     */
-    public static function clearCutstr($subject, $length = 0, $dot = '...', $charset = 'utf-8') {
-        if ($length) {
-            return XUtils::cutstr(strip_tags(str_replace(array("\r\n"), '', $subject)), $length, $dot, $charset);
-        } else {
-            return strip_tags(str_replace(array("\r\n"), '', $subject));
-        }
-    }
 
     /**
      * 检测是否为英文或英文数字的组合
