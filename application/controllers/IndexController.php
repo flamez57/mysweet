@@ -51,7 +51,7 @@ class IndexController extends HLController
     public function testAction()
     {
         echo '这里写测试代码';
-        //\hl\library\Functions\Helper::message();
+        \hl\library\Functions\Helper::message();
         echo \hl\library\Functions\Helper::getClientIP();
         echo \hl\library\Functions\Helper::execTime();
 

@@ -164,80 +164,36 @@ HTML;
     }
 
     /**
-     * 循环创建目录
-     */
-    static public function mkdir($dir, $mode = 0777) {
-        if (is_dir($dir) || @mkdir($dir, $mode))
-            return true;
-        if (!mk_dir(dirname($dir), $mode))
-            return false;
-        return @mkdir($dir, $mode);
+    ** 获得来源类型 post get
+    ** @return unknown
+    */
+    static public function method()
+    {
+        return strtoupper(isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET');
     }
 
     /**
-     * 格式化单位
-     */
-    static public function byteFormat($size, $dec = 2) {
-        $a = array("B", "KB", "MB", "GB", "TB", "PB");
-        $pos = 0;
-        while ($size >= 1024) {
-            $size /= 1024;
-            $pos++;
-        }
-        return round($size, $dec) . " " . $a[$pos];
-    }
-
-    /**
-     * 下拉框，单选按钮 自动选择
-     *
-     * @param $string 输入字符
-     * @param $param  条件
-     * @param $type   类型
-     *            selected checked
-     * @return string
-     */
-    static public function selected($string, $param = 1, $type = 'select') {
-
-        if (is_array($param)) {
-            $true = in_array($string, $param);
-        } elseif ($string == $param) {
-            $true = true;
-        }
-        if ($true)
-            $return = $type == 'select' ? 'selected="selected"' : 'checked="checked"';
-
-        echo $return;
-    }
-
-    /**
-     * 获得来源类型 post get
-     *
-     * @return unknown
-     */
-    static public function method() {
-        return strtoupper(isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET' );
-    }
-
-    /**
-     * 提示信息
-     */
-    static public function message($action = 'success', $content = '', $redirect = 'javascript:history.back(-1);', $timeout = 4) {
+    ** 提示信息
+    ** @param $action
+    ** @param $content
+    ** @param $redirect
+    ** @param $timeout
+    */
+    static public function message($action = 'success', $content = '', $redirect = 'javascript:history.back(-1);', $timeout = 4)
+    {
 
         switch ($action) {
             case 'success':
                 $titler = '操作完成';
                 $class = 'message_success';
-                $images = 'message_success.png';
                 break;
             case 'error':
                 $titler = '操作未完成';
                 $class = 'message_error';
-                $images = 'message_error.png';
                 break;
             case 'errorBack':
                 $titler = '操作未完成';
                 $class = 'message_error';
-                $images = 'message_error.png';
                 break;
             case 'redirect':
                 header("Location:$redirect");
@@ -246,66 +202,67 @@ HTML;
                 if (empty($redirect)) {
                     exit('<script language="javascript">alert("' . $content . '");window.history.back(-1)</script>');
                 } else {
-                    exit('<script language="javascript">alert("' . $content . '");window.location=" ' . $redirect . '   "</script>');
+                    exit('<script language="javascript">alert("' . $content . '");window.location="' . $redirect . '"</script>');
                 }
                 break;
         }
 
-        // 信息头部
-        $header = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        $html = <<<HTML
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>操作提示</title>
-<style type="text/css">
-body{font:12px/1.7 "\5b8b\4f53",Tahoma;}
-html,body,div,p,a,h3{margin:0;padding:0;}
-.tips_wrap{ background:#F7FBFE;border:1px solid #DEEDF6;width:780px;padding:50px;margin:50px auto 0;}
-.tips_inner{zoom:1;}
-.tips_inner:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
-.tips_inner .tips_img{width:80px;float:left;}
-.tips_info{float:left;line-height:35px;width:650px}
-.tips_info h3{font-weight:bold;color:#1A90C1;font-size:16px;}
-.tips_info p{font-size:14px;color:#999;}
-.tips_info p.message_error{font-weight:bold;color:#F00;font-size:16px; line-height:22px}
-.tips_info p.message_success{font-weight:bold;color:#1a90c1;font-size:16px; line-height:22px}
-.tips_info p.return{font-size:12px}
-.tips_info .time{color:#f00; font-size:14px; font-weight:bold}
-.tips_info p a{color:#1A90C1;text-decoration:none;}
-</style>
+<title>{$titler}</title>
+    <style type="text/css">
+        body{font:12px/1.7 "\5b8b\4f53",Tahoma;}
+        html,body,div,p,a,h3{margin:0;padding:0;}
+        .tips_wrap{ background:#F7FBFE;border:1px solid #DEEDF6;width:780px;padding:50px;margin:50px auto 0;}
+        .tips_inner{zoom:1;}
+        .tips_inner:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+        .tips_inner .tips_img{width:80px;float:left;}
+        .tips_info{float:left;line-height:35px;width:650px}
+        .tips_info h3{font-weight:bold;color:#1A90C1;font-size:16px;}
+        .tips_info p{font-size:14px;color:#999;}
+        .tips_info p.message_error{font-weight:bold;color:#F00;font-size:16px; line-height:22px}
+        .tips_info p.message_success{font-weight:bold;color:#1a90c1;font-size:16px; line-height:22px}
+        .tips_info p.return{font-size:12px}
+        .tips_info .time{color:#f00; font-size:14px; font-weight:bold}
+        .tips_info p a{color:#1A90C1;text-decoration:none;}
+    </style>
 </head>
-
-<body>';
-        // 信息底部
-        $footer = '</body></html>';
-
-        $body = '<script type="text/javascript">
+<body>
+    <script type="text/javascript">
         function delayURL(url) {
-        var delay = document.getElementById("time").innerHTML;
-        //alert(delay);
-        if(delay > 0){
-        delay--;
-        document.getElementById("time").innerHTML = delay;
-    } else {
-    window.location.href = url;
-    }
-    setTimeout("delayURL(\'" + url + "\')", 10000);
-    }
-    </script><div class="tips_wrap">
-    <div class="tips_inner">
-        <div class="tips_img">
-        </div>
-        <div class="tips_info">
-
-            <p class="' . $class . '">' . $content . '</p>
-            <p class="return">系统自动跳转在  <span class="time" id="time">' . $timeout . ' </span>  秒后，如果不想等待，<a href="' . $redirect . '">点击这里跳转</a></p>
+            var delay = document.getElementById("time").innerHTML;
+            if (delay > 0) {
+                delay--;
+                document.getElementById("time").innerHTML = delay;
+            } else {
+                window.location.href = url;
+                return;
+            }
+            setTimeout("delayURL('" + url + "')", 1000);
+        }
+    </script>
+    <div class="tips_wrap">
+        <div class="tips_inner">
+            <div class="tips_img"></div>
+            <div class="tips_info">
+                <p class="{$class}">{$content}</p>
+                <p class="return">
+                    系统自动跳转在  <span class="time" id="time">{$timeout}</span>  秒后，如果不想等待，
+                    <a href="{$redirect}">点击这里跳转</a>
+                </p>
+            </div>
         </div>
     </div>
-</div><script type="text/javascript">
-    delayURL("' . $redirect . '");
-    </script>';
-
-        exit($header . $body . $footer);
+    <script type="text/javascript">
+        delayURL("{$redirect}");
+    </script>
+</body>
+</html>
+HTML;
+        exit($html);
     }
 
     /**

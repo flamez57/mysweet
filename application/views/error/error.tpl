@@ -30,7 +30,7 @@
             } else {
                 window.location.href = url;
             }
-            setTimeout(delayURL(url), 1000);
+            setTimeout("delayURL('" + url + "')", 1000);
         }
     </script>
     <div class="tips_wrap">
