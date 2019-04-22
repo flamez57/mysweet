@@ -34,4 +34,12 @@ class MemberController extends HLController
     {
 
     }
+
+    /*
+    ** 忘记密码
+    */
+    public function forgetAction()
+    {
+
+    }
 }
