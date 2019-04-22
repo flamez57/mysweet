@@ -3,14 +3,14 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>登录</title>
-		<link rel="stylesheet" type="text/css" href="css/public.css"/>
-		<link rel="stylesheet" type="text/css" href="css/login.css"/>
+        <?=\hl\HLView::css('public.css');?>
+        <?=\hl\HLView::css('login.css');?>
 	</head>
 	<body>
 		<!-------------------login-------------------------->
 		<div class="login">
 			<form action="#" method="post">
-				<h1><a href="index.html"><img src="img/temp/logo.png"></a></h1>
+				<h1><a href="index.html"><?=\hl\HLView::img('temp/logo.png');?></a></h1>
 				<p></p>
 				<div class="msg-warn hide"><b></b>公共场所不建议自动登录，以防账号丢失</div>
 				<p><input type="text" name="" value="" placeholder="昵称/邮箱/手机号"></p>
@@ -19,6 +19,6 @@
 				<p class="txt"><a class="" href="reg.html">免费注册</a><a href="forget.html">忘记密码？</a></p>
 			</form>
 		</div>
-		
+
 	</body>
 </html>

@@ -1,15 +1,15 @@
 <?php
 namespace pc_shop\controllers;
 /**
-** @ClassName: IndexController
-** @Description: 默认首选控制器
+** @ClassName: MemberController
+** @Description: 用户中心
 ** @author flamez57 <flamez57@mysweet95.com>
 ** @date 2018年3月26日 晚上21:49
 ** @version V1.0
 */
 use hl\HLController;
 
-class IndexController extends HLController
+class MemberController extends HLController
 {
     /*
     ** 默认首页
@@ -17,5 +17,21 @@ class IndexController extends HLController
     public function indexAction()
     {
         //框架欢迎页
+    }
+
+    /*
+    ** 登陆
+    */
+    public function loginAction()
+    {
+
+    }
+
+    /*
+    ** 注册
+    */
+    public function regAction()
+    {
+
     }
 }
