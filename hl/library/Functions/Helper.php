@@ -305,14 +305,16 @@ HTML;
     }
 
     /**
-     * 验证手机号码
-     */
-    public static function mobile($str) {
+    ** 验证手机号码
+    ** @param $str string 手机号
+    ** @return bool
+    */
+    public static function mobile($str)
+    {
         if (empty($str)) {
-            return true;
+            return false;
         }
-
-        return preg_match('#^13[\d]{9}$|14^[0-9]\d{8}|^15[0-9]\d{8}$|^18[0-9]\d{8}$#', $str);
+        return preg_match('#^1[\d]{10}$#', trim($str)) ? true : false;
     }
 
     /**
@@ -326,42 +328,47 @@ HTML;
     }
 
     /**
-     * 验证qq号码
-     */
-    public static function qq($str) {
+    ** 验证qq号码
+    ** @param $str string
+    ** @return bool
+    */
+    public static function qq($str)
+    {
         if (empty($str)) {
-            return true;
+            return false;
         }
-
-        return preg_match('/^[1-9]\d{4,12}$/', trim($str));
+        return preg_match('/^[1-9]\d{4,12}$/', trim($str)) ? true : false;
     }
 
     /**
-     * 验证邮政编码
-     */
-    public static function zipCode($str) {
+    ** 验证邮政编码
+    ** @param $str string
+    ** @return bool
+    */
+    public static function zipCode($str)
+    {
         if (empty($str)) {
-            return true;
+            return false;
         }
-
-        return preg_match('/^[1-9]\d{5}$/', trim($str));
+        return preg_match('/^[1-9]\d{5}$/', trim($str)) ? true : false;
     }
 
     /**
-     * 验证ip
-     */
-    public static function ip($str) {
-        if (empty($str))
-            return true;
-
+    ** 验证ip
+    ** @param $str string
+    ** @return bool
+    */
+    public static function ip($str)
+    {
+        if (empty($str)) {
+            return false;
+        }
         if (!preg_match('#^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$#', $str)) {
             return false;
         }
-
-        $ip_array = explode('.', $str);
-
+        $ipArray = explode('.', $str);
         //真实的ip地址每个数字不能大于255（0-255）
-        return ( $ip_array[0] <= 255 && $ip_array[1] <= 255 && $ip_array[2] <= 255 && $ip_array[3] <= 255 ) ? true : false;
+        return ($ipArray[0] <= 255 && $ipArray[1] <= 255 && $ipArray[2] <= 255 && $ipArray[3] <= 255) ? true : false;
     }
 
     /**
