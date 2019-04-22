@@ -372,17 +372,34 @@ HTML;
     }
 
     /**
-     * 验证身份证(中国)
-     */
-    public static function idCard($str) {
+    ** 验证身份证(中国)
+    ** @param $str string
+    ** @return bool
+    */
+    public static function idCard($str)
+    {
         $str = trim($str);
-        if (empty($str))
-            return true;
-
-        if (preg_match("/^([0-9]{15}|[0-9]{17}[0-9a-z])$/i", $str))
-            return true;
-        else
+        if (empty($str)) {
             return false;
+        }
+        if (!preg_match("/^([0-9]{17}[0-9a-z])$/i", $str)) {
+            return false;
+        }
+        /*
+        ** 第十八位数字的计算方法为：将前面的身份证号码17位数分别乘以不同的系数,将这17位数字和系数相乘的结果相加。
+        ** 用加出来和除以11，看余数是多少？余数只可能有0 1 2 3 4 5 6 7 8 9 10这11个数字。
+        ** 其分别对应的最后一位身份证的号码为。1 0 X 9 8 7 6 5 4 3 2
+        */
+        //从第一位到第十七位的系数
+        $coef = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+        //第十八位对照表
+        $theEnd = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
+        //前17位求和
+        $sevtn = 0;
+        for ($i = 0; $i <= 16; $i++) {
+            $sevtn += $str[$i] * $coef[$i];
+        }
+        return $theEnd[$sevtn % 11] == $str[17] ? true : false;
     }
 
     /**
