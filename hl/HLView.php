@@ -94,7 +94,12 @@ class HLView
         $str = '<img src="'.$path.'" ';
         if (isset($param) && is_array($param)) {
             foreach ($param as $_key => $_value) {
-                $str .= $_key.'="'.$_value.'" ';
+                if ($_key == 'data-src') { //懒加载
+                    $str .= $_key.'="'.$path.'" ';
+                } else {
+                    $str .= $_key.'="'.$_value.'" ';
+                }
+
             }
         }
         $str .= '>';
