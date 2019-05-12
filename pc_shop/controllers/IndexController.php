@@ -42,4 +42,12 @@ class IndexController extends HLController
     {
 
     }
+
+    /*
+    ** 蜡艺香薰
+    */
+    public function perfumeAction()
+    {
+
+    }
 }
