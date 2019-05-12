@@ -91,11 +91,12 @@ class HLView
     public static function img($path, $param = [])
     {
         $path = self::$publicPath.'img'.DIRECTORY_SEPARATOR.$path;
+        $path2 = self::$publicPath.'img'.DIRECTORY_SEPARATOR;
         $str = '<img src="'.$path.'" ';
         if (isset($param) && is_array($param)) {
             foreach ($param as $_key => $_value) {
                 if ($_key == 'data-src') { //懒加载
-                    $str .= $_key.'="'.$path.'" ';
+                    $str .= $_key.'="'.$path2.$_value.'" ';
                 } else {
                     $str .= $_key.'="'.$_value.'" ';
                 }

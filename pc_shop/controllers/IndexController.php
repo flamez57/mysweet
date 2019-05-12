@@ -18,4 +18,12 @@ class IndexController extends HLController
     {
         //框架欢迎页
     }
+
+    /*
+    ** 装饰摆件
+    */
+    public function flowerDerAction()
+    {
+
+    }
 }
