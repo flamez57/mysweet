@@ -26,4 +26,20 @@ class IndexController extends HLController
     {
 
     }
+
+    /*
+    ** 布艺软式
+    */
+    public function decorationAction()
+    {
+
+    }
+
+    /*
+    ** 墙饰壁挂
+    */
+    public function paintAction()
+    {
+
+    }
 }
