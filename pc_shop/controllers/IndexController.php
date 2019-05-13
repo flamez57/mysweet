@@ -50,4 +50,12 @@ class IndexController extends HLController
     {
 
     }
+
+    /*
+    ** 创意家居
+    */
+    public function ideaAction()
+    {
+
+    }
 }
