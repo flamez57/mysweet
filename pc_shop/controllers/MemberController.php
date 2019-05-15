@@ -42,4 +42,12 @@ class MemberController extends HLController
     {
 
     }
+
+    /*
+    ** 重制密码
+    */
+    public function repwdAction()
+    {
+
+    }
 }

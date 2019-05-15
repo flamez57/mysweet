@@ -2,16 +2,16 @@
 <html>
 	<head lang="en">
 		<meta charset="utf-8" />
-		<title>搜索</title>
-		<link rel="stylesheet" type="text/css" href="css/public.css"/>
-		<link rel="stylesheet" type="text/css" href="css/proList.css"/>
+		<title>干花花艺</title>
+		<?=\hl\HLView::css('public.css');?>
+		<?=\hl\HLView::css('proList.css');?>
 	</head>
 	<body>
 		<!------------------------------head------------------------------>
 		<div class="head ding">
 			<div class="wrapper clearfix">
 				<div class="clearfix" id="top">
-					<h1 class="fl"><a href="index.html"><img src="img/logo.png"/></a></h1>
+					<h1 class="fl"><a href="index.html"><?=\hl\HLView::img('logo.png');?></a></h1>
 					<div class="fr clearfix" id="top1">
 						<p class="fl">
 							<a href="#" id="login">登录</a>
@@ -22,10 +22,10 @@
 							<input type="button" />
 						</form>
 						<div class="btn fl clearfix">
-							<a href="mygxin.html"><img src="img/grzx.png"/></a>
-							<a href="#" class="er1"><img src="img/ewm.png"/></a>
-							<a href="cart.html"><img src="img/gwc.png"/></a>
-							<p><a href="#"><img src="img/smewm.png"/></a></p>
+							<a href="mygxin.html"><?=\hl\HLView::img('grzx.png');?></a>
+							<a href="#" class="er1"><?=\hl\HLView::img('ewm.png');?></a>
+							<a href="cart.html"><?=\hl\HLView::img('gwc.png');?></a>
+							<p><a href="#"><?=\hl\HLView::img('smewm.png');?></a></p>
 						</div>
 					</div>
 				</div>
@@ -37,31 +37,31 @@
 							<div class="wrapper  clearfix">
 								<a href="paint.html">
 									<dl>
-										<dt><img src="img/nav1.jpg"/></dt>
+										<dt><?=\hl\HLView::img('nav1.jpg');?></dt>
 										<dd>浓情欧式</dd>
 									</dl>
 								</a>
 								<a href="paint.html">
 									<dl>
-										<dt><img src="img/nav2.jpg"/></dt>
+										<dt><?=\hl\HLView::img('nav2.jpg');?></dt>
 										<dd>浪漫美式</dd>
 									</dl>
 								</a>
 								<a href="paint.html">
 									<dl>
-										<dt><img src="img/nav3.jpg"/></dt>
+										<dt><?=\hl\HLView::img('nav3.jpg');?></dt>
 										<dd>雅致中式</dd>
 									</dl>
 								</a>
 								<a href="paint.html">
 									<dl>
-										<dt><img src="img/nav6.jpg"/></dt>
+										<dt><?=\hl\HLView::img('nav6.jpg');?></dt>
 										<dd>简约现代</dd>
 									</dl>
 								</a>
 								<a href="paint.html">
 									<dl>
-										<dt><img src="img/nav7.jpg"/></dt>
+										<dt><?=\hl\HLView::img('nav7.jpg');?></dt>
 										<dd>创意装饰</dd>
 									</dl>
 								</a>
@@ -151,7 +151,7 @@
 		<!-------------------current---------------------->
 		<div class="current">
 			<div class="wrapper clearfix">
-				<h3 class="fl">搜索结果：“干花”</h3> 
+				<h3 class="fl">搜索结果：“干花”</h3>
 				<div class="fr choice">
 					<p class="default">排序方式</p>
 					<ul class="select">
@@ -169,7 +169,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro01.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro01.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -178,7 +178,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro02.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro02.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -187,7 +187,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro03.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro03.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -196,7 +196,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro04.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro04.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -205,7 +205,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro05.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro05.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -214,7 +214,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro06.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro06.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -223,7 +223,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro07.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro07.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -232,7 +232,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro08.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro08.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -241,7 +241,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro01.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro01.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -250,7 +250,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro02.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro02.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -259,7 +259,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro03.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro03.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -268,7 +268,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro04.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro04.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -277,7 +277,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro05.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro05.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -286,7 +286,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro06.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro06.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -295,7 +295,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro07.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro07.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -304,7 +304,7 @@
 			<li>
 				<a href="proDetail.html">
 					<dl>
-						<dt><img src="img/temp/pro08.jpg"></dt>
+						<dt><?=\hl\HLView::img('temp/pro08.jpg');?></dt>
 						<dd>【最家】跳舞兰仿真花干花</dd>
 						<dd>￥17.90</dd>
 					</dl>
@@ -315,35 +315,35 @@
 		<div class="mask"></div>
 		<!-------------------mask内容------------------->
 		<div class="proDets">
-			<img class="off" src="img/temp/off.jpg" />
+			<?=\hl\HLView::img('temp/off.jpg', ['class' => 'off']);?>
 			<div class="tit clearfix">
 				<h4 class="fl">【最家】非洲菊仿真花干花</h4>
 				<span class="fr">￥17.90</span>
 			</div>
 			<div class="proCon clearfix">
 				<div class="proImg fl">
-					<img class="list" src="img/temp/proDet.jpg"  />
+					<?=\hl\HLView::img('temp/proDet.jpg', ['class' => 'list']);?>
 					<div class="smallImg clearfix">
-						<img src="img/temp/proDet01.jpg" data-src="img/temp/proDet01_big.jpg">
-						<img src="img/temp/proDet02.jpg" data-src="img/temp/proDet02_big.jpg">
-						<img src="img/temp/proDet03.jpg" data-src="img/temp/proDet03_big.jpg">
-						<img src="img/temp/proDet04.jpg" data-src="img/temp/proDet04_big.jpg">
+						<?=\hl\HLView::img('temp/proDet01.jpg', ['data-src' => 'temp/proDet01_big.jpg']);?>
+						<?=\hl\HLView::img('temp/proDet02.jpg', ['data-src' => 'temp/proDet02_big.jpg']);?>
+						<?=\hl\HLView::img('temp/proDet03.jpg', ['data-src' => 'temp/proDet03_big.jpg']);?>
+						<?=\hl\HLView::img('temp/proDet04.jpg', ['data-src' => 'temp/proDet04_big.jpg']);?>
 					</div>
 				</div>
 				<div class="fr">
 					<div class="proIntro">
 						<p>颜色分类</p>
 						<div class="smallImg clearfix categ">
-							<p class="fl"><img src="img/temp/prosmall01.jpg" alt="白瓷花瓶+20支快乐花" data-src="img/temp/proBig01.jpg"></p>
-							<p class="fl"><img src="img/temp/prosmall02.jpg" alt="白瓷花瓶+20支兔尾巴草" data-src="img/temp/proBig02.jpg"></p>
-							<p class="fl"><img src="img/temp/prosmall03.jpg" alt="20支快乐花" data-src="img/temp/proBig03.jpg"></p>
-							<p class="fl"><img src="img/temp/prosmall04.jpg" alt="20支兔尾巴草" data-src="img/temp/proBig04.jpg"></p>
+							<p class="fl"><?=\hl\HLView::img('temp/prosmall01.jpg', ['alt' => '白瓷花瓶+20支快乐花', 'data-src' => 'temp/proBig01.jpg']);?></p>
+							<p class="fl"><?=\hl\HLView::img('temp/prosmall02.jpg', ['alt' => '白瓷花瓶+20支兔尾巴草', 'data-src' => 'temp/proBig02.jpg']);?></p>
+							<p class="fl"><?=\hl\HLView::img('temp/prosmall03.jpg', ['alt' => '20支快乐花', 'data-src' => 'temp/proBig03.jpg']);?></p>
+							<p class="fl"><?=\hl\HLView::img('temp/prosmall04.jpg', ['alt' => '20支兔尾巴草', 'data-src' => 'temp/proBig04.jpg']);?></p>
 						</div>
-						<p>数量</p>
+						<p>数量&nbsp;&nbsp;库存<span>2096</span>件</p>
 						<div class="num clearfix">
-							<img class="fl sub" src="img/temp/sub.jpg">
+							<?=\hl\HLView::img('temp/sub.jpg', ['class' => 'fl sub']);?>
 							<span class="fl" contentEditable="true">1</span>
-							<img class="fl add" src="img/temp/add.jpg">
+							<?=\hl\HLView::img('temp/add.jpg', ['class' => 'fl add']);?>
 							<p class="please fl">请选择商品属性!</p>
 						</div>
 					</div>
@@ -359,26 +359,26 @@
 		<div class="gotop">
 			<a href="cart.html">
 			<dl class="goCart">
-				<dt><img src="img/gt1.png"/></dt>
+				<dt><?=\hl\HLView::img('gt1.png');?></dt>
 				<dd>去购<br />物车</dd>
 				<span>1</span>
 			</dl>
 			</a>
 			<a href="#" class="dh">
 			<dl>
-				<dt><img src="img/gt2.png"/></dt>
+				<dt><?=\hl\HLView::img('gt2.png');?></dt>
 				<dd>联系<br />客服</dd>
 			</dl>
 			</a>
 			<a href="mygxin.html">
 			<dl>
-				<dt><img src="img/gt3.png"/></dt>
+				<dt><?=\hl\HLView::img('gt3.png');?></dt>
 				<dd>个人<br />中心</dd>
 			</dl>
 			</a>
 			<a href="#" class="toptop" style="display: none;">
 			<dl>
-				<dt><img src="img/gt4.png"/></dt>
+				<dt><?=\hl\HLView::img('gt4.png');?></dt>
 				<dd>返回<br />顶部</dd>
 			</dl>
 			</a>
@@ -390,19 +390,19 @@
 			<div class="top">
 				<div class="wrapper">
 					<div class="clearfix">
-						<a href="#2" class="fl"><img src="img/foot1.png"/></a>
+						<a href="#2" class="fl"><?=\hl\HLView::img('foot1.png');?></a>
 						<span class="fl">7天无理由退货</span>
 					</div>
 					<div class="clearfix">
-						<a href="#2" class="fl"><img src="img/foot2.png"/></a>
+						<a href="#2" class="fl"><?=\hl\HLView::img('foot2.png');?></a>
 						<span class="fl">15天免费换货</span>
 					</div>
 					<div class="clearfix">
-						<a href="#2" class="fl"><img src="img/foot3.png"/></a>
+						<a href="#2" class="fl"><?=\hl\HLView::img('foot3.png');?></a>
 						<span class="fl">满599包邮</span>
 					</div>
 					<div class="clearfix">
-						<a href="#2" class="fl"><img src="img/foot4.png"/></a>
+						<a href="#2" class="fl"><?=\hl\HLView::img('foot4.png');?></a>
 						<span class="fl">手机特色服务</span>
 					</div>
 				</div>
@@ -410,9 +410,9 @@
 			<p class="dibu">最家家居&copy;2013-2017公司版权所有 京ICP备080100-44备0000111000号<br />
 			违法和不良信息举报电话：188-0130-1238，本网站所列数据，除特殊说明，所有数据均出自我司实验室测试</p>
 		</div>
-		<script src="js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/pro.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/cart.js" type="text/javascript" charset="utf-8"></script>
+		<?=\hl\HLView::js('jquery-1.12.4.min.js');?>
+		<?=\hl\HLView::js('public.js');?>
+		<?=\hl\HLView::js('pro.js');?>
+		<?=\hl\HLView::js('cart.js');?>
 	</body>
 </html>

@@ -3,15 +3,15 @@
 	<head lang="en">
 		<meta charset="utf-8" />
 		<title>ok</title>
-		<link rel="stylesheet" type="text/css" href="css/public.css"/>
-		<link rel="stylesheet" type="text/css" href="css/proList.css" />
+		<?=\hl\HLView::css('public.css');?>
+		<?=\hl\HLView::css('proList.css');?>
 	</head>
 	<body>
 		<!----------------------------------------order------------------>
 		<div class="head ding">
 			<div class="wrapper clearfix">
 				<div class="clearfix" id="top">
-					<h1 class="fl"><a href="index.html"><img src="img/logo.png"/></a></h1>
+					<h1 class="fl"><a href="index.html"><?=\hl\HLView::img('logo.png');?></a></h1>
 					<div class="fr clearfix" id="top1">
 						<p class="fl">
 							<a href="#" id="login">登录</a>
@@ -22,10 +22,10 @@
 							<input type="button" />
 						</form>
 						<div class="btn fl clearfix">
-							<a href="mygxin.html"><img src="img/grzx.png"/></a>
-							<a href="#" class="er1"><img src="img/ewm.png"/></a>
-							<a href="cart.html"><img src="img/gwc.png"/></a>
-							<p><a href="#"><img src="img/smewm.png"/></a></p>
+							<a href="mygxin.html"><?=\hl\HLView::img('grzx.png');?></a>
+							<a href="#" class="er1"><?=\hl\HLView::img('ewm.png');?></a>
+							<a href="cart.html"><?=\hl\HLView::img('gwc.png');?></a>
+							<p><a href="#"><?=\hl\HLView::img('smewm.png');?></a></p>
 						</div>
 					</div>
 				</div>
@@ -37,31 +37,31 @@
 							<div class="wrapper  clearfix">
 								<a href="paint.html">
 									<dl>
-										<dt><img src="img/nav1.jpg"/></dt>
+										<dt><?=\hl\HLView::img('nav1.jpg');?></dt>
 										<dd>浓情欧式</dd>
 									</dl>
 								</a>
 								<a href="paint.html">
 									<dl>
-										<dt><img src="img/nav2.jpg"/></dt>
+										<dt><?=\hl\HLView::img('nav2.jpg');?></dt>
 										<dd>浪漫美式</dd>
 									</dl>
 								</a>
 								<a href="paint.html">
 									<dl>
-										<dt><img src="img/nav3.jpg"/></dt>
+										<dt><?=\hl\HLView::img('nav3.jpg');?></dt>
 										<dd>雅致中式</dd>
 									</dl>
 								</a>
 								<a href="paint.html">
 									<dl>
-										<dt><img src="img/nav6.jpg"/></dt>
+										<dt><?=\hl\HLView::img('nav6.jpg');?></dt>
 										<dd>简约现代</dd>
 									</dl>
 								</a>
 								<a href="paint.html">
 									<dl>
-										<dt><img src="img/nav7.jpg"/></dt>
+										<dt><?=\hl\HLView::img('nav7.jpg');?></dt>
 										<dd>创意装饰</dd>
 									</dl>
 								</a>
@@ -96,7 +96,7 @@
 			<div class="site">
 				<p class="wrapper clearfix">
 					<span class="fl">支付成功</span>
-					<img class="top" src="img/temp/cartTop03.png">
+					<?=\hl\HLView::img('temp/cartTop03.png', ['class' => 'top']);?>
 				</p>
 			</div>
 			<p class="ok">支付成功！剩余<span>5</span>秒<a href="myorderq.html">返回订单页</a></p>
@@ -105,43 +105,43 @@
 			<h4>猜你喜欢</h4>
 			<div class="bottom">
 				<div class="hd">
-					<span class="prev"><img src="img/temp/prev.png"></span>
-					<span class="next"><img src="img/temp/next.png"></span>
+					<span class="prev"><?=\hl\HLView::img('temp/prev.png');?></span>
+					<span class="next"><?=\hl\HLView::img('temp/next.png');?></span>
 				</div>
 				<div class="imgCon wrapper bd">
 					<div class="likeList clearfix">
 						<div>
 							<a href="proDetail.html">
 								<dl>
-									<dt><img src="img/temp/like01.jpg"></dt>
+									<dt><?=\hl\HLView::img('temp/like01.jpg');?></dt>
 									<dd>【最家】复古文艺风玻璃花瓶</dd>
 									<dd>￥193.20</dd>
 								</dl>
 							</a>
 							<a href="proDetail.html">
 								<dl>
-									<dt><img src="img/temp/like02.jpg"></dt>
+									<dt><?=\hl\HLView::img('temp/like02.jpg');?></dt>
 									<dd>【最家】复古文艺风玻璃花瓶</dd>
 									<dd>￥193.20</dd>
 								</dl>
 							</a>
 							<a href="proDetail.html">
 								<dl>
-									<dt><img src="img/temp/like03.jpg"></dt>
+									<dt><?=\hl\HLView::img('temp/like03.jpg');?></dt>
 									<dd>【最家】复古文艺风玻璃花瓶</dd>
 									<dd>￥193.20</dd>
 								</dl>
 							</a>
 							<a href="proDetail.html">
 								<dl>
-									<dt><img src="img/temp/like04.jpg"></dt>
+									<dt><?=\hl\HLView::img('temp/like04.jpg');?></dt>
 									<dd>【最家】复古文艺风玻璃花瓶</dd>
 									<dd>￥193.20</dd>
 								</dl>
 							</a>
 							<a href="proDetail.html" class="last">
 								<dl>
-									<dt><img src="img/temp/like05.jpg"></dt>
+									<dt><?=\hl\HLView::img('temp/like05.jpg');?></dt>
 									<dd>【最家】复古文艺风玻璃花瓶</dd>
 									<dd>￥193.20</dd>
 								</dl>
@@ -150,35 +150,35 @@
 						<div>
 							<a href="proDetail.html">
 								<dl>
-									<dt><img src="img/temp/like01.jpg"></dt>
+									<dt><?=\hl\HLView::img('temp/like01.jpg');?></dt>
 									<dd>【最家】复古文艺风玻璃花瓶</dd>
 									<dd>￥193.20</dd>
 								</dl>
 							</a>
 							<a href="proDetail.html">
 								<dl>
-									<dt><img src="img/temp/like02.jpg"></dt>
+									<dt><?=\hl\HLView::img('temp/like02.jpg');?></dt>
 									<dd>【最家】复古文艺风玻璃花瓶</dd>
 									<dd>￥193.20</dd>
 								</dl>
 							</a>
 							<a href="proDetail.html">
 								<dl>
-									<dt><img src="img/temp/like03.jpg"></dt>
+									<dt><?=\hl\HLView::img('temp/like03.jpg');?></dt>
 									<dd>【最家】复古文艺风玻璃花瓶</dd>
 									<dd>￥193.20</dd>
 								</dl>
 							</a>
 							<a href="proDetail.html">
 								<dl>
-									<dt><img src="img/temp/like04.jpg"></dt>
+									<dt><?=\hl\HLView::img('temp/like04.jpg');?></dt>
 									<dd>【最家】复古文艺风玻璃花瓶</dd>
 									<dd>￥193.20</dd>
 								</dl>
 							</a>
 							<a href="proDetail.html" class="last">
 								<dl>
-									<dt><img src="img/temp/like05.jpg"></dt>
+									<dt><?=\hl\HLView::img('temp/like05.jpg');?></dt>
 									<dd>【最家】复古文艺风玻璃花瓶</dd>
 									<dd>￥193.20</dd>
 								</dl>
@@ -193,19 +193,19 @@
 			<div class="top">
 				<div class="wrapper">
 					<div class="clearfix">
-						<a href="#2" class="fl"><img src="img/foot1.png"/></a>
+						<a href="#2" class="fl"><?=\hl\HLView::img('foot1.png');?></a>
 						<span class="fl">7天无理由退货</span>
 					</div>
 					<div class="clearfix">
-						<a href="#2" class="fl"><img src="img/foot2.png"/></a>
+						<a href="#2" class="fl"><?=\hl\HLView::img('foot2.png');?></a>
 						<span class="fl">15天免费换货</span>
 					</div>
 					<div class="clearfix">
-						<a href="#2" class="fl"><img src="img/foot3.png"/></a>
+						<a href="#2" class="fl"><?=\hl\HLView::img('foot3.png');?></a>
 						<span class="fl">满599包邮</span>
 					</div>
 					<div class="clearfix">
-						<a href="#2" class="fl"><img src="img/foot4.png"/></a>
+						<a href="#2" class="fl"><?=\hl\HLView::img('foot4.png');?></a>
 						<span class="fl">手机特色服务</span>
 					</div>
 				</div>
@@ -213,10 +213,10 @@
 			<p class="dibu">最家家居&copy;2013-2017公司版权所有 京ICP备080100-44备0000111000号<br />
 			违法和不良信息举报电话：188-0130-1238，本网站所列数据，除特殊说明，所有数据均出自我司实验室测试</p>
 		</div>
-		<script src="js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/pro.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/jquery.SuperSlide.2.1.1.js" type="text/javascript" charset="utf-8"></script>
+		<?=\hl\HLView::js('jquery-1.12.4.min.js');?>
+		<?=\hl\HLView::js('public.js');?>
+		<?=\hl\HLView::js('pro.js');?>
+		<?=\hl\HLView::js('jquery.SuperSlide.2.1.1.js');?>
 		<script type="text/javascript">
 			jQuery(".bottom").slide({titCell:".hd ul",mainCell:".bd .likeList",autoPage:true,autoPlay:false,effect:"leftLoop",autoPlay:true,vis:1});
 		</script>
