@@ -50,4 +50,28 @@ class MemberController extends HLController
     {
 
     }
+
+    /*
+    ** 个人信息
+    */
+    public function mymsgAction()
+    {
+
+    }
+
+    /*
+    ** 个人中心
+    */
+    public function mycenterAction()
+    {
+
+    }
+
+    /*
+    ** 我的评价
+    */
+    public function mycommentAction()
+    {
+
+    }
 }
