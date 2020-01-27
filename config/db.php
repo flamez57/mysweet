@@ -5,7 +5,7 @@ return [
         'host' => 'localhost',
         'dbname' => 'mysweet',
         'username' => 'root',
-        'password' => '',
+        'password' => 'vagrant',
         'charset' => 'utf8',
         'port' => '3306'
     ], 

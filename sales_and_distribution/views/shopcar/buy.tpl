@@ -3,20 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    
-        <meta name="format-detection" content="telephone=no" />
-    <title>男装专区</title>
-    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<meta name="format-detection" content="telephone=no" />
+    <title>去结算</title>
+	<?=\hl\HLView::css('loaders.min.css');?>
+    <?=\hl\HLView::css('loading.css');?>
+    <?=\hl\HLView::css('base.css');?>
+    <?=\hl\HLView::css('style.css');?>
+    <?=\hl\HLView::js('jquery.min.js');?>
     <script type="text/javascript">
     	$(window).load(function(){
     		$(".loading").addClass("loader-chanage")
     		$(".loading").fadeOut(300)
-    		
-    		
     	})
     </script>
 </head>
@@ -35,19 +32,19 @@
 <!--loading页结束-->
 <body>
 	<header class="top-header fixed-header">
-			<a class="icona" href="javascript:history.go(-1)">
-					<img src="images/left.png"/>
-			</a>
-			<h3>去结算</h3>
-			<a class="iconb" href="shopcar.html">
-			</a>
+		<a class="icona" href="javascript:history.go(-1)">
+			<?=\hl\HLView::img('images/left.png');?>
+		</a>
+		<h3>去结算</h3>
+		<a class="iconb" href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'shopcar', 'index')?>">
+		</a>
 	</header>
-	
+
 	<div class="contaniner fixed-cont">
 		<section class="to-buy">
 			<header>
 				<div class="now">
-					<span><img src="images/map-icon.png"/></span>
+					<span><?=\hl\HLView::img('images/map-icon.png');?></span>
 						<dl>
 							<dt>
 								<b>瑾晨</b>
@@ -57,7 +54,7 @@
 							<p>其他地址</p>
 						</dl>
 				</div>
-				
+
 				<div class="to-now">
 					<div class="tonow">
 							<label for="tonow"  onselectstart="return false" ></label>
@@ -70,14 +67,14 @@
 							</dt>
 							<dd>安徽省合肥市XXXXXXXX</dd>
 					</dl>
-					<h3><a href="go-address.html"><img src="images/write.png"/></a></h3>
+					<h3><a href="go-address.html"><?=\hl\HLView::img('images/write.png');?></a></h3>
 				</div>
 			</header>
 			<div class="buy-list">
 				<ul>
 					<a href="detail.html">
 						<figure>
-							<img src="images/detail-pp01.png"/>
+							<?=\hl\HLView::img('images/detail-pp01.png');?>
 						</figure>
 						<li>
 							<h3>超级大品牌服装，现在够买只要998</h3>
@@ -105,21 +102,21 @@
 					</dt>
 				</dl>
 			</div>
-			
+
 		</section>
 		<!--底部不够-->
 		<div style="margin-bottom: 9%;"></div>
 	</div>
-	
+
 	<footer class="buy-footer fixed-footer">
-			<p> 
+			<p>
 				<small>总金额</small>
 				<b>￥98.00</b>
 			</p>
-				
+
 				<input type="button" value="去付款"/>
 	</footer>
-	
+
 	<script type="text/javascript">
 		$(".to-now .tonow label").on('touchstart',function(){
 			if($(this).hasClass('ton')){

@@ -70,7 +70,7 @@
 	<footer class="page-footer fixed-footer">
 		<div class="shop-go">
 			<b>合计：￥108.90</b>
-			<span><a href="buy.html">去结算（2）</a></span>
+			<span><a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'shopcar', 'buy')?>">去结算（2）</a></span>
 		</div>
 		<ul>
 			<li>

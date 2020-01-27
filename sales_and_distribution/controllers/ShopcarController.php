@@ -22,4 +22,9 @@ class ShopcarController extends HLController
         \hl\HLView::param('out', $str);
 //        \hl\library\Functions\Helper::dump('sdf');  
     }
+
+    public function buyAction()
+    {
+
+    }
 }

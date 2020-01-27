@@ -260,13 +260,13 @@ transition: background-color 0.8s; }
 .to-buy header .now dl dt b{ font-weight: normal;font-size: 1.35em; }
 .to-buy header .now dl dt strong{font-weight: normal; margin-left: 3%;font-size: 1.35em; color: #fff; }
 .to-buy header .now dl dd{ text-align: justify;font-size: 1.35em; }
-.to-buy header .now dl p{position: absolute;font-size: 1.35em; width: 24%; right: 10%; bottom:5%; color: #FC605A; background:url(../images/downred.png) no-repeat; background-size: 16%; background-position: 100%;}
+.to-buy header .now dl p{position: absolute;font-size: 1.35em; width: 24%; right: 10%; bottom:5%; color: #FC605A; background:url(../img/images/downred.png) no-repeat; background-size: 16%; background-position: 100%;}
 /*切换地址*/
 .to-now{ width: 100%; padding: 6% 0;background-color: #fff; margin-bottom: 3%; overflow: hidden;}
 .to-now *{ float: left;}
 .to-now .tonow{position: relative; width: 10%; height: 5em;}
-.to-now .tonow label{ width: 100%; display: block; background: url(../images/check.png) no-repeat; background-size: 60%; background-position: 50%; height: 100%;}
-.to-now .tonow .ton{ width: 100%; display: block; background: url(../images/checke.png) no-repeat; background-size: 60%; background-position: 50%; height: 100%;}
+.to-now .tonow label{ width: 100%; display: block; background: url(../img/images/check.png) no-repeat; background-size: 60%; background-position: 50%; height: 100%;}
+.to-now .tonow .ton{ width: 100%; display: block; background: url(../img/images/checke.png) no-repeat; background-size: 60%; background-position: 50%; height: 100%;}
 .to-now .tonow input{opacity: 0; position: absolute; top: 0; left: 0;}
 .to-now dl{ width: 70%; overflow: hidden; color: #666; }
 .to-now dl dt{ width: 100%;  overflow: hidden; margin-bottom: 2%;}
