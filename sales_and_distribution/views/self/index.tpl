@@ -81,7 +81,7 @@
 		<section class="self">
 			<dl>
 				<dt>
-					<a href="order.html">
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'order', 'index')?>">
 						<?=\hl\HLView::img('images/self-icon.png');?>
 						<b>全部订单</b>
 						<span><?=\hl\HLView::img('images/right.png');?></span>
@@ -90,19 +90,19 @@
 				<dd>
 						<ul>
 							<li>
-								<a href="ordertwo.html">
+								<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'order', 'index')?>">
 									<?=\hl\HLView::img('images/order-icon01.png');?>
 									<p>待发货</p>
 								</a>
 							</li>
 							<li>
-								<a href="orderthree.html">
+								<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'order', 'index')?>">
 									<?=\hl\HLView::img('images/order-icon03.png');?>
 									<p>待付款</p>
 								</a>
 							</li>
 							<li>
-								<a href="orderfour.html">
+								<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'order', 'index')?>">
 									<?=\hl\HLView::img('images/order-icon02.png');?>
 									<p>待收货</p>
 								</a>

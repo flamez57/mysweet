@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>男装专区</title>
-    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>订单列表</title>
+	<?=\hl\HLView::css('loaders.min.css');?>
+    <?=\hl\HLView::css('loading.css');?>
+    <?=\hl\HLView::css('base.css');?>
+    <?=\hl\HLView::css('style.css');?>
+    <?=\hl\HLView::js('jquery.min.js');?>
     <script type="text/javascript">
     	$(window).load(function(){
     		$(".loading").addClass("loader-chanage")
@@ -32,23 +32,23 @@
 <body>
 	<header class="top-header fixed-header">
 		<a class="icona" href="javascript:history.go(-1)">
-				<img src="images/left.png"/>
-			</a>
-		<h3>待收货</h3>
-			<a class="iconb" href="shopcar.html">
+			<?=\hl\HLView::img('images/left.png');?>
+		</a>
+		<h3>全部订单</h3>
+			<a class="iconb" href="#">
 			</a>
 	</header>
-	
+
 	<div class="contaniner fixed-conta">
 		<section class="order">
 			<dl>
 				<dt>
 					<time>2015-11-15 22:55:59</time>
-					<span>待收货</span>
+					<span>待发货</span>
 				</dt>
 				<ul>
 					<a href="detail.html">
-						<figure><img src="images/classify-ph03.png"/></figure>
+						<figure><?=\hl\HLView::img('images/classify-ph03.png');?></figure>
 						<li>
 							<p>超级大品牌服装，现在够级大品牌服装，现在够买只要998</p>
 							<small>颜色：经典绮丽款</small>
@@ -63,23 +63,20 @@
 					<i>￥98.00</i>
 				</dd>
 				<dd>
-					<input type="button" value="申请退款" class="order-que" />
-					<input type="button" value="查看物流" onclick="javascript:location.href='wuliu.html'" />
-					<a href="go-order.html">
-						<input type="button" value="订单详情" />
-					</a>
 					<input type="button" value="确认收货" class="order-que"/>
+					<input type="button" value="查看物流" onclick="javascript:location.href='<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'order', 'logistics')?>'" />
+					<input type="button" value="取消订单" />
 				</dd>
 			</dl>
-			
+
 			<dl>
 				<dt>
 					<time>2015-11-15 22:55:59</time>
-					<span>待收货</span>
+					<span>待发货</span>
 				</dt>
 				<ul>
 					<a href="detail.html">
-						<figure><img src="images/classify-ph03.png"/></figure>
+						<figure><?=\hl\HLView::img('images/classify-ph03.png');?></figure>
 						<li>
 							<p>超级大品牌服装，现在够级大品牌服装，现在够买只要998</p>
 							<small>颜色：经典绮丽款</small>
@@ -93,21 +90,15 @@
 					<h3>商品总额</h3>
 					<i>￥98.00</i>
 				</dd>
-				<dd>					
-					<input type="button" value="申请退款" class="order-que" />
-					<input type="button" value="查看物流" onclick="javascript:location.href='wuliu.html'" />
-					<a href="go-order.html">
-						<input type="button" value="订单详情" />
-					</a>
+				<dd>
 					<input type="button" value="确认收货" class="order-que"/>
+					<input type="button" value="查看物流" onclick="javascript:location.href='<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'order', 'logistics')?>'" />
+					<input type="button" value="取消订单" />
+
+
 				</dd>
 			</dl>
 		</section>
 	</div>
-	
-	
-	
-	
-
 </body>
 </html>

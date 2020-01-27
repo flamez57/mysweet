@@ -5,11 +5,11 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
     <title>物流</title>
-    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<?=\hl\HLView::css('loaders.min.css');?>
+    <?=\hl\HLView::css('loading.css');?>
+    <?=\hl\HLView::css('base.css');?>
+    <?=\hl\HLView::css('style.css');?>
+    <?=\hl\HLView::js('jquery.min.js');?>
     <script type="text/javascript">
     	$(window).load(function(){
     		$(".loading").addClass("loader-chanage")
@@ -33,33 +33,33 @@
 <body>
 	<header class="top-header fixed-header">
 		<a class="icona" href="javascript:history.go(-1)">
-				<img src="images/left.png"/>
-			</a>
+			<?=\hl\HLView::img('images/left.png');?>
+		</a>
 		<h3>物流信息</h3>
-			
-			<a class="iconb" href="shopcar.html">
+
+			<a class="iconb" href="#">
 			</a>
 	</header>
-	
+
 	<div class="contaniner fixed-cont fixed-cont1">
 		<section class="go-order">
-			
+
 			<div class="order-shop">
 				<dl>
 					<a href="detail.html">
-						<dt><img src="images/index-ph01.png"/></dt>
+						<dt><?=\hl\HLView::img('images/index-ph01.png');?></dt>
 						<dd>
 							<p>超级大品牌服装，现在够买只要998</p>
 							<small>颜色：经典绮丽款</small>
-							<span>尺寸：L</span>							
+							<span>尺寸：L</span>
 							<b>￥32.00</b>
 							<strong>×3</strong>
 						</dd>
 					</a>
-					
+
 				</dl>
 				<ul>
-					
+
 					<li>
 						<span>商品总额</span>
 						<small>￥98.00</small>
@@ -75,7 +75,7 @@
 				<div class="list clearfloat">
 					<div class="left">
 						04-01
-					</div>					
+					</div>
 					<div class="right clearfloat">
 						<ul>
 							<li class="clearfloat active">
@@ -87,7 +87,7 @@
 									<span class="you">
 										已签收,签收人是同事代签已签收
 									</span>
-								</div>									
+								</div>
 							</li>
 							<li class="clearfloat">
 								<span class="dian"></span>
@@ -98,7 +98,7 @@
 									<span class="you">
 										【合肥十六分部】的派件员【罗广龙】正在派件 电话:*
 									</span>
-								</div>									
+								</div>
 							</li>
 							<li class="clearfloat">
 								<span class="dian"></span>
@@ -109,7 +109,7 @@
 									<span class="you">
 										快件已到达【合肥】 扫描员是【赵邦飞】上一站是【合肥分拨中心】
 									</span>
-								</div>									
+								</div>
 							</li>
 						</ul>
 					</div>
@@ -117,7 +117,7 @@
 				<div class="list clearfloat">
 					<div class="left">
 						03-31
-					</div>					
+					</div>
 					<div class="right clearfloat">
 						<ul>
 							<li class="clearfloat">
@@ -129,7 +129,7 @@
 									<span class="you">
 										已签收,签收人是同事代签已签收
 									</span>
-								</div>									
+								</div>
 							</li>
 							<li class="clearfloat">
 								<span class="dian"></span>
@@ -140,7 +140,7 @@
 									<span class="you">
 										【合肥十六分部】的派件员【罗广龙】正在派件 电话:*
 									</span>
-								</div>									
+								</div>
 							</li>
 							<li class="clearfloat">
 								<span class="dian"></span>
@@ -151,7 +151,7 @@
 									<span class="you">
 										快件已到达【合肥】 扫描员是【赵邦飞】上一站是【合肥分拨中心】
 									</span>
-								</div>									
+								</div>
 							</li>
 						</ul>
 					</div>
