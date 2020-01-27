@@ -23,6 +23,9 @@ class ShopcarController extends HLController
 //        \hl\library\Functions\Helper::dump('sdf');  
     }
 
+    /*
+    ** 确认订单
+    */
     public function buyAction()
     {
 

@@ -67,6 +67,14 @@ class SelfController extends HLController
     {
         
     }
+
+    /*
+     * 添加地址
+     */
+    public function goAddressAction()
+    {
+
+    }
     
     /*
     ** 我的分销

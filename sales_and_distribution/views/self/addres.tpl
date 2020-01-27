@@ -35,9 +35,9 @@
 		<a class="icona" href="javascript:history.go(-1)">
 				<?=\hl\HLView::img('images/left.png');?>
 			</a>
-		<h3>男装专区</h3>
+		<h3>地址管理</h3>
 			
-			<a class="text-top" href="go-address.html">
+			<a class="text-top" href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'goAddress')?>">
 				添加
 			</a>
 	</header>

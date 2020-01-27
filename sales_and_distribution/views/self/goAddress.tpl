@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>男装专区</title>
-    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>地址添加</title>
+	<?=\hl\HLView::css('loaders.min.css');?>
+    <?=\hl\HLView::css('loading.css');?>
+    <?=\hl\HLView::css('base.css');?>
+    <?=\hl\HLView::css('style.css');?>
+    <?=\hl\HLView::js('jquery.min.js');?>
     <script type="text/javascript">
     	$(window).load(function(){
     		$(".loading").addClass("loader-chanage")
@@ -32,14 +32,13 @@
 <body>
 	<header class="top-header fixed-header">
 		<a class="icona" href="javascript:history.go(-1)">
-				<img src="images/left.png"/>
-			</a>
-		<h3>男装专区</h3>
-			
+			<?=\hl\HLView::img('images/left.png');?>
+		</a>
+		<h3>地址添加</h3>
 			<a class="text-top" >
 			</a>
 	</header>
-	
+
 	<div class="contaniner fixed-conta">
 		<form action="" method="post" class="change-address" id="save">
 			<ul>
@@ -74,7 +73,7 @@
 					<textarea required="required"></textarea>
 				</li>
 			</ul>
-			
+
 			<ul>
 				<li class="checkboxa">
 					<input type="checkbox" id="check"/>
@@ -89,7 +88,7 @@
 			<input type="submit" value="保存" />
 		</form>
 	</div>
-	
+
 	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(".checkboxa label").on('touchstart',function(){
@@ -100,7 +99,7 @@
 			}
 		})
 	</script>
-	
+
 
 </body>
 </html>

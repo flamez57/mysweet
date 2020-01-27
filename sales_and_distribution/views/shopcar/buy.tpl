@@ -67,7 +67,7 @@
 							</dt>
 							<dd>安徽省合肥市XXXXXXXX</dd>
 					</dl>
-					<h3><a href="go-address.html"><?=\hl\HLView::img('images/write.png');?></a></h3>
+					<h3><a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'goAddress')?>"><?=\hl\HLView::img('images/write.png');?></a></h3>
 				</div>
 			</header>
 			<div class="buy-list">
