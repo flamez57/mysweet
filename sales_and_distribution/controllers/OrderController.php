@@ -24,6 +24,14 @@ class OrderController extends HLController
     }
 
     /*
+     * 订单详情
+     */
+    public function detailAction()
+    {
+
+    }
+
+    /*
      * 物流
      */
     public function logisticsAction()

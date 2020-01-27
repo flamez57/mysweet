@@ -47,7 +47,7 @@
 					<span>待发货</span>
 				</dt>
 				<ul>
-					<a href="detail.html">
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'order', 'detail')?>">
 						<figure><?=\hl\HLView::img('images/classify-ph03.png');?></figure>
 						<li>
 							<p>超级大品牌服装，现在够级大品牌服装，现在够买只要998</p>
@@ -75,7 +75,7 @@
 					<span>待发货</span>
 				</dt>
 				<ul>
-					<a href="detail.html">
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'order', 'detail')?>">
 						<figure><?=\hl\HLView::img('images/classify-ph03.png');?></figure>
 						<li>
 							<p>超级大品牌服装，现在够级大品牌服装，现在够买只要998</p>

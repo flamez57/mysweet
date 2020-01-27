@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>男装专区</title>
-    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>订单详情</title>
+	<?=\hl\HLView::css('loaders.min.css');?>
+    <?=\hl\HLView::css('loading.css');?>
+    <?=\hl\HLView::css('base.css');?>
+    <?=\hl\HLView::css('style.css');?>
+    <?=\hl\HLView::js('jquery.min.js');?>
     <script type="text/javascript">
     	$(window).load(function(){
     		$(".loading").addClass("loader-chanage")
@@ -33,22 +33,22 @@
 <body>
 	<header class="top-header fixed-header">
 		<a class="icona" href="javascript:history.go(-1)">
-				<img src="images/left.png"/>
-			</a>
+			<?=\hl\HLView::img('images/left.png');?>
+		</a>
 		<h3>待发货</h3>
-			
-			<a class="iconb" href="shopcar.html">
+
+			<a class="iconb" href="#">
 			</a>
 	</header>
-	
+
 	<div class="contaniner fixed-cont">
 		<section class="go-order">
 			<h3>
-				<img src="images/b-iocn01.png"/>
+				<?=\hl\HLView::img('images/b-iocn01.png');?>
 				<span>待发货</span>
 			</h3>
 			<dl class="map">
-				<dt><img src="images/a-icon02.png"/></dt>
+				<dt><?=\hl\HLView::img('images/a-icon02.png');?></dt>
 				<dd>
 					<span>瑾晨</span>
 					<small>13035059860</small>
@@ -57,8 +57,8 @@
 			</dl>
 			<div class="order-shop">
 				<dl>
-					<a href="detail.html">
-						<dt><img src="images/index-ph01.png"/></dt>
+					<a href="#">
+						<dt><?=\hl\HLView::img('images/index-ph01.png');?></dt>
 						<dd>
 							<p>超级大品牌服装，现在够买只要998</p>
 							<small>颜色：经典绮丽款</small>
@@ -68,7 +68,7 @@
 							<strong>×3</strong>
 						</dd>
 					</a>
-					
+
 				</dl>
 				<ul>
 					<li>
@@ -88,14 +88,14 @@
 			</div>
 		</section>
 	</div>
-	
+
 	<footer class="order-footer fixed-footer">
 		<input type="submit" value="确认收货" />
-		<input type="button" value="查看物流" onclick="javascript:location.href='wuliu.html'" />
-		
+		<input type="button" value="查看物流" onclick="javascript:location.href='<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'order', 'logistics')?>'" />
+
 	</footer>
-	
-	
+
+
 
 </body>
 </html>
