@@ -30,10 +30,31 @@
 </div>
 <!--loading页结束-->
 <body>
-	<header class="page-header">
+	<header class="top-header fixed-header">
+		<a class="icona" href="javascript:history.go(-1)">
+			<?=\hl\HLView::img('images/left.png');?>
+		</a>
 		<h3>购物车</h3>
+			<a class="iconb" href="#">
+				<?=\hl\HLView::img('images/shopbar.png');?>
+			</a>
 	</header>
-	
+	<!--<header class="page-header">
+		<h3>购物车</h3>
+	</header>-->
+	<!--空购物车-->
+	<div class="contaniner fixed-conta">
+		<div class="none">
+			<h3>
+				<?=\hl\HLView::img('images/shopnone.png');?>
+			</h3>
+			<p>
+				<span>您还没有商品</span>
+				<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'index', 'index')?>">去添加</a>
+			</p>
+		</div>
+	</div>
+	<!--非空购物车-->
 	<div class="contaniner fixed-contb">
 		<section class="shopcar">
 			<div class="shopcar-checkbox">
