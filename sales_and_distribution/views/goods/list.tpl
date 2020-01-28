@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>男装专区</title>
-    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>商品列表</title>
+	<?=\hl\HLView::css('loaders.min.css');?>
+    <?=\hl\HLView::css('loading.css');?>
+    <?=\hl\HLView::css('base.css');?>
+    <?=\hl\HLView::css('style.css');?>
+    <?=\hl\HLView::js('jquery.min.js');?>
     <script type="text/javascript">
     	$(window).load(function(){
     		$(".loading").addClass("loader-chanage")
@@ -32,21 +32,21 @@
 <body>
 	<header class="top-header fixed-header">
 		<a class="icona" href="javascript:history.go(-1)">
-				<img src="images/left.png"/>
-			</a>
-		<h3>男装专区</h3>
-			
-			<a class="iconb" href="shopcar.html">
-				<img src="images/shopbar.png"/>
+			<?=\hl\HLView::img('images/left.png');?>
+		</a>
+		<h3>商品列表</h3>
+
+			<a class="iconb" href="#">
+				<?=\hl\HLView::img('images/shopbar.png');?>
 			</a>
 	</header>
-	
+
 	<div class="contaniner fixed-conta">
 		<section class="list">
-			<figure><img src="images/list-ban01.png"/></figure>
+			<figure><?=\hl\HLView::img('images/list-ban01.png');?></figure>
 			<div class="search">
 				<input type="search" placeholder="韩版卫衣" />
-				<label><img src="images/list-search.png"/></label>
+				<label><?=\hl\HLView::img('images/list-search.png');?></label>
 			</div>
 			<nav>
 				<ul>
@@ -58,7 +58,7 @@
 					<li class="list-active">
 						<a href="#">
 							<span>销量</span>
-							<img src="images/up-red.png"/>
+							<?=\hl\HLView::img('images/up-red.png');?>
 						</a>
 					</li>
 					<li>
@@ -75,57 +75,57 @@
 			</nav>
 			<ul class="wall">
 				<li class="pic">
-					<a href="detail.html">
-						<img src="images/list-ph01.png"/>
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'goods', 'detail')?>">
+						<?=\hl\HLView::img('images/list-ph01.png');?>
 						<p>韩版青少年休闲修身长袖紧身衬衫</p>
 						<b>￥58</b><del>￥538</del>
 					</a>
 				</li>
 				<li class="pic">
-					<a href="detail.html">
-						<img src="images/list-ph02.png"/>
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'goods', 'detail')?>">
+						<?=\hl\HLView::img('images/list-ph02.png');?>
 						<p>韩版青少年休闲修身长袖紧身衬衫</p>
 						<b>￥58</b><del>￥538</del>
 					</a>
 				</li>
 				<li class="pic">
-					<a href="detail.html">
-						<img src="images/list-ph01.png"/>
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'goods', 'detail')?>">
+						<?=\hl\HLView::img('images/list-ph01.png');?>
 						<p>韩版青少年休闲修身长袖紧身衬衫</p>
 						<b>￥58</b><del>￥538</del>
 					</a>
 				</li>
 				<li class="pic">
-					<a href="detail.html">
-						<img src="images/list-ph02.png"/>
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'goods', 'detail')?>">
+						<?=\hl\HLView::img('images/list-ph02.png');?>
 						<p>韩版青少年休闲修身长袖紧身衬衫</p>
 						<b>￥58</b><del>￥538</del>
 					</a>
 				</li>
 				<li class="pic">
-					<a href="detail.html">
-						<img src="images/list-ph01.png"/>
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'goods', 'detail')?>">
+						<?=\hl\HLView::img('images/list-ph01.png');?>
 						<p>韩版青少年休闲修身长袖紧身衬衫</p>
 						<b>￥58</b><del>￥538</del>
 					</a>
 				</li>
 				<li class="pic">
-					<a href="detail.html">
-						<img src="images/list-ph02.png"/>
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'goods', 'detail')?>">
+						<?=\hl\HLView::img('images/list-ph02.png');?>
 						<p>韩版青少年休闲修身长袖紧身衬衫</p>
 						<b>￥58</b><del>￥538</del>
 					</a>
 				</li>
 				<li class="pic">
-					<a href="detail.html">
-						<img src="images/list-ph01.png"/>
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'goods', 'detail')?>">
+						<?=\hl\HLView::img('images/list-ph01.png');?>
 						<p>韩版青少年休闲修身长袖紧身衬衫</p>
 						<b>￥58</b><del>￥538</del>
 					</a>
 				</li>
 				<li class="pic">
-					<a href="detail.html">
-						<img src="images/list-ph02.png"/>
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'goods', 'detail')?>">
+						<?=\hl\HLView::img('images/list-ph02.png');?>
 						<p>韩版青少年休闲修身长袖紧身衬衫</p>
 						<b>￥58</b><del>￥538</del>
 					</a>
@@ -133,12 +133,11 @@
 			</ul>
 		</section>
 	</div>
-	
-	
-	
-	
-<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="js/jaliswall.js"></script>
+
+
+
+	<!--<?=\hl\HLView::js('jquery.min.js');?>-->
+	<?=\hl\HLView::js('jaliswall.js');?>
 	<script type="text/javascript">
 	$(window).load(function(){
 		$('.wall').jaliswall({ item: '.pic' });

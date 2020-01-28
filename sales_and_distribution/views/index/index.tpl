@@ -41,7 +41,7 @@
                         <input class="sch-input mui-input-clear" type="text" name="" id="" placeholder="连衣裙就是你的女人味儿" />
                     </div>
                 </div>
-                <a class="mui-btn mui-btn-primary sch-submit" href="search.html">搜索</a>
+                <a class="mui-btn mui-btn-primary sch-submit" href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'goods', 'list')?>">搜索</a>
             </div>
             <div class="scroll-wrap">
                 <div class="mui-scroll">

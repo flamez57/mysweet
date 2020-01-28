@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>商城</title>
-    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
-      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>商品详情</title>
+	<?=\hl\HLView::css('loaders.min.css');?>
+    <?=\hl\HLView::css('loading.css');?>
+    <?=\hl\HLView::css('base.css');?>
+    <?=\hl\HLView::css('style.css');?>
+    <?=\hl\HLView::css('swiper.min.css');?>
+    <?=\hl\HLView::js('jquery.min.js');?>
     <script type="text/javascript">
     	$(window).load(function(){
     		$(".loading").addClass("loader-chanage")
@@ -32,34 +32,34 @@
 <!--loading页结束-->
 <body>
 	<header class="detail-header fixed-header">
-		<a href="javascript:history.go(-1)"><img src="images/detail-left.png"/></a>
-		
-		<a href="shopcar.html" class="right"><img src="images/shopbar.png"/></a>
+		<a href="javascript:history.go(-1)"><?=\hl\HLView::img('images/left.png');?></a>
+
+		<a href="#" class="right"><?=\hl\HLView::img('images/shopbar.png');?></a>
 	</header>
-	
-	
+
+
 	<div class="contaniner fixed-contb">
 		<section class="detail">
 			<figure class="swiper-container">
 				<ul class="swiper-wrapper">
 					<li class="swiper-slide">
 						<a href="#">
-							<img src="images/detail-ban02.png"/>
+							<?=\hl\HLView::img('images/detail-ban02.png');?>
 						</a>
 					</li>
 					<li class="swiper-slide">
 						<a href="#">
-							<img src="images/detail-ban01.png"/>
+							<?=\hl\HLView::img('images/detail-ban01.png');?>
 						</a>
 					</li>
 					<li class="swiper-slide">
 						<a href="#">
-							<img src="images/detail-ban03.png"/>
+							<?=\hl\HLView::img('images/detail-ban03.png');?>
 						</a>
 					</li>
 					<li class="swiper-slide">
 						<a href="#">
-							<img src="images/detail-ban04.png"/>
+							<?=\hl\HLView::img('images/detail-ban04.png');?>
 						</a>
 					</li>
 				</ul>
@@ -70,7 +70,7 @@
 				<dt>
 					<h3>2015冬季新款韩版加厚中长款小鹿毛呢大衣女系带加厚羊毛呢外套</h3>
 					<div class="collect">
-						<img src="images/detail-heart-hei.png"/>
+						<?=\hl\HLView::img('images/detail-heart-hei.png');?>
 						<p>收藏</p>
 					</div>
 				</dt>
@@ -81,7 +81,7 @@
 					<small>+356积分</small>
 				</dd>
 			</dl>
-			
+
 			<div class="chose">
 				<ul>
 					<h3>颜色</h3>
@@ -111,36 +111,36 @@
 					</li>
 				</ul>
 			</div>
-			
+
 			<a href="#" class="seven">
 				<b>7</b>天无理由退换货
 				<span id="sss"></span>
 			</a>
-			
+
 			<ul class="same">
-				<a href="#">
+				<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'goods', 'detail')?>">
 					<span>
 						同类推荐
 					</span>
 					<li class="one">
-						<img src="images/detail-pp01.png"/>
+						<?=\hl\HLView::img('images/detail-pp01.png');?>
 						<p>￥188.00</p>
 					</li>
 					<li>
-						<img src="images/detail-pp02.png"/>
+						<?=\hl\HLView::img('images/detail-pp02.png');?>
 						<p>￥188.00</p>
 					</li>
 					<li>
-						<img src="images/detail-pp03.png"/>
+						<?=\hl\HLView::img('images/detail-pp03.png');?>
 						<p>￥188.00</p>
 					</li>
 					<li>
-						<img src="images/detail-pp04.png"/>
+						<?=\hl\HLView::img('images/detail-pp04.png');?>
 						<p>￥188.00</p>
 					</li>
 				</a>
 			</ul>
-			
+
 			<article class="detail-article">
 				<nav>
 					<ul class="article">
@@ -156,17 +156,17 @@
 				<section class="talkbox2" style="display: none;">
 					<ul class="talk">
 						<li>
-							<figure><img src="images/detail-tou.png"/></figure>
+							<figure><?=\hl\HLView::img('images/detail-tou.png');?></figure>
 							<dl>
 								<dt>
 									<p>瑾晨</p>
 									<time>2015.11.17</time>
 									<div class="star">
-										<span><img src="images/detail-iocn01.png"/></span>
-										<span><img src="images/detail-iocn01.png"/></span>
-										<span><img src="images/detail-iocn01.png"/></span>
-										<span><img src="images/detail-iocn001.png"/></span>
-										<span><img src="images/detail-iocn001.png"/></span>
+										<span><?=\hl\HLView::img('images/detail-iocn01.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn01.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn01.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn001.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn001.png');?></span>
 									</div>
 								</dt>
 								<dd>哎哟不错哦，很性感哦！</dd>
@@ -174,41 +174,41 @@
 							</dl>
 						</li>
 						<li>
-							<figure><img src="images/detail-tou.png"/></figure>
+							<figure><?=\hl\HLView::img('images/detail-tou.png');?></figure>
 							<dl>
 								<dt>
 									<p>瑾晨</p>
 									<time>2015.11.17</time>
 									<div class="star">
-										<span><img src="images/detail-iocn01.png"/></span>
-										<span><img src="images/detail-iocn01.png"/></span>
-										<span><img src="images/detail-iocn01.png"/></span>
-										<span><img src="images/detail-iocn001.png"/></span>
-										<span><img src="images/detail-iocn001.png"/></span>
+										<span><?=\hl\HLView::img('images/detail-iocn01.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn01.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn01.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn001.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn001.png');?></span>
 									</div>
 								</dt>
 								<dd>哎哟不错哦，很性感哦！</dd>
 								<small>颜色：豹纹凯特</small>
 								<div class="picbox">
-									<img src="images/detail-pp01.png"/>
-									<img src="images/detail-pp02.png"/>
-									<img src="images/detail-pp03.png"/>
-									<img src="images/detail-pp04.png"/>
+									<?=\hl\HLView::img('images/detail-pp01.png');?>
+									<?=\hl\HLView::img('images/detail-pp02.png');?>
+									<?=\hl\HLView::img('images/detail-pp03.png');?>
+									<?=\hl\HLView::img('images/detail-pp04.png');?>
 								</div>
 							</dl>
 						</li>
 						<li>
-							<figure><img src="images/detail-tou.png"/></figure>
+							<figure><?=\hl\HLView::img('images/detail-tou.png');?></figure>
 							<dl>
 								<dt>
 									<p>瑾晨</p>
 									<time>2015.11.17</time>
 									<div class="star">
-										<span><img src="images/detail-iocn01.png"/></span>
-										<span><img src="images/detail-iocn01.png"/></span>
-										<span><img src="images/detail-iocn01.png"/></span>
-										<span><img src="images/detail-iocn001.png"/></span>
-										<span><img src="images/detail-iocn001.png"/></span>
+										<span><?=\hl\HLView::img('images/detail-iocn01.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn01.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn01.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn001.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn001.png');?></span>
 									</div>
 								</dt>
 								<dd>哎哟不错哦，很性感哦！</dd>
@@ -216,47 +216,46 @@
 							</dl>
 						</li>
 						<li>
-							<figure><img src="images/detail-tou.png"/></figure>
+							<figure><?=\hl\HLView::img('images/detail-tou.png');?></figure>
 							<dl>
 								<dt>
 									<p>瑾晨</p>
 									<time>2015.11.17</time>
 									<div class="star">
-										<span><img src="images/detail-iocn01.png"/></span>
-										<span><img src="images/detail-iocn01.png"/></span>
-										<span><img src="images/detail-iocn01.png"/></span>
-										<span><img src="images/detail-iocn001.png"/></span>
-										<span><img src="images/detail-iocn001.png"/></span>
+										<span><?=\hl\HLView::img('images/detail-iocn01.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn01.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn01.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn001.png');?></span>
+										<span><?=\hl\HLView::img('images/detail-iocn001.png');?></span>
 									</div>
 								</dt>
 								<dd>哎哟不错哦，很性感哦！</dd>
 								<small>颜色：豹纹凯特</small>
 								<div class="picbox">
-									<img src="images/detail-pp01.png"/>
-									<img src="images/detail-pp02.png"/>
-									<img src="images/detail-pp03.png"/>
-									<img src="images/detail-pp04.png"/>
+									<?=\hl\HLView::img('images/detail-pp01.png');?>
+									<?=\hl\HLView::img('images/detail-pp02.png');?>
+									<?=\hl\HLView::img('images/detail-pp03.png');?>
+									<?=\hl\HLView::img('images/detail-pp04.png');?>
 								</div>
 							</dl>
 						</li>
 					</ul>
 				</section>
-				
+
 			</article>
 		</section>
 	</div>
-	
-	
+
+
 		<footer class="detail-footer fixed-footer">
 			<a href="#" class="go-car">
 				<input type="button" value="加入购物车"/>
 			</a>
-			<a href="buy.html" class="buy">
+			<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'shopcar', 'buy')?>" class="buy">
 				立即购买
 			</a>
 		</footer>
-	
-<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <!--<?=\hl\HLView::js('jquery.min.js');?>-->
 <script type="text/javascript">
 	$(window).scroll(function() {
 	    if ($(".detail-header").offset().top > 50) {
@@ -266,7 +265,7 @@
     }
 	});
 </script>
-<script src="js/swiper.min.js"></script>
+    <?=\hl\HLView::js('swiper.min.js');?>
 <script type="text/javascript">
 		$(document).ready(function(){
 			var mySwiper = new Swiper('.swiper-container',{
@@ -280,7 +279,7 @@
 <script type="text/javascript">
 	$(function(){
 		$('.chose li').click(function(){
-				
+
 			$(this).addClass('chose-active').siblings().removeClass('chose-active');
 
 			var tags=document.getElementsByClassName('chose-active');//获取标签
@@ -291,7 +290,7 @@
 	            tagArr += tags[i].innerHTML;//保存满足条件的元素
 
 	        }
-	       
+
 	        $('#sss').html(tagArr);
 
 		});
@@ -307,7 +306,7 @@
 				$('.talkbox1').hide();
 			}
 
-		});	
+		});
 	});
 </script>
 </body>
