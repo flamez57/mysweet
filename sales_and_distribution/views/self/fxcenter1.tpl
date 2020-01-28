@@ -99,7 +99,7 @@
 								<p class="list-number fr">￥2.76</p>
 							</li>
 						</a>	
-						<a href="tixian.html">
+						<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'record')?>">
 							<li class="box-s">
 								<p class="fl icon222 icon226">我的提现记录</p>
 								<span class="back fr"></span>

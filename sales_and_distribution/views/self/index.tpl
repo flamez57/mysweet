@@ -156,6 +156,13 @@
 					</a>
 				</li>
 				<li>
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'children')?>">
+						<?=\hl\HLView::img('images/self-icon05.png');?>
+						<p>我的会员</p>
+						<span><?=\hl\HLView::img('images/right.png');?></span>
+					</a>
+				</li>
+				<li>
 					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'sign')?>">
 						<?=\hl\HLView::img('images/self-icon011.png');?>
 						<p>修改密码</p>

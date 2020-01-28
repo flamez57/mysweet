@@ -83,6 +83,22 @@ class SelfController extends HLController
     {
         
     }
+
+    /*
+     * 我的会员
+     */
+    public function childrenAction()
+    {
+
+    }
+
+    /*
+     * 提现记录
+     */
+    public function recordAction()
+    {
+
+    }
     
     /*
     ** 修改密码

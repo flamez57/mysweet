@@ -12,14 +12,13 @@
 	    <meta name="format-detection" content="telephone=no">
 	    <meta name="keywords" content="">
 	    <meta name="description" content="">
-	    <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
-	    <script src="js/hmt.js" type="text/javascript"></script>
-	    <script type="text/javascript" src="js/swipe.js"></script>
-	    
-	    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-	    <link rel="stylesheet" type="text/css" href="css/base1.css"/>
-	    <link rel="stylesheet" type="text/css" href="css/common.css"/>
-	    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+	    <?=\hl\HLView::js('jquery-1.8.3.min.js');?>
+	    <?=\hl\HLView::js('hmt.js');?>
+	    <?=\hl\HLView::js('swipe.js');?>
+		<?=\hl\HLView::css('base.css');?>
+		<?=\hl\HLView::css('base1.css');?>
+	    <?=\hl\HLView::css('common.css');?>
+	    <?=\hl\HLView::css('style.css');?>
 	</head>
 	<body class="fx-center">
 		<div class="warp clearfloat">
@@ -27,11 +26,11 @@
 			<div class="header2 clearfloat box-s" id="header">
 				<div class="left1 clearfloat fl">
 					<a href="javascript:history.go(-1)" class="back">
-						<img src="images/left.png"/>
+						<?=\hl\HLView::img('images/left.png');?>
 					</a>
 				</div>
 				<div class="middle clearfloat fl">
-					我的佣金
+					我的会员
 				</div>
 				<div class="right1 fr clearfloat">
 					<a href="#" class="back"></a>
@@ -43,7 +42,7 @@
 				<div class="p-top p-top1 clearfloat">
 					<a href="personal.html">
 						<div class="tu">
-							<img src="img/touxiang.png"/>
+							<?=\hl\HLView::img('touxiang.png');?>
 						</div>
 						<p class="name">Guoguo</p>
 					</a>
@@ -78,10 +77,10 @@
 						<a href="#">
 							<li class="box-s">
 								<p class="fl icon222 icon223">我的一级会员</p>
-								<p class="list-number fr">2人</p>								
+								<p class="list-number fr">2人</p>
 							</li>
 						</a>
-						<a href="shopcar.html">
+						<a href="#">
 							<li class="box-s">
 								<p class="fl icon222 icon223">我的二级会员</p>
 								<p class="list-number fr">2人</p>
@@ -92,41 +91,41 @@
 								<p class="fl icon222 icon223">我的三级会员</p>
 								<p class="list-number fr">2人</p>
 							</li>
-						</a>						
+						</a>
 					</ul>
 				</div>
-				
+
 			</div>
-			
+
 		</div>
 		<!--p-center end-->
-			<footer class="page-footer page-footer1 fixed-footer" id="footer">
-				<ul>
-					<li>
-						<a href="index.html">
-							<img src="images/footer001.png"/>
-							<p>首页</p>
-						</a>
-					</li>
-					<li>
-						<a href="assort.html">
-							<img src="images/footer002.png"/>
-							<p>分类</p>
-						</a>
-					</li>
-					<li>
-						<a href="shopcar.html">
-							<img src="images/footer003.png"/>
-							<p>购物车</p>
-						</a>
-					</li>
-					<li class="active">
-						<a href="self.html">
-							<img src="images/footer04.png"/>
-							<p>个人中心</p>
-						</a>
-					</li>
-				</ul>
-			</footer>
+			<footer class="page-footer fixed-footer">
+		<ul>
+			<li>
+				<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'index', 'index')?>">
+                    <?=\hl\HLView::img('images/footer001.png');?>
+					<p>首页</p>
+				</a>
+			</li>
+			<li>
+				<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'assort', 'index')?>">
+                    <?=\hl\HLView::img('images/footer002.png');?>
+					<p>分类</p>
+				</a>
+			</li>
+			<li>
+				<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'shopcar', 'index')?>">
+                    <?=\hl\HLView::img('images/footer003.png');?>
+					<p>购物车</p>
+				</a>
+			</li>
+			<li class="active">
+				<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'index')?>">
+                    <?=\hl\HLView::img('images/footer04.png');?>
+					<p>个人中心</p>
+				</a>
+			</li>
+		</ul>
+	</footer>
 	</body>
 </html>
