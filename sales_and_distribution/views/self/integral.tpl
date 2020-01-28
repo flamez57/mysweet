@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>男装专区</title>
-    <link rel="stylesheet" type="text/css" href="css/loaders.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/loading.css"/>
-    <link rel="stylesheet" type="text/css" href="css/base.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-      <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>我的积分</title>
+	<?=\hl\HLView::css('loaders.min.css');?>
+    <?=\hl\HLView::css('loading.css');?>
+    <?=\hl\HLView::css('base.css');?>
+    <?=\hl\HLView::css('style.css');?>
+    <?=\hl\HLView::js('jquery.min.js');?>
     <script type="text/javascript">
     	$(window).load(function(){
     		$(".loading").addClass("loader-chanage")
@@ -32,14 +32,14 @@
 <body>
 	<header class="top-header fixed-header">
 		<a class="icona" href="javascript:history.go(-1)">
-				<img src="images/left.png"/>
-			</a>
+			<?=\hl\HLView::img('images/left.png');?>
+		</a>
 		<h3>我的积分</h3>
-			
-			<a class="iconb" href="shopcar.html">
+
+			<a class="iconb" href="#">
 			</a>
 	</header>
-	
+
 	<div class="contaniner fixed-conta">
 		<section class="integral">
 			<h3>3600</h3>
@@ -80,10 +80,10 @@
 			</dl>
 		</section>
 	</div>
-	
-	
-	
-	
+
+
+
+
 
 </body>
 </html>

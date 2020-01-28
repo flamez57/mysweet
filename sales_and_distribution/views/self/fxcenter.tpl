@@ -38,7 +38,7 @@
 			<!--p-center star-->
 			<div id="main" class="clearfloat">
 				<div class="p-top p-top1 clearfloat">
-					<a href="personal.html">
+					<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'qrcode')?>">
 						<div class="tu">
 							<img src="img/touxiang.png"/>
 						</div>

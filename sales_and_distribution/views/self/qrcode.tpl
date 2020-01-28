@@ -12,11 +12,11 @@
 	    <meta name="format-detection" content="telephone=no">
 	    <meta name="keywords" content="">
 	    <meta name="description" content="">
-	    <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
-	    <script src="js/hmt.js" type="text/javascript"></script>
-	    <script type="text/javascript" src="js/swipe.js"></script>
-	    <link rel="stylesheet" type="text/css" href="css/base1.css"/>
-	    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+		<?=\hl\HLView::js('jquery-1.8.3.min.js');?>
+	    <?=\hl\HLView::js('hmt.js');?>
+	    <?=\hl\HLView::js('swipe.js');?>
+		<?=\hl\HLView::css('base1.css');?>
+	    <?=\hl\HLView::css('common.css');?>
 	</head>
 	<body>
 		<div class="warp clearfloat">
@@ -25,7 +25,7 @@
 				<div class="p-top dinpu-top clearfloat">
 					<a href="personal.html">
 						<div class="tu">
-							<img src="uploads/10.jpg"/>
+							<?=\hl\HLView::img('uploads/10.jpg');?>
 						</div>
 						<p class="name">Guoguo</p>
 					</a>
@@ -49,11 +49,11 @@
 								<span class="fl tit">商品管理</span>
 								<span class="fr icon47">编辑</span>
 							</li>
-						</a>						
+						</a>
 					</ul>
 					<div class="wechat clearfix">
 						<p class="ewm">
-							<img src="uploads/12.jpg"/>
+							<?=\hl\HLView::img('uploads/12.jpg');?>
 						</p>
 						<p class="jinru t_c"><a href="p-index.html">进入店铺</a></p>
 					</div>

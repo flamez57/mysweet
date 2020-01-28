@@ -44,7 +44,7 @@
 	</header>-->
 
 	<div class="p-top  clearfloat">
-		<a href="personal.html">
+		<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'qrcode')?>">
 			<div class="tu">
 				<?=\hl\HLView::img('touxiang.png');?>
 			</div>
@@ -59,7 +59,7 @@
 						<p class="price">0.00</p>
 					</li>
 				</a>
-				<a href="#">
+				<a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'self', 'integral')?>">
 					<li class="box-s">
 						<span class="opa6"></span>
 						<p class="bt">我的积分</p>

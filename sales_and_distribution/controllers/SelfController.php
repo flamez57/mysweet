@@ -115,4 +115,20 @@ class SelfController extends HLController
     {
         
     }
+
+    /*
+     * 分销二维码
+     */
+    public function qrcodeAction()
+    {
+
+    }
+
+    /*
+     * 我的积分
+     */
+    public function integralAction()
+    {
+
+    }
 }
