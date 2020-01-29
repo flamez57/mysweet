@@ -82,6 +82,30 @@ class HLView
         $path = self::$publicPath.'css'.DIRECTORY_SEPARATOR.$path;
         echo '<link type="text/css" href="'.$path.'" rel="stylesheet" />';
     }
+
+    //---------------------------------后台部件专用
+    /*
+    ** js文件引入
+    ** @param $path 文件路径
+    ** @return void
+    */
+    public static function componentsJs($path)
+    {
+        $path = self::$publicPath.'components'.DIRECTORY_SEPARATOR.$path;
+        echo '<script type="text/javascript" src="'.$path.'"></script>';
+    }
+
+    /*
+    ** css文件引入
+    ** @param $path 文件路径
+    ** @return void
+    */
+    public static function componentsCss($path)
+    {
+        $path = self::$publicPath.'components'.DIRECTORY_SEPARATOR.$path;
+        echo '<link type="text/css" href="'.$path.'" rel="stylesheet" />';
+    }
+    //=======end======
     
     /*
     ** 图片引入

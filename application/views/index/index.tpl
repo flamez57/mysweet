@@ -44,6 +44,7 @@
                 <li><a href="<?=\hl\HLRoute::makeUrl('pc_shop', 'index', 'index')?>">pc商城</a></li>
                 <li><a href="<?=\hl\HLRoute::makeUrl('sales_and_distribution', 'index', 'index')?>">分销商城</a></li>
                 <li><a href="<?=\hl\HLRoute::makeUrl('application', 'index', 'install')?>">安装</a></li>
+                <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'index')?>">管理后台</a></li>
                 <li><a href="<?=\hl\HLRoute::makeUrl('application', 'index', 'test')?>">测试用</a></li>
             </ul>
         </nav>
