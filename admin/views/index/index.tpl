@@ -13,10 +13,10 @@
   <!-- Ionicons -->
   <?=\hl\HLView::componentsCss('Ionicons/css/ionicons.min.css');?>
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <?=\hl\HLView::css('AdminLTE.min.css');?>
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <?=\hl\HLView::css('skins/_all-skins.min.css');?>
   <!-- Morris chart -->
   <?=\hl\HLView::componentsCss('morris.js/morris.css');?>
   <!-- jvectormap -->
@@ -72,7 +72,7 @@
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <?=\hl\HLView::img('user2-160x160.jpg', ['class' => 'img-circle', 'alt' => 'User Image']);?>
                       </div>
                       <h4>
                         Support Team
