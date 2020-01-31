@@ -85,7 +85,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <?=\hl\HLView::img('user3-128x128.jpg', ['class' => 'img-circle', 'alt' => 'User Image']);?>
                       </div>
                       <h4>
                         AdminLTE Design Team
@@ -97,7 +97,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <?=\hl\HLView::img('user4-128x128.jpg', ['class' => 'img-circle', 'alt' => 'User Image']);?>
                       </div>
                       <h4>
                         Developers
@@ -109,7 +109,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <?=\hl\HLView::img('user3-128x128.jpg', ['class' => 'img-circle', 'alt' => 'User Image']);?>
                       </div>
                       <h4>
                         Sales Department
@@ -121,7 +121,7 @@
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <?=\hl\HLView::img('user4-128x128.jpg', ['class' => 'img-circle', 'alt' => 'User Image']);?>
                       </div>
                       <h4>
                         Reviewers
@@ -258,13 +258,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <?=\hl\HLView::img('user2-160x160.jpg', ['class' => 'user-image', 'alt' => 'User Image']);?>
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <?=\hl\HLView::img('user2-160x160.jpg', ['class' => 'img-circle', 'alt' => 'User Image']);?>
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -312,7 +312,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <?=\hl\HLView::img('user2-160x160.jpg', ['class' => 'img-circle', 'alt' => 'User Image']);?>
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
@@ -624,7 +624,7 @@
             <div class="box-body chat" id="chat-box">
               <!-- chat item -->
               <div class="item">
-                <img src="dist/img/user4-128x128.jpg" alt="user image" class="online">
+                <?=\hl\HLView::img('user4-128x128.jpg', ['class' => 'online', 'alt' => 'User Image']);?>
 
                 <p class="message">
                   <a href="#" class="name">
@@ -651,7 +651,7 @@
               <!-- /.item -->
               <!-- chat item -->
               <div class="item">
-                <img src="dist/img/user3-128x128.jpg" alt="user image" class="offline">
+                <?=\hl\HLView::img('user3-128x128.jpg', ['class' => 'offline', 'alt' => 'User Image']);?>
 
                 <p class="message">
                   <a href="#" class="name">
@@ -666,7 +666,7 @@
               <!-- /.item -->
               <!-- chat item -->
               <div class="item">
-                <img src="dist/img/user2-160x160.jpg" alt="user image" class="offline">
+                <?=\hl\HLView::img('user2-160x160.jpg', ['class' => 'offline', 'alt' => 'User Image']);?>
 
                 <p class="message">
                   <a href="#" class="name">

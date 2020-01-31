@@ -20,6 +20,13 @@ class IndexController extends HLController
     public function indexAction()
     {
         //框架欢迎页
+//        for ($i = 100; $i < 251; $i++) {
+//            echo <<<HTML
+//<li onclick="checkThis('resource/0{$i}.mp4', this)">0{$i}.mp4</li>\n\r
+//HTML;
+//
+//        }
+
     }
 
     //安装
