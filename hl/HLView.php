@@ -106,6 +106,29 @@ class HLView
         echo '<link type="text/css" href="'.$path.'" rel="stylesheet" />';
     }
     //=======end======
+    //---------------------------------后台插件专用
+    /*
+    ** js文件引入
+    ** @param $path 文件路径
+    ** @return void
+    */
+    public static function pluginsJs($path)
+    {
+        $path = self::$publicPath.'plugins'.DIRECTORY_SEPARATOR.$path;
+        echo '<script type="text/javascript" src="'.$path.'"></script>';
+    }
+
+    /*
+    ** css文件引入
+    ** @param $path 文件路径
+    ** @return void
+    */
+    public static function pluginsCss($path)
+    {
+        $path = self::$publicPath.'plugins'.DIRECTORY_SEPARATOR.$path;
+        echo '<link type="text/css" href="'.$path.'" rel="stylesheet" />';
+    }
+    //=======end======
     
     /*
     ** 图片引入

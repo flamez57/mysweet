@@ -26,7 +26,7 @@
   <!-- Daterange picker -->
   <?=\hl\HLView::componentsCss('bootstrap-daterangepicker/daterangepicker.css');?>
   <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <?=\hl\HLView::pluginsCss('bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css');?>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -1246,8 +1246,8 @@
 <!-- Sparkline -->
     <?=\hl\HLView::componentsJs('jquery-sparkline/dist/jquery.sparkline.min.js');?>
 <!-- jvectormap -->
-<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <?=\hl\HLView::pluginsJs('jvectormap/jquery-jvectormap-1.2.2.min.js');?>
+    <?=\hl\HLView::pluginsJs('jvectormap/jquery-jvectormap-world-mill-en.js');?>
 <!-- jQuery Knob Chart -->
     <?=\hl\HLView::componentsJs('jquery-knob/dist/jquery.knob.min.js');?>
 <!-- daterangepicker -->
@@ -1256,16 +1256,16 @@
 <!-- datepicker -->
     <?=\hl\HLView::componentsJs('bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js');?>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <?=\hl\HLView::pluginsJs('bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js');?>
 <!-- Slimscroll -->
     <?=\hl\HLView::componentsJs('jquery-slimscroll/jquery.slimscroll.min.js');?>
 <!-- FastClick -->
     <?=\hl\HLView::componentsJs('fastclick/lib/fastclick.js');?>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<?=\hl\HLView::js('adminlte.min.js');?>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
+<?=\hl\HLView::js('pages/dashboard.js');?>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<?=\hl\HLView::js('demo.js');?>
 </body>
 </html>
