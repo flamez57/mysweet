@@ -34,8 +34,11 @@
         <?=\hl\HLView::componentsJs('fastclick/lib/fastclick.js');?>
         <!-- AdminLTE App -->
         <?=\hl\HLView::js('adminlte.min.js');?>
+        <!-- ChartJS -->
+        <?=\hl\HLView::componentsJs('chart.js/Chart.js');?>
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <?=\hl\HLView::js('pages/dashboard.js');?>
+        <!--<?=\hl\HLView::js('pages/dashboard2.js');?>-->
         <!-- AdminLTE for demo purposes -->
         <?=\hl\HLView::js('demo.js');?>
     </body>

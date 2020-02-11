@@ -30,4 +30,9 @@ class IndexController extends HLController
 //        }
 
     }
+
+    public function index2Action()
+    {
+        HLView::param('title', '管理后台首页');
+    }
 }
