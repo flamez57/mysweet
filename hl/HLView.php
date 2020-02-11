@@ -185,4 +185,12 @@ class HLView
         self::$default = false;
         include_once(self::$viewPath.$path.'.tpl');
     }
+
+    /**
+    ** 公共模板
+    */
+    public static function publicTpl($fileName)
+    {
+        include_once(ROOT_PATH.self::$module.DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR.$fileName.'.tpl');
+    }
 }
