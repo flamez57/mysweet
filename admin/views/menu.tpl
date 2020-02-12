@@ -48,14 +48,14 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                    <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                    <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                    <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'topNav')?>"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'boxed')?>"><i class="fa fa-circle-o"></i> Boxed</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'fixed')?>"><i class="fa fa-circle-o"></i> Fixed</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'collapsedSidebar')?>"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
                 </ul>
             </li>
             <li>
-                <a href="pages/widgets.html">
+                <a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'widgets')?>">
                     <i class="fa fa-th"></i> <span>Widgets</span>
                     <span class="pull-right-container">
                         <small class="label pull-right bg-green">new</small>
@@ -71,10 +71,10 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                    <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                    <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                    <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'chartjs')?>"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'morris')?>"><i class="fa fa-circle-o"></i> Morris</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'flot')?>"><i class="fa fa-circle-o"></i> Flot</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'inline')?>"><i class="fa fa-circle-o"></i> Inline charts</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -86,12 +86,12 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                    <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-                    <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                    <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                    <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                    <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'general2')?>"><i class="fa fa-circle-o"></i> General</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'icons')?>"><i class="fa fa-circle-o"></i> Icons</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'buttons')?>"><i class="fa fa-circle-o"></i> Buttons</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'sliders')?>"><i class="fa fa-circle-o"></i> Sliders</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'timeline')?>"><i class="fa fa-circle-o"></i> Timeline</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'modals')?>"><i class="fa fa-circle-o"></i> Modals</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -102,9 +102,9 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                    <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-                    <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'general')?>"><i class="fa fa-circle-o"></i> General Elements</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'advanced')?>"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'editors')?>"><i class="fa fa-circle-o"></i> Editors</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -115,12 +115,12 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                    <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'simple')?>"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'data')?>"><i class="fa fa-circle-o"></i> Data tables</a></li>
                 </ul>
             </li>
             <li>
-                <a href="pages/calendar.html">
+                <a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'calendar')?>">
                     <i class="fa fa-calendar"></i> <span>Calendar</span>
                     <span class="pull-right-container">
                         <small class="label pull-right bg-red">3</small>
@@ -129,7 +129,7 @@
                 </a>
             </li>
             <li>
-                <a href="pages/mailbox/mailbox.html">
+                <a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'mailbox')?>">
                     <i class="fa fa-envelope"></i> <span>Mailbox</span>
                     <span class="pull-right-container">
                         <small class="label pull-right bg-yellow">12</small>
@@ -146,15 +146,15 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-                    <li><a href="pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-                    <li><a href="pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-                    <li><a href="pages/examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-                    <li><a href="pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-                    <li><a href="pages/examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-                    <li><a href="pages/examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-                    <li><a href="pages/examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-                    <li><a href="pages/examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'invoice')?>"><i class="fa fa-circle-o"></i> Invoice</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'profile')?>"><i class="fa fa-circle-o"></i> Profile</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'login')?>"><i class="fa fa-circle-o"></i> Login</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'register')?>"><i class="fa fa-circle-o"></i> Register</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'lockscreen')?>"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', '_404')?>"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', '_500')?>"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'blank')?>"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'pace')?>"><i class="fa fa-circle-o"></i> Pace Page</a></li>
                 </ul>
             </li>
             <li class="treeview">
