@@ -6,17 +6,17 @@
   <title>AdminLTE 2 | Top Navigation</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <!-- Bootstrap 3.3.7 -->
+        <?=\hl\HLView::componentsCss('bootstrap/dist/css/bootstrap.min.css');?>
+        <!-- Font Awesome -->
+        <?=\hl\HLView::componentsCss('font-awesome/css/font-awesome.min.css');?>
+        <!-- Ionicons -->
+        <?=\hl\HLView::componentsCss('Ionicons/css/ionicons.min.css');?>
+        <!-- Theme style -->
+        <?=\hl\HLView::css('AdminLTE.min.css');?>
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+        folder instead of downloading all of them to reduce the load. -->
+        <?=\hl\HLView::css('skins/_all-skins.min.css');?>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,7 +36,7 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="../../index2.html" class="navbar-brand"><b>Admin</b>LTE</a>
+          <a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'index')?>" class="navbar-brand"><b>Admin</b>LTE</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -86,7 +86,7 @@
                       <a href="#">
                         <div class="pull-left">
                           <!-- User Image -->
-                          <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <?=\hl\HLView::img('user2-160x160.jpg', ['class' => 'img-circle', 'alt' => 'User Image']);?>
                         </div>
                         <!-- Message title and timestamp -->
                         <h4>
@@ -170,14 +170,14 @@
               <!-- Menu Toggle Button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
-                <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                <?=\hl\HLView::img('user2-160x160.jpg', ['class' => 'user-image', 'alt' => 'User Image']);?>
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                 <span class="hidden-xs">Alexander Pierce</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
                 <li class="user-header">
-                  <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                  <?=\hl\HLView::img('user2-160x160.jpg', ['class' => 'img-circle', 'alt' => 'User Image']);?>
 
                   <p>
                     Alexander Pierce - Web Developer
@@ -276,18 +276,17 @@
   </footer>
 </div>
 <!-- ./wrapper -->
-
 <!-- jQuery 3 -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+        <?=\hl\HLView::componentsJs('jquery/dist/jquery.min.js');?>
+        <!-- Bootstrap 3.3.7 -->
+        <?=\hl\HLView::componentsJs('bootstrap/dist/js/bootstrap.min.js');?>
+<!-- Slimscroll -->
+        <?=\hl\HLView::componentsJs('jquery-slimscroll/jquery.slimscroll.min.js');?>
+        <!-- FastClick -->
+        <?=\hl\HLView::componentsJs('fastclick/lib/fastclick.js');?>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+        <?=\hl\HLView::js('adminlte.min.js');?>
+        <!-- AdminLTE for demo purposes -->
+        <?=\hl\HLView::js('demo.js');?>
 </body>
 </html>
