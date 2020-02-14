@@ -94,7 +94,7 @@
                     <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'modals')?>"><i class="fa fa-circle-o"></i> Modals</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="active treeview">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>Forms</span>
                     <span class="pull-right-container">
@@ -102,7 +102,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'general')?>"><i class="fa fa-circle-o"></i> General Elements</a></li>
+                    <li class="active"><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'general')?>"><i class="fa fa-circle-o"></i> General Elements</a></li>
                     <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'advanced')?>"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
                     <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'editors')?>"><i class="fa fa-circle-o"></i> Editors</a></li>
                 </ul>
