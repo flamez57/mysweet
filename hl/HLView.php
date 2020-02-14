@@ -100,10 +100,17 @@ class HLView
     ** @param $path 文件路径
     ** @return void
     */
-    public static function componentsCss($path)
+    public static function componentsCss($path, $param = [])
     {
         $path = self::$publicPath.'components'.DIRECTORY_SEPARATOR.$path;
-        echo '<link type="text/css" href="'.$path.'" rel="stylesheet" />';
+        $str = '<link type="text/css" href="'.$path.'" rel="stylesheet" ';
+        if (isset($param) && is_array($param)) {
+            foreach ($param as $_key => $_value) {
+                $str .= $_key.'="'.$_value.'" ';
+            }
+        }
+        $str .= '>';
+        echo $str;
     }
     //=======end======
     //---------------------------------后台插件专用
