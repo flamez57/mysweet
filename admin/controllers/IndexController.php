@@ -21,6 +21,7 @@ class IndexController extends HLController
     public function indexAction()
     {
         HLView::param('title', '管理后台首页');
+        HLView::param('active', 'index');
         //框架欢迎页
 //        for ($i = 100; $i < 251; $i++) {
 //            echo <<<HTML
@@ -34,5 +35,6 @@ class IndexController extends HLController
     public function index2Action()
     {
         HLView::param('title', '管理后台首页');
+        HLView::param('active', 'index2');
     }
 }

@@ -27,7 +27,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li class="<?php if (in_array(\hl\HLView::$putout['active'], ['index', 'index2'])) {echo 'active ';}?>treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     <span class="pull-right-container">
@@ -35,11 +35,11 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'index')?>"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'index2')?>"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'index') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'index')?>"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'index2') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'index2')?>"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="<?php if (in_array(\hl\HLView::$putout['active'], ['topNav', 'boxed', 'fixed', 'collapsedSidebar'])) {echo 'active ';}?>treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
                     <span>Layout Options</span>
@@ -62,7 +62,7 @@
                     </span>
                 </a>
             </li>
-            <li class="treeview">
+            <li class="<?php if (in_array(\hl\HLView::$putout['active'], ['chartjs', 'morris', 'flot', 'inline'])) {echo 'active ';}?>treeview">
                 <a href="#">
                     <i class="fa fa-pie-chart"></i>
                     <span>Charts</span>
@@ -77,7 +77,7 @@
                     <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'inline')?>"><i class="fa fa-circle-o"></i> Inline charts</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="<?php if (in_array(\hl\HLView::$putout['active'], ['general2', 'icons', 'buttons', 'sliders', 'timeline', 'modals'])) {echo 'active ';}?>treeview">
                 <a href="#">
                     <i class="fa fa-laptop"></i>
                     <span>UI Elements</span>
@@ -94,7 +94,7 @@
                     <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'modals')?>"><i class="fa fa-circle-o"></i> Modals</a></li>
                 </ul>
             </li>
-            <li class="active treeview">
+            <li class="<?php if (in_array(\hl\HLView::$putout['active'], ['general', 'advanced', 'editors'])) {echo 'active ';}?>treeview">
                 <a href="#">
                     <i class="fa fa-edit"></i> <span>Forms</span>
                     <span class="pull-right-container">
@@ -107,7 +107,7 @@
                     <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'editors')?>"><i class="fa fa-circle-o"></i> Editors</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="<?php if (in_array(\hl\HLView::$putout['active'], ['simple', 'data'])) {echo 'active ';}?>treeview">
                 <a href="#">
                     <i class="fa fa-table"></i> <span>Tables</span>
                     <span class="pull-right-container">
@@ -138,7 +138,7 @@
                     </span>
                 </a>
             </li>
-            <li class="treeview">
+            <li class="<?php if (in_array(\hl\HLView::$putout['active'], ['invoice', 'profile', 'login', 'register', 'lockscreen', '_404', '_500', 'blank', 'pace'])) {echo 'active ';}?>treeview">
                 <a href="#">
                     <i class="fa fa-folder"></i> <span>Examples</span>
                     <span class="pull-right-container">
