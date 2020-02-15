@@ -48,10 +48,10 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'topNav')?>"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'boxed')?>"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'fixed')?>"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'collapsedSidebar')?>"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'topNav') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'topNav')?>"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'boxed') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'boxed')?>"><i class="fa fa-circle-o"></i> Boxed</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'fixed') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'fixed')?>"><i class="fa fa-circle-o"></i> Fixed</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'collapsedSidebar') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'collapsedSidebar')?>"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
                 </ul>
             </li>
             <li>
@@ -71,10 +71,10 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'chartjs')?>"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'morris')?>"><i class="fa fa-circle-o"></i> Morris</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'flot')?>"><i class="fa fa-circle-o"></i> Flot</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'inline')?>"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'chartjs') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'chartjs')?>"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'morris') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'morris')?>"><i class="fa fa-circle-o"></i> Morris</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'flot') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'flot')?>"><i class="fa fa-circle-o"></i> Flot</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'inline') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'inline')?>"><i class="fa fa-circle-o"></i> Inline charts</a></li>
                 </ul>
             </li>
             <li class="<?php if (in_array(\hl\HLView::$putout['active'], ['general2', 'icons', 'buttons', 'sliders', 'timeline', 'modals'])) {echo 'active ';}?>treeview">
@@ -86,12 +86,12 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'general2')?>"><i class="fa fa-circle-o"></i> General</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'icons')?>"><i class="fa fa-circle-o"></i> Icons</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'buttons')?>"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'sliders')?>"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'timeline')?>"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'modals')?>"><i class="fa fa-circle-o"></i> Modals</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'general2') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'general2')?>"><i class="fa fa-circle-o"></i> General</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'icons') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'icons')?>"><i class="fa fa-circle-o"></i> Icons</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'buttons') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'buttons')?>"><i class="fa fa-circle-o"></i> Buttons</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'sliders') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'sliders')?>"><i class="fa fa-circle-o"></i> Sliders</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'timeline') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'timeline')?>"><i class="fa fa-circle-o"></i> Timeline</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'modals') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'modals')?>"><i class="fa fa-circle-o"></i> Modals</a></li>
                 </ul>
             </li>
             <li class="<?php if (in_array(\hl\HLView::$putout['active'], ['general', 'advanced', 'editors'])) {echo 'active ';}?>treeview">
@@ -102,9 +102,9 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'general')?>"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'advanced')?>"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'editors')?>"><i class="fa fa-circle-o"></i> Editors</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'general') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'general')?>"><i class="fa fa-circle-o"></i> General Elements</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'advanced') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'advanced')?>"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'editors') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'editors')?>"><i class="fa fa-circle-o"></i> Editors</a></li>
                 </ul>
             </li>
             <li class="<?php if (in_array(\hl\HLView::$putout['active'], ['simple', 'data'])) {echo 'active ';}?>treeview">
@@ -115,8 +115,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'simple')?>"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'data')?>"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'simple') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'simple')?>"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'data') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'data')?>"><i class="fa fa-circle-o"></i> Data tables</a></li>
                 </ul>
             </li>
             <li>
@@ -146,15 +146,15 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'invoice')?>"><i class="fa fa-circle-o"></i> Invoice</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'profile')?>"><i class="fa fa-circle-o"></i> Profile</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'login')?>"><i class="fa fa-circle-o"></i> Login</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'register')?>"><i class="fa fa-circle-o"></i> Register</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'lockscreen')?>"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', '_404')?>"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', '_500')?>"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'blank')?>"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-                    <li><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'pace')?>"><i class="fa fa-circle-o"></i> Pace Page</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'invoice') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'invoice')?>"><i class="fa fa-circle-o"></i> Invoice</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'profile') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'profile')?>"><i class="fa fa-circle-o"></i> Profile</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'login') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'login')?>"><i class="fa fa-circle-o"></i> Login</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'register') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'register')?>"><i class="fa fa-circle-o"></i> Register</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'lockscreen') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'lockscreen')?>"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == '_404') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', '_404')?>"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == '_500') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', '_500')?>"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'blank') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'blank')?>"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+                    <li<?php if (\hl\HLView::$putout['active'] == 'pace') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'pace')?>"><i class="fa fa-circle-o"></i> Pace Page</a></li>
                 </ul>
             </li>
             <li class="treeview">

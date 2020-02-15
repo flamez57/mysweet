@@ -198,7 +198,7 @@ class PagesController extends HLController
     public function general2Action()
     {
         HLView::param('title', 'general');
-        HLView::param('active', 'general');
+        HLView::param('active', 'general2');
     }
 
     public function iconsAction()
