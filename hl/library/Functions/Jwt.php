@@ -3,11 +3,6 @@ namespace hl\library\Functions;
 /**
 ** @ClassName: Jwt
 ** @Description: token签名验证
- * ===测试使用
-new Jwt();
-var_dump(Jwt::getToken(['a' => 'sdfs']));
-$a = 'eyJhbGciOiYmYiOjEJf8xRlnXZFCIwDFJfFSJd57bWph-zuM';
-var_dump(Jwt::verifyToken($a));
 ** @author flamez57 <flamez57@mysweet95.com>
 ** @date 2020年2月17日 晚上22:49
 ** @version V1.0
@@ -42,7 +37,7 @@ class Jwt
         $arr = [
             'iss' => 'mysweet95', //该JWT的签发者
             'iat' => self::$time, //签发时间
-            'exp' => self::$time + 15, //过期时间
+            'exp' => self::$time + 15 * 86400, //过期时间
             'nbf' => self::$time, //该时间之前不接收处理该Token
             'sub' => '', //面向的用户
             'jti' => md5(uniqid('JWT') . self::$time) //该Token唯一标识

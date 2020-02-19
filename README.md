@@ -474,4 +474,29 @@ HTML;
     print_r($hta->getArrayOfTh(true));
 ```
 
+Jwt
+========
+实例化Jwt类
+```php
+new \hl\library\Functions\Jwt();
+```
+生成token存在客户端，每次请求都要携带这个token
+```php
+\hl\library\Functions\Jwt::getToken(这里是要携带的参数数组);
+//生成256位的字符串
+```
+验证token 这里只对过期时间做基础验证 验证通过返回数组 不通过返回false
+```php
+\hl\library\Functions\Jwt::verifyToken($token);
+/* 验证成功返回参数
+array (size=7)
+  'iss' => string 'mysweet95' (length=9)  //该JWT的签发者
+  'iat' => int 1582123404   //签发时间
+  'exp' => int 1583419404   //过期时间
+  'nbf' => int 1582123404   //该时间之前不接收处理该Token
+  'sub' => string '' (length=0)  //面向的用户
+  'jti' => string 'c5e8f2e681ab5e8ca5006f06f7fe77a9' (length=32)//该Token唯一标识
+  'a' => string 'sdfs' (length=4)  //后面的都是要携带参数
+*/
+```
 
