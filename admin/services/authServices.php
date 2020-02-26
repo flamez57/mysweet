@@ -1,8 +1,8 @@
 <?php
 namespace admin\services;
 /**
-** @ClassName: exampleServices
-** @Description: 业务层示例
+** @ClassName: authServices
+** @Description: 权限管理
 ** @author flamez57 <flamez57@mysweet95.com>
 ** @date 2018年3月26日 晚上21:49
 ** @version V1.0
@@ -20,6 +20,9 @@ use admin\models\auth\roleNodeModels;
 
 class authServices extends HLServices
 {
+    /*
+     * 登陆啥的就这里写
+     */
     public function todo()
     {
         $str = exampleModels::getInstance()->todo();
