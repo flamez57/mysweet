@@ -8,7 +8,15 @@ namespace admin\services;
 ** @version V1.0
 */
 use hl\HLServices;
-use application\models\exampleModels;
+use admin\models\auth\adminModels;
+use admin\models\auth\groupMenuModels;
+use admin\models\auth\groupModels;
+use admin\models\auth\groupRoleModels;
+use admin\models\auth\logModels;
+use admin\models\auth\menuModels;
+use admin\models\auth\nodeModels;
+use admin\models\auth\roleModels;
+use admin\models\auth\roleNodeModels;
 
 class authServices extends HLServices
 {

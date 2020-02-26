@@ -1,5 +1,5 @@
 <?php
-namespace application\models\auth;
+namespace admin\models\auth;
 /**
 ** @ClassName: HLModel
 ** @Description: 节点角色关联表数据模型示例

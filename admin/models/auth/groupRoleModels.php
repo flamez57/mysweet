@@ -1,15 +1,15 @@
 <?php
-namespace application\models\auth;
+namespace admin\models\auth;
 /**
 ** @ClassName: HLModel
-** @Description: 菜单表数据模型示例
+** @Description: 组和角色关联表数据模型示例
 ** @author flamez57 <flamez57@mysweet95.com>
 ** @date 2018年3月26日 晚上21:49
 ** @version V1.0
 */
 use hl\HLModel;
 
-class menuModels extends HLModel
+class groupRoleModels extends HLModel
 {
     /*
     ** 选择数据库
@@ -19,7 +19,7 @@ class menuModels extends HLModel
     /*
     ** 数据表
     */
-    public $tableName = 'hl_auth_menu';
+    public $tableName = 'hl_auth_group_role';
     
     public function __construct()
     {
