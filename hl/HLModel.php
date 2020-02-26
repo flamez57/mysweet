@@ -62,4 +62,59 @@ class HLModel extends HLSington
         $this->setLastQuery($sql);
         return $this->db->query($sql, $db);
     }
+
+    /*
+     * 获取一条
+     */
+    public function getRow()
+    {
+
+    }
+
+    /*
+     * 获取一个值
+     */
+    public function getOne()
+    {
+
+    }
+
+    /*
+     * 获取列表
+     */
+    public function getAll()
+    {
+
+    }
+
+    public function getByWhere()
+    {
+
+    }
+
+    public function updateByWhere()
+    {
+
+    }
+
+    public function updateById()
+    {
+
+    }
+
+    /*
+     * 减少
+     */
+    public function decr()
+    {
+
+    }
+
+    /*
+     * 增加
+     */
+    public function incr()
+    {
+
+    }
 }

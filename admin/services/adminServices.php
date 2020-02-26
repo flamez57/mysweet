@@ -47,10 +47,24 @@ class adminServices extends HLServices
     /*
      * 编辑用详情
      */
+    public function adminDetail()
+    {
+
+    }
+
     /*
      * 保存
      */
+    public function saveAdmin()
+    {
+
+    }
+
     /*
      * 删除
      */
+    public function delAdmin()
+    {
+
+    }
 }
