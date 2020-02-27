@@ -24,6 +24,11 @@ class HLModel extends HLSington
     public $_db;
 
     /*
+     * 主键
+     */
+    public $id;
+
+    /*
     ** 查询上次连接数据库请求的查询
     */
     private $lastQuery = '';
@@ -92,14 +97,14 @@ class HLModel extends HLSington
 
     }
 
-    public function updateByWhere()
+    public function updateByWhere($where, $data)
     {
-
+        return $this->db->update($this->tableName, $data, $where);
     }
 
-    public function updateById()
+    public function updateById($id, $data)
     {
-
+        return $this->db->update($this->tableName, $data, [$this->id => $id]);
     }
 
     /*
