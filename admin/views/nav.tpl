@@ -16,6 +16,12 @@
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+                <!--板块 每个板块都有自己对应的菜单-->
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        系统管理
+                    </a>
+                </li>
                 <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
