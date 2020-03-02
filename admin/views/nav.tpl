@@ -18,7 +18,10 @@
             <ul class="nav navbar-nav">
                 <!--板块 每个板块都有自己对应的菜单-->
                 <li>
-                    <a href="#" class="dropdown-toggle">
+                    <a href="#" class="dropdown-toggle" aria-expanded="true">
+                        样板
+                    </a>
+                    <a href="#" class="dropdown-toggle" aria-expanded="true">
                         系统管理
                     </a>
                 </li>
