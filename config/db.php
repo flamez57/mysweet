@@ -8,5 +8,5 @@ return [
         'password' => 'vagrant',
         'charset' => 'utf8',
         'port' => '3306'
-    ], 
+    ],
 ];
