@@ -1,5 +1,5 @@
 # Folder config file
-config/db.php
+/config/db.php
 
 # 编辑器配置
 .idea/
