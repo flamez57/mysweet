@@ -19,7 +19,7 @@
                 <!--板块 每个板块都有自己对应的菜单-->
                 <?php foreach (\hl\HLView::$putout['nav_menu'] as $_v) { ?>
                 <li>
-                    <a href="<?=$_v['menu_id']?>" class="dropdown-toggle" aria-expanded="true">
+                    <a href="<?=\hl\HLRoute::makeUrl('admin', 'index', 'index', ['menuId' => $_v['menu_id']])?>" class="dropdown-toggle" aria-expanded="true">
                         <?=$_v['name'];?>
                     </a>
                 </li>

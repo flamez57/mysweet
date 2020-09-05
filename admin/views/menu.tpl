@@ -54,6 +54,28 @@
                     <li<?php if (\hl\HLView::$putout['active'] == 'collapsedSidebar') {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'collapsedSidebar')?>"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
                 </ul>
             </li>
+            <?php foreach (\hl\HLView::$putout['left_menu'] as $_v) { if (isset($_v['children'])) { ?>
+            <li class="<?php if (in_array(\hl\HLView::$putout['active'], array_column($_v['children'], 'code'))) {echo 'active ';}?>treeview">
+                <a href="#">
+                    <i class="fa fa-pie-chart"></i>
+                    <span><?=$_v['name'];?></span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <?php foreach ($_v['children'] as $__v) { ?>
+                    <li<?php if (\hl\HLView::$putout['active'] == $__v['code']) {echo ' class="active"';}?>><a href="<?=\hl\HLRoute::makeUrl('admin', $_v['code'], $__v['code'])?>"><i class="fa fa-circle-o"></i> <?=$__v['name'];?></a></li>
+                    <?php } ?>
+                </ul>
+            </li>
+            <?php } else { ?>
+            <li>
+                <a href="#">
+                    <i class="fa fa-th"></i> <span><?=$_v['name'];?></span>
+                </a>
+            </li>
+            <?php } } ?>
             <li>
                 <a href="<?=\hl\HLRoute::makeUrl('admin', 'pages', 'widgets')?>">
                     <i class="fa fa-th"></i> <span>Widgets</span>

@@ -38,7 +38,11 @@ class HLRoute
     ** 方法
     */
     static private $action;
- 
+
+    static private $var_module = 'm';
+    static private $var_controller = 'c';
+    static private $var_action = 'a';
+
     /*
     ** 初始化方法
     ** @param $config
@@ -58,13 +62,23 @@ class HLRoute
     ** @param $action string 方法
     ** @return string
     */
-    static public function makeUrl($module, $controller, $action)
+    static public function makeUrl($module, $controller, $action, $param = [])
     {
     	switch (self::$urlMode) {
     		case self::COMMON_MODE:
     			$url = "/index.php?m={$module}&c={$controller}&a={$action}";
+    			if (!empty($param)) {
+    			    foreach ($param as $_k => $_v) {
+    			        $url .= "&{$_k}={$_v}";
+                    }
+                }
     		break;
     		case self::BEAUTIFY_MODE:
+    		    if (!empty($param)) {
+    			    foreach ($param as $_k => $_v) {
+    			        $action .= "_{$_k}_{$_v}";
+                    }
+                }
     			$url = "/{$module}_{$controller}_{$action}.html";
     		break;
     	}
@@ -88,13 +102,13 @@ class HLRoute
     				foreach ($params as $_paramV) {
 		                $tmp = explode('=', $_paramV);
 		                switch ($tmp[0]) {
-		                	case 'm':
+                            case self::$var_module:
 		                		$data['module'] = $tmp[1];
 		                	break;
-		                	case 'c':
+                            case self::$var_controller:
 		                		$data['controller'] = $tmp[1];
 		                	break;
-		                	case 'a':
+                            case self::$var_action:
 		                		$data['action'] = $tmp[1];
 		                	break;
 		                }
@@ -146,7 +160,6 @@ class HLRoute
     static private function getParamByDynamic()
     {
         $arr = empty($_SERVER['QUERY_STRING']) ? array() : explode('&', $_SERVER['QUERY_STRING']);
-        var_dump($_SERVER['QUERY_STRING'], $arr);
         $data = array(
             'module' => '',
             'controller' => '',
@@ -190,7 +203,7 @@ class HLRoute
                     break;
             }
         }
-        return $data;
+        return $data['param'];
     }
  
     /**
@@ -198,14 +211,15 @@ class HLRoute
      */
     static private function getParamByPathinfo()
     {
-        $part = explode('_', trim($_SERVER['REQUEST_URI'], '/'));
+        $part = explode(
+            '_',
+            trim(substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '.html')), '/')
+        );
         $data = [];
         if (!empty($part)) {
-            krsort($part);
-            $data['module'] = array_pop($part);
-            $data['controller'] = array_pop($part);
-            $data['action'] = array_pop($part);
-            ksort($part);
+            $data['module'] = array_shift($part);
+            $data['controller'] = array_shift($part);
+            $data['action'] = array_shift($part);
             $part = array_values($part);
             $tmp = array();
             if (count($part) > 0) {
@@ -217,7 +231,7 @@ class HLRoute
             }
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
-                    $data = array_merge($tmp, $_GET);
+                    $data = $tmp;
                     unset($_GET);
                     break;
                 case 'POST':
