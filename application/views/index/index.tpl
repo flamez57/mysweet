@@ -33,7 +33,7 @@
     <div style="width:auto; display:inline-block !important; margin:300px auto;">
         <div>
             <?=\hl\HLView::img('deer.gif', ['width' => '200px']);?>
-            <?=\hl\HLView::img('mysweet.png', ['width' => '200px']);?>
+            <?=\hl\HLView::img('mysweet.png', ['width' => '70%']);?>
         </div>
         <nav class="list1">
             <ul>

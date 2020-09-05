@@ -8,6 +8,7 @@ namespace application\controllers;
 ** @version V1.0
 */
 use application\models\installModels;
+use application\models\exampleModels;
 use hl\HLController;
 use application\services\exampleServices;
 use application\services\installServices;
@@ -49,6 +50,105 @@ class IndexController extends HLController
     }
 
     public function testAction()
+    {
+        $p2 = [];
+        $p3 = [];
+        $p4 = [];
+        $p5 = [];
+        $w2 = [];
+        $w3 = [];
+        $w4 = [];
+        $w5 = [];
+        $sp2 = [];
+        $sp3 = [];
+        $sp4 = [];
+        $sp5 = [];
+        $sw2 = [];
+        $sw3 = [];
+        $sw4 = [];
+        $sw5 = [];
+        $sql = "select id,supplier_goods_id,supplier_store_id,goods_id,title,shipping from srm_goods where is_delete = 0 and goods_id >0";
+        $list = exampleModels::getInstance()->aa($sql);
+        $data = [];
+        foreach ($list as $_list) {
+            if (empty($_list['shipping'])) {
+                continue;
+            }
+            $ship = json_decode($_list['shipping'], true);
+            if (!isset($ship['postage_default']) || !isset($ship['district'])) {
+                continue;
+            }
+            //var_dump($ship, $_list);
+            if ($ship['type'] == 'pcs') {
+                if (!empty($ship['district'])) {
+                    foreach ($ship['district'] as $_v) {
+                        if ($_v['postage'] >= 20) {
+                            $data[] = [
+                                '供应链商品id' => $_list['supplier_goods_id']."\t",
+                                '商品id' => $_list['goods_id'],
+                                '商品名称' => $_list['title'],
+                                '件数' => $_v['start'],
+                                '钱' => $_v['postage'],
+                                '区域' => $_v['to_province'],
+                                '首重' => '',
+                                '区域2' => '',
+                                '钱2' => '',
+                            ];
+                        }
+                    }
+                }
+            } elseif ($shop['type'] = 'weight') {
+                if (!empty($ship['district'])) {
+                    foreach ($ship['district'] as $_v) {
+                        if ($_v['postage'] >= 20) {
+                            $data[] = [
+                                '供应链商品id' => $_list['supplier_goods_id']."\t",
+                                '商品id' => $_list['goods_id'],
+                                '商品名称' => $_list['title'],
+                                '件数' => '',
+                                '区域' => '',
+                                '钱' => '',
+                                '首重' => $_v['start'],
+                                '区域2' => $_v['to_province'],
+                                '钱2' => $_v['postage'],
+                            ];
+                        }
+                    }
+                }
+            }
+            //var_dump($ship);
+        }
+        //var_dump($data);
+        die;
+        //实例化类
+        $csv = new \hl\library\Tools\Excel\HLPutoutCsv();
+        //设置表名
+        $csv->setTableName('202091');
+        //设置表头
+        $csv->setTableHead(['code', 'zi_gou', 'title', 'pcs','fee', 'zero', 'weg','fee', 'zero']);
+        //导出数据
+        $csv->putout($data);
+        /*
+        echo "p2== ".count(array_unique($p2))."<br>";
+        echo "p3== ".count(array_unique($p3))."<br>";
+        echo "p4== ".count(array_unique($p4))."<br>";
+        echo "p5== ".count(array_unique($p5))."<br>";
+        echo "w2== ".count(array_unique($w2))."<br>";
+        echo "w3== ".count(array_unique($w3))."<br>";
+        echo "w4== ".count(array_unique($w4))."<br>";
+        echo "w5== ".count(array_unique($w5))."<br>";
+        echo "sp2== ".count(array_unique($sp2))."<br>";
+        echo "sp3== ".count(array_unique($sp3))."<br>";
+        echo "sp4== ".count(array_unique($sp4))."<br>";
+        echo "sp5== ".count(array_unique($sp5))."<br>";
+        echo "sw2== ".count(array_unique($sw2))."<br>";
+        echo "sw3== ".count(array_unique($sw3))."<br>";
+        echo "sw4== ".count(array_unique($sw4))."<br>";
+        echo "sw5== ".count(array_unique($sw5))."<br>";*/
+        die;
+    }
+
+    public function test2Action()
     {
 
         echo '这里写测试代码';
