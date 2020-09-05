@@ -7,10 +7,9 @@ namespace admin\controllers;
 ** @date 2020年2月12日 晚上21:49
 ** @version V1.0
 */
-use hl\HLController;
 use hl\HLView;
 
-class PagesController extends HLController
+class PagesController extends BaseController
 {
     /*
     ** charts

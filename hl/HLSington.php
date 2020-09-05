@@ -24,7 +24,7 @@ class HLSington
         
         $class = get_called_class();
         if (!isset(self::$_instance) || !self::$_instance instanceof self) {
-            self::$_instance[$class] = new $class();
+            self::$_instance[$class] = new $class($config);
         }
         if ($config) {
             self::$config = $config;

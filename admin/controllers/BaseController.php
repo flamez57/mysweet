@@ -11,9 +11,15 @@ use application\models\installModels;
 use hl\HLController;
 use application\services\exampleServices;
 use application\services\installServices;
+use hl\HLView;
 
 class BaseController extends HLController
 {
+    public function __construct($config)
+    {
+        HLView::param('nav_menu', $config['admin_menu']);
+    }
+
     /*
     ** 默认首页
     */

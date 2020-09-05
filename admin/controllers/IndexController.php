@@ -8,12 +8,11 @@ namespace admin\controllers;
 ** @version V1.0
 */
 use application\models\installModels;
-use hl\HLController;
 use application\services\exampleServices;
 use application\services\installServices;
 use hl\HLView;
 
-class IndexController extends HLController
+class IndexController extends BaseController
 {
     /*
     ** 默认首页
