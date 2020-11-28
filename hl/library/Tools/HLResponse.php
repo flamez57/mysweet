@@ -33,7 +33,7 @@ class HLResponse
             'data' => $data
         ];
         
-        echo json_encode($result);die;
+        echo json_encode($result, JSON_UNESCAPED_UNICODE);die;
     }
     
     /**

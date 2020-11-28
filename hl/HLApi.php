@@ -2,6 +2,8 @@
 namespace hl;
 
 use hl\HLSington;
+use hl\library\Tools\HLResponse;
+
 /**
 ** @ClassName: HLApi
 ** @Description: 接口基类
@@ -12,27 +14,15 @@ use hl\HLSington;
 
 class HLApi extends HLSington
 {
-    /*
-    ** 被调用的方法
-    */
-    private $callFunction;
-    
-    /*
-    ** 默认木模板目录路径
-    */
-    private $viewPath;
+    private $code = 0;
+    private $message = '';
+    private $data = [];
     
     /*
     ** 指向到最终的方法
     */
     public function __call($method, $avgs)
     {
-        $class = get_called_class();
-        $class = explode('\\', $class);
-        $this->viewPath = ROOT_PATH.$class[0].DIRECTORY_SEPARATOR.'views'.DIRECTORY_SEPARATOR. 
-                lcfirst(substr($class[2],0,strlen($class[2])-10)).DIRECTORY_SEPARATOR;
-        HLView::init($class[0], $this->viewPath);
-        $this->callFunction = $method;
         $method .= 'Action';
         if ($avgs) {
             return call_user_func_array([$this, $method], $avgs);
@@ -46,7 +36,7 @@ class HLApi extends HLSington
     */
     public function __destruct()
     {
-        echo $this->callFunction;
+        HLResponse::json($this->code, $this->message, $this->data);
     }
 
     /**
