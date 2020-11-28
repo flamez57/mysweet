@@ -14,6 +14,7 @@ use application\models\wampModels;
 use hl\HLApi;
 use application\services\exampleServices;
 use application\services\installServices;
+use hl\library\Tools\HLResponse;
 
 class IndexController extends HLApi
 {
@@ -23,6 +24,7 @@ class IndexController extends HLApi
     public function indexAction()
     {
         //框架欢迎页
+        HLResponse::json($this->code, $this->message, $this->data);
     }
 
     //安装
