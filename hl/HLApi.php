@@ -30,14 +30,6 @@ class HLApi extends HLSington
             return call_user_func_array([$this, $method], []);
         }
     }
-    
-    /*
-    ** 结束时引入默认的模板文件
-    */
-    public function __destruct()
-    {
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
 
     /**
     ** 获取post传值
