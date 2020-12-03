@@ -1,0 +1,65 @@
+body,h1,h2,h3,div,p{margin: 0;padding: 0}
+body{background-color: #FFFCD4;color: #111;}
+body{
+    font-family: sans-serif;    /*设置字体*/
+}
+
+.login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    background: #ff9d5b;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.login-box h1 {
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+.text-box{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 20px 0;
+    border: 1px solid #bbbbbb;
+}
+
+.text-box i{
+    width: 26px;
+    float: left;
+    text-align: center;
+    margin: 2px;
+    color: #bbb;
+}
+
+.text-box input {
+    border: none;
+    outline: none;
+    background: none;
+    color: #111;
+    font-size: 18px;
+    width: 80%;
+    float: left;
+}
+
+input[type="submit"]{
+    width: 100%;
+    border: none;
+    outline: none;
+    background: cornflowerblue;
+    color: white;
+    border-radius: 2px;
+    padding: 10px ;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 12px 0;
+}
+.save-pwd{
+    font-size: 14px;
+}

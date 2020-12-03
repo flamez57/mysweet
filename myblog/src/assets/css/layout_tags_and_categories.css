@@ -1,0 +1,112 @@
+@font-face {font-family: "Adobe 仿宋 Std R";}
+body, div, h1, h2, h3, blockquote, p {margin: 0;padding: 0}
+a {color: #111;text-decoration: none}
+a:hover {text-decoration: none}
+.main-container {
+    position: relative;
+}
+
+.main-container-content {
+    position: relative;
+    margin: 0 auto;
+    width: 85%;
+    min-width: 780px;
+    max-width: 1260px;
+}
+.content-body{
+    margin-left: 3%;
+    margin-right: 3%;
+}
+.header h1{
+    font-size: 2rem;
+    font-weight: normal;
+}
+.include-title{
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.marks {
+    margin: 5px 0;
+}
+
+.marks span {
+    margin-right: 10px
+}
+
+.marks i {
+    font-size: inherit;
+}
+
+.marks .view {
+    display: inline-block;
+    float: right;
+}
+.release-time, .tags-item, .view-number {
+    display: inline-block;
+}
+.tags-item a{
+    margin-right: 10px;
+}
+.tags-item a:hover{
+    text-decoration: underline;
+}
+.view-number{
+    width: 76px;
+    text-align: right;
+}
+
+.posts-inner {
+    margin-bottom: 2rem;
+}
+
+.posts {
+    padding-left: 1rem;
+    line-height: 32px;
+    border-left: 4px solid #58E877;
+    border-radius: 0 10px 10px 0;
+}
+.post-title{
+    font-size: 22px;
+}
+
+.read-more a, .read-more a:hover {
+    color: #58E877;
+    /*text-shadow: 1px 1px 0 #111111;*/
+}
+.post-short-content{
+    display: inline-block;
+    line-height: 28px;
+}
+
+.content-nav {
+    text-align: center;
+}
+
+.bottom-nav {
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+}
+
+.content-nav li {
+    float: left;
+}
+
+.bottom-nav a {
+    margin: 0 10px;
+    font-size: 18px;
+    color: #303030;
+}
+
+.bottom-nav i {
+    font-size: 18px;
+}
+
+.bottom-nav a:hover {
+    color: #ff8e40;
+}
+
+.bottom-nav .nav-action {
+    color: #ff8e40;
+}

@@ -1,0 +1,185 @@
+@font-face {font-family: "Adobe 仿宋 Std R";}
+body,p,ul,li,div,h1,h2,h3,blockquote,p,header,div{margin: 0;padding: 0}
+li{list-style: none}
+a{text-decoration:none}
+a:hover{text-decoration:none}
+span{margin-right: 10px}
+.main-container{
+    position: relative;
+}
+.main-container-content{
+    width: 65%;
+    min-width: 640px;
+    max-width: 960px;
+    margin: 0 auto;
+    /*background: white;*/
+    padding: 1rem;
+    border-radius: 10px;
+}
+.header{
+    position: relative;
+    margin: 0 auto;
+    padding-top: calc(45px + 4rem);
+    width: 65%;
+    min-width: 640px;
+    max-width: 960px;
+}
+.main-post-title {
+    padding: 20px 15px 15px;
+    line-height: 32px;
+    border-left: 5px solid #58E877;
+    border-radius: 0 2px 2px 0;
+    /*background: #FFFCD4;*/
+}
+.main-post-title h1{
+    border-bottom: 1px solid #bbbbbb;
+    padding-bottom: 20px;
+    font-size: 32px;
+}
+.main-post-title .marks{
+    line-height: 32px;
+    margin: 5px 0;
+}
+.main-post-title p{
+    display: inline;
+    float: right;
+}
+.marks {
+    margin: 5px 0;
+}
+
+.marks span {
+    margin-right: 10px
+}
+
+.marks i {
+    font-size: inherit;
+}
+
+.marks .view {
+    display: inline-block;
+    float: right;
+}
+.release-time, .tags-item, .view-number {
+    display: inline-block;
+}
+.tags-item a{
+    margin-right: 10px;
+}
+.tags-item a:hover{
+    text-decoration: underline;
+}
+.view-number{
+    width: 76px;
+    text-align: right;
+}
+
+.main-post-content{
+    position: relative;
+    margin: 20px;
+    padding: 20px;
+}
+.main-post-content h2{
+    line-height: 32px;
+    margin: 0 0 15px;
+}
+.main-post-content p{
+    line-height: 28px;
+    margin: 0 0 15px;
+}
+
+.comments{
+    margin: 20px 0;
+}
+.comments-header{
+    font-weight: normal;
+    padding: 15px 0;
+    border-bottom: 1px dashed #5c5c5c;
+}
+.comments-content{
+    border-bottom: 1px dashed #5c5c5c;
+}
+.comment{
+    margin: 15px 0 0 10px;
+}
+.comment-content{
+    margin: 15px 0 15px 15px;
+}
+.author{
+    font-weight: bolder;
+}
+.comment-footer{
+    display: inline;
+    margin-left: 70%;
+}
+
+.main-comment{
+    position: relative;
+    border-radius: 10px;
+    padding: 20px;
+    background: #D5E8B0;
+    /*border: 1px solid #eef0f2;*/
+}
+.main-comment h1{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #bbbbbb;
+    font-weight: normal;
+}
+.main-comment div,.main-comment p{
+    margin: 10px 0;
+}
+.main-comment p{
+    line-height: 32px;
+}
+.main-comment textarea{
+    width: 90%;
+    background: #FFFCD4;
+    border: 1px solid #eef0f2;
+}
+.main-comment input[type="text"]{
+    width: 250px;
+    height: 24px;
+    font-size: 14px;
+    background: #FFFCD4;
+    border: 1px solid #eef0f2;
+}
+.main-comment input[type="submit"]{
+    background: #FFFCD4;
+    border: #eef0f2;
+    width: 100px;
+    height: 32px;
+}
+.main-comment span{
+    color: #979797;
+}
+
+.entry-nav{
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem;
+    /*width: 100%;*/
+    background-color: #8bc1ed;
+    border-radius: 10px;
+}
+.entry-categories, .entry-location{
+    display: inline;
+}
+.entry-categories{
+    line-height: 220%;
+    margin-left: 1rem;
+}
+.entry-location li{
+    width: 240px;
+    line-height: 220%;
+}
+.entry-categories a{
+    color: green;
+}
+.entry-categories a:hover{
+    text-decoration: underline;
+}
+.entry-location a{
+    color: #111;
+    text-decoration: underline;
+}

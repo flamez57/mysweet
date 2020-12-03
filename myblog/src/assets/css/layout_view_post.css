@@ -1,0 +1,90 @@
+@font-face {font-family: "Adobe 仿宋 Std R";}
+body,p,ul,li,div,h1,h2,h3,blockquote,p,header,div{margin: 0;padding: 0}
+html,body{background: #FFFCD4;font-size: 14px;color: #111;}
+li{list-style: none}
+a{color: #111;text-decoration:none}
+a:hover{color: #111;text-decoration:none}
+span{margin-right: 10px}
+.main-container{
+    position: relative;
+}
+.main-container-content{
+    width: 65%;
+    min-width: 640px;
+    max-width: 960px;
+    margin: 0 auto;
+    /*background: white;*/
+    padding: 1rem;
+    border-radius: 10px;
+}
+.header{
+    position: relative;
+    margin: 0 auto;
+    padding-top: 2rem;
+    width: 65%;
+    min-width: 640px;
+    max-width: 960px;
+}
+.main-post-title {
+    padding: 20px 15px 15px;
+    line-height: 32px;
+    border-left: 5px solid #58E877;
+    border-radius: 0 2px 2px 0;
+    /*background: #FFFCD4;*/
+}
+.main-post-title h1{
+    border-bottom: 1px solid #bbbbbb;
+    padding-bottom: 20px;
+    font-size: 32px;
+}
+.main-post-title .marks{
+    line-height: 32px;
+    margin: 5px 0;
+}
+.main-post-title p{
+    display: inline;
+    float: right;
+}
+.marks {
+    margin: 5px 0;
+}
+
+.marks span {
+    margin-right: 10px
+}
+
+.marks i {
+    font-size: inherit;
+}
+
+.marks .view {
+    display: inline-block;
+    float: right;
+}
+.release-time, .tags-item, .view-number {
+    display: inline-block;
+}
+.tags-item a{
+    margin-right: 10px;
+}
+.tags-item a:hover{
+    text-decoration: underline;
+}
+.view-number{
+    width: 76px;
+    text-align: right;
+}
+
+.main-post-content{
+    position: relative;
+    margin: 20px;
+    padding: 20px;
+}
+.main-post-content h2{
+    line-height: 28px;
+    margin: 0 0 15px;
+}
+.main-post-content p{
+    line-height: 28px;
+    margin: 0 0 15px;
+}
