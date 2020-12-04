@@ -42,8 +42,8 @@
                             </div>
                             <div class="tags-item">
                                 <i class="iconfont iconlabel_fill"></i>
-                                <a href="tags.html">生活</a>
-                                <a href="tags.html">点滴</a>
+                                <router-link to="/TagList">生活</router-link>
+                                <router-link to="/TagList">点滴</router-link>
                             </div>
                             <div class="view">访问数:
                                 <div class="view-number"><span>1112</span></div>
@@ -51,7 +51,7 @@
                         </div>
                         <p class="post-short-content">今天的北京阳光灿烂，风清气爽，气温适宜，好像除了空气中飘着一些烦人的柳絮之外，一切都刚刚好。
                             索性去了趟玉渊潭公园，活动活动筋骨。通往公园的桥边上站着一群上了年纪的大爷们守着鱼竿，通往公园的路上各色的人群攒动，耳朵里是小贩的叫卖声，协警的指引声，人群里除了各种寒暄声还夹杂着孩童的哭闹声。这种浓烈喧闹的市民生活气息好像已经很久没有感受过了，工作以来的我一到周末就愿意宅家，躺着不想出门，像在学校读书的
-                            <span class="read-more">...<a href="post.html">Read More</a></span></p>
+                            <span class="read-more">...<router-link to="/Detail">Read More</router-link></span></p>
                     </blockquote>
                 </div>
                 <div class="posts-inner">
@@ -170,7 +170,7 @@
                 <div class="cate-ul-item">
                     <ul class="cate-ul">
                         <li>
-                            <a href="categories.html">生活</a>
+                            <router-link to="/CateList">生活</router-link>
                             <span> (16)</span>
                         </li>
                         <li><a href="categories.html">前端开发</a><span> (7)</span></li>
@@ -208,9 +208,9 @@
 <!-- 右导航 Start -->
 <ul class="fixbar">
     <li>
-        <a href="index.html">
+        <router-link to="/">
             <i class="iconfont iconhome" aria-hidden="true"></i>
-        </a>
+        </router-link>
     </li>
     <li>
         <a href="#toTop">
