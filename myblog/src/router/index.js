@@ -3,6 +3,9 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Record from '@/components/Record'
 import About from '@/components/About'
+import CateList from '@/components/CateList'
+import TagList from '@/components/TagList'
+import Detail from '@/components/Detail'
 
 Vue.use(Router)
 
@@ -20,6 +23,18 @@ export default new Router({
       path: '/About',
       name: 'About',
       component: About
+    }, {
+      path: '/CateList',
+      name: 'CateList',
+      component: CateList
+    }, {
+      path: '/TagList',
+      name: 'TagList',
+      component: TagList
+    }, {
+      path: '/Detail',
+      name: 'Detail',
+      component: Detail
     }
   ]
 })

@@ -1,0 +1,156 @@
+@font-face {font-family: "Adobe 仿宋 Std R";}
+html{ scroll-behavior: smooth;}
+body,p,ul,li,div,h1,h2,h3{margin: 0;padding: 0}
+html,body{background: #ccee40;font-size: 14px;color: #111;}
+li{list-style: none}
+a{color: #111;text-decoration:none}
+a:hover{text-decoration:none}
+.top-nav-fiexd{
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    width: 100%;
+    background: #ccee40;
+    box-shadow: 0 2px 4px #bd2c00;
+}
+.top-nav-inner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin: 0 auto;
+    width: 85%;
+    height: 45px;
+    min-width: 780px;
+    max-width: 1260px;
+}
+.top-nav{
+    display: flex;
+    align-items: center;
+    margin-left: calc(3%  - .5rem);
+    height: 45px;
+}
+.top-nav a{
+    padding: .75rem 1rem;
+    margin: 0 .5rem;
+    color: #111;
+    border-radius: 15px;
+    transition: .5s;
+}
+.top-nav a:hover{
+    color: #fff;
+    background-color: #bd2c00;
+}
+.top-nav .nav-action{    /*默认颜色*/
+    color: #fff;
+    background-color: #bd2c00;
+}
+.search-box{
+    position: relative;
+    display: inline-block;
+    margin-right:3%;
+    width: 220px;
+    height: 34px;
+    border-radius: 20px;
+    border: 1px solid #5c5c5c;
+}
+.search-box input{
+    width: 150px;
+    height: 34px;
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0 10px;
+    font-size: 12px;
+    color:#303030;
+}
+.search-box button{
+    width: 40px;
+    height: 34px;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    color: #111;
+}
+.header-item{
+    position: relative;
+}
+.header{
+    margin: 0 auto;
+    padding-top: calc(45px + 2rem);
+    width: 85%;
+    min-width: 780px;
+    max-width: 1260px;
+
+}
+.header-inner{
+    width: 85%;
+    min-width: 780px;
+    max-width: 1260px;
+    text-align: center;
+    margin: 0 auto;
+}
+.header-info{
+    text-align: center;
+}
+.header-info-head {
+    margin-top: 2rem;
+    width: 140px;
+    height: 140px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;  /*不被选中*/
+    border-radius: 50%;
+    box-shadow: 0 0 1rem #333;
+}
+.header-info-name{
+    margin: 20px auto 0;
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+}
+.header-info-desc {
+    margin: 10px auto 20px;
+    text-align: center;
+    color: #333;
+}
+
+
+.footer{
+    position: relative;
+    clear: both;
+}
+.footer-copyright{
+    position: relative;
+    width: 85%;
+    min-width: 780px;
+    max-width: 1260px;
+    padding: 20px 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.fixbar{
+    position: fixed;
+    right: 15px;
+    bottom: 80px;
+}
+.fixbar li{
+    background: #666666;
+    border-radius: 10%;
+    margin: 1px 0;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    cursor: pointer;
+}
+.fixbar i{
+    padding: 5px;
+    color: white;
+    font-size: 20px;
+}
+
+
+
