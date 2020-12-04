@@ -81,8 +81,8 @@ export default {
       msg: 'about'
     }
   },
-  components:{
-       ManageMenu,
+  components: {
+    ManageMenu
   }
 }
 </script>
