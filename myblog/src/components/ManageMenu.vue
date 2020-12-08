@@ -9,28 +9,29 @@
       </div>
       <ul class="left-nav" id="ul1">
       <li class="left-nav-item left-nav-action">
-                    <a href="#" class="left-nav-inner">
-                        <i class="iconfont icontimerauto" aria-hidden="true"></i>
-                        修改个人信息
-                    </a>
+      <router-link to="/Manage" class="left-nav-inner"><i class="iconfont icontimerauto" aria-hidden="true"></i>修改个人信息</router-link>
+
                 </li>
                 <li class="left-nav-item">
-                    <a href="#" class="left-nav-inner">
-                        <i class="iconfont icon-lock" aria-hidden="true"></i>
+                <router-link to="/SetPwd" class="left-nav-inner">
+                <i class="iconfont icon-lock" aria-hidden="true"></i>
                         修改密码
-                    </a>
+                </router-link>
                 </li>
         <li class="left-nav-item left-nav-action">
-          <a href="#" class="left-nav-inner">
-            <i class="iconfont iconarticle-line" aria-hidden="true"></i>
+        <router-link to="/ArticleList" class="left-nav-inner">
+                <i class="iconfont iconarticle-line" aria-hidden="true"></i>
             文章
-          </a>
+                </router-link>
+
         </li>
         <li class="left-nav-item">
-          <a href="#" class="left-nav-inner">
-            <i class="iconfont iconfolder" aria-hidden="true"></i>
+        <router-link to="/ManageCate" class="left-nav-inner">
+                <i class="iconfont iconfolder" aria-hidden="true"></i>
             分类
-          </a>
+                </router-link>
+
+
         </li>
         <li class="left-nav-item">
           <a href="#" class="left-nav-inner">

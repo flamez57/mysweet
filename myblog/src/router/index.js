@@ -9,6 +9,11 @@ import Detail from '@/components/Detail'
 // 管理
 import Login from '@/components/Login'
 import Manage from '@/components/Manage'
+import SetPwd from '@/components/SetPwd'
+import ArticleList from '@/components/ArticleList'
+import CreatArticle from '@/components/CreatArticle'
+import ManageCate from '@/components/ManageCate'
+import CreatCate from '@/components/CreatCate'
 
 Vue.use(Router)
 
@@ -46,6 +51,26 @@ export default new Router({
       path: '/Manage',
       name: 'Manage',
       component: Manage
+    }, {
+      path: '/SetPwd',
+      name: 'SetPwd',
+      component: SetPwd
+    }, {
+      path: '/ArticleList',
+      name: 'ArticleList',
+      component: ArticleList
+    }, {
+      path: '/CreatArticle',
+      name: 'CreatArticle',
+      component: CreatArticle
+    }, {
+      path: '/ManageCate',
+      name: 'ManageCate',
+      component: ManageCate
+    }, {
+      path: '/CreatCate',
+      name: 'CreatCate',
+      component: CreatCate
     }
   ]
 })

@@ -1,73 +1,9 @@
 <template>
 
 <div class="main-canvas">
-  <div class="left-sidebar" id="left-sidebar">
-    <div class="sidebar-main-content">
-      <div class="header-info">
-        <img class="header-info-head" src="../assets/img/head2.png"/>
-        <h2 class="header-info-name">小黄人</h2>
-        <p class="header-info-desc">欢迎来到我的个人博客</p>
-      </div>
-      <ul class="left-nav" id="ul1">
-      <li class="left-nav-item left-nav-action">
-                    <a href="#" class="left-nav-inner">
-                        <i class="iconfont icontimerauto" aria-hidden="true"></i>
-                        修改个人信息
-                    </a>
-                </li>
-                <li class="left-nav-item">
-                    <a href="#" class="left-nav-inner">
-                        <i class="iconfont icon-lock" aria-hidden="true"></i>
-                        修改密码
-                    </a>
-                </li>
-        <li class="left-nav-item left-nav-action">
-          <a href="#" class="left-nav-inner">
-            <i class="iconfont iconarticle-line" aria-hidden="true"></i>
-            文章
-          </a>
-        </li>
-        <li class="left-nav-item">
-          <a href="#" class="left-nav-inner">
-            <i class="iconfont iconfolder" aria-hidden="true"></i>
-            分类
-          </a>
-        </li>
-        <li class="left-nav-item">
-          <a href="#" class="left-nav-inner">
-            <i class="iconfont iconsettings" aria-hidden="true"></i>
-            设置
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="user-exit">
-      <button>退出</button>
-    </div>
-  </div>
-    <div class="top-sidebar">
-    <div class="top-nav">
-      <ul class="top-icon-menu">
-        <li id="control-left-nav">
-          <i class="iconfont iconmenu" aria-hidden="true"></i>
-        </li>
-      </ul>
+<manage-menu></manage-menu>
 
-      <ul class="top-private-menu">
-        <li class="private-menu-item"><a class="private-menu-inner" href="../index.html" target="_blank">博客预览</a></li>
-        <li class="private-menu-item" id="li1">
-          <a class="private-menu-inner open-drop-down" id="oA" href="userInforModify.html" target="_blank">个人中心</a>
-          <!--<div class="drop-down" id="drop-down">-->
-          <!--<a href="#">个人信息</a>-->
-          <!--<a href="#">修改密码</a>-->
-          <!--<a href="#">退出</a>-->
-          <!--</div>-->
-        </li>
-      </ul>
-    </div>
-  </div>
-
-    <div class="main-container" style="display: block;">
+    <div class="main-container">
     <div class="content">
       <div class="container-title">
         <ul id="arch-manage-title-ul">
@@ -75,7 +11,7 @@
         </ul>
       </div>
       <!--内容1.1 管理文章 S-->
-      <div class="container-body" style="display: block;" id="manage-container-body1-1">
+      <div class="container-body" id="manage-container-body1-1">
         <div class="select-direction">
           <!--筛选 S-->
           <div class="left-direction-inner" id="post-left-direction-inner">
@@ -94,7 +30,9 @@
                 <i class="iconfont iconsearch" aria-hidden="true"></i>
               </button>
             </div>
-            <a href="#" class="rel-btn" id="add-post">创建文章</a>
+            <router-link to="/CreatArticle" class="rel-btn">
+                创建文章
+                </router-link>
           </div>
           <!--搜索 及 创建 E-->
         </div>
@@ -132,9 +70,9 @@
               </td>
               <td>
                 <div class="edit">
-                  <a href="../view-post.html" target="_blank"><i class="iconfont iconchakan" aria-hidden="true"></i></a>
+                  <a href="../view-post.html" target="_blank"><i class="iconfont iconchakan"></i></a>
                   <a class="delete-post" href="#" onclick="confirm('确定删除吗？');">
-                    <i class="iconfont iconicon--" aria-hidden="true"></i>
+                    <i class="iconfont iconicon"></i>
                   </a>
                 </div>
               </td>
@@ -312,86 +250,6 @@
         <!--table E-->
       </div>
       <!--内容1.1 管理文章 E-->
-
-      <!--内容1.2 创建文章 S-->
-      <div class="container-body" id="manage-container-body1-2">
-        <div class="post-func">
-          <select class="select-cate">
-            <option>请选择分类</option>
-            <option value="生活">生活</option>
-            <option value="文学">文学</option>
-          </select>
-          <a href="#" class="del-btn">删除</a>
-          <a href="../view-post.html" class="view-btn" target="_blank">预览</a>
-          <a href="#" class="save-btn">存草稿</a>
-          <a href="#" class="rel-btn">发布</a>
-        </div>
-        <!--文章编辑 S-->
-        <div class="edit-area">
-          <div class="arch-title">
-            <!--<span>标题:</span>-->
-            <input type="text" placeholder="文章标题"/>
-          </div>
-          <div class="arch-desc">
-            <!--<span>描述:</span>-->
-            <input type="text" placeholder="文章描述"/>
-          </div>
-          <div class="arch-main-body">
-            <!--<textarea rows="20" cols="70"></textarea>-->
-            <div class="edit-func">
-              <span class="edit-func-item">
-                <a href="#"><i class="iconfont iconcuti" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconxieti" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconUnderline" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconshanchuxian" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconh1" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconh" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconh2" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconimage" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconyinyong-" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconul" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconol" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconlink" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont icondaima" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont icongongshi" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconvideo" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconfengexian" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconziyuan" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconziyuan1" aria-hidden="true"></i></a>
-              </span>
-              <span>
-                <a href="#"><i class="iconfont iconweibiaoti10" aria-hidden="true"></i></a>
-              </span>
-            </div>
-            <div class="content-canvas">
-              <div class="content-body">
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-              </div>
-              <!--<div style="height: 400px;"></div>-->
-            </div>
-          </div>
-        </div>
-        <!--文章编辑 E-->
-      </div>
-      <!--内容1.2 创建文章 E-->
     </div>
   </div>
 </div>
@@ -399,12 +257,16 @@
 </template>
 
 <script>
+import ManageMenu from './ManageMenu'
 export default {
   name: 'About',
   data () {
     return {
       msg: 'about'
     }
+  },
+  components: {
+    ManageMenu
   }
 }
 </script>

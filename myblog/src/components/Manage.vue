@@ -2,11 +2,11 @@
 
 <div class="main-canvas">
 <manage-menu></manage-menu>
-<div class="main-container" style="display: block;">
+<div class="main-container">
         <div class="content">
             <div class="form-container">
                 <!--内容一 S-->
-                <div class="form" style="display: block;">
+                <div class="form">
                     <div class="form-element">
                         <label class="form-label">姓名</label>
                         <input class="input" type="text" value="胡成黎"/>
@@ -43,28 +43,6 @@
                         <span class="btn">取消</span>
                     </div>
                 </div>
-                <!--内容一 E-->
-
-                <!--内容二 S-->
-                <div class="form">
-                    <div class="form-element">
-                        <label class="form-label">原密码</label>
-                        <input class="input pwd" type="password" maxlength="16" value=""/>
-                    </div>
-                    <div class="form-element">
-                        <label class="form-label">新的密码</label>
-                        <input class="input pwd" type="password" maxlength="16" value=""/>
-                    </div>
-                    <div class="form-element">
-                        <label class="form-label">确认密码</label>
-                        <input class="input pwd" type="password" maxlength="16" value=""/>
-                    </div>
-                    <div class="form-element">
-                        <span class="btn mr-10">确认</span>
-                        <span class="btn">取消</span>
-                    </div>
-                </div>
-                <!--内容二 E-->
             </div>
         </div>
     </div>
