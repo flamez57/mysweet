@@ -44,4 +44,18 @@ class HLApi extends HLSington
         }
         return $_POST[$key] ?? $value;
     }
+
+    /**
+    ** 获取get传值
+    ** @param $key string
+    ** @param $value string|array
+    ** @return string|array
+    */
+    public function getQuery($key = '', $value = '')
+    {
+        if (empty($key)) {
+            return $_GET;
+        }
+        return $_GET[$key] ?? $value;
+    }
 }

@@ -11,6 +11,7 @@ use application\models\installModels;
 use application\models\exampleModels;
 use application\models\example2Models;
 use application\models\wampModels;
+use blogapi\services\memberServices;
 use hl\HLApi;
 use application\services\exampleServices;
 use application\services\installServices;
@@ -18,6 +19,34 @@ use hl\library\Tools\HLResponse;
 
 class IndexController extends HLApi
 {
+    /*
+     * 分类
+     */
+    public function cateListAction()
+    {
+        $code = $this->getQuery('code', '');
+    }
+    /*
+     * 标签
+     */
+    /*
+     * 文章列表
+     */
+    /*
+     * 用户信息
+     */
+    public function memberInfoAction()
+    {
+        $code = $this->getQuery('code', '');
+        $this -> data = memberServices::getInstance()->getMemberInfo($code);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+    /*
+     * 详情
+     */
+    /*
+     * 发表看法
+     */
     /*
     ** 默认首页
     */

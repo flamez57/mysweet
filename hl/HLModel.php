@@ -79,9 +79,12 @@ class HLModel extends HLSington
     /*
      * 获取一个值
      */
-    public function getOne()
+    public function getOne($sql, $plarams = [])
     {
-
+        if (strpos(strtoupper($sql), 'LIMIT ') === false) {
+            $sql = trim($sql, '; ') . ' LIMIT 0, 1';
+        }
+        return $this->db->safeQuery($sql, $plarams);
     }
 
     /*

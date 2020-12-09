@@ -26,6 +26,15 @@ class memberModels extends HLModel
         parent::__construct();
     }
 
+    /*
+    ** 根据code获取member_id
+    */
+    public function getMemberIdByCode($code)
+    {
+        $sql = "SELECT id FROM {$this->tableName} WHERE code = :code";
+        return $this->getOne($sql, ['code' => $code]);
+    }
+
     public function doSql($sql, $db = '')
     {
         return $this->query($sql, $db);

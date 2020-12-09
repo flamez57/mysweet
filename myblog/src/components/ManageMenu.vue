@@ -12,7 +12,6 @@
       <router-link to="/Manage" class="left-nav-inner">
         <i class="iconfont icontimerauto" aria-hidden="true"></i>修改个人信息
       </router-link>
-
                 </li>
                 <li class="left-nav-item">
                 <router-link to="/SetPwd" class="left-nav-inner">
@@ -25,7 +24,6 @@
                 <i class="iconfont iconarticle-line" aria-hidden="true"></i>
             文章
                 </router-link>
-
         </li>
         <li class="left-nav-item">
         <router-link to="/ManageCate" class="left-nav-inner">
