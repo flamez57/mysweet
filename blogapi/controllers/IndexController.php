@@ -33,7 +33,7 @@ class IndexController extends HLApi
      * 文章列表
      */
     /*
-     * 用户信息
+     * 用户信息 http://mysweet.com/index.php?m=blogapi&c=index&a=memberInfo&code=123
      */
     public function memberInfoAction()
     {

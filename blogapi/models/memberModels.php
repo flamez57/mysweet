@@ -31,7 +31,7 @@ class memberModels extends HLModel
     */
     public function getMemberIdByCode($code)
     {
-        $sql = "SELECT id FROM {$this->tableName} WHERE code = :code";
+        $sql = "SELECT id FROM {$this->tableName} WHERE code = ?";
         return $this->getOne($sql, ['code' => $code]);
     }
 

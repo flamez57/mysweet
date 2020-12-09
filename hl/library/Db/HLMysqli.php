@@ -208,6 +208,7 @@ class HLMysqli implements HLDBAdapter
             return false;
         }
         if (stripos($query, "SELECT") !== false) {
+            $return_value = [];
             $return = $stmt->get_result();
             while($row = $return->fetch_assoc()){
                 $return_value[] = $row;

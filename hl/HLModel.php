@@ -84,7 +84,8 @@ class HLModel extends HLSington
         if (strpos(strtoupper($sql), 'LIMIT ') === false) {
             $sql = trim($sql, '; ') . ' LIMIT 0, 1';
         }
-        return $this->db->safeQuery($sql, $plarams);
+        $res = $this->db->safeQuery($sql, $plarams);
+        return current($res[0]);
     }
 
     /*
