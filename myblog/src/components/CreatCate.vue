@@ -12,8 +12,6 @@
 
       <!--内容2.2 添加管理 S-->
       <div class="container-body" id="manage-container-body2-2">
-
-
         <div class="edit-cate-info">
           <em class="iconfont iconfolder"></em>
           <div>
