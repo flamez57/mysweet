@@ -1,8 +1,8 @@
 <?php
 namespace blogapi\services;
 /**
-** @ClassName: memberServices
-** @Description: 用户业务
+** @ClassName: cateServices
+** @Description: 分类业务
 ** @author flamez57 <flamez57@mysweet95.com>
 ** @date 2020年11月28日 晚上21:49
 ** @version V1.0
@@ -10,9 +10,9 @@ namespace blogapi\services;
 use blogapi\models\memberModels;
 use hl\HLServices;
 
-class memberServices extends HLServices
+class cateServices extends HLServices
 {
-    public function getMemberInfo($code)
+    public function getFrontCateList($code)
     {
         $memberId = memberModels::getInstance()->getMemberIdByCode($code);
         $memberInfo = memberModels::getInstance()->getByWhere(
