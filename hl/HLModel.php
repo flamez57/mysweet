@@ -28,6 +28,8 @@ class HLModel extends HLSington
      */
     public $id;
 
+    public $tableName;
+
     /*
     ** 查询上次连接数据库请求的查询
     */
@@ -69,36 +71,69 @@ class HLModel extends HLSington
     }
 
     /*
-     * 获取一条
-     */
-    public function getRow()
-    {
-
-    }
-
-    /*
-     * 获取一个值
-     */
-    public function getOne($sql, $plarams = [])
+    ** 获取一条
+    */
+    public function getRow($sql, $params = [])
     {
         if (strpos(strtoupper($sql), 'LIMIT ') === false) {
             $sql = trim($sql, '; ') . ' LIMIT 0, 1';
         }
-        $res = $this->db->safeQuery($sql, $plarams);
-        return current($res[0]);
+        $res = $this->db->safeQuery($sql, $params);
+        if (!empty($res)) {
+            return current($res);
+        } else {
+            return [];
+        }
     }
 
     /*
-     * 获取列表
-     */
-    public function getAll()
+    ** 获取一个值
+    */
+    public function getOne($sql, $params = [])
     {
-
+        if (strpos(strtoupper($sql), 'LIMIT ') === false) {
+            $sql = trim($sql, '; ') . ' LIMIT 0, 1';
+        }
+        $res = $this->db->safeQuery($sql, $params);
+        if (!empty($res)) {
+            return current($res[0]);
+        } else {
+            return '';
+        }
     }
 
-    public function getByWhere()
+    /*
+    ** 获取列表
+    */
+    public function getAll($sql, $params = [])
     {
+        return $this->db->safeQuery($sql, $params);
+    }
 
+    /*
+     * 默认取一条
+     */
+    public function getByWhere($where = [], $fields = '*', $orderBy = '', $groupBy = '', $limit = 1)
+    {
+        $whereStr = $this->db->getPreparingWhereCondition($where, $bindParam);
+        if (!empty($orderBy)) {
+            $orderBy = " ORDER BY {$orderBy} ";
+        }
+        if (!empty($groupBy)) {
+            $groupBy = " GROUP BY {$groupBy} ";
+        }
+        $limit = " LIMIT {$limit}";
+        $sql = "SELECT {$fields} FROM {$this->tableName} {$whereStr} {$groupBy} {$orderBy} {$limit}";
+        $res = $this->db->safeQuery($sql, $bindParam);
+        if (!empty($res)) {
+            if ($limit != 1) {
+                return $res;
+            } else {
+                return current($res);
+            }
+        } else {
+            return [];
+        }
     }
 
     public function updateByWhere($where, $data)
@@ -114,16 +149,16 @@ class HLModel extends HLSington
     /*
      * 减少
      */
-    public function decr()
+    public function decr($where, $field, $step = 1)
     {
-
+        return $this->db->update($this->tableName, [$field => [$field - $step]], $where);
     }
 
     /*
      * 增加
      */
-    public function incr()
+    public function incr($where, $field, $step = 1)
     {
-
+        return $this->db->update($this->tableName, [$field => [$field + $step]], $where);
     }
 }
