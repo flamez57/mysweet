@@ -1,7 +1,5 @@
 <template>
 
-<div class="main-canvas">
-<manage-menu></manage-menu>
 
     <div class="main-container">
     <div class="content">
@@ -91,21 +89,16 @@
       <!--内容1.2 创建文章 E-->
     </div>
   </div>
-</div>
 
 </template>
 
 <script>
-import ManageMenu from './ManageMenu'
 export default {
   name: 'About',
   data () {
     return {
       msg: 'about'
     }
-  },
-  components: {
-    ManageMenu
   }
 }
 </script>

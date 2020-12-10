@@ -1,7 +1,6 @@
 <template>
 
-<div class="main-canvas">
-<manage-menu></manage-menu>
+
 <div class="main-container">
         <div class="content">
             <div class="form-container">
@@ -27,21 +26,17 @@
             </div>
         </div>
     </div>
-</div>
+
 
 </template>
 
 <script>
-import ManageMenu from './ManageMenu'
 export default {
   name: 'About',
   data () {
     return {
       msg: 'about'
     }
-  },
-  components: {
-    ManageMenu
   }
 }
 </script>

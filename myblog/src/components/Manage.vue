@@ -1,67 +1,58 @@
 <template>
-
-<div class="main-canvas">
-<manage-menu></manage-menu>
-<div class="main-container">
-        <div class="content">
-            <div class="form-container">
-                <!--内容一 S-->
-                <div class="form">
-                    <div class="form-element">
-                        <label class="form-label">姓名</label>
-                        <input class="input" type="text" value="胡成黎"/>
-                    </div>
-                    <div class="form-element">
-                        <label class="form-label">主页地址</label>
-                        <input class="input" type="text" value="index.html"/>
-                    </div>
-                    <div class="form-element">
-                        <label class="form-label">GitHub</label>
-                        <input class="input" type="text" value="https://github.com/CharlesHu24"/>
-                    </div>
-                    <div class="form-element">
-                        <label class="form-label">QQ</label>
-                        <input class="input" type="text" value="2736934369"/>
-                    </div>
-                    <div class="form-element">
-                        <label class="form-label">邮箱</label>
-                        <input class="input" type="text" value="2736934369@qq.com"/>
-                    </div>
-                    <div class="form-element">
-                        <label class="form-label">个性签名</label>
-                        <textarea class="textarea" value="123">123</textarea>
-                    </div>
-                    <div class="form-element">
-                        <label class="form-label">头像</label>
-                        <div class="form-message">请选择小于1M的图片</div>
-                        <div class="form-img">
-                            <img class="form-img-inner" src="../assets/img/head2.png"/>
-                        </div>
-                    </div>
-                    <div class="form-element">
-                        <span class="btn mr-10">保存</span>
-                        <span class="btn">取消</span>
-                    </div>
+    <div class="main-canvas">
+        <!--导航 Start-->
+        <div class="left-sidebar" id="left-sidebar">
+            <div class="sidebar-main-content">
+                <div class="header-info">
+                    <img class="header-info-head" src="../assets/img/head2.png"/>
+                    <h2 class="header-info-name">小黄人</h2>
+                    <p class="header-info-desc">欢迎来到我的个人博客</p>
                 </div>
+                <ul class="left-nav" id="ul1">
+                    <li class="left-nav-item left-nav-action">
+                        <router-link to="/Manage" class="left-nav-inner">
+                            <i class="iconfont icontimerauto" aria-hidden="true"></i>修改个人信息
+                        </router-link>
+                    </li>
+                    <li class="left-nav-item">
+                        <router-link to="/Manage/SetPwd" class="left-nav-inner">
+                            <i class="iconfont icon-lock" aria-hidden="true"></i>修改密码
+                        </router-link>
+                    </li>
+                    <li class="left-nav-item">
+                        <router-link to="/Manage/ArticleList" class="left-nav-inner">
+                            <i class="iconfont iconarticle-line" aria-hidden="true"></i>文章
+                        </router-link>
+                    </li>
+                    <li class="left-nav-item">
+                        <router-link to="/Manage/ManageCate" class="left-nav-inner">
+                            <i class="iconfont iconfolder" aria-hidden="true"></i>分类
+                        </router-link>
+                    </li>
+                    <li class="left-nav-item">
+                        <a href="#" class="left-nav-inner">
+                            <i class="iconfont iconsettings" aria-hidden="true"></i>设置
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="user-exit">
+                <button><router-link to="/">退出</router-link></button>
             </div>
         </div>
+        <!--导航 End-->
+        <router-view></router-view>
     </div>
-</div>
-
 </template>
 
 <script>
-import ManageMenu from './ManageMenu'
 export default {
-  name: 'About',
-  data () {
-    return {
-      msg: 'about'
+    name: 'Manage',
+    data () {
+        return {
+            msg: 'manage'
+        }
     }
-  },
-  components: {
-    ManageMenu
-  }
 }
 </script>
 

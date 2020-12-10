@@ -45,6 +45,11 @@ a:hover{text-decoration:none}
     color: #fff;
     background-color: #bd2c00;
 }
+.top-nav .router-link-exact-active{
+    color: #fff;
+    background-color: #bd2c00;
+}
+
 .search-box{
     position: relative;
     display: inline-block;

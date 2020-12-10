@@ -1,8 +1,4 @@
 <template>
-
-<div class="main-canvas">
-<manage-menu></manage-menu>
-
     <div class="main-container">
     <div class="content">
       <div class="container-title">
@@ -30,7 +26,7 @@
                 <i class="iconfont iconsearch" aria-hidden="true"></i>
               </button>
             </div>
-            <router-link to="/CreatArticle" class="rel-btn">
+            <router-link to="/Manage/CreatArticle" class="rel-btn">
                 创建文章
                 </router-link>
           </div>
@@ -252,21 +248,17 @@
       <!--内容1.1 管理文章 E-->
     </div>
   </div>
-</div>
 
 </template>
 
 <script>
-import ManageMenu from './ManageMenu'
+
 export default {
   name: 'About',
   data () {
     return {
       msg: 'about'
     }
-  },
-  components: {
-    ManageMenu
   }
 }
 </script>

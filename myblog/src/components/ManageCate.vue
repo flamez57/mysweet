@@ -1,7 +1,4 @@
 <template>
-
-<div class="main-canvas">
-<manage-menu></manage-menu>
   <div class="main-container">
     <div class="content">
       <div class="container-title">
@@ -28,7 +25,7 @@
                 <i class="iconfont iconsearch" aria-hidden="true"></i>
               </button>
             </div>
-            <router-link to="/CreatCate" class="rel-btn">
+            <router-link to="/Manage/CreatCate" class="rel-btn">
                 添加分类
                 </router-link>
           </div>
@@ -115,21 +112,18 @@
     </div>
   </div>
 
-</div>
+
 
 </template>
 
 <script>
-import ManageMenu from './ManageMenu'
+
 export default {
   name: 'About',
   data () {
     return {
       msg: 'about'
     }
-  },
-  components: {
-    ManageMenu
   }
 }
 </script>

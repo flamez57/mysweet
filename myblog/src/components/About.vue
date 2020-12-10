@@ -1,20 +1,5 @@
 <template>
   <div>
-      <header class="top-nav-fiexd">
-        <div class="top-nav-inner">
-            <div class="top-nav" id="top-nav">
-                <router-link to="/">首页</router-link>
-                <router-link to="/Record">档案</router-link>
-                <router-link to="/About" class="nav-action">关于我</router-link>
-            </div>
-            <div class="search-box" id="search-box">
-                <input id="search-text" type="text" placeholder="search">
-                <button class="searchbtn" id="search-btn">
-                    <i class="iconfont iconsearch" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-    </header>
     <header>
         <div class="header" id="header">
             <div class="header-inner">
@@ -98,26 +83,6 @@
         </div>
     </div>
 </div>
-<footer class="footer">
-    <div class="footer-copyright">
-        <p>Copyright © 2019-2020 Bronny. All Rights Reserved.</p>
-    </div>
-</footer>
-<!-- 页脚 End -->
-
-<!-- 右导航 Start -->
-<ul class="fixbar">
-    <li>
-        <a href="index.html">
-            <i class="iconfont iconhome" aria-hidden="true"></i>
-        </a>
-    </li>
-    <li>
-        <a href="#toTop">
-            <i class="iconfont icontop" aria-hidden="true"></i>
-        </a>
-    </li>
-</ul>
   </div>
 </template>
 
