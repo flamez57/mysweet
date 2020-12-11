@@ -126,7 +126,7 @@ class HLModel extends HLSington
         $sql = "SELECT {$fields} FROM {$this->tableName} {$whereStr} {$groupBy} {$orderBy} {$limit}";
         $res = $this->db->safeQuery($sql, $bindParam);
         if (!empty($res)) {
-            if ($limit != 1) {
+            if ($limit != ' LIMIT 1') {
                 return $res;
             } else {
                 return current($res);

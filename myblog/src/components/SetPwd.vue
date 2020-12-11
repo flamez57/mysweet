@@ -1,6 +1,4 @@
 <template>
-
-
 <div class="main-container">
         <div class="content">
             <div class="form-container">
@@ -26,8 +24,6 @@
             </div>
         </div>
     </div>
-
-
 </template>
 
 <script>
