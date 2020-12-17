@@ -1,6 +1,4 @@
 <template>
-
-
     <div class="main-container">
     <div class="content">
       <div class="container-title">
@@ -89,7 +87,6 @@
       <!--内容1.2 创建文章 E-->
     </div>
   </div>
-
 </template>
 
 <script>

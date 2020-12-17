@@ -47,12 +47,12 @@
 
 <script>
 export default {
-    name: 'Manage',
-    data () {
-        return {
-            msg: 'manage'
-        }
+  name: 'Manage',
+  data () {
+    return {
+      msg: 'manage'
     }
+  }
 }
 </script>
 

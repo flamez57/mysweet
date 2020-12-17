@@ -41,13 +41,13 @@ export default new Router({
       path: '/Manage',
       name: 'Manage',
       component: Manage,
-      children:[
+      children: [
         { path: '/', name: 'UserInfo', component: UserInfo },
         { path: 'SetPwd', name: 'SetPwd', component: SetPwd },
         { path: 'ArticleList', name: 'ArticleList', component: ArticleList },
         { path: 'CreatArticle', name: 'CreatArticle', component: CreatArticle },
         { path: 'ManageCate', name: 'ManageCate', component: ManageCate },
-        { path: 'CreatCate', name: 'CreatCate', component: CreatCate },
+        { path: 'CreatCate', name: 'CreatCate', component: CreatCate }
       ]
     }
   ]

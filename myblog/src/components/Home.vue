@@ -191,7 +191,7 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'home'
+      msg: '爱学习后生'
     }
   }
 }
