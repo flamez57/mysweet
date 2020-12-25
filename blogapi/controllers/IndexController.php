@@ -6,7 +6,6 @@ use blogapi\services\cateServices;
 use blogapi\services\tagServices;
 use blogapi\services\articleServices;
 use blogapi\services\diaryServices;
-use hl\HLApi;
 use hl\library\Tools\HLResponse;
 /**
 ** @ClassName: IndexController
@@ -16,7 +15,7 @@ use hl\library\Tools\HLResponse;
 ** @version V1.0
 */
 
-class IndexController extends HLApi
+class IndexController extends BaseController
 {
     /*
     ** 分类 http://mysweet.com/index.php?m=blogapi&c=index&a=cateList&code=123
@@ -62,9 +61,15 @@ class IndexController extends HLApi
         $this -> data = memberServices::getInstance()->getMemberInfo($code);
         HLResponse::json($this->code, $this->message, $this->data);
     }
+
     /*
-     * 详情
-     */
+    ** 详情
+    */
+    public function articleDetailAction()
+    {
+        $id = $this->getQuery('id', 0);
+        $this->memberId;
+    }
     /*
      * 发表看法
      */
