@@ -21,7 +21,7 @@ class tagServices extends HLServices
     {
         $memberId = memberModels::getInstance()->getMemberIdByCode($code);
         $where = ['a.member_id' => $memberId, 'a.status' => 1, 'a.deleted_at' => 0, 't.status' => 1];
-        $list = tagsModels::getInstance()->tagList($where, 't.id,t.name', 't.sort asc');
+        $list = tagsModels::getInstance()->tagList($where, 'DISTINCT t.id,t.name', 't.sort asc');
         return ['list' => $list];
     }
 }

@@ -35,4 +35,22 @@ class articleModels extends HLModel
     {
         $this->db->insert($table, $param);
     }
+
+    public function articleList($where = [], $fields = '*', $orderBy = '', $limit = 1)
+    {
+        $whereStr = $this->db->getPreparingWhereCondition($where, $bindParam);
+        if (!empty($orderBy)) {
+            $orderBy = " ORDER BY {$orderBy} ";
+        }
+        $limit = " LIMIT {$limit}";
+        $sql = "SELECT {$fields} FROM {$this->tableName} a ".
+            "left join yx_article_tags_relevance atr on atr.article_id = a.id ".
+            " {$whereStr} {$orderBy} {$limit}";
+        $res = $this->db->safeQuery($sql, $bindParam);
+        if (!empty($res)) {
+            return $res;
+        } else {
+            return [];
+        }
+    }
 }

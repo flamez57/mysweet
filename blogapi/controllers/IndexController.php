@@ -3,9 +3,11 @@ namespace blogapi\controllers;
 
 use application\models\exampleModels;
 use application\models\wampModels;
+use blogapi\models\articleModels;
 use blogapi\services\memberServices;
 use blogapi\services\cateServices;
 use blogapi\services\tagServices;
+use blogapi\services\articleServices;
 use hl\HLApi;
 use application\services\exampleServices;
 use application\services\installServices;
@@ -41,8 +43,20 @@ class IndexController extends HLApi
     }
 
     /*
-     * 文章列表
-     */
+    ** 文章列表
+    */
+    public function articleListAction()
+    {
+        $param['code'] = $this->getQuery('code', '');
+        $param['page'] = $this->getQuery('page', 1);
+        $param['page_size'] = $this->getQuery('page_size', 20);
+        $param['tag_id'] = $this->getQuery('tag_id', 0);
+        $param['cate_id'] = $this->getQuery('cate_id', 0);
+        $param['keyword'] = $this->getQuery('keyword', '');
+        $this -> data = articleModels::getInstance()->getFrontArticleList($param);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
     /*
     ** 用户信息 http://mysweet.com/index.php?m=blogapi&c=index&a=memberInfo&code=123
     */
