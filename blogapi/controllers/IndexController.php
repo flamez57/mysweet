@@ -1,5 +1,15 @@
 <?php
 namespace blogapi\controllers;
+
+use application\models\exampleModels;
+use application\models\wampModels;
+use blogapi\services\memberServices;
+use blogapi\services\cateServices;
+use blogapi\services\tagServices;
+use hl\HLApi;
+use application\services\exampleServices;
+use application\services\installServices;
+use hl\library\Tools\HLResponse;
 /**
 ** @ClassName: IndexController
 ** @Description: 默认首选控制器
@@ -7,28 +17,29 @@ namespace blogapi\controllers;
 ** @date 2020年11月28日 晚上21:49
 ** @version V1.0
 */
-use application\models\installModels;
-use application\models\exampleModels;
-use application\models\example2Models;
-use application\models\wampModels;
-use blogapi\services\memberServices;
-use hl\HLApi;
-use application\services\exampleServices;
-use application\services\installServices;
-use hl\library\Tools\HLResponse;
 
 class IndexController extends HLApi
 {
     /*
-     * 分类
-     */
+    ** 分类 http://mysweet.com/index.php?m=blogapi&c=index&a=cateList&code=123
+    */
     public function cateListAction()
     {
         $code = $this->getQuery('code', '');
+        $this -> data = cateServices::getInstance()->getFrontCateList($code);
+        HLResponse::json($this->code, $this->message, $this->data);
     }
+
     /*
-     * 标签
-     */
+    ** 标签 http://mysweet.com/index.php?m=blogapi&c=index&a=tagList&code=123
+    */
+    public function tagListAction()
+    {
+        $code = $this->getQuery('code', '');
+        $this -> data = tagServices::getInstance()->getFrontTagList($code);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
     /*
      * 文章列表
      */
