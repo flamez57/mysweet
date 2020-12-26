@@ -8,6 +8,8 @@ namespace blogapi\services;
 ** @date 2020年11月28日 晚上21:49
 ** @version V1.0
 */
+use blogapi\models\cateModels;
+use blogapi\models\commentModels;
 use blogapi\models\memberModels;
 use blogapi\models\articleModels;
 use blogapi\models\tagsRelevanceModels;
@@ -48,7 +50,7 @@ class articleServices extends HLServices
         }
         $start = ($param['page'] - 1) * $param['page_size'];
         $limit = " {$start},{$param['page_size']} ";
-        $fields = 'id,title,content,a.pv,created_at';
+        $fields = 'id,title,content,pv,created_at';
         $list = articleModels::getInstance()->getByWhere($where, $fields, ' id DESC ', '', $limit);
         $count = articleModels::getInstance()->getCountByWhere($where);
         $articleIds = array_column($list, 'id');
@@ -91,5 +93,78 @@ class articleServices extends HLServices
             }, $list),
             'count' => $count
         ];
+    }
+
+    /*
+    ** 文章详情
+    */
+    public function getFrontArticleDetail($id, $memberId = 0)
+    {
+        $where = ['id' => $id];
+        articleModels::getInstance()->incr($where, 'pv');
+        $where['deleted_at'] = 0;
+        $where['status'] = 1;
+        $fields = 'id,title,content,pv,created_at,member_id,cate_id';
+        $detail = articleModels::getInstance()->getByWhere($where, $fields);
+        $reply = false;
+        if ($detail) {
+            if ($detail['member_id'] == $memberId) {
+                $reply = true;
+            }
+            $tagsRel = tagsRelevanceModels::getInstance()->getByWhere(
+                ['article_id' => $id],
+                'tag_id',
+                '',
+                '',
+                '1000'
+            );
+            $tagIds = array_column($tagsRel, 'tag_id');
+            if ($tagIds) {
+                $tags = tagsModels::getInstance()->getByWhere(
+                    ['id' => ['in', $tagIds], 'status' => 1],
+                    'id,name',
+                    '',
+                    '',
+                    '1000'
+                );
+                $tags = array_column($tags, 'name', 'id');
+            } else {
+                $tags = [];
+            }
+            if ($tagsRel) {
+                foreach ($tagsRel as $v) {
+                    if (isset($tags[$v['tag_id']])) {
+                        $detail['tags'][] = ['id' => $v['tag_id'], 'name' => $tags[$v['tag_id']]];
+                    }
+                }
+            }
+            $detail['created_at'] = date('Y-m-d H:i:s', $detail['created_at']);
+            $detail['cate'] = cateModels::getInstance()->getByWhere(['id' => $detail['cate_id']], 'id,name');
+            $detail['before'] = articleModels::getInstance()->getByWhere(
+                ['id' => ['gt', $id], 'member_id' => $detail['member_id'], 'status' => 1, 'deleted_at' => 0],
+                'id,title'
+            );
+            $detail['next'] = articleModels::getInstance()->getByWhere(
+                ['id' => ['lt', $id], 'member_id' => $detail['member_id'], 'status' => 1, 'deleted_at' => 0],
+                'id,title'
+            );
+        }
+        $comment = array_map(function ($_list) use ($reply) {
+            $_list['created_at'] = date('Y-m-d H:i', $_list['created_at']);
+            if ($_list['reply_at'] == 0) {
+                $_list['allow_reply'] = $reply ? 1 : 0;
+            } else {
+                $_list['allow_reply'] = 0;
+                $_list['reply_at'] = date('Y-m-d H:i', $_list['reply_at']);
+            }
+            return $_list;
+        }, commentModels::getInstance()->getByWhere(
+            ['article_id' => $id],
+            'id,content,created_at,nickname,reply_content,reply_at',
+            '',
+            '',
+            '50'
+        ));
+        return ['detail' => $detail, 'comments' => $comment, 'comment_num' => count($comment)];
     }
 }

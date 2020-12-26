@@ -63,13 +63,15 @@ class IndexController extends BaseController
     }
 
     /*
-    ** 详情
+    ** 详情 http://mysweet.com/index.php?m=blogapi&c=index&a=articleDetail&id=1
     */
     public function articleDetailAction()
     {
         $id = $this->getQuery('id', 0);
-        $this->memberId;
+        $this -> data = articleServices::getInstance()->getFrontArticleDetail($id, $this->memberId);
+        HLResponse::json($this->code, $this->message, $this->data);
     }
+
     /*
      * 发表看法
      */
