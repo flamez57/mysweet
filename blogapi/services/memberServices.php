@@ -36,8 +36,8 @@ class memberServices extends HLServices
                 throw new \Exception('用户已被禁用', '-1');
             }
             if (md5($pwd.$member['salt']) == $member['password']) {
-                $data = ['token' => ''];
-                //记录token
+                $data = ['token' => md5($code.$member['salt'].TIMESTAMP)];
+                memberModels::getInstance()->updateById($member['id'], $data);
             } else {
                 throw new \Exception('密码错误', '-1');
             }
