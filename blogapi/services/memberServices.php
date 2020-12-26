@@ -21,4 +21,29 @@ class memberServices extends HLServices
         );
         return ['member_info' => $memberInfo];
     }
+
+    /*
+    ** 登陆
+    */
+    public function login($code, $pwd, &$errCode, &$errMessage, &$data)
+    {
+        $member = memberModels::getInstance()->getByWhere(['code' => $code], 'id,password,salt,status');
+        try {
+            if (empty($member)) {
+                throw new \Exception('用户不存在', '-1');
+            }
+            if ($member['status'] == 0) {
+                throw new \Exception('用户已被禁用', '-1');
+            }
+            if (md5($pwd.$member['salt']) == $member['password']) {
+                $data = ['token' => ''];
+                //记录token
+            } else {
+                throw new \Exception('密码错误', '-1');
+            }
+        } catch (\Exception $ex) {
+            $errCode = $ex->getCode();
+            $errMessage = $ex->getMessage();
+        }
+    }
 }

@@ -19,6 +19,15 @@ use hl\library\Tools\HLResponse;
 class ManageController extends BaseController
 {
     /*
+     * 个人信息详情编辑用
+     */
+    /*
+     * 个人信息编辑保存
+     */
+    /*
+     * 修改密码保存
+     */
+    /*
     ** 分类 http://mysweet.com/index.php?m=blogapi&c=manage&a=cateList&code=123
     */
     public function cateListAction()

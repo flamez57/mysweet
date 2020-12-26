@@ -105,4 +105,15 @@ class IndexController extends BaseController
         $this -> data = diaryServices::getInstance()->getFrontList($code);
         HLResponse::json($this->code, $this->message, $this->data);
     }
+
+    /*
+    ** 登陆
+    */
+    public function loginAction()
+    {
+        $code = $this->getPost('code', '');
+        $pwd = $this->getPost('pwd', '');
+        memberServices::getInstance()->login($code, $pwd, $this->code, $this->message, $this->data);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
 }
