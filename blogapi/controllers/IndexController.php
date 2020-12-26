@@ -86,8 +86,16 @@ class IndexController extends BaseController
     }
 
     /*
-     * 回复
-     */
+    ** 回复
+    */
+    public function replyAction()
+    {
+        $id = $this->getPost('id', 0);
+        $content = $this->getPost('content', '');
+        $this -> data = commentServices::getInstance()->reply($id, $content, $this->memberId);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
     /*
     ** 档案
     */
@@ -96,25 +104,5 @@ class IndexController extends BaseController
         $code = $this->getQuery('code', '');
         $this -> data = diaryServices::getInstance()->getFrontList($code);
         HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    //执行安装
-    public function installDoAction()
-    {
-        $host = $this->getPost('host', 'localhost');
-        $dbname = $this->getPost('dbname', 'mysweet');
-        $username = $this->getPost('username', 'root');
-        $password = $this->getPost('password', 'vagrant');
-        $adminName = $this->getPost('adminm', 'admin');
-        $adminPwd = $this->getPost('adminp', 'admin');
-        $adminPwd2 = $this->getPost('adminpt', 'admin');
-        //链接数据库
-        installServices::getInstance()->wdbConfig($host, $username, $password, '');
-        //建表插入基础数据
-        installServices::getInstance()->createTableAndInsertData($dbname, 'default');
-        //链接数据库
-        installServices::getInstance()->wdbConfig($host, $username, $password, $dbname);
-        //创建管理员账号
-        installServices::getInstance()->createAdmin($adminName, $adminPwd, $adminPwd2);
     }
 }

@@ -37,16 +37,15 @@ class commentServices extends HLServices
     }
 
     /*
-     * 回复
-     */
+    ** 回复
+    */
     public function reply($id, $content, $memberId = 0)
     {
-        /*CREATE TABLE `yx_article_comment` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  article_id
-  `reply_content` varchar(255) NOT NULL DEFAULT '' COMMENT '回复内容',
-  `reply_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '回复时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='评论表';*/
+        $comment = commentServices::getInstance()->getByWhere(['id' => $id], 'article_id,reply_at');
+        $article = articleModels::getInstance()->getByWhere(['id' => $comment['article_id']], 'member_id');
+        if ($comment['reply_at'] == 0 && $article['member_id'] == $memberId && !empty($content)) {
+            commentModels::getInstance()->updateById($id, ['reply_content' => $content, 'reply_at' => TIMESTAMP]);
+        }
+        return ['id' => $id];
     }
 }
