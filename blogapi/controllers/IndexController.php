@@ -1,6 +1,7 @@
 <?php
 namespace blogapi\controllers;
 
+use blogapi\services\commentServices;
 use blogapi\services\memberServices;
 use blogapi\services\cateServices;
 use blogapi\services\tagServices;
@@ -73,8 +74,17 @@ class IndexController extends BaseController
     }
 
     /*
-     * 发表看法
-     */
+    ** 发表看法
+    */
+    public function addCommentAction()
+    {
+        $articleId = $this->getPost('article_id', 0);
+        $content = $this->getPost('content', '');
+        $nickname = $this->getPost('nickname', '佚名');
+        $this -> data = commentServices::getInstance()->addComment($articleId, $content, $nickname);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
     /*
      * 回复
      */
