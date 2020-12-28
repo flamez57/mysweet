@@ -13,4 +13,15 @@ use hl\HLApi;
 class BaseController extends HLApi
 {
     public $memberId = 0;
+
+    public function __construct()
+    {
+        $this->checkLogin();
+    }
+
+    //校验登陆
+    public function checkLogin()
+    {
+        //
+    }
 }
