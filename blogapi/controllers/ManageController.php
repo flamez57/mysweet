@@ -55,4 +55,40 @@ class ManageController extends BaseController
         }
         HLResponse::json($this->code, $this->message, $this->data);
     }
+    /*
+     * 图片上传
+     */
+    /*
+     * 文章列表
+     */
+    /*
+     * 文章详情
+     */
+    /*
+     * 文章保存
+     */
+    /*
+     * 删除文章
+     */
+    /*
+     * 发布退回文章
+     */
+    /*
+     * 分类下拉
+     */
+    /*
+     * 分类列表
+     */
+    /*
+     * 分类详情
+     */
+    /*
+     * 分类保存
+     */
+    /*
+     * 日记列表
+     */
+    /*
+     * 日记保存
+     */
 }
