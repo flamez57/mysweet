@@ -24,4 +24,15 @@ class BaseController extends HLApi
     {
         //
     }
+
+    protected function getToken()
+    {
+        if (isset($_SERVER['HTTP_TOKEN']) && !empty($_SERVER['HTTP_TOKEN'])) {
+            $token = $_SERVER['HTTP_TOKEN'];
+        } else {
+            $token = !empty($this->getPost('token')) ? $this->getPost('token') :
+                $this->getQuery('token');
+        }
+        return $token;
+    }
 }
