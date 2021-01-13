@@ -31,4 +31,42 @@ class diaryServices extends HLServices
         }
         return ['list' => array_values($outList)];
     }
+
+    /*
+    ** 管理端日记列表
+    */
+    public function diaryList($page, $pageSize, $param, $memberId)
+    {
+        $where = ['member_id' => $memberId];
+        if (!empty($param['year'])) {
+            $where['year'] = $param['year'];
+        }
+        if (!empty($param['mon'])) {
+            $where['mon'] = $param['mon'];
+        }
+        if (!empty($param['day'])) {
+            $where['day'] = $param['day'];
+        }
+        $start = ($page - 1) * $pageSize;
+        $list = array_map(function ($_list) {
+            $_list['created_at'] = date('Y-m-d H:i:s', $_list['created_at']);
+            return $_list;
+        }, diaryModels::getInstance()->getByWhere($where, 'id,content,created_at', 'id desc', '', " {$start},{$pageSize} "));
+        $count = diaryModels::getInstance()->getCountByWhere($where);
+        return ['list' => $list, 'count' => $count];
+    }
+
+    public function addDiary($content, $memberId)
+    {
+        $data = [
+            'member_id' => $memberId,
+            'year' => date('Y'),
+            'mon' => date('m'),
+            'day' => date('d'),
+            'content' => $content,
+            'created_at' => TIMESTAMP
+        ];
+        //diaryModels::getInstance()->insert($data);
+        return new \stdClass();
+    }
 }

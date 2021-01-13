@@ -1,6 +1,7 @@
 <?php
 namespace blogapi\controllers;
 
+use blogapi\services\diaryServices;
 use blogapi\services\memberServices;
 use hl\library\Tools\HLResponse;
 /**
@@ -106,7 +107,24 @@ class ManageController extends BaseController
     /*
      * 日记列表
      */
+    public function diaryListAction()
+    {
+        $page = $this->getQuery('page', 1);
+        $pageSize = $this->getQuery('page_size', 20);
+        $param['year'] = $this->getQuery('year', date('Y'));
+        $param['mon'] = $this->getQuery('mon', '');
+        $param['day'] = $this->getQuery('day', '');
+        $this->data = diaryServices::getInstance()->diaryList($page, $pageSize, $param, $this->memberId);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
     /*
      * 日记保存
      */
+    public function addDiaryAction()
+    {
+        $content = $this->getPost('content', '');
+        $this->data = diaryServices::getInstance()->addDiary($content, $this->memberId);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
 }
