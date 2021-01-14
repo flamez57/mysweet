@@ -169,6 +169,68 @@ class articleServices extends HLServices
     }
 
     /*
+    ** 文章列表
+    */
+    public function articleList($page, $pageSize, $keyword, $type, $memberId)
+    {
+        $where['member_id'] = $memberId;
+        switch ($type) {
+            case 1:
+                $where['deleted_at'] = 0;
+                $where['status'] = 0;
+                break;
+            case 2:
+                $where['deleted_at'] = 0;
+                $where['status'] = 0;
+                break;
+            case 3:
+                $where['deleted_at'] = ['neq', 0];
+                break;
+            case 0:
+            default:
+                $where['deleted_at'] = 0;
+        }
+        if (!empty($keyword)) {
+            $where['title'] = ['like', trim($keyword)];
+        }
+        $start = ($page - 1) * $pageSize;
+        $limit = " {$start},{$pageSize} ";
+        $fields = 'id,title,member_id,cate_id,drafts_content,pv,status,created_at,updated_at';
+        $list = articleModels::getInstance()->getByWhere($where, $fields, ' updated_at DESC ', '', $limit);
+        $count = articleModels::getInstance()->getCountByWhere($where);
+        $cateIds = array_column($list, 'cate_id');
+        if (!empty($cateIds)) {
+            $cates = cateModels::getInstance()->getByWhere(['id' => ['in', $cateIds]], 'id,name', '', '', $pageSize);
+            $cates = array_column($cates, 'name', 'id');
+        } else {
+            $cates = [];
+        }
+        $memberIds = array_column($list, 'member_id');
+        if (!empty($memberIds)) {
+            $members = memberModels::getInstance()->getByWhere(
+                ['id' => ['in', $memberIds]],
+                'id,code,nickname,avatar',
+                '',
+                '',
+                $pageSize
+            );
+            $members = array_combine(array_column($members, 'id'), $members);
+        } else {
+            $members = [];
+        }
+        return [
+            'list' => array_map(function ($_list) use ($cates, $members) {
+                $_list['cate_name'] = $cates[$_list['cate_id']] ?? '';
+                if (isset($members[$_list['member_id']])) {
+                    $_list += $members[$_list['member_id']];
+                }
+                return $_list;
+            }, $list),
+            'count' => $count
+        ];
+    }
+
+    /*
     ** 删除文章
     */
     public function delArticle($id, $memberId, &$code, &$message)

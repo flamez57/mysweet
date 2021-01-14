@@ -79,9 +79,20 @@ class ManageController extends BaseController
         }
         HLResponse::json($this->code, $this->message, $this->data);
     }
+
     /*
-     * 文章列表
-     */
+    ** 文章列表
+    */
+    public function articleListAction()
+    {
+        $keyword = $this->getQuery('keyword', '');
+        $page = $this->getQuery('page', 1);
+        $pageSize = $this->getQuery('page_size', 20);
+        $type = $this->getQuery('type', 0); //0全部  1草稿  2发布  3回收站
+        $this->data = articleServices::getInstance()->articleList($page, $pageSize, $keyword, $type, $this->memberId);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
     /*
      * 文章详情
      */
