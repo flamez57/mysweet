@@ -1,6 +1,7 @@
 <?php
 namespace blogapi\controllers;
 
+use blogapi\services\cateServices;
 use blogapi\services\diaryServices;
 use blogapi\services\memberServices;
 use hl\library\Tools\HLResponse;
@@ -92,21 +93,53 @@ class ManageController extends BaseController
     /*
      * 发布退回文章
      */
+
     /*
-     * 分类下拉
-     */
+    ** 分类下拉
+    */
+    public function cateSelectAction()
+    {
+        $this->data = cateServices::getInstance()->cateSelect();
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
     /*
-     * 分类列表
-     */
+    ** 分类列表
+    */
+    public function cateListAction()
+    {
+        $page = $this->getQuery('page', 1);
+        $pageSize = $this->getQuery('page_size', 20);
+        $this->data = cateServices::getInstance()->cateList($page, $pageSize, $this->memberId);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
     /*
      * 分类详情
      */
+    public function aa()
+    {
+        /*CREATE TABLE `yx_article_categories` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '分类名称',
+  `sort` tinyint(4) NOT NULL DEFAULT '0' COMMENT '排序',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否开启 1开启 0禁用',*/
+    }
     /*
      * 分类保存
      */
+    public function save()
+    {
+        /*CREATE TABLE `yx_article_categories` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '分类名称',
+  `sort` tinyint(4) NOT NULL DEFAULT '0' COMMENT '排序',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否开启 1开启 0禁用',*/
+    }
+
     /*
-     * 日记列表
-     */
+    ** 日记列表
+    */
     public function diaryListAction()
     {
         $page = $this->getQuery('page', 1);
@@ -119,8 +152,8 @@ class ManageController extends BaseController
     }
 
     /*
-     * 日记保存
-     */
+    ** 日记保存
+    */
     public function addDiaryAction()
     {
         $content = $this->getPost('content', '');

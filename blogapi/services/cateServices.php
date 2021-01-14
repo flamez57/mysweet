@@ -43,4 +43,43 @@ class cateServices extends HLServices
             }, $list)
         ];
     }
+
+    /*
+    ** 分类下拉选项
+    */
+    public function cateSelect()
+    {
+        $list = cateModels::getInstance()->getByWhere(['status' => 1], 'id,name', 'sort asc', '', '100');
+        return ['list' => $list];
+    }
+
+    /*
+    ** 管理分类列表
+    */
+    public function cateList($page, $pageSize, $memberId)
+    {
+        $start = ($page - 1) * $pageSize;
+        $list = cateModels::getInstance()->getByWhere([], 'id,name,sort,status', '', '', " {$start},{$pageSize} ");
+        $cateIds = array_column($list, 'id');
+        if (!empty($cateIds)) {
+            $articleCount = articleModels::getInstance()->getByWhere(
+                ['member_id' => $memberId, 'cate_id' => ['in', $cateIds], 'status' => 1, 'deleted_at' => 0],
+                'cate_id,count(id) AS num',
+                '',
+                'cate_id',
+                '30'
+            );
+            $articleCount = array_column($articleCount, 'num', 'cate_id');
+        } else {
+            $articleCount = [];
+        }
+
+        return [
+            'list' => array_map(function ($_list) use ($articleCount) {
+                $_list['num'] = $articleCount[$_list['id']] ?? 0;
+                return $_list;
+            }, $list),
+            'count' => cateModels::getInstance()->getCountByWhere()
+        ];
+    }
 }
