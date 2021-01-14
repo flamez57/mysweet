@@ -104,24 +104,18 @@ class ManageController extends BaseController
     }
 
     /*
-     * 文章保存
-     */
-    public function dd()
+    ** 文章保存
+    */
+    public function saveAction()
     {
-        /*CREATE TABLE `yx_article` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `member_id` int(4) NOT NULL DEFAULT '0' COMMENT '用户id',
-  `cate_id` int(4) NOT NULL DEFAULT '0' COMMENT '分类id',
-  `title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
-  `content` text COMMENT '内容',
-  `drafts_content` text COMMENT '草稿内容',
-  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '0草稿 1发布',
-  `pv` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '访问量',
-  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
-  `deleted_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '删除时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='博文表';*/
+        $id = $this->getPost('id', 0);
+        $param['cate_id'] = $this->getPost('cate_id', 0);
+        $param['title'] = $this->getPost('title', '');
+        $param['drafts_content'] = $this->getPost('content', '');
+        $param['status'] = $this->getPost('status', 0);
+        $param['tags'] = $this->getPost('tags', []);
+        $this->data = articleServices::getInstance()->articleSave($id, $param, $this->memberId);
+        HLResponse::json($this->code, $this->message, $this->data);
     }
 
     /*

@@ -251,6 +251,36 @@ class articleServices extends HLServices
         return $article;
     }
 
+    public function articleSave($id, $param, $memberId)
+    {
+        $param['member_id'] = $memberId;
+        $param['created_at'] = TIMESTAMP;
+        $param['updated_at'] = TIMESTAMP;
+        if ($param['status'] == 1) {
+            $param['content'] = $param['drafts_content'];
+        }
+        $tags = $param['tags'];
+        unset($param['tags']);
+        if ($id == 0) {
+            $id = articleModels::getInstance()->insert($param);
+        } else {
+            articleModels::getInstance()->updateById($id, $param);
+        }
+        if (!empty($tags)) {
+            /*CREATE TABLE `yx_article_tags_relevance` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `article_id` int(4) NOT NULL DEFAULT '0' COMMENT '文章id',
+  `tag_id` int(4) NOT NULL DEFAULT '0' COMMENT '标签id',
+  PRIMARY KEY (`id`)
+        CREATE TABLE `yx_article_tags` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL COMMENT '标签名称',
+  `sort` tinyint(4) NOT NULL DEFAULT '0' COMMENT '排序',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '0待审核 1审核通过',
+  PRIMARY KEY (`id`)*/
+        }
+    }
+
     /*
     ** 删除文章
     */
