@@ -56,6 +56,9 @@ class diaryServices extends HLServices
         return ['list' => $list, 'count' => $count];
     }
 
+    /*
+    ** 写日记
+    */
     public function addDiary($content, $memberId)
     {
         $data = [
@@ -66,7 +69,7 @@ class diaryServices extends HLServices
             'content' => $content,
             'created_at' => TIMESTAMP
         ];
-        //diaryModels::getInstance()->insert($data);
+        diaryModels::getInstance()->insert($data);
         return new \stdClass();
     }
 }
