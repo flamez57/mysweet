@@ -82,4 +82,25 @@ class cateServices extends HLServices
             'count' => cateModels::getInstance()->getCountByWhere()
         ];
     }
+
+    /*
+    ** 编辑用详情
+    */
+    public function cateDetail($id)
+    {
+        return cateModels::getInstance()->getByWhere(['id' => $id], 'id,name,sort,status');
+    }
+
+    /*
+    ** 分类保存
+    */
+    public function saveCate($id, $param, &$code, &$message)
+    {
+        if ($id == 0) {
+            cateModels::getInstance()->insert($param);
+        } else {
+            cateModels::getInstance()->updateById($id, $param);
+        }
+        return new \stdClass();
+    }
 }

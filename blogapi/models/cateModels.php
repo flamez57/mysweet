@@ -31,8 +31,8 @@ class cateModels extends HLModel
         return $this->query($sql, $db);
     }
 
-    public function insert($table, $param = [])
+    public function insert($param = [])
     {
-        $this->db->insert($table, $param);
+        $this->db->insert($this->tableName, $param);
     }
 }

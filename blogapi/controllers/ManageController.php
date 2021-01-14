@@ -115,26 +115,26 @@ class ManageController extends BaseController
     }
 
     /*
-     * 分类详情
-     */
-    public function aa()
+    ** 分类详情
+    */
+    public function cateDetailAction()
     {
-        /*CREATE TABLE `yx_article_categories` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '分类名称',
-  `sort` tinyint(4) NOT NULL DEFAULT '0' COMMENT '排序',
-  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否开启 1开启 0禁用',*/
+        $id = $this->getQuery('id', 0);
+        $this->data = cateServices::getInstance()->cateDetail($id);
+        HLResponse::json($this->code, $this->message, $this->data);
     }
+
     /*
-     * 分类保存
-     */
-    public function save()
+    ** 分类保存
+    */
+    public function saveCateAction()
     {
-        /*CREATE TABLE `yx_article_categories` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '分类名称',
-  `sort` tinyint(4) NOT NULL DEFAULT '0' COMMENT '排序',
-  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否开启 1开启 0禁用',*/
+        $id = $this->getPost('', 0);
+        $param['name'] = $this->getPost('name', '');
+        $param['sort'] = $this->getPost('sort', 0);
+        $param['status'] = $this->getPost('status', 1);
+        $this->data = cateServices::getInstance()->saveCate($id, $param, $this->code, $this->message);
+        HLResponse::json($this->code, $this->message, $this->data);
     }
 
     /*
