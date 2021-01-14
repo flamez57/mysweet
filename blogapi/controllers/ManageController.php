@@ -1,6 +1,7 @@
 <?php
 namespace blogapi\controllers;
 
+use blogapi\services\articleServices;
 use blogapi\services\cateServices;
 use blogapi\services\diaryServices;
 use blogapi\services\memberServices;
@@ -87,12 +88,44 @@ class ManageController extends BaseController
     /*
      * 文章保存
      */
+    public function dd()
+    {
+        /*CREATE TABLE `yx_article` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `member_id` int(4) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `cate_id` int(4) NOT NULL DEFAULT '0' COMMENT '分类id',
+  `title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
+  `content` text COMMENT '内容',
+  `drafts_content` text COMMENT '草稿内容',
+  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '0草稿 1发布',
+  `pv` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '访问量',
+  `created_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间',
+  `deleted_at` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '删除时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='博文表';*/
+    }
+
     /*
-     * 删除文章
-     */
+    ** 删除文章
+    */
+    public function delArticleAction()
+    {
+        $id = $this->getPost('id', 0);
+        $this->data = articleServices::getInstance()->delArticle($id, $this->memberId, $this->code, $this->message);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
     /*
-     * 发布退回文章
-     */
+    ** 发布退回文章
+    */
+    public function updateStatusAction()
+    {
+        $id = $this->getPost('id', 0);
+        $status = $this->getPost('status', 0);
+        $this->data = articleServices::getInstance()->updateStatus($id, $status, $this->memberId, $this->code, $this->message);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
 
     /*
     ** 分类下拉

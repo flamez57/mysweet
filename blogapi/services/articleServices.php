@@ -167,4 +167,41 @@ class articleServices extends HLServices
         ));
         return ['detail' => $detail, 'comments' => $comment, 'comment_num' => count($comment)];
     }
+
+    /*
+    ** 删除文章
+    */
+    public function delArticle($id, $memberId, &$code, &$message)
+    {
+        $article = articleModels::getInstance()->getByWhere(['id' => $id], 'member_id');
+        if ($memberId != $article['member_id']) {
+            $code = -1;
+            $message = '只有作者本人可以删除';
+        } else {
+            articleModels::getInstance()->updateById($id, ['deleted_at' => TIMESTAMP]);
+        }
+        return new \stdClass();
+    }
+
+    /*
+    ** 发布于撤回
+    */
+    public function updateStatus($id, $status, $memberId, &$code, &$message)
+    {
+        $article = articleModels::getInstance()->getByWhere(['id' => $id], 'member_id,drafts_content');
+        if ($memberId != $article['member_id']) {
+            $code = -1;
+            $message = '只有作者本人可以操作';
+        } else {
+            if ($status == 1) { //发布
+                articleModels::getInstance()->updateById(
+                    $id,
+                    ['content' => $article['drafts_content'], 'status' => 1, 'updated_at' => TIMESTAMP]
+                );
+            } else { //撤回
+                articleModels::getInstance()->updateById($id, ['status' => 0, 'updated_at' => TIMESTAMP]);
+            }
+        }
+        return new \stdClass();
+    }
 }
