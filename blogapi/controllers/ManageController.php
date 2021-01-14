@@ -94,8 +94,15 @@ class ManageController extends BaseController
     }
 
     /*
-     * 文章详情
-     */
+    ** 文章详情
+    */
+    public function detailAction()
+    {
+        $id = $this->getQuery('id', 0);
+        $this->data = articleServices::getInstance()->articleDetail($id, $this->memberId);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
     /*
      * 文章保存
      */
@@ -203,5 +210,13 @@ class ManageController extends BaseController
         $content = $this->getPost('content', '');
         $this->data = diaryServices::getInstance()->addDiary($content, $this->memberId);
         HLResponse::json($this->code, $this->message, $this->data);
+    }
+
+    /*
+    ** 退出
+    */
+    public function loginOutAction()
+    {
+
     }
 }

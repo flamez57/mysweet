@@ -231,6 +231,27 @@ class articleServices extends HLServices
     }
 
     /*
+    ** 文章编辑详情
+    */
+    public function articleDetail($id, $memberId)
+    {
+        $article = articleModels::getInstance()->getByWhere(
+            ['id' => $id, 'member_id' => $memberId],
+            'id,cate_id,title,drafts_content'
+        );
+        if (empty($article)) {
+            $article = ['id' => 0, 'cate_id' => 0, 'title' => '', 'drafts_content' => '', 'tags' => []];
+        } else {
+            $tr = tagsRelevanceModels::getInstance()->getByWhere(['article_id' => $id], 'tag_id', '', '', 20);
+            $tagIds = array_column($tr, 'tag_id');
+            if (!empty($tagIds)) {
+                $article['tags'] = tagsModels::getInstance()->getByWhere(['' => ['in', $tagIds]], 'id,name', ' sort ASC ', '', 20);
+            }
+        }
+        return $article;
+    }
+
+    /*
     ** 删除文章
     */
     public function delArticle($id, $memberId, &$code, &$message)

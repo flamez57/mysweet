@@ -50,6 +50,7 @@ class cateServices extends HLServices
     public function cateSelect()
     {
         $list = cateModels::getInstance()->getByWhere(['status' => 1], 'id,name', 'sort asc', '', '100');
+        $list[] = ['id' => 0, 'name' => '请选择类目'];
         return ['list' => $list];
     }
 
