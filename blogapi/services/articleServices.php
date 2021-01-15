@@ -251,6 +251,9 @@ class articleServices extends HLServices
         return $article;
     }
 
+    /*
+    ** 文章保存
+    */
     public function articleSave($id, $param, $memberId)
     {
         $param['member_id'] = $memberId;
@@ -267,17 +270,25 @@ class articleServices extends HLServices
             articleModels::getInstance()->updateById($id, $param);
         }
         if (!empty($tags)) {
-            /*CREATE TABLE `yx_article_tags_relevance` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `article_id` int(4) NOT NULL DEFAULT '0' COMMENT '文章id',
-  `tag_id` int(4) NOT NULL DEFAULT '0' COMMENT '标签id',
-  PRIMARY KEY (`id`)
-        CREATE TABLE `yx_article_tags` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL COMMENT '标签名称',
-  `sort` tinyint(4) NOT NULL DEFAULT '0' COMMENT '排序',
-  `status` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '0待审核 1审核通过',
-  PRIMARY KEY (`id`)*/
+            foreach ($tags as $_tag) {
+                if ($_tag['id'] == 0) {
+                    $tag = tagsModels::getInstance()->getByWhere(['name' => $_tag['name']], 'id,name');
+                    if (empty($tag)) {
+                        $_tag['id'] = tagsModels::getInstance()->insert(
+                            [
+                                'name' => $_tag['name'],
+                                'status' => 0
+                            ]
+                        );
+                    } else {
+                        $_tag = $tag;
+                    }
+                }
+                $tr = tagsRelevanceModels::getInstance()->getByWhere(['article_id' => $id, 'tag_id' => $_tag['id']], 'id');
+                if (empty($tr)) {
+                    tagsRelevanceModels::getInstance()->insert(['article_id' => $id, 'tag_id' => $_tag['id']]);
+                }
+            }
         }
     }
 
