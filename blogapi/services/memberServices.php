@@ -49,6 +49,15 @@ class memberServices extends HLServices
     }
 
     /*
+    ** 退出
+    */
+    public function loginOut($memberId)
+    {
+        memberModels::getInstance()->updateById($memberId, ['token' => '']);
+        return new \stdClass();
+    }
+
+    /*
     ** 编辑用用户信息
     */
     public function memberInfoForEdit($memberId)

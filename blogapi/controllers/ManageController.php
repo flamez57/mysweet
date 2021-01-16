@@ -211,6 +211,7 @@ class ManageController extends BaseController
     */
     public function loginOutAction()
     {
-
+        $this->data = memberServices::getInstance()->loginOut($this->memberId);
+        HLResponse::json($this->code, $this->message, $this->data);
     }
 }
