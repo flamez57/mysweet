@@ -9,7 +9,8 @@ namespace blogapi\services;
 */
 use blogapi\models\memberModels;
 use hl\HLServices;
-use hl\library\Functions\Helper;
+use hl\library\Functions\Jwt;
+use hl\library\Functions\Password;
 
 class memberServices extends HLServices
 {
@@ -36,9 +37,12 @@ class memberServices extends HLServices
             if ($member['status'] == 0) {
                 throw new \Exception('用户已被禁用', '-1');
             }
-            if (md5($pwd.$member['salt']) == $member['password']) {
-                $data = ['token' => md5($code.$member['salt'].TIMESTAMP)];
-                memberModels::getInstance()->updateById($member['id'], $data);
+            if (Password::makePassword($pwd, $member['salt']) == $member['password']) {
+                $jwt = new Jwt();
+                $datain = ['token' => md5($code.$member['salt'].TIMESTAMP)];
+                //生成token存在客户端，每次请求都要携带这个token
+                $data = Jwt::getToken($datain);//生成256位的字符串
+                memberModels::getInstance()->updateById($member['id'], $datain);
             } else {
                 throw new \Exception('密码错误', '-1');
             }
@@ -100,11 +104,12 @@ class memberServices extends HLServices
             if ($member['status'] == 0) {
                 throw new \Exception('用户已被禁用', '-1');
             }
-            if (md5($pwd.$member['salt']) != $member['password']) {
+            if (Password::makePassword($pwd, $member['salt']) != $member['password']) {
                 throw new \Exception('原密码错误', '-1');
             }
-            $data['salt'] = Helper::str_rand(8);
-            $data['password'] = md5($pwdnew.$data['salt']);
+
+            $data['salt'] = Password::makeSalt();
+            $data['password'] = Password::makePassword($pwdnew, $data['salt']);
             memberModels::getInstance()->updateById($memberId, $data);
             $errMessage = '修改成功';
         } catch (\Exception $ex) {
