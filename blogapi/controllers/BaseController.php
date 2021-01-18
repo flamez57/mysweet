@@ -22,7 +22,7 @@ class BaseController extends HLApi
     //校验登陆
     public function checkLogin()
     {
-        //
+        $token = $this->getToken();
     }
 
     protected function getToken()
