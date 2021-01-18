@@ -11,6 +11,7 @@ use blogapi\models\memberModels;
 use hl\HLServices;
 use hl\library\Functions\Jwt;
 use hl\library\Functions\Password;
+use hl\library\Session\HLSession;
 
 class memberServices extends HLServices
 {
@@ -43,6 +44,7 @@ class memberServices extends HLServices
                 //生成token存在客户端，每次请求都要携带这个token
                 $data = Jwt::getToken($datain);//生成256位的字符串
                 memberModels::getInstance()->updateById($member['id'], $datain);
+                HLSession::getInstance()->set($datain['token'], $member['id']);
             } else {
                 throw new \Exception('密码错误', '-1');
             }
@@ -57,6 +59,8 @@ class memberServices extends HLServices
     */
     public function loginOut($memberId)
     {
+        $member = memberModels::getInstance()->getByWhere(['id' => $memberId], 'token');
+        HLSession::getInstance()->delete($member['token']);
         memberModels::getInstance()->updateById($memberId, ['token' => '']);
         return new \stdClass();
     }

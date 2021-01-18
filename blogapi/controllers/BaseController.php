@@ -1,8 +1,11 @@
 <?php
 namespace blogapi\controllers;
 
+use blogapi\models\memberModels;
 use hl\HLApi;
 use hl\library\Functions\Jwt;
+use hl\library\Session\HLSession;
+use hl\library\Tools\HLResponse;
 
 /**
 ** @ClassName: IndexController
@@ -29,17 +32,22 @@ class BaseController extends HLApi
         $tokenArr = Jwt::verifyToken($token);
         if ($tokenArr === false) {
             // 未登录状态
+            HLResponse::json('-1', '请先登陆', new \stdClass());
+            die;
         } else {
-            /* 验证成功返回参数
-                array (size=7)
-                  'iss' => string 'mysweet95' (length=9)  //该JWT的签发者
-                  'iat' => int 1582123404   //签发时间
-                  'exp' => int 1583419404   //过期时间
-                  'nbf' => int 1582123404   //该时间之前不接收处理该Token
-                  'sub' => string '' (length=0)  //面向的用户
-                  'jti' => string 'c5e8f2e681ab5e8ca5006f06f7fe77a9' (length=32)//该Token唯一标识
-                  'token' => string 'sdfs' (length=4)  //后面的都是要携带参数
-                */
+            $memberId = HLSession::getInstance()->get($tokenArr['token']);
+            if (!empty($memberId)) {
+                $this->memberId = $memberId;
+            } else {
+                $memberId = memberModels::getInstance()->getMemberIdByToken($tokenArr['token']);
+                if (empty($memberId)) {
+                    HLResponse::json('-1', '登陆信息失效', new \stdClass());
+                    die;
+                } else {
+                    $this->memberId = $memberId;
+                    HLSession::getInstance()->set($tokenArr['token'], $this->memberId);
+                }
+            }
         }
     }
 
