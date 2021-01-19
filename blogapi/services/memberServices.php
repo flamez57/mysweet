@@ -44,7 +44,7 @@ class memberServices extends HLServices
                 //生成token存在客户端，每次请求都要携带这个token
                 $data = Jwt::getToken($datain);//生成256位的字符串
                 memberModels::getInstance()->updateById($member['id'], $datain);
-                HLSession::getInstance()->set($datain['token'], $member['id']);
+                HLSession::getInstance()->set($datain['token'], $member['id'])->save();
             } else {
                 throw new \Exception('密码错误', '-1');
             }

@@ -45,7 +45,7 @@ class BaseController extends HLApi
                     die;
                 } else {
                     $this->memberId = $memberId;
-                    HLSession::getInstance()->set($tokenArr['token'], $this->memberId);
+                    HLSession::getInstance()->set($tokenArr['token'], $this->memberId)->save();
                 }
             }
         }
