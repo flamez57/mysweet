@@ -26,7 +26,7 @@
         <!-- 页脚 Start -->
         <footer class="footer">
             <div class="footer-copyright">
-                <p>Copyright © 2020 杨翔 All Rights Reserved | <a href="//beian.miit.gov.cn">晋ICP备2020014291号</a></p>
+                <p>Copyright © 2020 杨翔 All Rights Reserved | <a href="https://beian.miit.gov.cn">晋ICP备2020014291号-1</a></p>
             </div>
         </footer>
         <!-- 页脚 End -->
