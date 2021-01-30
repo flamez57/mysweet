@@ -28,3 +28,7 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+修改config文件夹下面的index.js里面,把 assetsPublicPath: './'改成“ assetsPublicPath: '/'
+
+然后重新 npm run 跑一下就可以了

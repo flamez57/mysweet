@@ -4,16 +4,16 @@
 <header>
     <div class="header">
         <div class="main-post-title">
-            <h1>北京的一天</h1>
+            <h1>Apache或者Nginx为PHP设置服务器环境变量</h1>
             <div class="marks">
                 <div class="release-time">
                     <span><i class="iconfont iconschedule"></i></span>
-                    <span>2019-12-23</span>
+                    <span>2020-12-23</span>
                 </div>
                 <div class="tags-item">
                     <i class="iconfont iconlabel_fill"></i>
-                    <a href="tags.html">生活</a>
-                    <a href="tags.html">点滴</a>
+                    <router-link to="/TagList">环境变量</router-link>
+                    <router-link to="/TagList">PHP</router-link>
                 </div>
                 <div class="view">访问数:
                     <div class="view-number"><span>1112</span></div>
@@ -27,12 +27,33 @@
         <!--正文 S-->
         <article class="main-post">
             <div class="main-post-content">
-                <h2>圣菲满大街的艺术商品</h2>
-                <p>今天的北京阳光灿烂，风清气爽，气温适宜，好像除了空气中飘着一些烦人的柳絮之外，一切都刚刚好。</p>
-                <p>索性去了趟玉渊潭公园，活动活动筋骨。通往公园的桥边上站着一群上了年纪的大爷们守着鱼竿，通往公园的路上各色的人群攒动，耳朵里是小贩的叫卖声，协警的指引声，人群里除了各种寒暄声还夹杂着孩童的哭闹声。这种浓烈喧闹的市民生活气息好像已经很久没有感受过了，工作以来的我一到周末就愿意宅家，躺着不想出门，像在学校读书的时候一样，仿佛在一个属于自己的小角落里与世隔离很久。所以那种喧闹咋一来仿佛还挺新鲜，把我从安静的独居拽入一个仿佛真实仿佛也不那么真实的群体环境里。也许人独处久了，就会希望将自己置身于一个群体中，哪怕这个群体对你而言很陌生，甚至无需与之交流。</p>
-                <p>回来的路上，我看着出租车外面那灿烂阳光照耀下的北京，一条条从未觉得如此干净的街道，旁边一棵棵长出嫩绿的小树，周边一幢幢整齐排列的居民楼，还有远处反光的高楼表面，这些画面组合的那一刻，我仿佛感受到了这座城市从所未有的美，似乎这座城市是带有温情的，是一个你愿意安定下来的地方。</p>
-                <p>当你感到生活乏味找不到意义时，我建议你挑个天气好的日子出去走走，其实只要自己尝试着放慢自己，细细地去发掘这座城市，你会发现生活其实没有那么无聊糟糕，所在的城市好像也没有那么冰冷无情。我们常在探索生命的意义而未果，而今天的我觉得生命的意义或许就像是树枝上刚长出来的新芽，我们都知道总将有一天它会老化脱落、不复存在，然后周而复始地开始重复着，但此时此刻你看，这些嫩芽就在阳光下闪烁着它的光辉，让人欢欣鼓舞。怀抱着希望并给予身边的人希望，或许就是生命的意义。</p>
-                <p>现在的我，则希望能凭借自身的努力在这片土地上找到一个归属的角落。</p>
+                <p>在开发项目的时候生产环境和开发环境的配置信息是不一样的，总要切换的话比较麻烦，现在我们可以通过设置服务器环境变量来区分线上生产环境还是本地开发环境，比如我们可以设置 RUNTIME_ENVIROMENT 的为 'DEV'还是'PRO'来区分。然后在PHP端通过$_SERVER['RUNTIME_ENVIROMENT']来获取值。</p>
+                <h2>一、Nginx （通过fastcgi_param来设置）</h2>
+                <pre>
+                    # 在nginx的配置文件nginx.conf中配置环境server段location中添加相应的配置信息
+                    location ~ \.php($|/) {
+                        #......
+                        fastcgi_param    RUNTIME_ENVIROMENT 'PRO'; # PRO or DEV
+                        #......
+                    }
+                </pre>
+                <p>配置好后重启（nginx -s reload）就好。</p>
+                <h2>二、PHP自身(通过php主配置文件php-fpm.conf来设置)</h2>
+                <pre>
+                    #这个设置必须放在主配置文件php-fpm.conf里（/usr/local/php/etc/php-fpm.conf）
+                    #直接在配置文件中添加：
+                    env[RUNTIME_ENVIROMENT] = 'PRO'
+                </pre>
+                <p>添加后重启php-fpm （service restart php-fpm）。</p>
+                <h2>三、Apache设置环境变量（SetEnv 变量名 变量值）</h2>
+                <pre>
+                    &lt;VirtualHost *:80&gt;
+                    #......
+                        SetEnv RUNTIME_ENVIROMENT DEV
+                    #......
+                    &lt;/VirtualHost&gt;
+                </pre>
+                <p></p>
             </div>
         </article>
         <!--正文 E-->
@@ -40,12 +61,12 @@
         <!--分类及翻篇 S-->
         <div class="entry-nav">
             <div class="entry-categories">
-                分类&nbsp;:&nbsp;<a href="categories.html">生活</a>
+                分类&nbsp;:&nbsp;<router-link to="/CateList">服务端</router-link>
             </div>
             <div class="entry-location">
                 <ul>
-                    <li>上一篇&nbsp;:&nbsp;<a href="#">点击上一篇</a></li>
-                    <li>下一篇&nbsp;:&nbsp;<a href="#">点击下一篇</a></li>
+                    <li>上一篇&nbsp;:&nbsp;<router-link to="/Detail">点击上一篇</router-link></li>
+                    <li>下一篇&nbsp;:&nbsp;<router-link to="/Detail">点击下一篇</router-link></li>
                 </ul>
             </div>
         </div>

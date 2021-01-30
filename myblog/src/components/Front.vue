@@ -8,8 +8,8 @@
                     <router-link to="/">首页</router-link>
                     <router-link to="/Record">档案</router-link>
                     <router-link to="/About">关于我</router-link>
-                    <router-link to="/Login">登陆</router-link>
-                    <router-link to="/Manage">管理后台</router-link>
+                    <!--<router-link to="/Login">登陆</router-link>-->
+                    <!--<router-link to="/Manage">管理后台</router-link>-->
                 </div>
                 <div class="search-box" id="search-box">
                     <input id="search-text" type="text" placeholder="search">
