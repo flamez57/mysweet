@@ -31,55 +31,7 @@
           </div>
           <div class="arch-main-body">
             <!--<textarea rows="20" cols="70"></textarea>-->
-            <div class="edit-func">
-              <span class="edit-func-item">
-                <a href="#"><i class="iconfont iconcuti" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconxieti" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconUnderline" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconshanchuxian" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconh1" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconh" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconh2" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconimage" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconyinyong-" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconul" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconol" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconlink" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont icondaima" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont icongongshi" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconvideo" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconfengexian" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconziyuan" aria-hidden="true"></i></a>
-                <a href="#"><i class="iconfont iconziyuan1" aria-hidden="true"></i></a>
-              </span>
-              <span>
-                <a href="#"><i class="iconfont iconweibiaoti10" aria-hidden="true"></i></a>
-              </span>
-            </div>
-            <div class="content-canvas">
-              <div class="content-body">
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-                <p>巴拉巴拉。。</p>
-              </div>
-              <!--<div style="height: 400px;"></div>-->
-            </div>
+            <editor-bar v-model="detail" :isClear="isClear" @change="change"></editor-bar>
           </div>
         </div>
         <!--文章编辑 E-->
@@ -90,11 +42,20 @@
 </template>
 
 <script>
+import EditorBar from './WangEnduit'
 export default {
-  name: 'About',
+  name: 'edit',
+  components: { EditorBar },
   data () {
     return {
-      msg: 'about'
+      msg: 'about',
+      isClear: false,
+      detail: ''
+    }
+  },
+  methods: {
+    change (val) {
+      console.log(val)
     }
   }
 }
