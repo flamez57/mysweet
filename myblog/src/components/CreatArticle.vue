@@ -50,7 +50,7 @@ export default {
     return {
       msg: 'about',
       isClear: false,
-      detail: ''
+      detail: '文章内容'
     }
   },
   methods: {
