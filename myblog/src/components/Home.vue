@@ -91,6 +91,8 @@
 </template>
 
 <script>
+import memberInfo from '@/api/getData'
+console.log(memberInfo)
 export default {
   name: 'Home',
   data () {
