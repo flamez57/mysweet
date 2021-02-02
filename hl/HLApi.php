@@ -42,7 +42,7 @@ class HLApi extends HLSington
         if (empty($key)) {
             return $_POST;
         }
-        return $_POST[$key] ?? $value;
+        return trim($_POST[$key] ?? $value);
     }
 
     /**

@@ -21,14 +21,14 @@
             </h1>
             <h2 class="archives-title">
                 <div class="title-point"></div>
-                2019
+                2020
             </h2>
             <div class="archives-content">
                 <div class="content-point"></div>
                 <div class="post-entry">
                     <span class="post-release-time">12-25&nbsp;&nbsp;13:31</span>
                     <span class="archive-post-title">
-                        <a href="post.html">
+                        <a href="/">
                             <span>这是我第一次创建个人博客</span>
                         </a>
                     </span>
@@ -39,19 +39,8 @@
                 <div class="post-entry">
                     <span class="post-release-time">12-25&nbsp;&nbsp;13:31</span>
                     <span class="archive-post-title">
-                        <a href="post.html">
-                            今天的北京阳光灿烂，风清气爽，气温适宜，好像除了空气中飘着一些烦人的柳絮之外，一切都刚刚好。
-                        </a>
-                    </span>
-                </div>
-            </div>
-            <div class="archives-content">
-                <div class="content-point"></div>
-                <div class="post-entry">
-                    <span class="post-release-time">12-25&nbsp;&nbsp;13:31</span>
-                    <span class="archive-post-title">
-                        <a href="post.html">
-                            <span>第一个归档测试做好了</span>
+                        <a href="/">
+                            今天的杭州阳光灿烂，风清气爽，气温适宜，好像除了空气中飘着一些烦人的柳絮之外，一切都刚刚好。
                         </a>
                     </span>
                 </div>
@@ -60,76 +49,15 @@
         <div class="archives-inner">
             <h2 class="archives-title">
                 <div class="title-point"></div>
-                2018
+                2021
             </h2>
             <div class="archives-content">
                 <div class="content-point"></div>
                 <div class="post-entry">
                     <span class="post-release-time">12-25&nbsp;&nbsp;13:31</span>
                     <span class="archive-post-title">
-                        <a href="post.html">
+                        <a href="/">
                             <span>这是我第一次创建个人博客</span>
-                        </a>
-                    </span>
-                </div>
-            </div>
-            <div class="archives-content">
-                <div class="content-point"></div>
-                <div class="post-entry">
-                    <span class="post-release-time">12-25&nbsp;&nbsp;13:31</span>
-                    <span class="archive-post-title">
-                        <a href="post.html">
-                            <span>这是我第一次创建个人博客</span>
-                        </a>
-                    </span>
-                </div>
-            </div>
-            <div class="archives-content">
-                <div class="content-point"></div>
-                <div class="post-entry">
-                    <span class="post-release-time">12-25&nbsp;&nbsp;13:31</span>
-                    <span class="archive-post-title">
-                        <a href="post.html">
-                            <span>这是我第一次创建个人博客</span>
-                        </a>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="archives-inner">
-            <h2 class="archives-title">
-                <div class="title-point"></div>
-                2017
-            </h2>
-            <div class="archives-content">
-                <div class="content-point"></div>
-                <div class="post-entry">
-                    <span class="post-release-time">12-25&nbsp;&nbsp;13:31</span>
-                    <span class="archive-post-title">
-                        <a href="post.html">
-                            <span>这是我第一次创建个人博客</span>
-                        </a>
-                    </span>
-                </div>
-            </div>
-            <div class="archives-content">
-                <div class="content-point"></div>
-                <div class="post-entry">
-                    <span class="post-release-time">12-25&nbsp;&nbsp;13:31</span>
-                    <span class="archive-post-title">
-                        <a href="post.html">
-                            <span>这是我第一次创建个人博客</span>
-                        </a>
-                    </span>
-                </div>
-            </div>
-            <div class="archives-content">
-                <div class="content-point"></div>
-                <div class="post-entry">
-                    <span class="post-release-time">12-25&nbsp;&nbsp;13:31</span>
-                    <span class="archive-post-title">
-                        <a href="post.html">
-                            <span>第一个归档测试做好了</span>
                         </a>
                     </span>
                 </div>
@@ -150,7 +78,7 @@ export default {
   name: 'Record',
   data () {
     return {
-      msg: 'record'
+      msg: '爱学习后生'
     }
   }
 }

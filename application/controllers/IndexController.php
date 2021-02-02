@@ -9,6 +9,8 @@ namespace application\controllers;
 */
 use application\models\installModels;
 use application\models\exampleModels;
+use application\models\example2Models;
+use application\models\wampModels;
 use hl\HLController;
 use application\services\exampleServices;
 use application\services\installServices;
@@ -50,6 +52,414 @@ class IndexController extends HLController
     }
 
     public function testAction()
+    {
+        ini_set('max_execution_time', '1800');
+        $data = [];
+        $id = 95158239;
+        while ($rows = exampleModels::getInstance()->aa(
+            "select mml.member_id,m.regtime,mp.role from sl_gold_miner_member_level mml 
+left join sl_member_plus mp on mp.member_id = mml.member_id
+left join sl_member m on m.member_id = mml.member_id where mml.member_id > {$id} and mml.level > 0 order by mml.member_id asc limit 10"
+        )) {
+            foreach ($rows as $_row) {
+                $inData = [
+                    'member_id' => $_row['member_id'],
+                    'role' => empty($_row['role']) ? 0 : $_row['role'],
+                    'day_1' => '0',
+                    'day_2' => '0',
+                    'day_3' => '0',
+                    'day_4' => '0',
+                    'day_5' => '0',
+                    'day_6' => '0',
+                    'day_7' => '0',
+                    'day_8' => '0',
+                    'day_9' => '0',
+                    'day_10' => '0',
+                    'regtime' => $_row['regtime'],
+                ];
+                $sql = "select create_time from sl_gold_miner_gold_ore_log where member_id = {$_row['member_id']} and source <= 20";
+                $ores = exampleModels::getInstance()->aa($sql);
+                $aaa = ['day_1','day_2','day_3','day_4','day_5','day_6','day_7','day_8','day_9','day_10'];
+                $ccc = ['day_1' => '0',
+                    'day_2' => '0',
+                    'day_3' => '0',
+                    'day_4' => '0',
+                    'day_5' => '0',
+                    'day_6' => '0',
+                    'day_7' => '0',
+                    'day_8' => '0',
+                    'day_9' => '0',
+                    'day_10' => '0',];
+                if ($ores) {
+                    foreach ($ores as $_ore) {
+                        if (in_array('day_'. intval(date('d', $_ore['create_time'])), $aaa)) {
+                            $inData['day_'. intval(date('d', $_ore['create_time']))] = '1';
+                            unset($ccc['day_'. intval(date('d', $_ore['create_time']))]);
+                        }
+                    }
+                }
+
+                if (!empty($ccc)) {
+                    $teams = exampleModels::getInstance()->aa("select play_time from sl_gold_miner_team where member_id = {$_row['member_id']}");
+                    if ($teams) {
+                        foreach ($teams as $_team) {
+                            if (in_array('day_'. intval(date('d', $_team['play_time'])), $aaa)) {
+                                $inData['day_'. intval(date('d', $_team['play_time']))] = '1';
+                                unset($ccc['day_'. intval(date('d', $_team['play_time']))]);
+                            }
+                        }
+                    }
+                }
+                if (!empty($ccc)) {
+                    $areas = exampleModels::getInstance()->aa("select create_time from sl_gold_miner_area_member where member_id = {$_row['member_id']}");
+                    if ($areas) {
+                        foreach ($areas as $_area) {
+                            if (in_array('day_'. intval(date('d', $_area['create_time'])), $aaa)) {
+                                $inData['day_'. intval(date('d', $_area['create_time']))] = '1';
+                            }
+                        }
+                    }
+                }
+                wampModels::getInstance()->insert('sl_gold_miner', $inData);
+                $id = $_row['member_id'];
+            }
+//            var_dump($rows);
+//            die;
+        }
+        die;
+        //参与用户数（定义：完成赚金矿的某一项日常任务或加入大区或参与组队pk即算参与）
+
+        /*$sql = "select price_rule_id,goods_id from srm_goods where STATUS = 1";
+        $rows = example2Models::getInstance()->aa($sql);
+        foreach ($rows as $_row) {
+            if (isset($data[$_row['price_rule_id']])) {
+                $data[$_row['price_rule_id']] .= ','.$_row['goods_id'];
+            } else {
+                $data[$_row['price_rule_id']] = $_row['goods_id'];
+            }
+
+        }
+        echo '<table border = "1">';
+        foreach ($data as $_k => $_v) {
+            $_tmp = exampleModels::getInstance()->aa("select sum(real_sales) num from sl_goods_data where goods_id in ({$_v}) limit 1");
+            echo '<tr>';
+            echo '<td>'.$_k.'</td>';
+            echo '<td>'.$_tmp[0]['num'].'</td>';
+            echo '</tr>';
+        }
+        echo '</table>';
+        var_dump($data);
+        die;*/
+        /*
+        $sql = "select rpl.member_id,count(rpl.id) as c from sl_gold_miner_red_packets_log rpl
+left join sl_member_plus mp on mp.member_id = rpl.member_id
+where rpl.packet_type = 1 and create_time >= UNIX_TIMESTAMP('2020-11-01') and rpl.create_time < UNIX_TIMESTAMP('2020-11-10 22:00') 
+and mp.role >= 3
+GROUP by rpl.member_id";
+        $rows = exampleModels::getInstance()->aa($sql);
+        $t1 = 0;
+        foreach ($rows as $_row) {
+            if ($_row['c'] <= 5) {
+                if (isset($data[$t1][$_row['c']])) {
+                    $data[$t1][$_row['c']]++;
+                } else {
+                    $data[$t1][$_row['c']] = 1;
+                }
+            } elseif ($_row['c'] >= 6 && $_row['c'] <= 10) {
+                if (isset($data[$t1][6])) {
+                    $data[$t1][6]++;
+                } else {
+                    $data[$t1][6] = 1;
+                }
+            } elseif ($_row['c'] >= 10 && $_row['c'] <= 20) {
+                if (isset($data[$t1][7])) {
+                    $data[$t1][7]++;
+                } else {
+                    $data[$t1][7] = 1;
+                }
+            } elseif ($_row['c'] > 20 && $_row['c'] <= 30) {
+                if (isset($data[$t1][8])) {
+                    $data[$t1][8]++;
+                } else {
+                    $data[$t1][8] = 1;
+                }
+            } elseif ($_row['c'] > 30 && $_row['c'] <= 40) {
+                if (isset($data[$t1][9])) {
+                    $data[$t1][9]++;
+                } else {
+                    $data[$t1][9] = 1;
+                }
+            } elseif ($_row['c'] > 40 && $_row['c'] <= 50) {
+                if (isset($data[$t1][10])) {
+                    $data[$t1][10]++;
+                } else {
+                    $data[$t1][10] = 1;
+                }
+            } else {
+                if (isset($data[$t1][11])) {
+                    $data[$t1][11]++;
+                } else {
+                    $data[$t1][11] = 1;
+                }
+            }
+        }
+        echo '<table border = "1">';
+        for ($i = 1; $i <= 11; $i++) {
+            echo '<tr>';
+            echo '<td>'. ($data[0][$i] ?? 0) . '</td>';
+            echo '</tr>';
+        }
+        echo '</table>';
+        die;*/
+        /*
+        $t1 = strtotime(date('2020-11-01'));
+        $t0 = $t1;
+        while ($t1 < strtotime(date('2020-11-11'))) {
+            $t2 = $t1 + 86400;
+            $rows = exampleModels::getInstance()->aa("select member_id,count(id) AS c from sl_gold_miner_red_packets_log 
+where packet_type = 1 and create_time >= {$t1} and create_time < {$t2} GROUP by member_id");
+            foreach ($rows as $_row) {
+                if ($_row['c'] <= 5) {
+                    if (isset($data[$t1][$_row['c']])) {
+                        $data[$t1][$_row['c']]++;
+                    } else {
+                        $data[$t1][$_row['c']] = 1;
+                    }
+                } elseif ($_row['c'] >= 6 && $_row['c'] <= 10) {
+                    if (isset($data[$t1][6])) {
+                        $data[$t1][6]++;
+                    } else {
+                        $data[$t1][6] = 1;
+                    }
+                } elseif ($_row['c'] >= 10 && $_row['c'] <= 20) {
+                    if (isset($data[$t1][7])) {
+                        $data[$t1][7]++;
+                    } else {
+                        $data[$t1][7] = 1;
+                    }
+                } elseif ($_row['c'] > 20 && $_row['c'] <= 30) {
+                    if (isset($data[$t1][8])) {
+                        $data[$t1][8]++;
+                    } else {
+                        $data[$t1][8] = 1;
+                    }
+                } elseif ($_row['c'] > 30 && $_row['c'] <= 40) {
+                    if (isset($data[$t1][9])) {
+                        $data[$t1][9]++;
+                    } else {
+                        $data[$t1][9] = 1;
+                    }
+                } elseif ($_row['c'] > 40 && $_row['c'] <= 50) {
+                    if (isset($data[$t1][10])) {
+                        $data[$t1][10]++;
+                    } else {
+                        $data[$t1][10] = 1;
+                    }
+                } else {
+                    if (isset($data[$t1][11])) {
+                        $data[$t1][11]++;
+                    } else {
+                        $data[$t1][11] = 1;
+                    }
+                }
+            }
+            $t1 = $t2;
+        }
+
+        //var_dump($data);
+        echo '<table border = "1">';
+        for ($i = 1; $i <= 11; $i++) {
+            echo '<tr>';
+            for ($j = 0; $j <= 10; $j ++) {
+                echo '<td>'. ($data[$t0 + (86400 * $j)][$i] ?? 0) . '</td>';
+            }
+            echo '</tr>';
+        }
+        echo '</table>';
+        die;
+        */
+        /*while ($rows = exampleModels::getInstance()->aa(
+            "select mam.member_id,mam.area_id,mam.create_time,mp.role from sl_gold_miner_area_member mam
+left join sl_member_plus mp on mp.member_id = mam.member_id where mam.member_id > {$id} limit 100"
+        )) {
+            foreach ($rows as $_row) {
+                if (empty($_row['role'])) {
+                    $key2 = 0;
+                } elseif ($_row['role'] >= 3) {
+                    $key2 = 3;
+                } else {
+                    $key2 = $_row['role'];
+                }
+                $day = date('d', $_row['create_time']);
+                if (isset($data[$_row['area_id']][$key2][$day])) {
+                    $data[$_row['area_id']][$key2][$day]++;
+                } else {
+                    $data[$_row['area_id']][$key2][$day] = 1;
+                }
+                $id = $_row['member_id'];
+            }
+        }
+
+        //var_dump($data);
+        echo '<table>';
+        foreach ($data as $_k => $_v) {
+            echo '<tr><td>'.$_k.'</td></tr>';
+            for ($i = 0; $i <= 3; $i++) {
+                echo '<tr>';
+                for ($j = 1; $j <= 10; $j++) {
+                    if ($j < 10) {
+                        echo '<td>'. ($data[$_k][$i]['0'.$j] ?? 0) . '</td>';
+                    } else {
+                        echo '<td>'. ($data[$_k][$i][$j] ?? 0) . '</td>';
+                    }
+                }
+                echo '</tr>';
+            }
+        }
+        echo '</table>';
+        die;*/
+        /*while ($rows = exampleModels::getInstance()->aa(
+            "select mml.member_id,mml.level,mp.role,mml.full_level_time from sl_gold_miner_member_level mml
+left join sl_member_plus mp on mp.member_id = mml.member_id
+where mml.member_id > {$id} and mml.level > 14 and mml.level <= 19 limit 100"
+        )) {
+            $member_ids = implode(',', array_column($rows, 'member_id'));
+            $sql = "select DISTINCT member_id,create_time from sl_gold_miner_red_packets_log ".
+                    "where member_id IN({$member_ids}) and level_type = 3 group by member_id order by id desc ";
+            $times = exampleModels::getInstance()->aa($sql);
+            foreach ($times as $_time) {
+                $keyDays[$_time['member_id']] = date('d', $_time['create_time'] + 3600 * 8);
+            }
+            foreach ($rows as $_row) {
+                if ($_row['level'] <= 12) {
+                    $key1 = 1;
+                } elseif ($_row['level'] >= 13 && $_row['level'] <= 14) {
+                    $key1 = 2;
+                } elseif ($_row['level'] >= 15 && $_row['level'] <= 19) {
+                    $key1 = 3;
+                } elseif ($_row['level'] == 20) {
+                    $key1 = 4;
+                }
+                if (empty($_row['role'])) {
+                    $key2 = 0;
+                } elseif ($_row['role'] >= 3) {
+                    $key2 = 3;
+                } else {
+                    $key2 = $_row['role'];
+                }
+                if (isset($data[$key1][$key2]['num'])) {
+                    $data[$key1][$key2]['num']++;
+                } else {
+                    $data[$key1][$key2]['num'] = 1;
+                }
+                $num = $keyDays[$_row['member_id']] ?? 10;
+//                if ($num == 0) {
+//                    echo $_row['member_id'].'==='.$_row['level'].'<br>';
+//                }
+                if (isset($data[$key1][$key2][$num])) {
+                    $data[$key1][$key2][$num]++;
+                } else {
+                    $data[$key1][$key2][$num] = 1;
+                }
+                switch ($key1) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        $num = date('d', $_row['full_level_time']);
+                        if (isset($data[$key1][$key2][$num])) {
+                            $data[$key1][$key2][$num]++;
+                        } else {
+                            $data[$key1][$key2][$num] = 1;
+                        }
+                        break;
+                }
+
+                $id = $_row['member_id'];
+            }
+        }*/
+        $path = 'wjk.csv';
+        $csv = new \hl\library\Tools\Excel\HLCsvReader();
+        $data = $csv->getData($path);
+        $i = 0;
+        foreach ($data as $_list) {
+//            if ($i >= 4) {
+//                break;
+//            }
+            $fixamount = $_list[2];
+            echo '-- '.$_list[0].'___'.$i;
+            echo '<br>';
+            //拉新
+            $sql1 = "select id,packet_num,packet_type,packet_amount,create_time from sl_gold_miner_red_packets_log ".
+                "where member_id = '{$_list[0]}' and level_type = 1 and packet_status = 1 and packet_type = 1 order by id asc";
+            $list1 = exampleModels::getInstance()->aa($sql1);
+            //var_dump($list1);
+            //非拉新
+            $sql2 = "select id,packet_num,packet_type,packet_amount,create_time from sl_gold_miner_red_packets_log ".
+                "where member_id = '{$_list[0]}' and level_type = 1 and packet_status = 1 and packet_type = 0 order by id asc";
+            $list2 = exampleModels::getInstance()->aa($sql2);
+            //var_dump($list2);
+            $openTime = end($list2)['create_time'];
+            if ($list1) {
+                foreach ($list1 as $_list1) {
+                    if ($openTime < 1604207488) { //0.88
+                        echo "update sl_gold_miner_red_packets_log set packet_amount = ". 0.88 * $_list1['packet_num']. " where id = '{$_list1['id']} limit 1';<br>";
+                        $fixamount -= (0.88 * $_list1['packet_num']);
+                    } elseif ($openTime >= 1604207488 && $openTime < 1604207504) { // 1.68
+                        echo "update sl_gold_miner_red_packets_log set packet_amount = ". 1.68 * $_list1['packet_num']. " where id = '{$_list1['id']} limit 1';<br>";
+                        $fixamount -= (1.68 * $_list1['packet_num']);
+                    } elseif ($openTime >= 1604207504) { // 1.26
+                        echo "update sl_gold_miner_red_packets_log set packet_amount = ". 1.26 * $_list1['packet_num']. " where id = '{$_list1['id']} limit 1';<br>";
+                        $fixamount -= (1.26 * $_list1['packet_num']);
+                    }
+                }
+            }
+            $num = array_sum(array_column($list2, 'packet_num'));
+            $unit = floor($fixamount * 100 / $num) / 100;
+            foreach ($list2 as $_list2) {
+                if ($num == $_list2['packet_num']) {
+                    echo "update sl_gold_miner_red_packets_log set packet_amount = ". $fixamount . " where id = '{$_list2['id']} limit 1';<br>";
+                } else {
+                    echo "update sl_gold_miner_red_packets_log set packet_amount = ". $unit * $_list2['packet_num']. " where id = '{$_list2['id']} limit 1';<br>";
+                    $fixamount -= ($unit * $_list2['packet_num']);
+                }
+                $num -= $_list2['packet_num'];
+            }
+            unset($openTime);
+            unset($list1);
+            unset($list2);
+            $i++;
+        }
+        //var_dump($data);
+
+    }
+    public function test112Action()
+    {
+        $sql = "select data from sl_store_update_aptitude where status >= 0 limit 300";
+        $list = exampleModels::getInstance()->aa($sql);
+        $data = [];
+        foreach ($list as $_list) {
+            $a = json_decode($_list['data'], true);
+            foreach ($a['other_qualification'] as $_v) {
+                if (strpos($_v, '/G0/')) {
+                    $data[] = $_v;
+                    echo $_v.'<br>';
+                }
+            }
+            foreach ($a['qualification'] as $__v) {
+                if (strpos($__v['aptitude_image'], '/G0/')) {
+                    $data[] = $__v['aptitude_image'];
+                    echo $__v['aptitude_image'].'<br>';
+                }
+            }
+        }
+        var_dump($data);
+    }
+
+    public function test3Action()
     {
         $p2 = [];
         $p3 = [];

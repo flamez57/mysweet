@@ -136,6 +136,22 @@ class HLModel extends HLSington
         }
     }
 
+    /*
+    ** 获取条数
+    */
+    public function getCountByWhere($where = [])
+    {
+        $whereStr = $this->db->getPreparingWhereCondition($where, $bindParam);
+        $limit = " LIMIT 1";
+        $sql = "SELECT COUNT(1) num FROM {$this->tableName} {$whereStr} {$limit}";
+        $res = $this->db->safeQuery($sql, $bindParam);
+        if (!empty($res)) {
+            return current($res)['num'];
+        } else {
+            return 0;
+        }
+    }
+
     public function updateByWhere($where, $data)
     {
         return $this->db->update($this->tableName, $data, $where);

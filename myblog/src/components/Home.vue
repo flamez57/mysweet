@@ -17,116 +17,29 @@
         <!--帖子 S-->
         <div class="alpha">
             <div class="content-body">
+                <!--列表内容-->
                 <div class="posts-inner">
                     <blockquote class="posts">
-                        <h2 class="post-title"><a href="post.html">这是标题</a></h2>
+                        <h2 class="post-title"><router-link to="/Detail">Apache或者Nginx为PHP设置服务器环境变量</router-link></h2>
                         <div class="marks">
                             <div class="release-time">
                                 <span><i class="iconfont iconschedule"></i></span>
-                                <span>2019-12-23</span>
+                                <span>2020-12-23</span>
                             </div>
                             <div class="tags-item">
                                 <i class="iconfont iconlabel_fill"></i>
-                                <router-link to="/TagList">生活</router-link>
-                                <router-link to="/TagList">点滴</router-link>
+                                <router-link to="/TagList">环境变量</router-link>
+                                <router-link to="/TagList">PHP</router-link>
                             </div>
                             <div class="view">访问数:
                                 <div class="view-number"><span>1112</span></div>
                             </div>
                         </div>
-                        <p class="post-short-content">今天的北京阳光灿烂，风清气爽，气温适宜，好像除了空气中飘着一些烦人的柳絮之外，一切都刚刚好。
-                            索性去了趟玉渊潭公园，活动活动筋骨。通往公园的桥边上站着一群上了年纪的大爷们守着鱼竿，通往公园的路上各色的人群攒动，耳朵里是小贩的叫卖声，协警的指引声，人群里除了各种寒暄声还夹杂着孩童的哭闹声。这种浓烈喧闹的市民生活气息好像已经很久没有感受过了，工作以来的我一到周末就愿意宅家，躺着不想出门，像在学校读书的
+                        <p class="post-short-content">在开发项目的时候生产环境和开发环境的配置信息是不一样的，总要切换的话比较麻烦，现在我们可以通过设置服务器环境变量来区分线上生产环境还是本地开发环境，比如我们可以设置 RUNTIME_ENVIROMENT 的为 'DEV'还是'PRO'来区分。然后在PHP端通过$_SERVER['RUNTIME_ENVIROMENT']来获取值。
                             <span class="read-more">...<router-link to="/Detail">Read More</router-link></span></p>
                     </blockquote>
                 </div>
-                <div class="posts-inner">
-                    <blockquote class="posts">
-                        <h2 class="post-title"><a href="post.html">这是标题</a></h2>
-                        <div class="marks">
-                            <div class="release-time">
-                                <span><i class="iconfont iconschedule"></i></span>
-                                <span>2019-12-23</span>
-                            </div>
-                            <div class="tags-item">
-                                <i class="iconfont iconlabel_fill"></i>
-                                <a href="tags.html">生活</a>
-                                <a href="tags.html">点滴</a>
-                            </div>
-                            <div class="view">访问数:
-                                <div class="view-number"><span>1112</span></div>
-                            </div>
-                        </div>
-                        <p class="post-short-content">今天的北京阳光灿烂，风清气爽，气温适宜，好像除了空气中飘着一些烦人的柳絮之外，一切都刚刚好。
-                            索性去了趟玉渊潭公园，活动活动筋骨。通往公园的桥边上站着一群上了年纪的大爷们守着鱼竿，通往公园的路上各色的人群攒动，耳朵里是小贩的叫卖声，协警的指引声，人群里除了各种寒暄声还夹杂着孩童的哭闹声。这种浓烈喧闹的市民生活气息好像已经很久没有感受过了，工作以来的我一到周末就愿意宅家，躺着不想出门，像在学校读书的
-                            <span class="read-more">...<a href="post.html">Read More</a></span></p>
-                    </blockquote>
-                </div>
-                <div class="posts-inner">
-                    <blockquote class="posts">
-                        <h2 class="post-title"><a href="post.html">这是标题</a></h2>
-                        <div class="marks">
-                            <div class="release-time">
-                                <span><i class="iconfont iconschedule"></i></span>
-                                <span>2019-12-23</span>
-                            </div>
-                            <div class="tags-item">
-                                <i class="iconfont iconlabel_fill"></i>
-                                <a href="tags.html">生活</a>
-                                <a href="tags.html">点滴</a>
-                            </div>
-                            <div class="view">访问数:
-                                <div class="view-number"><span>1112</span></div>
-                            </div>
-                        </div>
-                        <p class="post-short-content">今天的北京阳光灿烂，风清气爽，气温适宜，好像除了空气中飘着一些烦人的柳絮之外，一切都刚刚好。
-                            索性去了趟玉渊潭公园，活动活动筋骨。通往公园的桥边上站着一群上了年纪的大爷们守着鱼竿，通往公园的路上各色的人群攒动，耳朵里是小贩的叫卖声，协警的指引声，人群里除了各种寒暄声还夹杂着孩童的哭闹声。这种浓烈喧闹的市民生活气息好像已经很久没有感受过了，工作以来的我一到周末就愿意宅家，躺着不想出门，像在学校读书的
-                            <span class="read-more">...<a href="post.html">Read More</a></span></p>
-                    </blockquote>
-                </div>
-                <div class="posts-inner">
-                    <blockquote class="posts">
-                        <h2 class="post-title"><a href="post.html">这是标题</a></h2>
-                        <div class="marks">
-                            <div class="release-time">
-                                <span><i class="iconfont iconschedule"></i></span>
-                                <span>2019-12-23</span>
-                            </div>
-                            <div class="tags-item">
-                                <i class="iconfont iconlabel_fill"></i>
-                                <a href="tags.html">生活</a>
-                                <a href="tags.html">点滴</a>
-                            </div>
-                            <div class="view">访问数:
-                                <div class="view-number"><span>1112</span></div>
-                            </div>
-                        </div>
-                        <p class="post-short-content">今天的北京阳光灿烂，风清气爽，气温适宜，好像除了空气中飘着一些烦人的柳絮之外，一切都刚刚好。
-                            索性去了趟玉渊潭公园，活动活动筋骨。通往公园的桥边上站着一群上了年纪的大爷们守着鱼竿，通往公园的路上各色的人群攒动，耳朵里是小贩的叫卖声，协警的指引声，人群里除了各种寒暄声还夹杂着孩童的哭闹声。这种浓烈喧闹的市民生活气息好像已经很久没有感受过了，工作以来的我一到周末就愿意宅家，躺着不想出门，像在学校读书的
-                            <span class="read-more">...<a href="post.html">Read More</a></span></p>
-                    </blockquote>
-                </div>
-                <div class="posts-inner">
-                    <blockquote class="posts">
-                        <h2 class="post-title"><a href="post.html">这是标题</a></h2>
-                        <div class="marks">
-                            <div class="release-time">
-                                <span><i class="iconfont iconschedule"></i></span>
-                                <span>2019-12-23</span>
-                            </div>
-                            <div class="tags-item">
-                                <i class="iconfont iconlabel_fill"></i>
-                                <a href="tags.html">生活</a>
-                                <a href="tags.html">点滴</a>
-                            </div>
-                            <div class="view">访问数:
-                                <div class="view-number"><span>1112</span></div>
-                            </div>
-                        </div>
-                        <p class="post-short-content">今天的北京阳光灿烂，风清气爽，气温适宜，好像除了空气中飘着一些烦人的柳絮之外，一切都刚刚好。
-                            索性去了趟玉渊潭公园，活动活动筋骨。通往公园的桥边上站着一群上了年纪的大爷们守着鱼竿，通往公园的路上各色的人群攒动，耳朵里是小贩的叫卖声，协警的指引声，人群里除了各种寒暄声还夹杂着孩童的哭闹声。这种浓烈喧闹的市民生活气息好像已经很久没有感受过了，工作以来的我一到周末就愿意宅家，躺着不想出门，像在学校读书的
-                            <span class="read-more">...<a href="post.html">Read More</a></span></p>
-                    </blockquote>
-                </div>
+                <!--列表内容end-->
             </div>
             <!--下导航 S-->
             <div class="content-nav">
@@ -135,10 +48,10 @@
                         <i class="iconfont iconarrow-lift" aria-hidden="true"></i>
                     </a>
                     <a href="#" class="nav-action">1</a>
-                    <a href="#">2</a>
+                    <!--<a href="#">2</a>
                     <a href="#">3</a>
                     <span>…</span>
-                    <a href="#">9</a>
+                    <a href="#">9</a>-->
                     <a href="#">
                         <i class="iconfont iconarrow-right" aria-hidden="true"></i>
                     </a>
@@ -155,12 +68,9 @@
                 <div class="cate-ul-item">
                     <ul class="cate-ul">
                         <li>
-                            <router-link to="/CateList">生活</router-link>
-                            <span> (16)</span>
+                            <router-link to="/CateList">服务端</router-link>
+                            <span> (1)</span>
                         </li>
-                        <li><a href="categories.html">前端开发</a><span> (7)</span></li>
-                        <li><a href="categories.html">文学类</a><span> (2)</span></li>
-                        <li><a href="categories.html">编程笔记</a><span> (9)</span></li>
                     </ul>
                 </div>
             </div>
@@ -168,14 +78,8 @@
                 <h3>标签</h3>
                 <div class="tags-ul-item">
                     <ul class="tags-ul">
-                        <li><a href="tags.html">Git</a></li>
-                        <li><a href="tags.html">javascript</a></li>
-                        <li><a href="tags.html">前端开发</a></li>
-                        <li><a href="">jQuery</a></li>
-                        <li><a href="#">Git</a></li>
-                        <li><a href="#">Git</a></li>
-                        <li><a href="#">Git</a></li>
-                        <li><a href="#">Git</a></li>
+                        <li><router-link to="/TagList">环境变量</router-link></li>
+                        <li><router-link to="/TagList">PHP</router-link></li>
                     </ul>
                 </div>
             </div>
@@ -187,6 +91,8 @@
 </template>
 
 <script>
+import memberInfo from '@/api/getData'
+console.log(memberInfo)
 export default {
   name: 'Home',
   data () {

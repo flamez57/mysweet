@@ -35,6 +35,15 @@ class memberModels extends HLModel
         return $this->getOne($sql, ['code' => $code]);
     }
 
+    /*
+    ** 根据token获取member_id
+    */
+    public function getMemberIdByToken($token)
+    {
+        $sql = "SELECT id FROM {$this->tableName} WHERE token = ?";
+        return $this->getOne($sql, ['token' => $token]);
+    }
+
     public function doSql($sql, $db = '')
     {
         return $this->query($sql, $db);

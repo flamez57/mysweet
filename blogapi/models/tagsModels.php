@@ -31,8 +31,26 @@ class tagsModels extends HLModel
         return $this->query($sql, $db);
     }
 
-    public function insert($table, $param = [])
+    public function insert($param = [])
     {
-        $this->db->insert($table, $param);
+        $this->db->insert($this->tableName, $param);
+    }
+
+    public function tagList($where = [], $fields = '*', $orderBy = '')
+    {
+        $whereStr = $this->db->getPreparingWhereCondition($where, $bindParam);
+        if (!empty($orderBy)) {
+            $orderBy = " ORDER BY {$orderBy} ";
+        }
+        $limit = " LIMIT 100";
+        $sql = "SELECT {$fields} FROM {$this->tableName} t ".
+            "left join yx_article_tags_relevance atr on atr.tag_id = t.id ".
+            "left join yx_article a on a.id = atr.article_id {$whereStr} {$orderBy} {$limit}";
+        $res = $this->db->safeQuery($sql, $bindParam);
+        if (!empty($res)) {
+            return $res;
+        } else {
+            return [];
+        }
     }
 }

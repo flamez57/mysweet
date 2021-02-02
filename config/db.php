@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'default' => [
+    'wamp' => [
         'host' => 'localhost',
-        'dbname' => 'mysweet',
+        'dbname' => 'shunlian',
         'username' => 'root',
-        'password' => 'vagrant',
+        'password' => '',
         'charset' => 'utf8',
         'port' => '3306'
     ],

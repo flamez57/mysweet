@@ -144,6 +144,7 @@ CREATE TABLE `yx_member` (
   `regtime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '注册时间',
   `regip` char(15) NOT NULL DEFAULT '' COMMENT '注册IP',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态，0禁止，1正常',
+  `token` varchar(40) NOT NULL DEFAULT '' COMMENT '登陆密钥',
   PRIMARY KEY (`id`),
   UNIQUE KEY `code` (`code`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
