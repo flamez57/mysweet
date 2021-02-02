@@ -99,6 +99,18 @@ export default {
     return {
       msg: '爱学习后生'
     }
+  },
+  methods: {
+    send() {
+      axios({// 格式a
+        method: 'get',
+        url: 'http://www.baidu.com?name=tom&age=23'
+      }).then(function(resp){
+        console.log(resp.data)
+      }).catch(resp => {
+        console.log('请求失败：'+resp.status+','+resp.statusText)
+      })
+    },
   }
 }
 </script>
