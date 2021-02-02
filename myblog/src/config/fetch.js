@@ -49,8 +49,8 @@ export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
       let requestObj
       if (window.XMLHttpRequest) {
         requestObj = new XMLHttpRequest()
-      } else {
-        requestObj = new ActiveXObject()
+      } else if (window.ActiveXObject) {
+        requestObj = new ActiveXObject('Microsoft.XMLHTTP')
       }
 
       let sendData = ''
