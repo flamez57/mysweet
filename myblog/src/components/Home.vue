@@ -91,27 +91,27 @@
 </template>
 
 <script>
-import memberInfo from '@/api/getData'
-console.log(memberInfo)
+import * as memberInfo from '@/api/getData'
+
 export default {
   name: 'Home',
   data () {
     return {
-      msg: '爱学习后生'
+      msg: '爱学习后生',
+      memberInfo: memberInfo
     }
   },
   methods: {
     send () {
-      this.$http({// 格式a
+      /* this.$http({// 格式a
         method: 'get',
         url: 'http://mysweet.cc/index.php?m=blogapi&c=index&a=memberInfo&code=123',
-        headers: {'X-Requested-With': 'XMLHttpRequest'},
-        changOrigin: true
+        headers: {'X-Requested-With': 'XMLHttpRequest'}
       }).then(function (resp) {
         console.log(resp.data)
       }).catch(resp => {
         console.log('请求失败：' + resp.status + ',' + resp.statusText)
-      })
+      }) */
     }
   },
   created () {

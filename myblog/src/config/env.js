@@ -12,10 +12,10 @@
  */
 let baseUrl = ''
 let routerMode = 'history'
-let baseImgPath = 'http://images.cangdu.org/'
+let baseImgPath = 'http://mysweet95.com/'
 
 if (process.env.NODE_ENV === 'development') {
-  // baseUrl = 'http://cangdu.org:8001';
+  baseUrl = 'http://mysweet.com/index.php?' // 开发板
 } else {
   baseUrl = 'http://mysweet.com/index.php?'
 }

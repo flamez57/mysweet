@@ -23,7 +23,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Front',
       component: Front,
       children: [
         { path: '/', name: 'Home', component: Home },
@@ -39,7 +38,6 @@ export default new Router({
       component: Login
     }, {
       path: '/Manage',
-      name: 'Manage',
       component: Manage,
       children: [
         { path: '/', name: 'UserInfo', component: UserInfo },

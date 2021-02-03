@@ -1,80 +1,69 @@
 /**
  * Created by Administrator on 2020/12/11.
  */
-import { baseUrl } from './env'
+import Apis from './apis'
+import axios from 'axios'
 
-export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
-  type = type.toUpperCase()
-  url = baseUrl + url
-
-  if (type === 'GET') {
-    let dataStr = '' // 数据拼接字符串
-    Object.keys(data).forEach(key => {
-      dataStr += key + '=' + data[key] + '&'
-    })
-
-    if (dataStr !== '') {
-      dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'))
-      url = url + '?' + dataStr
-    }
+const METHOD = {
+  GET: 'get',
+  POST: 'post'
+}
+/**
+ * 网络请求
+ * @param method 方法
+ * @param url 接口地址
+ * @param params 参数
+ * @param showError 是否展示错误信息
+ * @returns {Promise<any>}
+ */
+// 错误和失败信息都在这里进行处理，界面中调用的时候只处理正确数据即可
+function request(method, url, params, showError) {
+  if (showError || showError == undefined){ // 是否展示错误信息
+    showError = true;
+  }else {
+    showError = false;
   }
-
-  if (window.fetch && method === 'fetch') {
-    let requestConfig = {
-      credentials: 'include',
-      method: type,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      mode: 'cors',
-      cache: 'force-cache'
-    }
-
-    if (type === 'POST') {
-      Object.defineProperty(requestConfig, 'body', {
-        value: JSON.stringify(data)
-      })
-    }
-
-    try {
-      const response = await fetch(url, requestConfig)
-      const responseJson = await response.json()
-      return responseJson
-    } catch (error) {
-      throw new Error(error)
-    }
-  } else {
-    return new Promise((resolve, reject) => {
-      let requestObj
-      if (window.XMLHttpRequest) {
-        requestObj = new XMLHttpRequest()
-      } else if (window.ActiveXObject) {
-        requestObj = new ActiveXObject('Microsoft.XMLHTTP')
-      }
-
-      let sendData = ''
-      if (type === 'POST') {
-        sendData = JSON.stringify(data)
-      }
-
-      requestObj.open(type, url, true)
-      requestObj.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-      requestObj.send(sendData)
-
-      requestObj.onreadystatechange = () => {
-        if (requestObj.readyState === 4) {
-          if (requestObj.status === 200) {
-            let obj = requestObj.response
-            if (typeof obj !== 'object') {
-              obj = JSON.parse(obj)
-            }
-            resolve(obj)
-          } else {
-            reject(requestObj)
-          }
+  return new Promise((resolve, reject) => {
+    axios({
+      method: method,
+      url: url,
+      params: params,
+      headers: {'X-Requested-With': 'XMLHttpRequest'}
+    }).then((res) => {
+      if (res.data.code == 0) { // 0 是请求成功
+        resolve(res.data.data)
+      } else { // 其他情况返回错误信息，根据需要处理
+        reject(res.data)
+        if (showError){
+          console.log(res.data.message)
         }
       }
-    })
-  }
+    }).catch(() => {
+      if (showError){
+        console.log('请求失败，请稍后再试')
+      }
+    });
+  });
 }
+
+function get(url, params, showError) {
+    return request(METHOD.GET, url, params, showError);
+}
+
+function post(url, params, showError) {
+    return request(METHOD.POST, url, params, showError);
+}
+
+function fetch(url, params, $type = 'GET', showError = false) {
+  type = type.toUpperCase()
+  return type(url, params, showError)
+}
+const API = {
+    // 产品
+    memberInfo: (params) => post(Apis.memberInfo, params),
+}
+
+function install(Vue) {
+    Vue.prototype.$request = API;
+}
+export default install
