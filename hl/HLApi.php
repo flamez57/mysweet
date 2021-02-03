@@ -17,7 +17,7 @@ class HLApi extends HLSington
     public $code = 0;
     public $message = '';
     public $data = [];
-    
+
     /*
     ** 指向到最终的方法
     */

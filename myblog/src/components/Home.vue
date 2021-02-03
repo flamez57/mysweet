@@ -101,16 +101,21 @@ export default {
     }
   },
   methods: {
-    send() {
-      axios({// 格式a
+    send () {
+      this.$http({// 格式a
         method: 'get',
-        url: 'http://www.baidu.com?name=tom&age=23'
-      }).then(function(resp){
+        url: 'http://mysweet.cc/index.php?m=blogapi&c=index&a=memberInfo&code=123',
+        headers: {'X-Requested-With': 'XMLHttpRequest'},
+        changOrigin: true
+      }).then(function (resp) {
         console.log(resp.data)
       }).catch(resp => {
-        console.log('请求失败：'+resp.status+','+resp.statusText)
+        console.log('请求失败：' + resp.status + ',' + resp.statusText)
       })
-    },
+    }
+  },
+  created () {
+    this.send()
   }
 }
 </script>
