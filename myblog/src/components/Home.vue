@@ -91,19 +91,37 @@
 </template>
 
 <script>
-import * as memberInfo from '@/api/getData'
 
 export default {
   name: 'Home',
   data () {
     return {
-      msg: '爱学习后生',
-      memberInfo: memberInfo
+      msg: '爱学习后生'
     }
   },
+  mounted() {
+    this.loadModuleData();
+  },
   methods: {
+    loadModuleData() {
+      let params = {
+          code: '123'
+      }
+      this.$request.memberInfo(
+          params
+      ).then((data)=>{ // 直接拿到的就是成功数据，其他情况封装的时候统一处理
+          console.log(data)
+          /*data.forEach(data => {
+              this.tableData.push({
+                  id: data.id || '',
+                  name: data.name || '',
+                  desc: data.desc || '',
+              })
+          })*/
+      });
+    },
     send () {
-      /* this.$http({// 格式a
+       this.$http({// 格式a
         method: 'get',
         url: 'http://mysweet.cc/index.php?m=blogapi&c=index&a=memberInfo&code=123',
         headers: {'X-Requested-With': 'XMLHttpRequest'}
@@ -111,7 +129,7 @@ export default {
         console.log(resp.data)
       }).catch(resp => {
         console.log('请求失败：' + resp.status + ',' + resp.statusText)
-      }) */
+      })
     }
   },
   created () {

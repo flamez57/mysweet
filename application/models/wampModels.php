@@ -92,4 +92,9 @@ class wampModels extends HLModel
     {
         $this->db->insert($table, $param);
     }
+
+    public function update($table, $param, $where)
+    {
+        $this->db->update($table, $param, $where);
+    }
 }

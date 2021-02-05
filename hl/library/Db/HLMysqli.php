@@ -187,6 +187,9 @@ class HLMysqli implements HLDBAdapter
             $bindParams = [$bindParams];
         }
         $stmt = $this->_dbLink->prepare($query);
+        if (!$stmt) {
+            return [];
+        }
         if (!is_null($paramType)) {
             if (is_array($paramType)) {
                 $params[0] = implode("", $paramType);

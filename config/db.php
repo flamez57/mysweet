@@ -17,6 +17,22 @@ return [
         'charset' => 'utf8',
         'port' => '3306'
     ],
+    'default' => [
+        'host' => '81.69.155.9',
+        'dbname' => 'shunlian',//'srm'
+        'username' => 'dev.yangxiang',
+        'password' => 'A#45gBRHd%$4I2Ih',
+        'charset' => 'utf8',
+        'port' => '3306'
+    ],
+    'srm' => [
+        'host' => '81.69.155.9',
+        'dbname' => 'srm',
+        'username' => 'dev.yangxiang',
+        'password' => 'A#45gBRHd%$4I2Ih',
+        'charset' => 'utf8',
+        'port' => '3306'
+    ],
     'blog' => [
         'host' => 'localhost',
         'dbname' => 'blog',

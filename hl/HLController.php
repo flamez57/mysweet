@@ -62,4 +62,12 @@ class HLController extends HLSington
         }
         return $_POST[$key] ?? $value;
     }
+
+    public function getQuery($key = '', $value = '')
+    {
+        if (empty($key)) {
+            return $_GET;
+        }
+        return $_GET[$key] ?? $value;
+    }
 }

@@ -5,10 +5,12 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import vueResource from 'vue-resource'
+import VueRequest from './config/fetch'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 Vue.use(vueResource)
+Vue.use(VueRequest)
 
 /* eslint-disable no-new */
 new Vue({

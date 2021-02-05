@@ -53,78 +53,84 @@ class IndexController extends HLController
 
     public function testAction()
     {
-        ini_set('max_execution_time', '1800');
-        $data = [];
-        $id = 95158239;
-        while ($rows = exampleModels::getInstance()->aa(
-            "select mml.member_id,m.regtime,mp.role from sl_gold_miner_member_level mml 
-left join sl_member_plus mp on mp.member_id = mml.member_id
-left join sl_member m on m.member_id = mml.member_id where mml.member_id > {$id} and mml.level > 0 order by mml.member_id asc limit 10"
+        ini_set('max_execution_time', '3600');
+        /*$rows = exampleModels::getInstance()->aa(
+            "select DISTINCT m.member_id,m.code,case when mp.role = 1 then '店主' when mp.role = 2 then '主管' when mp.role > 2 then '经理' else '普通用户' end AS role
+from sl_order o 
+left join sl_member m on m.member_id = o.member_id 
+left join sl_member_plus mp on mp.member_id = m.member_id
+where o.create_time >= UNIX_TIMESTAMP('2020-01-01') and o.status > 0"
+        );
+        echo '一共'.count($rows).'<br>';
+        foreach ($rows as $_row) {
+            if ($_row['member_id'] > 96800532) {
+                wampModels::getInstance()->insert(
+                    'sl_gold_egg',
+                    [
+                        'member_id' => $_row['member_id'],
+                        'role' => $_row['role'],
+                        'code' => $_row['code'],
+                    ]
+                );
+            }
+        }
+        echo 'success';
+        die;
+        $data = [];*/
+        $id = $this->getQuery('id', 94099265);
+        while ($rows = wampModels::getInstance()->aa(
+            "select member_id from sl_gold_egg where member_id > {$id} order by member_id asc limit 1000"
         )) {
             foreach ($rows as $_row) {
-                $inData = [
-                    'member_id' => $_row['member_id'],
-                    'role' => empty($_row['role']) ? 0 : $_row['role'],
-                    'day_1' => '0',
-                    'day_2' => '0',
-                    'day_3' => '0',
-                    'day_4' => '0',
-                    'day_5' => '0',
-                    'day_6' => '0',
-                    'day_7' => '0',
-                    'day_8' => '0',
-                    'day_9' => '0',
-                    'day_10' => '0',
-                    'regtime' => $_row['regtime'],
-                ];
-                $sql = "select create_time from sl_gold_miner_gold_ore_log where member_id = {$_row['member_id']} and source <= 20";
-                $ores = exampleModels::getInstance()->aa($sql);
-                $aaa = ['day_1','day_2','day_3','day_4','day_5','day_6','day_7','day_8','day_9','day_10'];
-                $ccc = ['day_1' => '0',
-                    'day_2' => '0',
-                    'day_3' => '0',
-                    'day_4' => '0',
-                    'day_5' => '0',
-                    'day_6' => '0',
-                    'day_7' => '0',
-                    'day_8' => '0',
-                    'day_9' => '0',
-                    'day_10' => '0',];
-                if ($ores) {
+                $updata = [];
+                $useSql = "select member_id,sum(total_egg) AS num,sum(last_amount) AS amount,FROM_UNIXTIME(create_time, '%m') AS mon
+from sl_order  
+where member_id = {$_row['member_id']} and create_time >= UNIX_TIMESTAMP('2020-11-01') and status > 0 group by FROM_UNIXTIME(create_time, '%m')";
+                $ores = exampleModels::getInstance()->aa($useSql);
+                if (!empty($ores)) {
                     foreach ($ores as $_ore) {
-                        if (in_array('day_'. intval(date('d', $_ore['create_time'])), $aaa)) {
-                            $inData['day_'. intval(date('d', $_ore['create_time']))] = '1';
-                            unset($ccc['day_'. intval(date('d', $_ore['create_time']))]);
+                        switch ($_ore['mon']) {
+                            case '01':
+                                $updata['b_1'] = $_ore['num'];
+                                $updata['c_1'] = $_ore['amount'];
+                                break;
+                            case '11':
+                                $updata['b_11'] = $_ore['num'];
+                                $updata['c_11'] = $_ore['amount'];
+                                break;
+                            case '12':
+                                $updata['b_12'] = $_ore['num'];
+                                $updata['c_12'] = $_ore['amount'];
+                                break;
                         }
                     }
                 }
 
-                if (!empty($ccc)) {
-                    $teams = exampleModels::getInstance()->aa("select play_time from sl_gold_miner_team where member_id = {$_row['member_id']}");
-                    if ($teams) {
-                        foreach ($teams as $_team) {
-                            if (in_array('day_'. intval(date('d', $_team['play_time'])), $aaa)) {
-                                $inData['day_'. intval(date('d', $_team['play_time']))] = '1';
-                                unset($ccc['day_'. intval(date('d', $_team['play_time']))]);
-                            }
+                $getSql = "select sum(change_num) AS num,FROM_UNIXTIME(create_time, '%m') AS mon
+from sl_member_gold_egg_log  
+where member_id = {$_row['member_id']} and create_time >= UNIX_TIMESTAMP('2020-11-01') and change_num > 0 group by FROM_UNIXTIME(create_time, '%m')";
+                $getArr = exampleModels::getInstance()->aa($getSql);
+                if (!empty($getArr)) {
+                    foreach ($getArr as $_get) {
+                        switch ($_get['mon']) {
+                            case '01':
+                                $updata['a_1'] = $_get['num'];
+                                break;
+                            case '11':
+                                $updata['a_11'] = $_get['num'];
+                                break;
+                            case '12':
+                                $updata['a_12'] = $_get['num'];
+                                break;
                         }
                     }
                 }
-                if (!empty($ccc)) {
-                    $areas = exampleModels::getInstance()->aa("select create_time from sl_gold_miner_area_member where member_id = {$_row['member_id']}");
-                    if ($areas) {
-                        foreach ($areas as $_area) {
-                            if (in_array('day_'. intval(date('d', $_area['create_time'])), $aaa)) {
-                                $inData['day_'. intval(date('d', $_area['create_time']))] = '1';
-                            }
-                        }
-                    }
+                if (!empty($updata)) {
+                    wampModels::getInstance()->update('sl_gold_egg', $updata, ['member_id' => $_row['member_id']]);
                 }
-                wampModels::getInstance()->insert('sl_gold_miner', $inData);
                 $id = $_row['member_id'];
             }
-//            var_dump($rows);
-//            die;
+            echo $id.'<br>';
         }
         die;
         //参与用户数（定义：完成赚金矿的某一项日常任务或加入大区或参与组队pk即算参与）
