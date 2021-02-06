@@ -15,9 +15,9 @@ let routerMode = 'history'
 let baseImgPath = 'http://mysweet95.com/'
 
 if (process.env.NODE_ENV === 'development') {
-  baseUrl = 'http://mysweet.com/index.php?' // 开发板
+  baseUrl = 'http://mysweet.cc/index.php?' // 开发板
 } else {
-  baseUrl = 'http://mysweet.com/index.php?'
+  baseUrl = 'http://mysweet.cc/index.php?'
 }
 
 export {

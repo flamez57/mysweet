@@ -3,14 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import axios from 'axios'
-import vueResource from 'vue-resource'
-import VueRequest from './config/fetch'
+import api from './api' // 导入api接口
 
 Vue.config.productionTip = false
-Vue.prototype.$http = axios
-Vue.use(vueResource)
-Vue.use(VueRequest)
+Vue.prototype.$api = api; // 将api挂载到vue的原型上
 
 /* eslint-disable no-new */
 new Vue({

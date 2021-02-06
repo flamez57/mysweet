@@ -2,7 +2,7 @@
 //解决跨域问题
 header("Access-Control-Allow-Origin:*");
 header('Access-Control-Allow-Methods:*');
-header('Access-Control-Allow-Headers: X-Requested-With,X_Requested_With');
+header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Requested-With, X_Requested_With');
 //开启报错显示
 ini_set("display_errors", "On");
 error_reporting(E_ALL);
