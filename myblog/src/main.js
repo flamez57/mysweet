@@ -6,7 +6,7 @@ import router from './router'
 import api from './api' // 导入api接口
 
 Vue.config.productionTip = false
-Vue.prototype.$api = api; // 将api挂载到vue的原型上
+Vue.prototype.$api = api // 将api挂载到vue的原型上
 
 /* eslint-disable no-new */
 new Vue({

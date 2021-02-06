@@ -91,7 +91,6 @@
 </template>
 
 <script>
-//import { memberInfos } from '../api/api';// 导入我们的api接口
 export default {
   name: 'Home',
   data () {
@@ -99,54 +98,18 @@ export default {
       msg: '爱学习后生'
     }
   },
-  mounted() {
-    //this.loadModuleData();
-      this.send()
+  mounted () {
+    this.loadModuleData()
   },
   methods: {
-    loadModuleData() {
-      /*let params = {
-          code: '123'
-      }
-      this.$request.memberInfo(
-          params
-      ).then((data)=>{ // 直接拿到的就是成功数据，其他情况封装的时候统一处理
-          console.log(data)
-          data.forEach(data => {
-              this.tableData.push({
-                  id: data.id || '',
-                  name: data.name || '',
-                  desc: data.desc || '',
-              })
-          })
-      });*/
-    },
-    send () {
-        this.$api.article.articleDetail(1, {
-            code: 123
-        }).then(res=> {
-            console.log(res)
-            // 执行某些操作
-        })
-//        memberInfos({
-//                code: '123154'
-//            }).then(res => {
-//                // 获取数据成功后的其他操作
-//            console.log(res)
-//            })
-       /*this.$http({// 格式a
-        method: 'get',
-        url: 'http://mysweet.cc/index.php?m=blogapi&c=index&a=memberInfo&code=123',
-        headers: {'X-Requested-With': 'XMLHttpRequest'}
-      }).then(function (resp) {
-        console.log(resp.data)
-      }).catch(resp => {
-        console.log('请求失败：' + resp.status + ',' + resp.statusText)
-      })*/
+    loadModuleData () {
+      this.$api.article.articleDetail(1, {
+        code: 123
+      }).then(res => {
+        console.log(res)
+        // 执行某些操作
+      })
     }
-  },
-  created () {
-    //this.send()
   }
 }
 </script>
