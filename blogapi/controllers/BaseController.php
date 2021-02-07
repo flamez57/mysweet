@@ -18,10 +18,13 @@ use hl\library\Tools\HLResponse;
 class BaseController extends HLApi
 {
     public $memberId = 0;
+    public $needLogin = true;
 
     public function __construct()
     {
-        $this->checkLogin();
+        if ($this->needLogin) {
+            $this->checkLogin();
+        }
     }
 
     //校验登陆
@@ -53,8 +56,12 @@ class BaseController extends HLApi
 
     protected function getToken()
     {
-        if (isset($_SERVER['HTTP_TOKEN']) && !empty($_SERVER['HTTP_TOKEN'])) {
-            $token = $_SERVER['HTTP_TOKEN'];
+        if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
+            $header = apache_request_headers();
+            $_SERVER['HTTP_AUTHORIZATION'] = $header['Authorization'] ?? '';
+        }
+        if (isset($_SERVER['HTTP_AUTHORIZATION']) && !empty($_SERVER['HTTP_AUTHORIZATION'])) {
+            $token = $_SERVER['HTTP_AUTHORIZATION'];
         } else {
             $token = !empty($this->getPost('token')) ? $this->getPost('token') :
                 $this->getQuery('token');

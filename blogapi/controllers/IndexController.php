@@ -18,6 +18,12 @@ use hl\library\Tools\HLResponse;
 
 class IndexController extends BaseController
 {
+    public function __construct()
+    {
+        $this->needLogin = false;
+        parent::__construct();
+    }
+
     /*
     ** 分类 http://mysweet.com/index.php?m=blogapi&c=index&a=cateList&code=123
     */

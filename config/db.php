@@ -37,7 +37,7 @@ return [
         'host' => 'localhost',
         'dbname' => 'blog',
         'username' => 'root',
-        'password' => 'vagrant',
+        'password' => '',
         'charset' => 'utf8',
         'port' => '3306'
     ],
