@@ -103,9 +103,7 @@ export default {
   },
   methods: {
     loadModuleData () {
-      this.$api.article.articleDetail(1, {
-        code: 123
-      }).then(res => {
+      this.$api.member.frontMemberInfo('123').then(res => {
         console.log(res)
         // 执行某些操作
       })
