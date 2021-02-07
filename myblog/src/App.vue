@@ -1,12 +1,21 @@
 <template>
-  <div id="app">
+  <div id="app" :style="backgroundDiv">
     <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      backgroundDiv: {
+        backgroundImage: 'url(' + require('@/assets/img/bj.jpg') + ')',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100% 100%'
+      }
+    }
+  }
 }
 </script>
 
