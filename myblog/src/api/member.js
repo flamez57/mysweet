@@ -8,7 +8,7 @@ import qs from 'qs' // 根据需求是否导入qs模块
 const member = {
   // 首页分类列表用户信息
   frontMemberInfo (code) {
-    return axios.get(Apis.fmemberInfo, {code: code})
+    return axios.get(Apis.fmemberInfo, {params: {code: code}})
   },
   // 登陆
   toLogin (code, pwd) {
