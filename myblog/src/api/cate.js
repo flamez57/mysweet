@@ -8,7 +8,7 @@ import qs from 'qs' // 根据需求是否导入qs模块
 const cate = {
   // 首页分类列表
   frontCateList (code) {
-    return axios.get(Apis.fcateList, {code: code})
+    return axios.get(Apis.fcateList, {params: {code: code}})
   },
   // 分类下拉
   manageCateSelect () {

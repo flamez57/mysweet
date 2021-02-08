@@ -100,10 +100,17 @@ export default {
   },
   mounted () {
     this.loadModuleData()
+    this.loadModuleData2()
   },
   methods: {
+    loadModuleData2 () {
+      this.$api.member.frontMemberInfo('flamez').then(res => {
+        console.log(res)
+        // 执行某些操作
+      })
+    },
     loadModuleData () {
-      this.$api.member.frontMemberInfo('123').then(res => {
+      this.$api.cate.frontCateList('flamez').then(res => {
         console.log(res)
         // 执行某些操作
       })
