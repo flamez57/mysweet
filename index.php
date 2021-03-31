@@ -1,7 +1,8 @@
 <?php
 //解决跨域问题
+header('Access-Control-Allow-Credentials: true'); //设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器
 header("Access-Control-Allow-Origin:*");
-header('Access-Control-Allow-Methods:*');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Requested-With, X_Requested_With');
 //开启报错显示
 ini_set("display_errors", "On");
