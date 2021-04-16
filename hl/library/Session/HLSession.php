@@ -46,8 +46,14 @@ class HLSession implements HLSessionApi
     private function __construct($type, $config)
     {
         $this->type = $type;
-        $class = 'HLSessionImp' . $type;
-        $this->handle = new $class($config);
+        switch ($type) {
+            case 'Cookie':
+                $this->handle = new HLSessionImpCookie($config);
+                break;
+            case 'Redis':
+                $this->handle = new HLSessionImpRedis($config);
+                break;
+        }
     }
 
     /**
