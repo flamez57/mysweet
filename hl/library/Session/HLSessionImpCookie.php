@@ -97,7 +97,6 @@ class HLSessionImpCookie implements HLSessionApi
             return $this;
         }
         static::$setData[$cookieKey][$key] = $value;
-
         return $this;
     }
 
@@ -117,7 +116,6 @@ class HLSessionImpCookie implements HLSessionApi
         $expire = $this->config['tokenExpire'];
         $value = $this->authcode($value, 'ENCODE', '', $expire);
         $this->token = $value;
-
         if ($this->config['tokenSaveInCookie'] == 1) {
             if (empty(static::$setData[$cookieKey])) {
                 return $this->destroy();
@@ -130,7 +128,7 @@ class HLSessionImpCookie implements HLSessionApi
                     $value,
                     $clientExpire,
                     '/',
-                    CommonConfig::getCookieDomain(),
+                    'mysweet.cc',
                     $this->config['tokenCookieSecure'],
                     $this->config['tokenCookieHttpOnly']
                 );
