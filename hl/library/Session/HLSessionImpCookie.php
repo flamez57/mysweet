@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
+ * Cookie实现session
  * User: flamez57
  * Date: 2021/1/18
  * Time: 13:48
@@ -12,10 +12,12 @@ use hl\library\Functions\Jwt;
 
 class HLSessionImpCookie implements HLSessionApi
 {
+    /**
+    ** 默认配置信息
+    */
     private $config = [
         'cookieDomain' => 'mysweet.com', // cookie存放域名
         'tokenExpire' => 1440, //服务端过期时间
-        'tokenCookieAuthKey' => 'this is auth key, safe require', //cookie加密密钥
         'tokenSaveInCookie' => 1, //是否把token存入cookie，不保存则需要客户端保存token
         'tokenCookieName' => 'hl_f', //保存token的cookie key，不使用也需配置
         'tokenCookieExpire' => 0, //0 浏览器退出则失效
@@ -23,23 +25,21 @@ class HLSessionImpCookie implements HLSessionApi
         'tokenCookieHttpOnly' => false, //false Web JS可以访问Cookie，true JS禁止读取cookie
     ];
 
-    private $jwt;
-
-    private static $setData = [];
+    private static $setData = []; //session存放的所有参数
 
     private $token; //Cookie 方式，token就是密文
 
     public function __construct($config)
     {
-        $jwt = new Jwt();
         $this->setConfig($config);
+        new Jwt();
     }
 
     /**
-     * 初始化
-     * @param $token
-     * @return static
-     */
+    ** 初始化
+    ** @param $token
+    ** @return static
+    */
     public function init($token = null)
     {
         $cookieKey = $this->config['tokenCookieName'];
@@ -63,10 +63,10 @@ class HLSessionImpCookie implements HLSessionApi
     }
 
     /**
-     * 修改配置
-     * @param $config
-     * @return static
-     */
+    ** 修改配置
+    ** @param $config
+    ** @return static
+    */
     public function setConfig($config)
     {
         if (!empty($config)) {
@@ -76,10 +76,10 @@ class HLSessionImpCookie implements HLSessionApi
     }
 
     /**
-     * 获取session
-     * @param $key
-     * @return mixed
-     */
+    ** 获取session
+    ** @param $key
+    ** @return mixed
+    */
     public function get($key)
     {
         $cookieKey = $this->config['tokenCookieName'];
@@ -91,11 +91,11 @@ class HLSessionImpCookie implements HLSessionApi
     }
 
     /**
-     * 设置session
-     * @param $key
-     * @param $value
-     * @return static
-     */
+    ** 设置session
+    ** @param $key
+    ** @param $value
+    ** @return static
+    */
     public function set($key, $value)
     {
         $cookieKey = $this->config['tokenCookieName'];
@@ -107,9 +107,9 @@ class HLSessionImpCookie implements HLSessionApi
     }
 
     /**
-     * 保存session
-     * @return mixed
-     */
+    ** 保存session
+    ** @return mixed
+    */
     public function save()
     {
         $cookieKey = $this->config['tokenCookieName'];
@@ -142,10 +142,10 @@ class HLSessionImpCookie implements HLSessionApi
     }
 
     /**
-     * 删除session
-     * @param $key
-     * @return static
-     */
+    ** 删除session
+    ** @param $key
+    ** @return static
+    */
     public function delete($key)
     {
         $cookieKey = $this->config['tokenCookieName'];
@@ -154,9 +154,9 @@ class HLSessionImpCookie implements HLSessionApi
     }
 
     /**
-     * 清除session
-     * @return mixed
-     */
+    ** 销毁session
+    ** @return mixed
+    */
     public function destroy()
     {
         //Cookie方式，加密保存token对应值
@@ -174,9 +174,9 @@ class HLSessionImpCookie implements HLSessionApi
     }
 
     /**
-     * 获取Token
-     * @return mixed
-     */
+    ** 获取Token
+    ** @return mixed
+    */
     public function getToken()
     {
         return $this->token;

@@ -49,6 +49,7 @@ class BaseController extends HLApi
         }
     }
 
+    //获取token
     protected function getToken()
     {
         if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
