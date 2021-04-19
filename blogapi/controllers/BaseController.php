@@ -5,6 +5,7 @@ use blogapi\models\memberModels;
 use hl\HLApi;
 use hl\library\Functions\Jwt;
 use hl\library\Session\HLSession;
+use hl\library\Session\HLSessionImpRedis;
 use hl\library\Tools\HLResponse;
 
 /**
@@ -31,26 +32,20 @@ class BaseController extends HLApi
     public function checkLogin()
     {
         $token = $this->getToken();
-        //验证token 这里只对过期时间做基础验证 验证通过返回数组 不通过返回false
-        $tokenArr = Jwt::verifyToken($token);
-        if ($tokenArr === false) {
+        if (!empty($token)) {
+            $session = HLSession::getInstance(self::$config['token']['blogapi'])->init($token);
+        } else {
+            $session = HLSession::getInstance(self::$config['token']['blogapi'])->init();
+        }
+        $memberId = $session->get('member_id');
+        $btoken = $session->get('token'); //表里的token
+        $token = $session->getToken(); //客户端用
+        if (empty($memberId)) {
             // 未登录状态
             HLResponse::json('-1', '请先登陆', new \stdClass());
             die;
         } else {
-            $memberId = HLSession::getInstance()->get($tokenArr['token']);
-            if (!empty($memberId)) {
-                $this->memberId = $memberId;
-            } else {
-                $memberId = memberModels::getInstance()->getMemberIdByToken($tokenArr['token']);
-                if (empty($memberId)) {
-                    HLResponse::json('-1', '登陆信息失效', new \stdClass());
-                    die;
-                } else {
-                    $this->memberId = $memberId;
-                    HLSession::getInstance()->set($tokenArr['token'], $this->memberId)->save();
-                }
-            }
+            $this->memberId = $memberId;
         }
     }
 
