@@ -1,20 +1,20 @@
 <template>
 
-      <div class="login-box">
+<div class="login-box">
     <h1>管理员登录</h1>
     <form>
         <div class="text-box">
             <i class="iconfont icon-timerauto" aria-hidden="true"></i>
-            <input type="text" placeholder="请输入用户名"/>
+            <input type="text" v-model="loginForm.code" placeholder="请输入用户名"/>
         </div>
         <div class="text-box">
             <i class="iconfont icon-lock" aria-hidden="true"></i>
-            <input type="password" placeholder="输入密码"/>
+            <input type="password" v-model="loginForm.pwd" placeholder="输入密码"/>
         </div>
         <div class="save-pwd">
             <input type="checkbox"/>记住密码
         </div>
-        <input type="submit" value="登录"/>
+        <input type="submit" @click="login" value="登录"/>
     </form>
 </div>
 
@@ -25,7 +25,32 @@ export default {
   name: 'About',
   data () {
     return {
-      msg: 'about'
+      msg: 'about',
+      loginForm: {
+        code: '',
+        pwd: ''
+      }
+    }
+  },
+  methods: {
+    login () {
+      let _this = this;
+      if (this.loginForm.code === '' || this.loginForm.pwd === '') {
+        alert('账号或密码不能为空');
+      } else {
+        this.$api.member.toLogin(_this.loginForm.code, _this.loginForm.pwd).then(res => {
+          console.log(res)
+          // 执行某些操作
+            /*_this.userToken = 'Bearer ' + res.data.data.body.token;
+          // 将用户token保存到vuex中
+          _this.changeLogin({ Authorization: _this.userToken });
+          _this.$router.push('/home');
+          alert('登陆成功');*/
+        }).catch(error => {
+          alert('账号或密码错误');
+          console.log(error);
+        });
+      }
     }
   }
 }
