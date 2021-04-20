@@ -34,22 +34,25 @@ export default {
   },
   methods: {
     login () {
-      let _this = this;
+      let _this = this
       if (this.loginForm.code === '' || this.loginForm.pwd === '') {
-        alert('账号或密码不能为空');
+        alert('账号或密码不能为空')
       } else {
         this.$api.member.toLogin(_this.loginForm.code, _this.loginForm.pwd).then(res => {
-          console.log(res)
+          console.log(res.data)
           // 执行某些操作
-            /*_this.userToken = 'Bearer ' + res.data.data.body.token;
+          /*
+          _this.userToken = 'Bearer ' + res.data.data.body.token;
           // 将用户token保存到vuex中
           _this.changeLogin({ Authorization: _this.userToken });
           _this.$router.push('/home');
-          alert('登陆成功');*/
+          alert('登陆成功');
+          */
+          alert(res.data.message)
         }).catch(error => {
-          alert('账号或密码错误');
-          console.log(error);
-        });
+          alert('账号或密码错误')
+          console.log(error)
+        })
       }
     }
   }
