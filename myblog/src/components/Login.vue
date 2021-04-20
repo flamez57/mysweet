@@ -42,11 +42,9 @@ export default {
           console.log(res.data)
           // 执行某些操作
           /*
-          _this.userToken = 'Bearer ' + res.data.data.body.token;
           // 将用户token保存到vuex中
           _this.changeLogin({ Authorization: _this.userToken });
           _this.$router.push('/home');
-          alert('登陆成功');
           */
           alert(res.data.message)
         }).catch(error => {
