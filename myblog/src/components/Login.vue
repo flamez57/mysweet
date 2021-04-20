@@ -41,9 +41,11 @@ export default {
         this.$api.member.toLogin(_this.loginForm.code, _this.loginForm.pwd).then(res => {
           console.log(res.data)
           // 执行某些操作
+          if (res.data.code === 0) {
+            // 将用户token保存到vuex中
+            _this.$api.changeLogin({Authorization: res.data.data.token})
+          }
           /*
-          // 将用户token保存到vuex中
-          _this.changeLogin({ Authorization: _this.userToken });
           _this.$router.push('/home');
           */
           alert(res.data.message)

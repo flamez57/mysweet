@@ -17,6 +17,7 @@ class HLApi extends HLSington
     public $code = 0;
     public $message = '';
     public $data = [];
+    private $posts;
 
     /*
     ** 指向到最终的方法
@@ -39,10 +40,22 @@ class HLApi extends HLSington
     */
     public function getPost($key = '', $value = '')
     {
-        if (empty($key)) {
-            return $_POST;
+        if ($this->posts) {
+            $values = $this->posts;
+        } else {
+            if (strpos(file_get_contents("php://input"), '{') === 0) {
+                $this->posts = json_decode(file_get_contents("php://input"), true);
+                $values = $this->posts;
+            } else {
+                $this->posts = $_POST;
+                $values = $this->posts;
+            }
         }
-        return trim($_POST[$key] ?? $value);
+        if ($key != '') {
+            return trim(isset($values[$key]) ? $values[$key] : $value);
+        } else {
+            return $values;
+        }
     }
 
     /**
