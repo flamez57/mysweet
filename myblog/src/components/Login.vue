@@ -43,7 +43,7 @@ export default {
           // 执行某些操作
           if (res.data.code === 0) {
             // 将用户token保存到vuex中
-            _this.$api.changeLogin({Authorization: res.data.data.token})
+            _this.$api.store.commit('changeLogin', {Authorization: res.data.data.token})
           }
           /*
           _this.$router.push('/home');
