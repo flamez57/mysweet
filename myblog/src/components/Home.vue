@@ -67,9 +67,9 @@
                 <h3>分类</h3>
                 <div class="cate-ul-item">
                     <ul class="cate-ul">
-                        <li>
-                            <router-link to="/CateList">服务端</router-link>
-                            <span> (1)</span>
+                        <li v-for="cate in cates" :key="cate.id">
+                            <router-link to="/CateList">{{cate.name}}</router-link>
+                            <span> ({{cate.num}})</span>
                         </li>
                     </ul>
                 </div>
@@ -95,7 +95,8 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: '爱学习后生'
+      msg: '爱学习后生',
+      cates: [{name: '', num: '0'}]
     }
   },
   mounted () {
@@ -113,6 +114,9 @@ export default {
       this.$api.cate.frontCateList('flamez').then(res => {
         console.log(res)
         // 执行某些操作
+        if (res.data.code === 0) {
+          this.cates = res.data.data.list
+        }
       })
     }
   }
