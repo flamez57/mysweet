@@ -6,27 +6,27 @@
                 <div class="form">
                     <div class="form-element">
                         <label class="form-label">姓名</label>
-                        <input class="input" type="text" value="胡成3黎"/>
+                        <input class="input" type="text" v-model="memberForm.nickname"/>
                     </div>
                     <div class="form-element">
                         <label class="form-label">主页地址</label>
-                        <input class="input" type="text" value="index.html"/>
+                        <input class="input" type="text" v-model="memberForm.home_page"/>
                     </div>
                     <div class="form-element">
                         <label class="form-label">GitHub</label>
-                        <input class="input" type="text" value="https://github.com/CharlesHu24"/>
+                        <input class="input" type="text" v-model="memberForm.github"/>
                     </div>
                     <div class="form-element">
                         <label class="form-label">QQ</label>
-                        <input class="input" type="text" value="2736934369"/>
+                        <input class="input" type="text" v-model="memberForm.qq"/>
                     </div>
                     <div class="form-element">
                         <label class="form-label">邮箱</label>
-                        <input class="input" type="text" value="2736934369@qq.com"/>
+                        <input class="input" type="text" v-model="memberForm.email"/>
                     </div>
                     <div class="form-element">
                         <label class="form-label">个性签名</label>
-                        <textarea class="textarea" value="123">123</textarea>
+                        <textarea class="textarea" v-model="memberForm.motto"></textarea>
                     </div>
                     <div class="form-element">
                         <label class="form-label">头像</label>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="form-element">
-                        <span class="btn mr-10">保存</span>
+                        <span class="btn mr-10" @click="saveMemberInfo">保存</span>
                         <span class="btn">取消</span>
                     </div>
                 </div>
@@ -51,7 +51,42 @@ export default {
   name: 'About',
   data () {
     return {
-      msg: 'about'
+      msg: 'about',
+      memberForm: {
+        nickname: '',
+        home_page: '',
+        github: '',
+        qq: '',
+        email: '',
+        motto: '',
+        avatar: ''
+      }
+    }
+  },
+  mounted () {
+    this.memberInfo()
+  },
+  methods: {
+    memberInfo () {
+      this.$api.member.manageMemberInfoForEdit().then(res => {
+        console.log(res)
+        // 执行某些操作
+        if (res.data.code === 0) {
+          this.memberForm.nickname = res.data.data.member_info.nickname
+          this.memberForm.home_page = res.data.data.member_info.home_page
+          this.memberForm.github = res.data.data.member_info.github
+          this.memberForm.qq = res.data.data.member_info.qq
+          this.memberForm.email = res.data.data.member_info.email
+          this.memberForm.motto = res.data.data.member_info.motto
+          this.memberForm.avatar = res.data.data.member_info.avatar
+        }
+      })
+    },
+    saveMemberInfo () {
+      this.$api.member.manageSaveMemberInfo(this.memberForm).then(res => {
+        console.log(res)
+        // 执行某些操作
+      })
     }
   }
 }
