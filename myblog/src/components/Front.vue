@@ -8,8 +8,8 @@
                     <router-link to="/">首页</router-link>
                     <router-link to="/Record">档案</router-link>
                     <router-link to="/About">关于我</router-link>
-                    <router-link to="/Login">登陆</router-link>
-                    <router-link to="/Manage">管理后台</router-link>
+                    <router-link v-show="isShowL" to="/Login">登陆</router-link>
+                    <router-link v-show="isShowM" to="/Manage">管理后台</router-link>
                 </div>
                 <div class="search-box" id="search-box">
                     <input id="search-text" type="text" placeholder="search">
@@ -53,10 +53,25 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'home'
+      msg: 'home',
+      isShowL: true, // 是否显示登陆按钮
+      isShowM: false // 是否显示管理按钮
     }
   },
+  mounted () {
+    this.isShowManage() // 切换管理与登陆按钮
+  },
   methods: {
+    isShowManage () { // 切换管理与登陆按钮
+      let token = localStorage.getItem('Authorization')
+      if (token === 'null' || token === '') {
+        this.isShowL = true
+        this.isShowM = false
+      } else {
+        this.isShowL = false
+        this.isShowM = true
+      }
+    },
     backTop () { // 回到顶部
       document.body.scrollTop = 0
       document.documentElement.scrollTop = 0
