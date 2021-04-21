@@ -37,7 +37,7 @@
                 </ul>
             </div>
             <div class="user-exit">
-                <button><router-link to="/">退出</router-link></button>
+                <button @click="loginOut">退出</button>
             </div>
         </div>
         <!--导航 End-->
@@ -51,6 +51,22 @@ export default {
   data () {
     return {
       msg: 'manage'
+    }
+  },
+  methods: {
+    loginOut () {
+      this.$api.member.toLoginOut().then(res => {
+        // 执行某些操作
+        if (res.data.code === 0) {
+          // 将用户token从vuex中清除
+          localStorage.removeItem('Authorization')
+          // this.$router.push('/')
+        }
+        alert(res.data.message)
+      }).catch(error => {
+        alert('退出失败')
+        console.log(error)
+      })
     }
   }
 }

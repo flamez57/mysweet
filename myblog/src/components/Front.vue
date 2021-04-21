@@ -64,7 +64,7 @@ export default {
   methods: {
     isShowManage () { // 切换管理与登陆按钮
       let token = localStorage.getItem('Authorization')
-      if (token === 'null' || token === '') {
+      if (token === null || token === '') {
         this.isShowL = true
         this.isShowM = false
       } else {
