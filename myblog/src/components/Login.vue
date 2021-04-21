@@ -44,10 +44,8 @@ export default {
           if (res.data.code === 0) {
             // 将用户token保存到vuex中
             _this.$api.store.commit('changeLogin', {Authorization: res.data.data.token})
+            _this.$router.push('/')
           }
-          /*
-          _this.$router.push('/home');
-          */
           alert(res.data.message)
         }).catch(error => {
           alert('账号或密码错误')

@@ -54,7 +54,7 @@ const router = new Router({
 // 导航守卫
 // 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
 router.beforeEach((to, from, next) => {
-  if (to.path === '/Login') {
+  if (to.path.search('/Manage') === -1) { // 不是管理页面就不判断登陆
     next()
   } else {
     let token = localStorage.getItem('Authorization')

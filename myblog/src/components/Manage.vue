@@ -60,7 +60,7 @@ export default {
         if (res.data.code === 0) {
           // 将用户token从vuex中清除
           localStorage.removeItem('Authorization')
-          // this.$router.push('/')
+          this.$router.push('/')
         }
         alert(res.data.message)
       }).catch(error => {
