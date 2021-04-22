@@ -36,8 +36,9 @@
                                 <div class="view-number"><span>{{article.pv}}</span></div>
                             </div>
                         </div>
-                        <p class="post-short-content">在开发项目的时候生产环境和开发环境的配置信息是不一样的，总要切换的话比较麻烦，现在我们可以通过设置服务器环境变量来区分线上生产环境还是本地开发环境，比如我们可以设置 RUNTIME_ENVIROMENT 的为 'DEV'还是'PRO'来区分。然后在PHP端通过$_SERVER['RUNTIME_ENVIROMENT']来获取值。
-                            <span class="read-more">...<router-link to="/Detail">Read More</router-link></span></p>
+                        <p class="post-short-content">
+                            {{article.content}}<span class="read-more">...<router-link to="/Detail">Read More</router-link></span>
+                        </p>
                     </blockquote>
                 </div>
                 <!--列表内容end-->
