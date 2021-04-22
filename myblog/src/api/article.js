@@ -9,7 +9,7 @@ import qs from 'qs' // 根据需求是否导入qs模块
 const article = {
   // 文章列表
   frontArticleList (code, page, pageSize, tagId, cateId, keyword) {
-    return axios.get(Apis.farticleList, {code: code, page: page, page_size: pageSize, tag_id: tagId, cate_id: cateId, keyword: keyword})
+    return axios.get(Apis.farticleList, {params: {code: code, page: page, page_size: pageSize, tag_id: tagId, cate_id: cateId, keyword: keyword}})
   },
   // 文章详情
   frontArticleDetail (id) {
