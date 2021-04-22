@@ -404,7 +404,7 @@ class HLMysqli implements HLDBAdapter
                             $this->errorMsg .= 'not define sql option ' . $opStr;
                     }
                 } else {
-                    $query_w[] = "`{$k}`=?";
+                    $query_w[] = "{$k}=?";
                     $bindParam[] = $v;
                 }
             }

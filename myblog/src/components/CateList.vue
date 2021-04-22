@@ -3,7 +3,7 @@
 <div>
     <header>
     <div class="header">
-        <h1 class="include-title">有关"服务端"的分类</h1>
+        <h1 class="include-title">{{cate_id}}有关"服务端"的分类</h1>
     </div>
 </header>
 
@@ -63,7 +63,8 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'home'
+      msg: 'home',
+      cate_id: this.$route.params.cate_id
     }
   }
 }

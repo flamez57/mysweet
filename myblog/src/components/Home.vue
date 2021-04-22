@@ -67,9 +67,8 @@
                 <h3>分类</h3>
                 <div class="cate-ul-item">
                     <ul class="cate-ul">
-                        <li v-for="cate in cates" :key="cate.id">
-                            <router-link to="/CateList">{{cate.name}}</router-link>
-                            <span> ({{cate.num}})</span>
+                        <li v-for="cate in cates" :key="cate.id" @click="toCateList(cate.id)">
+                            {{cate.name}}<span> ({{cate.num}})</span>
                         </li>
                     </ul>
                 </div>
@@ -78,8 +77,9 @@
                 <h3>标签</h3>
                 <div class="tags-ul-item">
                     <ul class="tags-ul">
-                        <li><router-link to="/TagList">环境变量</router-link></li>
-                        <li><router-link to="/TagList">PHP</router-link></li>
+                        <li v-for="tag in tags" :key="tag.id" @click="toTagList(tag.id)">
+                            {{tag.name}}&nbsp;&nbsp;&nbsp;
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -95,28 +95,57 @@ export default {
   name: 'Home',
   data () {
     return {
+      default_code: 'flamez', // 默认code
       msg: '爱学习后生',
-      cates: [{name: '', num: '0'}]
+      cates: [{id: '', name: '', num: '0'}],
+      tags: [{id: '', name: ''}]
     }
   },
   mounted () {
-    this.loadModuleData()
+    this.cateList()
+    this.tagList()
     this.loadModuleData2()
   },
   methods: {
+    // 页面数据获取
     loadModuleData2 () {
-      this.$api.member.frontMemberInfo('flamez').then(res => {
+      this.$api.member.frontMemberInfo(this.default_code).then(res => {
         console.log(res)
         // 执行某些操作
       })
     },
-    loadModuleData () {
-      this.$api.cate.frontCateList('flamez').then(res => {
+    // 分类
+    cateList () {
+      this.$api.cate.frontCateList(this.default_code).then(res => {
         console.log(res)
         // 执行某些操作
         if (res.data.code === 0) {
           this.cates = res.data.data.list
         }
+      })
+    },
+    // 标签
+    tagList () {
+      this.$api.tag.frontTagList(this.default_code).then(res => {
+        console.log(res)
+        // 执行某些操作
+        if (res.data.code === 0) {
+          this.tags = res.data.data.list
+        }
+      })
+    },
+
+    // 链接跳转
+    toCateList (id) {
+      // 直接调用$router.push 实现携带参数的跳转
+      this.$router.push({
+        path: '/CateList/' + id
+      })
+    },
+    toTagList (id) {
+      // 直接调用$router.push 实现携带参数的跳转
+      this.$router.push({
+        path: '/TagList/' + id
       })
     }
   }

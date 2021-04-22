@@ -28,9 +28,9 @@ const router = new Router({
         { path: '/', name: 'Home', component: Home },
         { path: 'Record', name: 'Record', component: Record },
         { path: 'About', name: 'About', component: About },
-        { path: 'CateList', name: 'CateList', component: CateList },
-        { path: 'TagList', name: 'TagList', component: TagList },
-        { path: 'Detail', name: 'Detail', component: Detail }
+        { path: 'CateList/:cate_id', name: 'CateList', component: CateList },
+        { path: 'TagList/:tag_id', name: 'TagList', component: TagList },
+        { path: 'Detail/:id', name: 'Detail', component: Detail }
       ]
     }, {
       path: '/Login',
