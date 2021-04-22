@@ -3,7 +3,7 @@
 <div>
     <header>
     <div class="header">
-        <h1 class="include-title">{{cate_id}}有关"服务端"的分类</h1>
+        <h1 class="include-title">有关"服务端"的分类</h1>
     </div>
 </header>
 
@@ -12,25 +12,27 @@
         <div class="tags-body">
             <div class="content-body">
                 <!--列表内容-->
-                <div class="posts-inner">
+                <div class="posts-inner" v-for="article in articles" v-bind:key="article.id">
                     <blockquote class="posts">
-                        <h2 class="post-title"><router-link to="/Detail">Apache或者Nginx为PHP设置服务器环境变量</router-link></h2>
+                        <h2 class="post-title"><a @click="toDetail(article.id)">{{article.title}}</a></h2>
                         <div class="marks">
                             <div class="release-time">
                                 <span><i class="iconfont iconschedule"></i></span>
-                                <span>2020-12-23</span>
+                                <span>{{article.created_at}}</span>
                             </div>
                             <div class="tags-item">
                                 <i class="iconfont iconlabel_fill"></i>
-                                <router-link to="/TagList">环境变量</router-link>
-                                <router-link to="/TagList">PHP</router-link>
+                                <a v-for="tag in article.tags" :key="tag.id" @click="toTagList(tag.id)">
+                                    {{tag.name}}&nbsp;
+                                </a>
                             </div>
                             <div class="view">访问数:
-                                <div class="view-number"><span>1112</span></div>
+                                <div class="view-number"><span>{{article.pv}}</span></div>
                             </div>
                         </div>
-                        <p class="post-short-content">在开发项目的时候生产环境和开发环境的配置信息是不一样的，总要切换的话比较麻烦，现在我们可以通过设置服务器环境变量来区分线上生产环境还是本地开发环境，比如我们可以设置 RUNTIME_ENVIROMENT 的为 'DEV'还是'PRO'来区分。然后在PHP端通过$_SERVER['RUNTIME_ENVIROMENT']来获取值。
-                            <span class="read-more">...<router-link to="/Detail">Read More</router-link></span></p>
+                        <p class="post-short-content">
+                            {{article.content}}<span class="read-more">...<a @click="toDetail(article.id)">Read More</a></span>
+                        </p>
                     </blockquote>
                 </div>
                 <!--列表内容end-->
@@ -38,17 +40,14 @@
             <!--下导航 S-->
             <div class="content-nav">
                 <nav class="bottom-nav" id="con-nav">
-                    <a href="#">
+                    <a v-if="cur>1" v-on:click="cur--,pageClick()">
                         <i class="iconfont iconarrow-lift" aria-hidden="true"></i>
                     </a>
-                    <a href="#" class="nav-action">1</a>
-                    <!--<a href="#">2</a>
-                    <a href="#">3</a>
-                    <span>…</span>
-                    <a href="#">9</a>-->
-                    <a href="#">
+                    <a v-for="index in indexs" v-bind:key="index" v-bind:class="{ 'nav-action': cur == index}" v-on:click="pageClick(index)">{{index}}</a>
+                    <a v-if="cur!=all" v-on:click="cur++,pageClick()">
                         <i class="iconfont iconarrow-right" aria-hidden="true"></i>
                     </a>
+                    <a>共<i>{{all}} </i>页</a>
                 </nav>
             </div>
             <!--下导航 E-->
@@ -63,8 +62,78 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'home',
-      cate_id: this.$route.params.cate_id
+      default_code: 'flamez', // 默认code
+      msg: '爱学习后生',
+      articles: [],
+      // 分页列表
+      all: '10', // 总页数
+      cur: '1', // 当前页
+      page_size: '20', // 页容量
+      tagId: '0', // 标签id
+      cateId: this.$route.params.cate_id, // 分类id
+      keyword: '' // 关键字
+    }
+  },
+  mounted () {
+    this.pageClick(this.cur)
+  },
+  computed: {
+    // 分页
+    indexs: function () {
+      var left = 1
+      var right = this.all
+      var ar = []
+      if (this.all >= 5) {
+        if (this.cur > 3 && this.cur < this.all - 2) {
+          left = this.cur - 2
+          right = this.cur + 2
+        } else {
+          if (this.cur <= 3) {
+            left = 1
+            right = 5
+          } else {
+            right = this.all
+            left = this.all - 4
+          }
+        }
+      }
+      while (left <= right) {
+        ar.push(left)
+        left++
+      }
+      return ar
+    }
+  },
+  methods: {
+    // 页面数据获取
+    pageClick (index = 0) {
+      if (index !== 0 && this.cur !== index) {
+        this.cur = index
+      }
+      // 获取分页数据 tagId, cateId, keyword
+      this.$api.article.frontArticleList(this.default_code, this.cur, this.page_size, this.tagId, this.cateId, this.keyword).then(res => {
+        console.log(res)
+        // 执行某些操作
+        if (res.data.code === 0) {
+          var count = res.data.data.count
+          this.all = Math.ceil(count / this.page_size)
+          this.articles = res.data.data.list
+        }
+      })
+    },
+
+    // 链接跳转
+    toTagList (id) {
+      // 直接调用$router.push 实现携带参数的跳转
+      this.$router.push({
+        path: '/TagList/' + id
+      })
+    },
+    toDetail (id) {
+      // 直接调用$router.push 实现携带参数的跳转
+      this.$router.push({
+        path: '/Detail/' + id
+      })
     }
   }
 }

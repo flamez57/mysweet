@@ -38,11 +38,15 @@ class articleServices extends HLServices
                 '',
                 $count
             );
-            $articleIds = array_column($articleIds, 'article_id');
-            if ($articleIds) {
-                $where['id'] = ['in', $articleIds];
+            if ($count == 1) {
+                $where['id'] = $articleIds['article_id'];
             } else {
-                return ['list' => [], 'count' => 0];
+                $articleIds = array_column($articleIds, 'article_id');
+                if ($articleIds) {
+                    $where['id'] = ['in', $articleIds];
+                } else {
+                    return ['list' => [], 'count' => 0];
+                }
             }
         }
         if (!empty($param['keyword'])) {

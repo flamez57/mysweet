@@ -18,9 +18,9 @@
         <div class="alpha">
             <div class="content-body">
                 <!--列表内容-->
-                <div class="posts-inner"  v-for="article in articles" v-bind:key="article.id">
+                <div class="posts-inner" v-for="article in articles" v-bind:key="article.id">
                     <blockquote class="posts">
-                        <h2 class="post-title"><router-link to="/Detail">{{article.title}}</router-link></h2>
+                        <h2 class="post-title"><a @click="toDetail(article.id)">{{article.title}}</a></h2>
                         <div class="marks">
                             <div class="release-time">
                                 <span><i class="iconfont iconschedule"></i></span>
@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <p class="post-short-content">
-                            {{article.content}}<span class="read-more">...<router-link to="/Detail">Read More</router-link></span>
+                            {{article.content}}<span class="read-more">...<a @click="toDetail(article.id)">Read More</a></span>
                         </p>
                     </blockquote>
                 </div>
@@ -196,6 +196,12 @@ export default {
       // 直接调用$router.push 实现携带参数的跳转
       this.$router.push({
         path: '/TagList/' + id
+      })
+    },
+    toDetail (id) {
+      // 直接调用$router.push 实现携带参数的跳转
+      this.$router.push({
+        path: '/Detail/' + id
       })
     }
   }
