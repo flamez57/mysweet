@@ -24,7 +24,7 @@ class articleServices extends HLServices
     */
     public function getFrontArticleList($param)
     {
-        $memberId = memberModels::getInstance()->getMemberIdByCode($param);
+        $memberId = memberModels::getInstance()->getMemberIdByCode($param['code']);
         $where = ['member_id' => $memberId, 'status' => 1, 'deleted_at' => 0];
         if (!empty($param['cate_id'])) {
             $where['cate_id'] = $param['cate_id'];
