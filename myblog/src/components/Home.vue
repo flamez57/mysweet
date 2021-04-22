@@ -44,17 +44,14 @@
             <!--下导航 S-->
             <div class="content-nav">
                 <nav class="bottom-nav" id="con-nav">
-                    <a href="#">
+                    <a v-if="cur>1" v-on:click="cur--,pageClick()">
                         <i class="iconfont iconarrow-lift" aria-hidden="true"></i>
                     </a>
-                    <a href="#" class="nav-action">1</a>
-                    <!--<a href="#">2</a>
-                    <a href="#">3</a>
-                    <span>…</span>
-                    <a href="#">9</a>-->
-                    <a href="#">
+                    <a v-for="index in indexs" v-bind:key="index" v-bind:class="{ 'nav-action': cur == index}" v-on:click="pageClick(index)">{{index}}</a>
+                    <a v-if="cur!=all" v-on:click="cur++,pageClick()">
                         <i class="iconfont iconarrow-right" aria-hidden="true"></i>
                     </a>
+                    <a>共<i>{{all}} </i>页</a>
                 </nav>
             </div>
             <!--下导航 E-->
@@ -98,13 +95,47 @@ export default {
       default_code: 'flamez', // 默认code
       msg: '爱学习后生',
       cates: [{id: '', name: '', num: '0'}],
-      tags: [{id: '', name: ''}]
+      tags: [{id: '', name: ''}],
+      // 分页列表
+      all: '10', // 总页数
+      cur: '1', // 当前页
+      page_size: '20', // 页容量
+      tagId: '0', // 标签id
+      cateId: '0', // 分类id
+      keyword: '' // 关键字
     }
   },
   mounted () {
     this.cateList()
     this.tagList()
     this.loadModuleData2()
+  },
+  computed: {
+    // 分页
+    indexs: function () {
+      var left = 1
+      var right = this.all
+      var ar = []
+      if (this.all >= 5) {
+        if (this.cur > 3 && this.cur < this.all - 2) {
+          left = this.cur - 2
+          right = this.cur + 2
+        } else {
+          if (this.cur <= 3) {
+            left = 1
+            right = 5
+          } else {
+            right = this.all
+            left = this.all - 4
+          }
+        }
+      }
+      while (left <= right) {
+        ar.push(left)
+        left++
+      }
+      return ar
+    }
   },
   methods: {
     // 页面数据获取
@@ -131,6 +162,19 @@ export default {
         // 执行某些操作
         if (res.data.code === 0) {
           this.tags = res.data.data.list
+        }
+      })
+    },
+    pageClick (index = 0) {
+      if (index !== 0 && this.cur !== index) {
+        this.cur = index
+      }
+      // 获取分页数据 tagId, cateId, keyword
+      this.$api.article.frontArticleList(this.default_code, this.cur, this.page_size, this.tagId, this.cateId, this.keyword).then(res => {
+        console.log(res)
+        // 执行某些操作
+        if (res.data.code === 0) {
+          // res.data.data.list
         }
       })
     },
