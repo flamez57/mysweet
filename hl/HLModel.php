@@ -26,7 +26,7 @@ class HLModel extends HLSington
     /*
      * 主键
      */
-    public $id;
+    public $id = 'id';
 
     public $tableName;
 

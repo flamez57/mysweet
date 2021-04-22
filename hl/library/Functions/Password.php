@@ -26,7 +26,7 @@ class Password
     ** @param $len int 长度
     ** @return string
     */
-    public static function makeSalt($len = 8)
+    public static function makeSalt($len = 6)
     {
         $str = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         $randnum = '';
