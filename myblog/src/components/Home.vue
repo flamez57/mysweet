@@ -18,21 +18,22 @@
         <div class="alpha">
             <div class="content-body">
                 <!--列表内容-->
-                <div class="posts-inner">
+                <div class="posts-inner"  v-for="article in articles" v-bind:key="article.id">
                     <blockquote class="posts">
-                        <h2 class="post-title"><router-link to="/Detail">Apache或者Nginx为PHP设置服务器环境变量</router-link></h2>
+                        <h2 class="post-title"><router-link to="/Detail">{{article.title}}</router-link></h2>
                         <div class="marks">
                             <div class="release-time">
                                 <span><i class="iconfont iconschedule"></i></span>
-                                <span>2020-12-23</span>
+                                <span>{{article.created_at}}</span>
                             </div>
                             <div class="tags-item">
                                 <i class="iconfont iconlabel_fill"></i>
-                                <router-link to="/TagList">环境变量</router-link>
-                                <router-link to="/TagList">PHP</router-link>
+                                <a v-for="tag in article.tags" :key="tag.id" @click="toTagList(tag.id)">
+                                    {{tag.name}}&nbsp;
+                                </a>
                             </div>
                             <div class="view">访问数:
-                                <div class="view-number"><span>1112</span></div>
+                                <div class="view-number"><span>{{article.pv}}</span></div>
                             </div>
                         </div>
                         <p class="post-short-content">在开发项目的时候生产环境和开发环境的配置信息是不一样的，总要切换的话比较麻烦，现在我们可以通过设置服务器环境变量来区分线上生产环境还是本地开发环境，比如我们可以设置 RUNTIME_ENVIROMENT 的为 'DEV'还是'PRO'来区分。然后在PHP端通过$_SERVER['RUNTIME_ENVIROMENT']来获取值。
@@ -96,6 +97,7 @@ export default {
       msg: '爱学习后生',
       cates: [{id: '', name: '', num: '0'}],
       tags: [{id: '', name: ''}],
+      articles: [],
       // 分页列表
       all: '10', // 总页数
       cur: '1', // 当前页
@@ -108,6 +110,7 @@ export default {
   mounted () {
     this.cateList()
     this.tagList()
+    this.pageClick(this.cur)
     this.loadModuleData2()
   },
   computed: {
@@ -174,7 +177,9 @@ export default {
         console.log(res)
         // 执行某些操作
         if (res.data.code === 0) {
-          // res.data.data.list
+          var count = res.data.data.count
+          this.all = Math.ceil(count / this.page_size)
+          this.articles = res.data.data.list
         }
       })
     },
