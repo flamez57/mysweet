@@ -59,23 +59,10 @@ export default {
         this.file = ''
         let data = res.data.data
         this.$emit('upload', data)
-        this.$message({
-          type: 'success',
-          message: '上传成功！'
-        })
+        alert('上传成功')
       }).catch(err => {
         console.log(err)
-        if (err.data.msg) {
-          this.$message({
-            type: 'error',
-            message: err.data.msg
-          })
-        } else {
-          this.$message({
-            type: 'error',
-            message: '上传失败'
-          })
-        }
+        alert('上传失败')
       })
     }
   }
