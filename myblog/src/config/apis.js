@@ -56,6 +56,8 @@ let Apis = {
   // 日记保存 post content
   addDiary: manageApi + 'addDiary',
   // 退出 get
-  loginOut: manageApi + 'loginOut'
+  loginOut: manageApi + 'loginOut',
+  // 图片上传
+  uploadImg: manageApi + 'uploadImg'
 }
 export default Apis

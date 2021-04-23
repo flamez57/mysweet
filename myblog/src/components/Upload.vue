@@ -52,9 +52,9 @@ export default {
       }
       // console.log('fileData', typeof fileData, fileData)
       let data = new FormData()
-      data.append('multfile', fileData)
+      data.append('img', fileData)
       data.append('operaType', this.uploadType)
-      this.$store.dispatch('UPLOAD_HEAD', data).then(res => {
+      this.$api.base.uploadImg(data).then(res => {
         console.log(res)
         this.file = ''
         let data = res.data.data

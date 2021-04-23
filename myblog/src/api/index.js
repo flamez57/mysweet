@@ -16,6 +16,8 @@ import member from './member'
 import comment from './comment'
 // 日记档案
 import diary from './diary'
+// 公共
+import base from './base'
 
 Vue.use(Vuex)
 // 状态存储
@@ -42,5 +44,6 @@ export default {
   member,
   comment,
   diary,
-  store
+  store,
+  base
 }
