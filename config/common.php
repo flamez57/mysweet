@@ -5,5 +5,5 @@ return [
 	'module' => 'application',
 	'controller' => 'index',
 	'action' => 'index',
-    'domain' => '//mysweet.cc/'
+    'domain' => '//mysweet.cc/' // 图片域名
 ];
