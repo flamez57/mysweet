@@ -67,11 +67,13 @@ class ManageController extends BaseController
         $path = './upload/';
         $upload = new \hl\library\Tools\Files\HLUploadFile($path, 'jpg,jpeg,png,gif,pdf');
         if ($upload->upload('img')) {
-            $this->data['path'] = $path;
+            $this->data['path'] = trim($path, '.');
             //上传后的文件信息 name size type
             $this->data['info'] = $upload->getFileInfo();
             //上传后的文件名
             $this->data['name'] = $upload->getFileName();
+            $this->data['domain'] = self::$config['common']['domain'];
+            $this->data['full_path'] = $this->data['domain'].$this->data['path'].$this->data['name'];
         } else {
             //失败的错误信息
             $this->code = -1;
