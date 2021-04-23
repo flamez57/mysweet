@@ -32,7 +32,7 @@
                         <label class="form-label">头像</label>
                         <div class="form-message">请选择小于1M的图片</div>
                         <div class="form-img">
-                            <img class="form-img-inner" src="../assets/img/head2.png"/>
+                            <upload :uploadType="`head`" :imgWidth="`140px`" :imgHeight="`140px`" :imgUrl="memberForm.avatar" @upload="getImgUrl"></upload>
                         </div>
                     </div>
                     <div class="form-element">
@@ -46,9 +46,10 @@
 </template>
 
 <script>
-
+import Upload from './Upload'
 export default {
   name: 'About',
+  components: { Upload },
   data () {
     return {
       msg: 'about',
@@ -87,6 +88,10 @@ export default {
         console.log(res)
         // 执行某些操作
       })
+    },
+    // 接收子组件emit的事件
+    getImgUrl (data) {
+      // data  得到的就是返回的图片路径的相关参数
     }
   }
 }
