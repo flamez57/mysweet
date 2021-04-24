@@ -37,7 +37,7 @@ class commentServices extends HLServices
     */
     public function reply($id, $content, $memberId = 0)
     {
-        $comment = commentServices::getInstance()->getByWhere(['id' => $id], 'article_id,reply_at');
+        $comment = commentModels::getInstance()->getByWhere(['id' => $id], 'article_id,reply_at');
         $article = articleModels::getInstance()->getByWhere(['id' => $comment['article_id']], 'member_id');
         if ($comment['reply_at'] == 0 && $article['member_id'] == $memberId && !empty($content)) {
             commentModels::getInstance()->updateById($id, ['reply_content' => $content, 'reply_at' => TIMESTAMP]);

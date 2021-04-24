@@ -23,9 +23,7 @@ class BaseController extends HLApi
 
     public function __construct()
     {
-        if ($this->needLogin) {
-            $this->checkLogin();
-        }
+        $this->checkLogin();
     }
 
     //校验登陆
@@ -40,7 +38,7 @@ class BaseController extends HLApi
         $memberId = $session->get('member_id');
         $btoken = $session->get('token'); //表里的token
         $token = $session->getToken(); //客户端用
-        if (empty($memberId)) {
+        if (empty($memberId) && $this->needLogin) {
             // 未登录状态
             HLResponse::json('-1', '请先登陆', new \stdClass());
             die;

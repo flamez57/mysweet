@@ -62,8 +62,17 @@
                     </div>
                     <div class="comment-footer">
                         <span>{{comment.created_at}}</span>
-                        <span>回复</span>
-
+                        <span v-if="comment.allow_reply == 1">回复</span>
+                    </div>
+                    <div class="comment-content" v-if="comment.reply_content">
+                        <h5>作者回复：</h5>
+                        <p>{{comment.reply_content}}---{{comment.reply_at}}</p>
+                    </div>
+                    <div class="reply-box" width="100%" v-if="comment.allow_reply == 1">
+                        <input type="text" placeholder="回复内容" v-model="reply_data.content">
+                        <button @click="frontReply(comment.id)">
+                            <i class="iconfont iconeditor" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -159,7 +168,8 @@ export default {
       }
     },
     // 回复 post id content
-    frontReply () {
+    frontReply (id) {
+      this.reply_data.id = id
       this.$api.comment.frontReply(this.reply_data).then(res => {
         console.log(res.data)
         // 执行某些操作
@@ -197,4 +207,32 @@ export default {
 @import '../assets/css/layout_head_foot.css';
 @import '../assets/css/private_post.css';
 @import '../assets/iconfont/blog/iconfont.css';
+.reply-box{
+    position: relative;
+    display: inline-block;
+    margin:3px;
+    width: 100%;
+    height: 34px;
+    border-radius: 20px;
+    border: 1px solid #5c5c5c;
+}
+.reply-box input{
+    width: 85%;
+    height: 34px;
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0 10px;
+    font-size: 12px;
+    color:#303030;
+}
+.reply-box button{
+    width: 10%;
+    height: 34px;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    color: #111;
+}
 </style>
