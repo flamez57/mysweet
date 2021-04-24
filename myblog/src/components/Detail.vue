@@ -8,15 +8,16 @@
             <div class="marks">
                 <div class="release-time">
                     <span><i class="iconfont iconschedule"></i></span>
-                    <span>2020-12-23</span>
+                    <span>{{detail.created_at}}</span>
                 </div>
                 <div class="tags-item">
                     <i class="iconfont iconlabel_fill"></i>
-                    <router-link to="/TagList">环境变量</router-link>
-                    <router-link to="/TagList">PHP</router-link>
+                    <a v-for="tag in detail.tags" :key="tag.id" @click="toTagList(tag.id)">
+                        {{tag.name}}&nbsp;&nbsp;&nbsp;
+                    </a>
                 </div>
                 <div class="view">访问数:
-                    <div class="view-number"><span>1112</span></div>
+                    <div class="view-number"><span>{{detail.pv}}</span></div>
                 </div>
             </div>
         </div>
@@ -27,32 +28,7 @@
         <!--正文 S-->
         <article class="main-post">
             <div class="main-post-content">
-                <p>在开发项目的时候生产环境和开发环境的配置信息是不一样的，总要切换的话比较麻烦，现在我们可以通过设置服务器环境变量来区分线上生产环境还是本地开发环境，比如我们可以设置 RUNTIME_ENVIROMENT 的为 'DEV'还是'PRO'来区分。然后在PHP端通过$_SERVER['RUNTIME_ENVIROMENT']来获取值。</p>
-                <h2>一、Nginx （通过fastcgi_param来设置）</h2>
-                <pre>
-                    # 在nginx的配置文件nginx.conf中配置环境server段location中添加相应的配置信息
-                    location ~ \.php($|/) {
-                        #......
-                        fastcgi_param    RUNTIME_ENVIROMENT 'PRO'; # PRO or DEV
-                        #......
-                    }
-                </pre>
-                <p>配置好后重启（nginx -s reload）就好。</p>
-                <h2>二、PHP自身(通过php主配置文件php-fpm.conf来设置)</h2>
-                <pre>
-                    #这个设置必须放在主配置文件php-fpm.conf里（/usr/local/php/etc/php-fpm.conf）
-                    #直接在配置文件中添加：
-                    env[RUNTIME_ENVIROMENT] = 'PRO'
-                </pre>
-                <p>添加后重启php-fpm （service restart php-fpm）。</p>
-                <h2>三、Apache设置环境变量（SetEnv 变量名 变量值）</h2>
-                <pre>
-                    &lt;VirtualHost *:80&gt;
-                    #......
-                        SetEnv RUNTIME_ENVIROMENT DEV
-                    #......
-                    &lt;/VirtualHost&gt;
-                </pre>
+                <pre>{{detail.content}}</pre>
                 <p></p>
             </div>
         </article>
@@ -61,12 +37,12 @@
         <!--分类及翻篇 S-->
         <div class="entry-nav">
             <div class="entry-categories">
-                分类&nbsp;:&nbsp;<router-link to="/CateList">服务端</router-link>
+                分类&nbsp;:&nbsp;<a @click="toCateList(cate.id)">{{cate.name}}</a>
             </div>
             <div class="entry-location">
                 <ul>
-                    <li>上一篇&nbsp;:&nbsp;<router-link to="/Detail">点击上一篇</router-link></li>
-                    <li>下一篇&nbsp;:&nbsp;<router-link to="/Detail">点击下一篇</router-link></li>
+                    <li>上一篇&nbsp;:&nbsp;<a @click="toDetail(before.id)">{{before.title}}</a></li>
+                    <li>下一篇&nbsp;:&nbsp;<a @click="toDetail(next.id)">{{next.title}}</a></li>
                 </ul>
             </div>
         </div>
@@ -75,54 +51,23 @@
         <!--留言板 S-->
         <div class="comments">
             <h2 class="comments-header">留言({{comment_num}}条)</h2>
-            <div class="comments-content">
+
+            <div class="comments-content" v-for="comment in comments" :key="comment.id">
                 <div class="comment">
                     <div class="comment-header">
-                        <span class="author">小黄人</span>
-                        说：
+                        <span class="author">{{comment.nickname}}</span> 说：
                     </div>
                     <div class="comment-content">
-                        <p>这篇文章的沙发归我了，这篇文章的沙发归我了，这篇文章的沙发归我了，这篇文章的沙发归我了</p>
+                        <p>{{comment.content}}</p>
                     </div>
                     <div class="comment-footer">
-                        <span>2020-1-10</span>
+                        <span>{{comment.created_at}}</span>
                         <span>回复</span>
 
                     </div>
                 </div>
             </div>
-            <div class="comments-content">
-                <div class="comment">
-                    <div class="comment-header">
-                        <span class="author">hcl</span>
-                        说：
-                    </div>
-                    <div class="comment-content">
-                        <p>这篇文章的凳子归我了，这篇文章的凳子归我了，这篇文章的凳子归我了，这篇文章的凳子归我了</p>
-                    </div>
-                    <div class="comment-footer">
-                        <span>2020-1-10</span>
-                        <span>回复</span>
 
-                    </div>
-                </div>
-            </div>
-            <div class="comments-content">
-                <div class="comment">
-                    <div class="comment-header">
-                        <span class="author">巴拉巴拉</span>
-                        说：
-                    </div>
-                    <div class="comment-content">
-                        <p>这篇文章的地板归我了，这篇文章的地板归我了，这篇文章的地板归我了，这篇文章的地板归我了</p>
-                    </div>
-                    <div class="comment-footer">
-                        <span>2020-1-10</span>
-                        <span>回复</span>
-
-                    </div>
-                </div>
-            </div>
         </div>
         <!--留言板 E-->
 
@@ -177,8 +122,15 @@ export default {
       id: this.$route.params.id, // 文章id
       comment_num: 0, // 评论数量
       comments: [], // 评论列表
+      cate: {id: '', name: ''}, // 分类
+      before: {id: '0', title: ''}, // 上一篇
+      next: {id: '0', title: ''}, // 下一篇
       detail: { // 文章内容
-        title: ''
+        title: '',
+        created_at: '',
+        pv: '',
+        content: '',
+        tags: []
       }
     }
   },
@@ -195,6 +147,7 @@ export default {
           this.comment_num = res.data.data.comment_num
           this.comments = res.data.data.comments
           this.detail = res.data.data.detail
+          this.cate = res.data.data.detail.cate
         }
       })
     },

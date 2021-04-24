@@ -167,7 +167,7 @@ class HLModel extends HLSington
      */
     public function decr($where, $field, $step = 1)
     {
-        return $this->db->update($this->tableName, [$field => [$field - $step]], $where);
+        return $this->db->update($this->tableName, [$field => ["$field - $step"]], $where);
     }
 
     /*
@@ -175,6 +175,6 @@ class HLModel extends HLSington
      */
     public function incr($where, $field, $step = 1)
     {
-        return $this->db->update($this->tableName, [$field => [$field + $step]], $where);
+        return $this->db->update($this->tableName, [$field => ["$field + $step"]], $where);
     }
 }
