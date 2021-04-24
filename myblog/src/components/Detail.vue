@@ -62,15 +62,15 @@
                     </div>
                     <div class="comment-footer">
                         <span>{{comment.created_at}}</span>
-                        <span v-if="comment.allow_reply == 1">回复</span>
+                        <span v-if="comment.allow_reply == 1" @click="toReply(comment.id)">回复</span>
                     </div>
                     <div class="comment-content" v-if="comment.reply_content">
                         <h5>作者回复：</h5>
                         <p>{{comment.reply_content}}---{{comment.reply_at}}</p>
                     </div>
-                    <div class="reply-box" width="100%" v-if="comment.allow_reply == 1">
+                    <div class="reply-box" width="100%" v-if="comment.id == reply_data.id">
                         <input type="text" placeholder="回复内容" v-model="reply_data.content">
-                        <button @click="frontReply(comment.id)">
+                        <button @click="frontReply">
                             <i class="iconfont iconeditor" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -168,8 +168,7 @@ export default {
       }
     },
     // 回复 post id content
-    frontReply (id) {
-      this.reply_data.id = id
+    frontReply () {
       this.$api.comment.frontReply(this.reply_data).then(res => {
         console.log(res.data)
         // 执行某些操作
@@ -177,6 +176,9 @@ export default {
           //
         }
       })
+    },
+    toReply (id) {
+      this.reply_data.id = id
     },
 
     // 链接跳转
