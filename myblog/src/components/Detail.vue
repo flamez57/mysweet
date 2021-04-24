@@ -139,6 +139,8 @@ export default {
           this.comments = res.data.data.comments
           this.detail = res.data.data.detail
           this.cate = res.data.data.detail.cate
+          this.before = res.data.data.detail.before
+          this.next = res.data.data.detail.next
         }
       })
     },

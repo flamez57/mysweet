@@ -87,7 +87,7 @@ class IndexController extends BaseController
         $articleId = $this->getPost('article_id', 0);
         $content = $this->getPost('content', '');
         $nickname = $this->getPost('nickname', '佚名');
-        $this -> data = commentServices::getInstance()->addComment($articleId, $content, $nickname);
+        $this->data = commentServices::getInstance()->addComment($articleId, $content, $nickname);
         HLResponse::json($this->code, $this->message, $this->data);
     }
 
