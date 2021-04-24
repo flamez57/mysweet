@@ -162,7 +162,8 @@ export default {
           console.log(res.data)
           // 执行某些操作
           if (res.data.code === 0) {
-            //
+            // 重新加载数据
+            this.frontArticleDetail(this.id)
           }
         })
       }
@@ -173,7 +174,8 @@ export default {
         console.log(res.data)
         // 执行某些操作
         if (res.data.code === 0) {
-          //
+          // 重新加载数据
+          this.frontArticleDetail(this.id)
         }
       })
     },
@@ -199,6 +201,7 @@ export default {
       this.$router.push({
         path: '/Detail/' + id
       })
+      this.frontArticleDetail(id) // 重新加载数据
     }
   }
 }
