@@ -4,7 +4,7 @@
 <header>
     <div class="header">
         <div class="main-post-title">
-            <h1>Apache或者Nginx为PHP设置服务器环境变量</h1>
+            <h1>{{detail.title}}</h1>
             <div class="marks">
                 <div class="release-time">
                     <span><i class="iconfont iconschedule"></i></span>
@@ -74,7 +74,7 @@
 
         <!--留言板 S-->
         <div class="comments">
-            <h2 class="comments-header">留言(x条)</h2>
+            <h2 class="comments-header">留言({{comment_num}}条)</h2>
             <div class="comments-content">
                 <div class="comment">
                     <div class="comment-header">
@@ -171,10 +171,52 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Detail',
   data () {
     return {
-      msg: 'home'
+      id: this.$route.params.id, // 文章id
+      comment_num: 0, // 评论数量
+      comments: [], // 评论列表
+      detail: { // 文章内容
+        title: ''
+      }
+    }
+  },
+  mounted () {
+    this.frontArticleDetail(this.id)
+  },
+  methods: {
+    // 页面数据获取
+    frontArticleDetail (id) {
+      this.$api.article.frontArticleDetail(id).then(res => {
+        console.log(res.data)
+        // 执行某些操作
+        if (res.data.code === 0) {
+          this.comment_num = res.data.data.comment_num
+          this.comments = res.data.data.comments
+          this.detail = res.data.data.detail
+        }
+      })
+    },
+
+    // 链接跳转
+    toCateList (id) {
+      // 直接调用$router.push 实现携带参数的跳转
+      this.$router.push({
+        path: '/CateList/' + id
+      })
+    },
+    toTagList (id) {
+      // 直接调用$router.push 实现携带参数的跳转
+      this.$router.push({
+        path: '/TagList/' + id
+      })
+    },
+    toDetail (id) {
+      // 直接调用$router.push 实现携带参数的跳转
+      this.$router.push({
+        path: '/Detail/' + id
+      })
     }
   }
 }

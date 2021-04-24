@@ -13,7 +13,7 @@ const article = {
   },
   // 文章详情
   frontArticleDetail (id) {
-    return axios.get(Apis.farticleDetail, {id: id})
+    return axios.get(Apis.farticleDetail, {params: {id: id}})
   },
   // 文章列表
   manageArticleList (keyword, page, pageSize, type) {

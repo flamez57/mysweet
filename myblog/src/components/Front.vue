@@ -79,7 +79,7 @@ export default {
     },
     search () {
       console.log(this.keyword)
-      this.$router.push('/SearchList/'+this.keyword)
+      this.$router.push('/SearchList/' + this.keyword)
     }
   }
 }
