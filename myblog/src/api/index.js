@@ -24,7 +24,25 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     // 存储token
-    Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : ''
+    Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
+    // 展视端
+    f_code: 'flamez57', // 账号
+    f_nickname: '爱学习后生', // 昵称
+    f_avatar: 'https://avatars.githubusercontent.com/u/19811152?v=4', // 头像
+    f_motto: '欢迎来到我的个人博客', // 座右铭
+    // 管理端
+    m_code: 'flamez57', // 账号
+    m_nickname: '爱学习后生', // 昵称
+    m_avatar: 'https://avatars.githubusercontent.com/u/19811152?v=4', // 头像
+    m_motto: '欢迎来到我的个人博客' // 座右铭
+  },
+  getters: { // 实时监听state值的变化（最新状态）
+    getAuthorization (state) { // 承载变化的Authorization值
+      return state.Authorization
+    },
+    getfMotto (state) {
+      return state.f_motto
+    }
   },
 
   mutations: {
@@ -32,6 +50,15 @@ const store = new Vuex.Store({
     changeLogin (state, user) {
       state.Authorization = user.Authorization
       localStorage.setItem('Authorization', user.Authorization)
+    },
+    changefNickname (state, value) { // 改变昵称的初始值
+      state.f_nickname = value
+    },
+    changefAvatar (state, value) {
+      state.f_avatar = value
+    },
+    changefMotto (state, value) {
+      state.f_motto = value
     }
   }
 })

@@ -5,9 +5,9 @@
         <div class="header" id="header">
             <div class="header-inner">
                 <div class="header-info">
-                    <img class="header-info-head" src="../assets/img/head2.png"/>
-                    <h2 class="header-info-name">{{msg}}</h2>
-                    <p class="header-info-desc">欢迎来到我的个人博客</p>
+                    <img class="header-info-head" :src="this.$api.store.state.f_avatar"/>
+                    <h2 class="header-info-name">{{this.$api.store.state.f_nickname}}</h2><!--vuex两种不通取值-->
+                    <p class="header-info-desc">{{this.$api.store.getters.getfMotto}}</p> <!--vuex两种不通取值-->
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@ export default {
     this.cateList()
     this.tagList()
     this.pageClick(this.cur)
-    this.loadModuleData2()
+    this.frontMemberInfo()
   },
   computed: {
     // 分页
@@ -143,10 +143,15 @@ export default {
   },
   methods: {
     // 页面数据获取
-    loadModuleData2 () {
+    frontMemberInfo () {
       this.$api.member.frontMemberInfo(this.default_code).then(res => {
-        console.log(res)
+        console.log(res.data)
         // 执行某些操作
+        if (res.data.code === 0) {
+          this.$api.store.commit('changefNickname', res.data.data.member_info.nickname)
+          this.$api.store.commit('changefAvatar', res.data.data.member_info.avatar)
+          this.$api.store.commit('changefMotto', res.data.data.member_info.motto)
+        }
       })
     },
     // 分类
