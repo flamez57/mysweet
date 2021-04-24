@@ -20,12 +20,12 @@ class diaryServices extends HLServices
     public function getFrontList($code)
     {
         $memberId = memberModels::getInstance()->getMemberIdByCode($code);
-        $list = diaryModels::getInstance()->getByWhere(['member_id' => $memberId], 'year,content,created_at', 'id desc', '', '200');
+        $list = diaryModels::getInstance()->getByWhere(['member_id' => $memberId], 'id,year,content,created_at', 'id desc', '', '200');
         $outList = [];
         if ($list) {
             foreach ($list as $_v) {
                 $outList[$_v['year']]['year'] = $_v['year'];
-                $_v['created_at'] = date('m-d H:i:s', $_v['created_at']);
+                $_v['created_at'] = date('m-d  H:i ', $_v['created_at']);
                 $outList[$_v['year']]['list'][] = $_v;
             }
         }

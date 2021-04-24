@@ -8,11 +8,11 @@ import qs from 'qs' // 根据需求是否导入qs模块
 const diary = {
   // 档案
   frontDiary (code) {
-    return axios.get(Apis.fdiary, {code: code})
+    return axios.get(Apis.fdiary, {params: {code: code}})
   },
   // 日记列表
   manageDiaryList (page, pageSize, year, mon, day) {
-    return axios.get(Apis.diaryList, {page: page, page_size: pageSize})
+    return axios.get(Apis.diaryList, {params: {page: page, page_size: pageSize}})
   },
   // 日记保存 post content
   manageAddDiary (params) {
