@@ -41,8 +41,8 @@
             </div>
             <div class="entry-location">
                 <ul>
-                    <li>上一篇&nbsp;:&nbsp;<a @click="toDetail(before.id)">{{before.title}}</a></li>
-                    <li>下一篇&nbsp;:&nbsp;<a @click="toDetail(next.id)">{{next.title}}</a></li>
+                    <li v-if="before.id">上一篇&nbsp;:&nbsp;<a @click="toDetail(before.id)">{{before.title}}</a></li>
+                    <li v-if="next.id">下一篇&nbsp;:&nbsp;<a @click="toDetail(next.id)">{{next.title}}</a></li>
                 </ul>
             </div>
         </div>
@@ -74,7 +74,7 @@
         <!--发表看法 S-->
         <div class="main-comment">
             <h1>发表我的看法</h1>
-            <form>
+            <div>
                 <p><label>您的留言</label></p>
                 <p><textarea name="text" rows="10" cols="=50" v-model="comment_data.content"></textarea></p>
                 <div>
@@ -88,7 +88,7 @@
                     <p><input type="submit" value="发表" @click="frontAddComment"/>
                     <span>填写完成 请点击这里</span></p>
                 </div>
-            </form>
+            </div>
         </div>
         <!--发表看法 E-->
     </div>
@@ -105,8 +105,8 @@ export default {
       comment_num: 0, // 评论数量
       comments: [], // 评论列表
       cate: {id: '', name: ''}, // 分类
-      before: {id: '0', title: ''}, // 上一篇
-      next: {id: '0', title: ''}, // 下一篇
+      before: {}, // 上一篇
+      next: {}, // 下一篇
       detail: { // 文章内容
         title: '',
         created_at: '',

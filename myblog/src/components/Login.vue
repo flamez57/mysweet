@@ -2,7 +2,7 @@
 
 <div class="login-box">
     <h1>管理员登录</h1>
-    <form>
+    <div>
         <div class="text-box">
             <i class="iconfont icon-timerauto" aria-hidden="true"></i>
             <input type="text" v-model="loginForm.code" placeholder="请输入用户名"/>
@@ -15,7 +15,7 @@
             <input type="checkbox"/>记住密码
         </div>
         <input type="submit" @click="login" value="登录"/>
-    </form>
+    </div>
 </div>
 
 </template>
