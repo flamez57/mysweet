@@ -75,35 +75,17 @@
         <div class="main-comment">
             <h1>发表我的看法</h1>
             <form>
-                <p><label>您的留言 （HTML标签部分可用）</label></p>
-                <p><textarea name="text" rows="10" cols="=50"></textarea></p>
+                <p><label>您的留言</label></p>
+                <p><textarea name="text" rows="10" cols="=50" v-model="comment_data.content"></textarea></p>
                 <div>
                     <p>您的姓名：</p>
                     <p>
-                        <input type="text"/>
+                        <input type="text" v-model="comment_data.nickname"/>
                         <span>必填</span>
                     </p>
                 </div>
                 <div>
-                    <p>电子邮件：</p>
-                    <p>
-                        <input type="text"/>
-                        <span>必填</span>
-                    </p>
-                </div>
-                <div>
-                    <p>个人网址：</p>
-                    <p>
-                        <input type="text"/>
-                        <span>您可以投放自己的个人博客哦</span>
-                    </p>
-                </div>
-                <div>
-                    <p style="display: inline">记住个人信息？</p>
-                    <input type="checkbox"/>
-                </div>
-                <div>
-                    <p><input type="submit" value="发表"/>
+                    <p><input type="submit" value="发表" @click="frontAddComment"/>
                     <span>填写完成 请点击这里</span></p>
                 </div>
             </form>
@@ -131,6 +113,15 @@ export default {
         pv: '',
         content: '',
         tags: []
+      },
+      comment_data: {
+        article_id: this.$route.params.id, // 文章id
+        content: '',
+        nickname: ''
+      },
+      reply_data: {
+        id: '', // 评论id
+        content: ''
       }
     }
   },
@@ -148,6 +139,30 @@ export default {
           this.comments = res.data.data.comments
           this.detail = res.data.data.detail
           this.cate = res.data.data.detail.cate
+        }
+      })
+    },
+    // 发表看法 post article_id content nickname
+    frontAddComment () {
+      if (this.comment_data.nickname === '' || this.comment_data.content === '') {
+        alert('名称或内容不能为空')
+      } else {
+        this.$api.comment.frontAddComment(this.comment_data).then(res => {
+          console.log(res.data)
+          // 执行某些操作
+          if (res.data.code === 0) {
+            //
+          }
+        })
+      }
+    },
+    // 回复 post id content
+    frontReply () {
+      this.$api.comment.frontReply(this.reply_data).then(res => {
+        console.log(res.data)
+        // 执行某些操作
+        if (res.data.code === 0) {
+          //
         }
       })
     },
