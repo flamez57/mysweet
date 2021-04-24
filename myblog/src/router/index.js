@@ -6,6 +6,7 @@ import Record from '@/components/Record'
 import About from '@/components/About'
 import CateList from '@/components/CateList'
 import TagList from '@/components/TagList'
+import SearchList from '@/components/SearchList'
 import Detail from '@/components/Detail'
 // 管理
 import Login from '@/components/Login'
@@ -30,6 +31,7 @@ const router = new Router({
         { path: 'About', name: 'About', component: About },
         { path: 'CateList/:cate_id', name: 'CateList', component: CateList },
         { path: 'TagList/:tag_id', name: 'TagList', component: TagList },
+        { path: 'SearchList/:keyword', name: 'SearchList', component: SearchList },
         { path: 'Detail/:id', name: 'Detail', component: Detail }
       ]
     }, {

@@ -12,8 +12,8 @@
                     <router-link v-show="isShowM" to="/Manage">管理后台</router-link>
                 </div>
                 <div class="search-box" id="search-box">
-                    <input id="search-text" type="text" placeholder="search">
-                    <button class="searchbtn" id="search-btn">
+                    <input id="search-text" type="text" v-model="keyword" placeholder="search">
+                    <button class="searchbtn" id="search-btn" @click="search">
                         <i class="iconfont iconsearch" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -54,6 +54,7 @@ export default {
   data () {
     return {
       msg: 'home',
+      keyword: '',
       isShowL: true, // 是否显示登陆按钮
       isShowM: false // 是否显示管理按钮
     }
@@ -75,6 +76,10 @@ export default {
     backTop () { // 回到顶部
       document.body.scrollTop = 0
       document.documentElement.scrollTop = 0
+    },
+    search () {
+      console.log(this.keyword)
+      this.$router.push('/SearchList/'+this.keyword)
     }
   }
 }
