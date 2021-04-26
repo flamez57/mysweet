@@ -25,9 +25,7 @@
                 <i class="iconfont iconsearch" aria-hidden="true"></i>
               </button>
             </div>
-            <router-link to="/Manage/CreatCate" class="rel-btn">
-                添加分类
-                </router-link>
+            <router-link to="/Manage/AddDiary" class="rel-btn">添加日记</router-link>
           </div>
           <!--搜索 及 创建 E-->
         </div>

@@ -31,7 +31,7 @@
                     </li>
                     <li :class="'/Manage/DiaryList' === path ? 'left-nav-item left-nav-action' : 'left-nav-item'" @click="selectNav('/Manage/DiaryList')">
                         <router-link to="/Manage/DiaryList" class="left-nav-inner">
-                            <i class="iconfont iconfolder" aria-hidden="true"></i>日记
+                            <i class="iconfont iconeditor" aria-hidden="true"></i>日记
                         </router-link>
                     </li>
                     <li :class="'/Manage/Set' === path ? 'left-nav-item left-nav-action' : 'left-nav-item'" @click="selectNav('/Manage/Set')">
