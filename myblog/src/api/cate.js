@@ -16,11 +16,11 @@ const cate = {
   },
   // 分类列表
   manageCateList (page, pageSize) {
-    return axios.get(Apis.cateList, {page: page, page_size: pageSize})
+    return axios.get(Apis.cateList, {params: {page: page, page_size: pageSize}})
   },
   // 分类详情
   manageCateDetail (id) {
-    return axios.get(Apis.cateDetail, {id: id})
+    return axios.get(Apis.cateDetail, {params: {id: id}})
   },
   // 分类保存 name sort status
   manageSaveCate (params) {
