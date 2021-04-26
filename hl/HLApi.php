@@ -52,7 +52,8 @@ class HLApi extends HLSington
             }
         }
         if ($key != '') {
-            return trim(isset($values[$key]) ? $values[$key] : $value);
+            $value = isset($values[$key]) ? $values[$key] : $value;
+            return is_string($value) ? trim($value) : $value;
         } else {
             return $values;
         }

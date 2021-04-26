@@ -36,6 +36,10 @@
                         </div>
                     </div>
                     <div class="form-element">
+                        <label class="form-label">简介</label>
+                        <textarea rows="30" cols="70" v-model="memberForm.content"></textarea>
+                    </div>
+                    <div class="form-element">
                         <span class="btn mr-10" @click="saveMemberInfo">保存</span>
                         <span class="btn">取消</span>
                     </div>
@@ -60,7 +64,8 @@ export default {
         qq: '',
         email: '',
         motto: '',
-        avatar: ''
+        avatar: '',
+        content: ''
       }
     }
   },
@@ -80,6 +85,7 @@ export default {
           this.memberForm.email = res.data.data.member_info.email
           this.memberForm.motto = res.data.data.member_info.motto
           this.memberForm.avatar = res.data.data.member_info.avatar
+          this.memberForm.content = res.data.data.member_info.content
         }
       })
     },
@@ -91,7 +97,9 @@ export default {
     },
     // 接收子组件emit的事件
     getImgUrl (data) {
+      console.log(data)
       // data  得到的就是返回的图片路径的相关参数
+      this.memberForm.avatar = data.full_path
     }
   }
 }

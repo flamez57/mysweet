@@ -62,10 +62,8 @@
                                     <span>{{article.created_at}}</span>
                                 </td>
                                 <td>
-                                    <a href="#"><i class="iconfont iconchakan" @click="toDetail(article.id)"></i></a>
-                                    <a class="delete-post" href="#" onclick="confirm('确定删除吗？');">
-                                        <i class="iconfont iconicon"></i>
-                                    </a>
+                                    <a @click="toDetail(article.id)"><i class="iconfont iconchakan"></i></a>
+                                    <a @click="deleted(article.id)"><i class="iconfont iconicon--"></i></a>
                                 </td>
                             </tr>
                         </tbody>
@@ -149,6 +147,15 @@ export default {
           var count = res.data.data.count
           this.all = Math.ceil(count / this.page_size)
           this.articles = res.data.data.list
+        }
+      })
+    },
+    deleted (id) {
+      this.$api.article.manageArticleDel(id).then(res => {
+        console.log(res)
+        // 执行某些操作
+        if (res.data.code === 0) {
+          this.pageClick()
         }
       })
     },

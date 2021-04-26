@@ -27,8 +27,7 @@
     <div class="main-container-content">
         <!--正文 S-->
         <article class="main-post">
-            <div class="main-post-content">
-                <pre>{{detail.content}}</pre>
+            <div class="main-post-content" v-html="detail.content">
                 <p></p>
             </div>
         </article>
