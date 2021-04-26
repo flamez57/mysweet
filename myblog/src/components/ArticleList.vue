@@ -29,220 +29,51 @@
                     </div>
                     <!--搜索 及 创建 E-->
                 </div>
-
-        <!--table S-->
-        <div class="table-responsive">
-          <table class="table" id="post-table">
-            <thead>
-            <tr>
-              <th>文章名</th>
-              <th>状态</th>
-              <th>浏览量</th>
-              <th>更新时间</th>
-              <th></th>
-            </tr>
-            </thead>
-            <tbody id="post-tbody">
-            <tr v-for="article in articles" :key="article.id">
-              <td scope="row" class="position-relative">
-                <div class="media">
-                  <a class="stretched-link" @click="toDetail(article.id)">
-                    <em class="iconfont iconarticle-line mr-24"></em>
-                  </a>
-                  <div class="media-body">
-                    <h3 class="media-title">{{article.title}}</h3>
-                    <span class="media-text">— 没有描述</span>
-                  </div>
+                <!--table S-->
+                <div class="table-responsive">
+                    <table class="table" id="post-table">
+                        <thead>
+                            <tr>
+                                <th>文章名</th>
+                                <th>状态</th>
+                                <th>浏览量</th>
+                                <th>更新时间</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="post-tbody">
+                            <tr v-for="article in articles" :key="article.id">
+                                <td scope="row" class="position-relative">
+                                    <div class="media">
+                                        <a class="stretched-link" @click="toDetail(article.id)">
+                                            <em class="iconfont iconarticle-line mr-24"></em>
+                                        </a>
+                                        <div class="media-body">
+                                            <h3 class="media-title">{{article.title}}</h3>
+                                            <span class="media-text">{{article.drafts_content}}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td v-if="article.status == 0" class="tanmer-status tanmer-status-cg">草稿</td>
+                                <td v-if="article.status == 1" class="tanmer-status tanmer-status-fb">发布</td>
+                                <td>{{article.pv}}</td>
+                                <td class="tanmer-white-nowrap">
+                                    <a class="d-inline-block"><img :src="article.avatar" class="sm-avatar"></a>
+                                    <span>{{article.created_at}}</span>
+                                </td>
+                                <td>
+                                    <a href="#"><i class="iconfont iconchakan" @click="toDetail(article.id)"></i></a>
+                                    <a class="delete-post" href="#" onclick="confirm('确定删除吗？');">
+                                        <i class="iconfont iconicon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-              </td>
-              <td class="tanmer-status tanmer-status-cg">草稿</td>
-              <td>{{article.pv}}</td>
-              <td class="tanmer-white-nowrap">
-                <a class="d-inline-block"><img src="../assets/img/head2.png" class="sm-avatar"></a>
-                <span>2 天前</span>
-              </td>
-              <td>
-                <div class="edit">
-                  <a href="../view-post.html" target="_blank"><i class="iconfont iconchakan"></i></a>
-                  <a class="delete-post" href="#" onclick="confirm('确定删除吗？');">
-                    <i class="iconfont iconicon"></i>
-                  </a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td scope="row" class="position-relative">
-                <div class="media">
-                  <a class="stretched-link" href="../view-post.html">
-                    <em class="iconfont iconarticle-line mr-24"></em>
-                  </a>
-                  <div class="media-body">
-                    <h3 class="media-title">222</h3>
-                    <span class="media-text">— 没有描述</span>
-                  </div>
-                </div>
-              </td>
-              <td class="tanmer-status tanmer-status-cg">草稿</td>
-              <td>0</td>
-              <td class="tanmer-white-nowrap">
-                <a class="d-inline-block" data-toggle="tooltip" data-placement="top" title=""
-                   data-original-title="用户0306"><img src="../assets/img/head2.png" class="sm-avatar">
-                </a>
-                <span>2 天前</span>
-              </td>
-              <td>
-                <div class="edit">
-                  <a href="#"><i class="iconfont iconchakan" aria-hidden="true"></i></a>
-                  <a class="delete-post" href="#" onclick="confirm('确定删除吗？');"><i class="iconfont iconicon--"
-                                                                                  aria-hidden="true"></i></a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td scope="row" class="position-relative">
-                <div class="media">
-                  <a class="stretched-link" href="../view-post.html">
-                    <em class="iconfont iconarticle-line mr-24"></em>
-                  </a>
-                  <div class="media-body">
-                    <h3 class="media-title">文章标题</h3>
-                    <span class="media-text">— 没有描述</span>
-                  </div>
-                </div>
-              </td>
-              <td class="tanmer-status tanmer-status-cg">草稿</td>
-              <td>0</td>
-              <td class="tanmer-white-nowrap">
-                <a class="d-inline-block" data-toggle="tooltip" data-placement="top" title=""
-                   data-original-title="用户0306"><img src="../assets/img/head2.png" class="sm-avatar">
-                </a>
-                <span>2 天前</span>
-              </td>
-              <td>
-                <div class="edit">
-                  <a href="#"><i class="iconfont iconchakan" aria-hidden="true"></i></a>
-                  <a class="delete-post" href="#" onclick="confirm('确定删除吗？');"><i class="iconfont iconicon--"
-                                                                                  aria-hidden="true"></i></a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td scope="row" class="position-relative">
-                <div class="media">
-                  <a class="stretched-link" href="../view-post.html">
-                    <em class="iconfont iconarticle-line mr-24"></em>
-                  </a>
-                  <div class="media-body">
-                    <h3 class="media-title">111</h3>
-                    <span class="media-text">— 没有描述</span>
-                  </div>
-                </div>
-              </td>
-              <td class="tanmer-status tanmer-status-fb">发布</td>
-              <td>0</td>
-              <td class="tanmer-white-nowrap">
-                <a class="d-inline-block" data-toggle="tooltip" data-placement="top" title=""
-                   data-original-title="用户0306"><img src="../assets/img/head2.png" class="sm-avatar">
-                </a>
-                <span>2 天前</span>
-              </td>
-              <td>
-                <div class="edit">
-                  <a href="#"><i class="iconfont iconchakan" aria-hidden="true"></i></a>
-                  <a class="delete-post" href="#" onclick="confirm('确定删除吗？');"><i class="iconfont iconicon--"
-                                                                                  aria-hidden="true"></i></a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td scope="row" class="position-relative">
-                <div class="media">
-                  <a class="stretched-link" href="../view-post.html">
-                    <em class="iconfont iconarticle-line mr-24"></em>
-                  </a>
-                  <div class="media-body">
-                    <h3 class="media-title">111</h3>
-                    <span class="media-text">— 没有描述</span>
-                  </div>
-                </div>
-              </td>
-              <td class="tanmer-status tanmer-status-fb">发布</td>
-              <td>0</td>
-              <td class="tanmer-white-nowrap">
-                <a class="d-inline-block" data-toggle="tooltip" data-placement="top" title=""
-                   data-original-title="用户0306"><img src="../assets/img/head2.png" class="sm-avatar">
-                </a>
-                <span>2 天前</span>
-              </td>
-              <td>
-                <div class="edit">
-                  <a href="#"><i class="iconfont iconchakan" aria-hidden="true"></i></a>
-                  <a class="delete-post" href="#" onclick="confirm('确定删除吗？');"><i class="iconfont iconicon--"
-                                                                                  aria-hidden="true"></i></a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td scope="row" class="position-relative">
-                <div class="media">
-                  <a class="stretched-link" href="../view-post.html">
-                    <em class="iconfont iconarticle-line mr-24"></em>
-                  </a>
-                  <div class="media-body">
-                    <h3 class="media-title">111</h3>
-                    <span class="media-text">— 没有描述</span>
-                  </div>
-                </div>
-              </td>
-              <td class="tanmer-status tanmer-status-fb">发布</td>
-              <td>0</td>
-              <td class="tanmer-white-nowrap">
-                <a class="d-inline-block" data-toggle="tooltip" data-placement="top" title=""
-                   data-original-title="用户0306"><img src="../assets/img/head2.png" class="sm-avatar">
-                </a>
-                <span>2 天前</span>
-              </td>
-              <td>
-                <div class="edit">
-                  <a href="#"><i class="iconfont iconchakan" aria-hidden="true"></i></a>
-                  <a class="delete-post" href="#" onclick="confirm('确定删除吗？');"><i class="iconfont iconicon--"
-                                                                                  aria-hidden="true"></i></a>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td scope="row" class="position-relative">
-                <div class="media">
-                  <a class="stretched-link" href="../view-post.html">
-                    <em class="iconfont iconarticle-line mr-24"></em>
-                  </a>
-                  <div class="media-body">
-                    <h3 class="media-title">111</h3>
-                    <span class="media-text">— 没有描述</span>
-                  </div>
-                </div>
-              </td>
-              <td class="tanmer-status tanmer-status-fb">发布</td>
-              <td>0</td>
-              <td class="tanmer-white-nowrap">
-                <a class="d-inline-block" data-toggle="tooltip" data-placement="top" title=""
-                   data-original-title="用户0306"><img src="../assets/img/head2.png" class="sm-avatar">
-                </a>
-                <span>2 天前</span>
-              </td>
-              <td>
-                <div class="edit">
-                  <a href="#"><i class="iconfont iconchakan" aria-hidden="true"></i></a>
-                  <a class="delete-post" href="#" onclick="confirm('确定删除吗？');"><i class="iconfont iconicon--" aria-hidden="true"></i></a>
-                </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <!--table E-->
-      </div>
-      <!--内容1.1 管理文章 E-->
+                <!--table E-->
+            </div>
+            <!--内容1.1 管理文章 E-->
             <div class="content-nav">
                 <nav class="bottom-nav" id="con-nav">
                     <a v-if="cur>1" v-on:click="cur--,pageClick()">
