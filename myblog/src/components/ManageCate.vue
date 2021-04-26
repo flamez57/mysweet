@@ -72,7 +72,7 @@
 <script>
 
 export default {
-  name: 'About',
+  name: 'ManageCate',
   data () {
     return {
       msg: 'about',

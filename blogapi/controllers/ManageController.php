@@ -176,7 +176,7 @@ class ManageController extends BaseController
     */
     public function saveCateAction()
     {
-        $id = $this->getPost('', 0);
+        $id = $this->getPost('id', 0);
         $param['name'] = $this->getPost('name', '');
         $param['sort'] = $this->getPost('sort', 0);
         $param['status'] = $this->getPost('status', 1);
