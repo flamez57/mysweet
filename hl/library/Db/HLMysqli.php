@@ -183,7 +183,7 @@ class HLMysqli implements HLDBAdapter
     */
     public function safeQuery($query, $bindParams, $paramType = NULL)
     {
-        if (!is_array($bindParams)) {
+        if (!empty($bindParams) && !is_array($bindParams)) {
             $bindParams = [$bindParams];
         }
         $stmt = $this->_dbLink->prepare($query);
@@ -199,11 +199,13 @@ class HLMysqli implements HLDBAdapter
         } else {
             $params[0] = "";
         }
-        foreach ($bindParams as $prop => $val) {
-            if (is_null($paramType)) {
-                $params[0] .= $this->determineType($val);
+        if (!empty($bindParams)) {
+            foreach ($bindParams as $prop => $val) {
+                if (is_null($paramType)) {
+                    $params[0] .= $this->determineType($val);
+                }
+                array_push($params, $bindParams[$prop]);
             }
-            array_push($params, $bindParams[$prop]);
         }
         call_user_func_array(array($stmt, 'bind_param'), $this->refValues($params));
 

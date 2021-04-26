@@ -124,7 +124,11 @@ class HLModel extends HLSington
         }
         $limit = " LIMIT {$limit}";
         $sql = "SELECT {$fields} FROM {$this->tableName} {$whereStr} {$groupBy} {$orderBy} {$limit}";
-        $res = $this->db->safeQuery($sql, $bindParam);
+        if (empty($where)) {
+            $res = $this->db->query($sql, $bindParam);
+        } else {
+            $res = $this->db->safeQuery($sql, $bindParam);
+        }
         if (!empty($res)) {
             if ($limit != ' LIMIT 1') {
                 return $res;
@@ -144,7 +148,11 @@ class HLModel extends HLSington
         $whereStr = $this->db->getPreparingWhereCondition($where, $bindParam);
         $limit = " LIMIT 1";
         $sql = "SELECT COUNT(1) num FROM {$this->tableName} {$whereStr} {$limit}";
-        $res = $this->db->safeQuery($sql, $bindParam);
+        if (empty($where)) {
+            $res = $this->db->query($sql, $bindParam);
+        } else {
+            $res = $this->db->safeQuery($sql, $bindParam);
+        }
         if (!empty($res)) {
             return current($res)['num'];
         } else {

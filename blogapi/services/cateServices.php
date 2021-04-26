@@ -80,7 +80,7 @@ class cateServices extends HLServices
                 $_list['num'] = $articleCount[$_list['id']] ?? 0;
                 return $_list;
             }, $list),
-            'count' => cateModels::getInstance()->getCountByWhere()
+            'count' => cateModels::getInstance()->getCountByWhere([])
         ];
     }
 
