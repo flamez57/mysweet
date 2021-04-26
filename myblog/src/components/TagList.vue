@@ -3,7 +3,7 @@
 <div>
     <header>
     <div class="header">
-        <h1 class="include-title">含标签"环境变量"的文章</h1>
+        <h1 class="include-title">含标签"{{tag_name}}"的文章</h1>
     </div>
 </header>
 
@@ -65,6 +65,7 @@ export default {
       default_code: 'flamez', // 默认code
       msg: '爱学习后生',
       articles: [],
+      tag_name: '',
       // 分页列表
       all: '10', // 总页数
       cur: '1', // 当前页
@@ -118,6 +119,7 @@ export default {
           var count = res.data.data.count
           this.all = Math.ceil(count / this.page_size)
           this.articles = res.data.data.list
+          this.tag_name = res.data.data.name
         }
       })
     },

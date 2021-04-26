@@ -26,10 +26,15 @@ class articleServices extends HLServices
     {
         $memberId = memberModels::getInstance()->getMemberIdByCode($param['code']);
         $where = ['member_id' => $memberId, 'status' => 1, 'deleted_at' => 0];
+        $name = '';
         if (!empty($param['cate_id'])) {
+            $cate = cateModels::getInstance()->getByWhere(['id' => $param['cate_id']], 'id,name');
+            $name = $cate['name'] ?? '';
             $where['cate_id'] = $param['cate_id'];
         }
         if (!empty($param['tag_id'])) {
+            $tag = tagsModels::getInstance()->getByWhere(['id' => $param['tag_id']], 'id,name');
+            $name = $tag['name'] ?? '';
             $count = tagsRelevanceModels::getInstance()->getCountByWhere(['tag_id' => $param['tag_id']]);
             $articleIds = tagsRelevanceModels::getInstance()->getByWhere(
                 ['tag_id' => $param['tag_id']],
@@ -95,7 +100,8 @@ class articleServices extends HLServices
                 $_list['created_at'] = date('Y-m-d H:i:s', $_list['created_at']);
                 return $_list;
             }, $list),
-            'count' => $count
+            'count' => $count,
+            'name' => $name
         ];
     }
 
