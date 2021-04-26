@@ -11,7 +11,7 @@
                 <div class="select-direction">
                     <!--筛选 S-->
                     <div class="left-direction-inner" id="cate-left-direction-inner">
-                        <router-link to="/Manage/CreatCate" class="rel-btn">添加分类</router-link>
+                        <router-link to="/Manage/CreatCate/0" class="rel-btn">添加分类</router-link>
                     </div>
                     <!--创建 E-->
                 </div>

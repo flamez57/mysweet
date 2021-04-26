@@ -191,7 +191,7 @@ class articleServices extends HLServices
                 break;
             case 2:
                 $where['deleted_at'] = 0;
-                $where['status'] = 0;
+                $where['status'] = 1;
                 break;
             case 3:
                 $where['deleted_at'] = ['neq', 0];

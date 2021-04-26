@@ -10,9 +10,8 @@
       <div class="container-body" id="manage-container-body1-2">
         <div class="post-func">
           <select class="select-cate">
-            <option>请选择分类</option>
-            <option value="生活">生活</option>
-            <option value="文学">文学</option>
+            <option value="0">请选择分类</option>
+            <option v-for="cate in cates" :key="cate.id" :value="cate.id">{{cate.name}}</option>
           </select>
           <a href="#" class="del-btn">删除</a>
           <a href="../view-post.html" class="view-btn" target="_blank">预览</a>
@@ -48,14 +47,27 @@ export default {
   components: { EditorBar },
   data () {
     return {
-      msg: 'about',
+      cates: [],
       isClear: false,
       detail: '文章内容'
     }
   },
+  mounted () {
+    this.cateList()
+  },
   methods: {
     change (val) {
       console.log(val)
+    },
+    // 分类
+    cateList () {
+      this.$api.cate.manageCateSelect().then(res => {
+        console.log(res)
+        // 执行某些操作
+        if (res.data.code === 0) {
+          this.cates = res.data.data.list
+        }
+      })
     }
   }
 }

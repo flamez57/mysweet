@@ -17,11 +17,11 @@ const article = {
   },
   // 文章列表
   manageArticleList (keyword, page, pageSize, type) {
-    return axios.get(Apis.articleList, {keyword: keyword, page: page, page_size: pageSize, type: type})
+    return axios.get(Apis.articleList, {params: {keyword: keyword, page: page, page_size: pageSize, type: type}})
   },
   // 文章详情
   manageArticleDetail (id) {
-    return axios.get(Apis.detail, {id: id})
+    return axios.get(Apis.detail, {params: {id: id}})
   },
   // 文章保存 id cate_id title content status tags
   manageArticleSave (params) {
