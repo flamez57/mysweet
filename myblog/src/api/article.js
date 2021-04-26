@@ -29,11 +29,11 @@ const article = {
   },
   // 删除文章
   manageArticleDel (id) {
-    return axios.post(Apis.delArticle, {id: id})
+    return axios.post(Apis.delArticle, qs.stringify({id: id}))
   },
   // 发布退回文章
   manageUpdateStatus (id, status) {
-    return axios.post(Apis.updateStatus, {id: id, status: status})
+    return axios.post(Apis.updateStatus, qs.stringify({id: id, status: status}))
   }
 }
 
