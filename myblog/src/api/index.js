@@ -42,6 +42,15 @@ const store = new Vuex.Store({
     },
     getfMotto (state) {
       return state.f_motto
+    },
+    getmNickname (state) {
+      return state.m_nickname
+    },
+    getmAvatar (state) {
+      return state.m_avatar
+    },
+    getmMotto (state) {
+      return state.m_motto
     }
   },
 
@@ -59,6 +68,15 @@ const store = new Vuex.Store({
     },
     changefMotto (state, value) {
       state.f_motto = value
+    },
+    changemNickname (state, value) { // 改变昵称的初始值
+      state.m_nickname = value
+    },
+    changemAvatar (state, value) {
+      state.m_avatar = value
+    },
+    changemMotto (state, value) {
+      state.m_motto = value
     }
   }
 })

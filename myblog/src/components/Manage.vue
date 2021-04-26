@@ -4,9 +4,9 @@
         <div class="left-sidebar" id="left-sidebar">
             <div class="sidebar-main-content">
                 <div class="header-info">
-                    <img class="header-info-head" src="../assets/img/head2.png"/>
-                    <h2 class="header-info-name">小黄人</h2>
-                    <p class="header-info-desc">欢迎来到我的个人博客</p>
+                    <img class="header-info-head" :src="this.$api.store.getters.getmAvatar"/>
+                    <h2 class="header-info-name">{{this.$api.store.getters.getmNickname}}</h2>
+                    <p class="header-info-desc">{{this.$api.store.getters.getmMotto}}</p>
                 </div>
                 <ul class="left-nav" id="ul1">
                     <li :class="'/Manage' === path ? 'left-nav-item left-nav-action' : 'left-nav-item'" @click="selectNav('/Manage')">
@@ -27,6 +27,11 @@
                     <li :class="'/Manage/ManageCate' === path ? 'left-nav-item left-nav-action' : 'left-nav-item'" @click="selectNav('/Manage/ManageCate')">
                         <router-link to="/Manage/ManageCate" class="left-nav-inner">
                             <i class="iconfont iconfolder" aria-hidden="true"></i>分类
+                        </router-link>
+                    </li>
+                    <li :class="'/Manage/DiaryList' === path ? 'left-nav-item left-nav-action' : 'left-nav-item'" @click="selectNav('/Manage/DiaryList')">
+                        <router-link to="/Manage/DiaryList" class="left-nav-inner">
+                            <i class="iconfont iconfolder" aria-hidden="true"></i>日记
                         </router-link>
                     </li>
                     <li :class="'/Manage/Set' === path ? 'left-nav-item left-nav-action' : 'left-nav-item'" @click="selectNav('/Manage/Set')">
@@ -56,10 +61,22 @@ export default {
   },
   mounted () {
     this.path = this.$router.currentRoute.fullPath
+    this.memberInfo()
   },
   methods: {
     selectNav (path) { // 接受路由地址选中当前菜单
       this.path = path
+    },
+    memberInfo () {
+      this.$api.member.manageMemberInfoForEdit().then(res => {
+        console.log(res.data)
+        // 执行某些操作
+        if (res.data.code === 0) {
+          this.$api.store.commit('changemNickname', res.data.data.member_info.nickname)
+          this.$api.store.commit('changemAvatar', res.data.data.member_info.avatar)
+          this.$api.store.commit('changemMotto', res.data.data.member_info.motto)
+        }
+      })
     },
     loginOut () {
       this.$api.member.toLoginOut().then(res => {

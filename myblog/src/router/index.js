@@ -17,6 +17,8 @@ import ArticleList from '@/components/ArticleList'
 import CreatArticle from '@/components/CreatArticle'
 import ManageCate from '@/components/ManageCate'
 import CreatCate from '@/components/CreatCate'
+import DiaryList from '@/components/DiaryList'
+import AddDiary from '@/components/AddDiary'
 
 Vue.use(Router)
 
@@ -45,9 +47,11 @@ const router = new Router({
         { path: '/', name: 'UserInfo', component: UserInfo },
         { path: 'SetPwd', name: 'SetPwd', component: SetPwd },
         { path: 'ArticleList', name: 'ArticleList', component: ArticleList },
-        { path: 'CreatArticle', name: 'CreatArticle', component: CreatArticle },
+        { path: 'CreatArticle/:id', name: 'CreatArticle', component: CreatArticle },
         { path: 'ManageCate', name: 'ManageCate', component: ManageCate },
-        { path: 'CreatCate', name: 'CreatCate', component: CreatCate }
+        { path: 'CreatCate/:id', name: 'CreatCate', component: CreatCate },
+        { path: 'DiaryList', name: 'DiaryList', component: DiaryList },
+        { path: 'AddDiary', name: 'AddDiary', component: AddDiary }
       ]
     }
   ]
