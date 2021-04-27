@@ -8,6 +8,10 @@ const tag = {
   // 首页标签列表
   frontTagList (code) {
     return axios.get(Apis.ftagList, {params: {code: code}})
+  },
+  // 分类下拉
+  managetagSelect () {
+    return axios.get(Apis.tagSelect)
   }
 }
 

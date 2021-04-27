@@ -43,6 +43,8 @@ let Apis = {
   delArticle: manageApi + 'delArticle',
   // 发布退回文章 post id status
   updateStatus: manageApi + 'updateStatus',
+  // 标签下拉 get
+  tagSelect: manageApi + 'tagSelect',
   // 分类下拉 get
   cateSelect: manageApi + 'cateSelect',
   // 分类列表 get page page_size

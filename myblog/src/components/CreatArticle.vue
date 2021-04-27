@@ -48,6 +48,7 @@ export default {
     return {
       id: this.$route.params.id, // 文章id
       cates: [],
+      tags: [],
       articleForm: {
         id: '0',
         cate_id: '0',
@@ -61,6 +62,7 @@ export default {
   },
   mounted () {
     this.cateList()
+    this.tagList()
     this.info()
   },
   methods: {
@@ -75,6 +77,16 @@ export default {
         // 执行某些操作
         if (res.data.code === 0) {
           this.cates = res.data.data.list
+        }
+      })
+    },
+    // 标签
+    tagList () {
+      this.$api.tag.managetagSelect().then(res => {
+        console.log(res)
+        // 执行某些操作
+        if (res.data.code === 0) {
+          this.tags = res.data.data.list
         }
       })
     },
