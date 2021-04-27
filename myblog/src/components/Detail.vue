@@ -162,6 +162,8 @@ export default {
           // 执行某些操作
           if (res.data.code === 0) {
             // 重新加载数据
+            this.comment_data.nickname = ''
+            this.comment_data.content = ''
             this.frontArticleDetail(this.id)
           }
         })
@@ -174,6 +176,7 @@ export default {
         // 执行某些操作
         if (res.data.code === 0) {
           // 重新加载数据
+          this.reply_data.id = ''
           this.frontArticleDetail(this.id)
         }
       })
