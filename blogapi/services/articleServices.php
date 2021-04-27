@@ -295,7 +295,7 @@ class articleServices extends HLServices
                         $_tag['id'] = tagsModels::getInstance()->insert(
                             [
                                 'name' => $_tag['name'],
-                                'status' => 0
+                                'status' => 1
                             ]
                         );
                     } else {
