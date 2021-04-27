@@ -24,4 +24,13 @@ class tagServices extends HLServices
         $list = tagsModels::getInstance()->tagList($where, 'DISTINCT t.id,t.name', 't.sort asc');
         return ['list' => $list];
     }
+
+    /*
+    ** 标签下拉选项
+    */
+    public function tagSelect()
+    {
+        $list = tagsModels::getInstance()->getByWhere(['status' => 1], 'id,name', 'sort asc', '', '100');
+        return ['list' => $list];
+    }
 }

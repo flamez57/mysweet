@@ -185,4 +185,16 @@ class HLModel extends HLSington
     {
         return $this->db->update($this->tableName, [$field => ["$field + $step"]], $where);
     }
+
+    //根据id删除
+    public function delById($id)
+    {
+        return $this->db->delete($this->tableName, [$this->id => $id]);
+    }
+
+    //根据where删除
+    public function delByWhere($where = [])
+    {
+        return $this->db->delete($this->tableName, $where);
+    }
 }

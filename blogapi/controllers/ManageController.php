@@ -5,6 +5,7 @@ use blogapi\services\articleServices;
 use blogapi\services\cateServices;
 use blogapi\services\diaryServices;
 use blogapi\services\memberServices;
+use blogapi\services\tagServices;
 use hl\library\Tools\HLResponse;
 /**
 ** @ClassName: ManageController
@@ -150,6 +151,15 @@ class ManageController extends BaseController
     public function cateSelectAction()
     {
         $this->data = cateServices::getInstance()->cateSelect();
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
+    /*
+    ** 标签下拉
+    */
+    public function tagSelectAction()
+    {
+        $this->data = tagServices::getInstance()->tagSelect();
         HLResponse::json($this->code, $this->message, $this->data);
     }
 

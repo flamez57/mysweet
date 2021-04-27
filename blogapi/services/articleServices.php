@@ -258,7 +258,7 @@ class articleServices extends HLServices
             $tr = tagsRelevanceModels::getInstance()->getByWhere(['article_id' => $id], 'tag_id', '', '', 20);
             $tagIds = array_column($tr, 'tag_id');
             if (!empty($tagIds)) {
-                $article['tags'] = tagsModels::getInstance()->getByWhere(['' => ['in', $tagIds]], 'id,name', ' sort ASC ', '', 20);
+                $article['tags'] = tagsModels::getInstance()->getByWhere(['id' => ['in', $tagIds]], 'id,name', ' sort ASC ', '', 20);
             }
         }
         return $article;
@@ -282,6 +282,9 @@ class articleServices extends HLServices
         } else {
             articleModels::getInstance()->updateById($id, $param);
         }
+        //暂时最多10个标签
+        $trs = tagsRelevanceModels::getInstance()->getByWhere(['article_id' => $id], 'id,tag_id', '', '', 10);
+        $trs = array_column($trs, 'id', 'tag_id');
         if (!empty($tags)) {
             foreach ($tags as $_tag) {
                 if ($_tag['id'] == 0) {
@@ -297,10 +300,16 @@ class articleServices extends HLServices
                         $_tag = $tag;
                     }
                 }
-                $tr = tagsRelevanceModels::getInstance()->getByWhere(['article_id' => $id, 'tag_id' => $_tag['id']], 'id');
-                if (empty($tr)) {
+                if (isset($trs[$_tag['id']])) { //已经有的排除
+                    unset($trs[$_tag['id']]);
+                } else { //没有的插入
                     tagsRelevanceModels::getInstance()->insert(['article_id' => $id, 'tag_id' => $_tag['id']]);
                 }
+            }
+        }
+        if (!empty($trs)) { //多余的删除
+            foreach ($trs as $_k => $_v) {
+                tagsRelevanceModels::getInstance()->delById($_v);
             }
         }
     }
