@@ -64,7 +64,10 @@ class ManageController extends BaseController
     */
     public function uploadImgAction()
     {
-        $path = './upload/';
+        $y = date('Y');
+        $m = date('m');
+        $d = date('d');
+        $path = "./upload/{$y}/{$m}/{$d}/";
         $upload = new \hl\library\Tools\Files\HLUploadFile($path, 'jpg,jpeg,png,gif,pdf');
         if ($upload->upload('img')) {
             $this->data['path'] = trim($path, '.');

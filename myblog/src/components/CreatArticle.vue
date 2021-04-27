@@ -99,11 +99,17 @@ export default {
       })
     },
     publish (id) {
-      this.$api.article.manageUpdateStatus(id, 1).then(res => {
+      this.$api.article.manageArticleSave(this.articleForm).then(res => {
         console.log(res)
         // 执行某些操作
         if (res.data.code === 0) {
-          this.info()
+          this.$api.article.manageUpdateStatus(id, 1).then(res => {
+            console.log(res)
+            // 执行某些操作
+            if (res.data.code === 0) {
+              this.$router.push('/Detail/'+id)
+            }
+          })
         }
       })
     },
