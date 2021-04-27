@@ -98,6 +98,7 @@ class articleServices extends HLServices
             'list' => array_map(function ($_list) use ($tagList) {
                 $_list['tags'] = $tagList[$_list['id']] ?? [];
                 $_list['created_at'] = date('Y-m-d H:i:s', $_list['created_at']);
+                $_list['content'] = \hl\library\Functions\Helper::substrCut($_list['content'], 200);
                 return $_list;
             }, $list),
             'count' => $count,
@@ -234,6 +235,8 @@ class articleServices extends HLServices
                 if (isset($members[$_list['member_id']])) {
                     $_list += $members[$_list['member_id']];
                 }
+                $_list['created_at'] = date("Y-m-d H:i:s", $_list['created_at']);
+                $_list['drafts_content'] = \hl\library\Functions\Helper::substrCut($_list['drafts_content'], 20);
                 return $_list;
             }, $list),
             'count' => $count

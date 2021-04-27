@@ -107,7 +107,7 @@ export default {
             console.log(res)
             // 执行某些操作
             if (res.data.code === 0) {
-              this.$router.push('/Detail/'+id)
+              this.$router.push('/Detail/' + id)
             }
           })
         }

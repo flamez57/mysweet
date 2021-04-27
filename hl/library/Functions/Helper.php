@@ -1130,7 +1130,7 @@ function ArrMd2Ud($arr) {
     *$keyword:string  关键词 
     *$link:string,链接 
     */ 
-   function yang_keyword_link($content,$keyword,$link){ 
+    function yang_keyword_link($content,$keyword,$link){
         //排除图片中的关键词 
         $content = preg_replace( '|(<img[^>]*?)('.$keyword.')([^>]*?>)|U', '$1%&&&&&%$3', $content); 
         $regEx = '/(?!((<.*?)|(<a.*?)))('.$keyword.')(?!(([^<>]*?)>)|([^>]*?<\/a>))/si'; 
@@ -1139,5 +1139,59 @@ function ArrMd2Ud($arr) {
         //还原图片中的关键词 
         $content=str_replace('%&&&&&%',$keyword,$content); 
         return $content; 
+    }
+    //字符串截长
+    public static function substrCut($str_cut, $length, $sl = '...', $asciiCharLen = 1)
+    {
+        $str_cut = strip_tags($str_cut);
+        $curLen = self::strLen($str_cut, $asciiCharLen);
+        if ($curLen <= $length) {
+            return $str_cut;
+        }
+
+        $mbLen = mb_strlen($str_cut);
+        $cutStr = '';
+        $cusLen = 0;
+        for ($i = 0; $i < $mbLen; $i++) {
+            $char = mb_substr($str_cut, $i, 1);
+            if (preg_match('#^[\x0-\xff]$#', $char)) {
+                $cusLen += $asciiCharLen;
+            } else {
+                $cusLen += 1;
+            }
+            if ($cusLen > $length) {
+                break;
+            }
+            $cutStr .= $char;
+        }
+        $cutStr = $cutStr . $sl;
+        return $cutStr;
+    }
+
+    /**
+     * 字符长度
+     * @param $str
+     * @param int $asciiCharLen
+     * @return float|int
+     */
+    public static function strLen($str, $asciiCharLen = 1)
+    {
+        if (empty($str)) {
+            return 0;
+        }
+        $cusLen = 0;
+        $mbLen = mb_strlen($str);
+        if ($asciiCharLen == 1) {
+            return $mbLen;
+        }
+        for ($i = 0; $i < $mbLen; $i++) {
+            $char = mb_substr($str, $i, 1);
+            if (preg_match('#^[\x0-\xff]$#', $char)) {
+                $cusLen += $asciiCharLen;
+            } else {
+                $cusLen += 1;
+            }
+        }
+        return $cusLen;
     }
 }
