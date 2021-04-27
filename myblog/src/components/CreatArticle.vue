@@ -26,7 +26,16 @@
                     </div>
                     <div class="arch-desc">
                         <!--<span>描述:</span>-->
-                        <input type="text" placeholder="文章描述"/>
+                        <button class="select-cate" v-for="tag in articleForm.tags" :key="tag.id">
+                            {{tag.name}}<i class="iconfont iconicon--"></i>
+                        </button>
+                        <select class="select-cate" v-model="tag">
+                            <option v-for="tag in tags" :key="tag.id" :value="{id: tag.id, name: tag.name}">
+                                {{tag.name}}
+                            </option>
+                        </select>
+                        <input type="text" placeholder="添加新标签" v-model="new_tag"/>
+                        <button class="select-cate" @click="addNewTag">+add</button>
                     </div>
                     <div class="arch-main-body">
                         <editor-bar v-model="articleForm.content" :isClear="isClear" @change="change"></editor-bar>
@@ -49,15 +58,23 @@ export default {
       id: this.$route.params.id, // 文章id
       cates: [],
       tags: [],
+      tag: '',
+      new_tag: '',
       articleForm: {
         id: '0',
         cate_id: '0',
         content: '',
-        tags: '',
+        tags: [],
         title: ''
       },
       isClear: false,
       detail: '文章内容'
+    }
+  },
+  watch: {
+    tag (val) {
+      console.log(val)
+      this.addOldTag(val)
     }
   },
   mounted () {
@@ -139,6 +156,19 @@ export default {
       this.$router.push({
         path: '/Detail/' + id
       })
+    },
+    addNewTag () { // 添加新标签
+      this.articleForm.tags.push({id: 0, name: this.new_tag})
+    },
+    addOldTag (val) { // 添加老标签
+      let obj = {}
+      obj = this.articleForm.tags.find((item) => {
+        return item.id === val.id
+      })
+      // console.log(obj)
+      if (obj === undefined) {
+        this.articleForm.tags.push(val)
+      }
     }
   }
 }
