@@ -27,7 +27,7 @@
                     <div class="arch-desc">
                         <!--<span>描述:</span>-->
                         <button class="select-cate" v-for="tag in articleForm.tags" :key="tag.id">
-                            {{tag.name}}<i class="iconfont iconicon--"></i>
+                            {{tag.name}}<i class="iconfont iconicon--" @click="delTag(tag.name)"></i>
                         </button>
                         <select class="select-cate" v-model="tag">
                             <option v-for="tag in tags" :key="tag.id" :value="{id: tag.id, name: tag.name}">
@@ -168,6 +168,19 @@ export default {
       // console.log(obj)
       if (obj === undefined) {
         this.articleForm.tags.push(val)
+      }
+    },
+    delTag (name) {
+      // 查看对象索引
+      var index = 0
+      for (var i = 0; i < this.articleForm.tags.length; i++) {
+        if (name === this.articleForm.tags[i].name) {
+          index = i
+        }
+      }
+      // 删除指定索引的对象
+      if (index !== 0) {
+        this.articleForm.tags.splice(index, 1)
       }
     }
   }
