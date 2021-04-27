@@ -25,6 +25,13 @@ export default {
   props: ['uploadType', 'imgUrl', 'imgWidth', 'imgHeight'],
   created () {
     this.avatar = this.imgUrl
+    console.log('图：' + this.avatar)
+  },
+  watch: { // 监控imgUrl变化
+    imgUrl (val, oldVal) {
+      this.avatar = val
+      console.log(oldVal)
+    }
   },
   methods: {
     changeImage: function (e) {
