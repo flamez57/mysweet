@@ -259,6 +259,8 @@ class articleServices extends HLServices
             $tagIds = array_column($tr, 'tag_id');
             if (!empty($tagIds)) {
                 $article['tags'] = tagsModels::getInstance()->getByWhere(['id' => ['in', $tagIds]], 'id,name', ' sort ASC ', '', 20);
+            } else {
+                $article['tags'] = [];
             }
         }
         return $article;
