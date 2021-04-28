@@ -29,6 +29,17 @@
                 <p>Copyright © 2020 杨翔 All Rights Reserved | <a href="https://beian.miit.gov.cn">晋ICP备2020014291号-1</a></p>
             </div>
         </footer>
+        <div class="bottom-nav-fiexd">
+            <div class="top-nav-inner">
+                <div class="top-nav">
+                    <router-link to="/">首页</router-link>
+                    <router-link to="/Record">档案</router-link>
+                    <router-link to="/About">关于我</router-link>
+                    <router-link v-show="isShowL" to="/Login">登陆</router-link>
+                    <router-link v-show="isShowM" to="/Manage">管理后台</router-link>
+                </div>
+            </div>
+        </div>
         <!-- 页脚 End -->
 
         <!-- 右导航 Start -->

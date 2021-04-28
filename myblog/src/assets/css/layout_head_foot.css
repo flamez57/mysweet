@@ -13,6 +13,9 @@ a:hover{text-decoration:none}
     background: #ccee40;
     box-shadow: 0 2px 4px #bd2c00;
 }
+.bottom-nav-fiexd{ /*底部导航*/
+    display: none;
+}
 .top-nav-inner{
     display: flex;
     justify-content: space-between;
@@ -166,6 +169,19 @@ a:hover{text-decoration:none}
         width: 100%;
         background: yellow;
         box-shadow: 0 2px 4px #bd2c00;
+    }
+    .bottom-nav-fiexd{
+        display: block;
+        position: fixed;
+        z-index: 999;
+        bottom: 0;
+        width: 100%;
+        background: #ccee40;
+        box-shadow: 0 2px 4px #bd2c00;
+    }
+    /*原来的导航隐藏*/
+    .top-nav{
+        display: none;
     }
 }
 
