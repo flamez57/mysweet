@@ -157,5 +157,15 @@ a:hover{text-decoration:none}
     font-size: 20px;
 }
 
-
+@media screen and (max-width: 900px) {
+/*这里面写适应手机的样式*/
+    .top-nav-fiexd{
+        position: fixed;
+        z-index: 999;
+        top: 0;
+        width: 100%;
+        background: yellow;
+        box-shadow: 0 2px 4px #bd2c00;
+    }
+}
 
