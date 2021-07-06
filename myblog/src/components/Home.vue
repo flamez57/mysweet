@@ -82,6 +82,14 @@
                     </ul>
                 </div>
             </div>
+            <div class="note-aside">
+                <h3>友情链接</h3>
+                <div class="cate-ul-item">
+                    <ul class="cate-ul">
+                        <a v-for="friend in friends" :key="friend.title" :href="friend.url">{{friend.title}}</a>
+                    </ul>
+                </div>
+            </div>
         </div>
         <!--文章分类 E-->
     </div>
@@ -98,6 +106,7 @@ export default {
       msg: '爱学习后生',
       cates: [{id: '', name: '', num: '0'}],
       tags: [{id: '', name: ''}],
+      friends: [{title: '', url: ''}],
       articles: [],
       // 分页列表
       all: '10', // 总页数
@@ -111,6 +120,7 @@ export default {
   mounted () {
     this.cateList()
     this.tagList()
+    this.friendList()
     this.pageClick(this.cur)
     this.frontMemberInfo()
   },
@@ -171,6 +181,16 @@ export default {
         // 执行某些操作
         if (res.data.code === 0) {
           this.tags = res.data.data.list
+        }
+      })
+    },
+    // 友情链接
+    friendList () {
+      this.$api.tag.friendLink().then(res => {
+        console.log(res)
+        // 执行某些操作
+        if (res.data.code === 0) {
+          this.friends = res.data.data
         }
       })
     },

@@ -12,6 +12,8 @@ let Apis = {
   fcateList: frontApi + 'cateList',
   // 标签 get code
   ftagList: frontApi + 'tagList',
+  // 友联 get
+  friendLink: frontApi + 'friendLink',
   // 文章列表 get code page page_size tag_id cate_id keyword
   farticleList: frontApi + 'articleList',
   // 用户信息 get code

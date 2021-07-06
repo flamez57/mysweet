@@ -23,6 +23,8 @@ class HLCsvReader
             }
             $i++;
         }
+        return $excels;
+        var_dump($excels);
         $excels = eval('return ' . iconv('gbk', 'utf-8', var_export($excels, true)) . ';');
         return $excels;
     }

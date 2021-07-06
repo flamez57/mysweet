@@ -12,6 +12,10 @@ const tag = {
   // 分类下拉
   managetagSelect () {
     return axios.get(Apis.tagSelect)
+  },
+  // 友情链接
+  friendLink () {
+    return axios.get(Apis.friendLink)
   }
 }
 

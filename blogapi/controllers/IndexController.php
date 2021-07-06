@@ -122,4 +122,16 @@ class IndexController extends BaseController
         memberServices::getInstance()->login($code, $pwd, $this->code, $this->message, $this->data);
         HLResponse::json($this->code, $this->message, $this->data);
     }
+
+    /*
+    ** 友情链接
+    */
+    public function friendLinkAction()
+    {
+        $this->data = [
+            ['title' => 'baidu', 'url' => 'http://www.baidu.com'],
+            ['title' => 'baidu', 'url' => 'http://www.baidu.com'],
+        ];
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
 }

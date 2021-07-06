@@ -51,8 +51,9 @@ class IndexController extends HLController
         installServices::getInstance()->createAdmin($adminName, $adminPwd, $adminPwd2);
     }
 
-    public function testAction()
+    public function test58Action()
     {
+        die();
         ini_set('max_execution_time', '3600');
         /*$rows = exampleModels::getInstance()->aa(
             "select DISTINCT m.member_id,m.code,case when mp.role = 1 then '店主' when mp.role = 2 then '主管' when mp.role > 2 then '经理' else '普通用户' end AS role
@@ -130,7 +131,7 @@ where member_id = {$_row['member_id']} and create_time >= UNIX_TIMESTAMP('2020-1
                 }
                 $id = $_row['member_id'];
             }
-            echo $id.'<br>';
+            echo $id . '<br>';
         }
         die;
         //参与用户数（定义：完成赚金矿的某一项日常任务或加入大区或参与组队pk即算参与）
@@ -396,15 +397,15 @@ where mml.member_id > {$id} and mml.level > 14 and mml.level <= 19 limit 100"
 //                break;
 //            }
             $fixamount = $_list[2];
-            echo '-- '.$_list[0].'___'.$i;
+            echo '-- ' . $_list[0] . '___' . $i;
             echo '<br>';
             //拉新
-            $sql1 = "select id,packet_num,packet_type,packet_amount,create_time from sl_gold_miner_red_packets_log ".
+            $sql1 = "select id,packet_num,packet_type,packet_amount,create_time from sl_gold_miner_red_packets_log " .
                 "where member_id = '{$_list[0]}' and level_type = 1 and packet_status = 1 and packet_type = 1 order by id asc";
             $list1 = exampleModels::getInstance()->aa($sql1);
             //var_dump($list1);
             //非拉新
-            $sql2 = "select id,packet_num,packet_type,packet_amount,create_time from sl_gold_miner_red_packets_log ".
+            $sql2 = "select id,packet_num,packet_type,packet_amount,create_time from sl_gold_miner_red_packets_log " .
                 "where member_id = '{$_list[0]}' and level_type = 1 and packet_status = 1 and packet_type = 0 order by id asc";
             $list2 = exampleModels::getInstance()->aa($sql2);
             //var_dump($list2);
@@ -412,13 +413,13 @@ where mml.member_id > {$id} and mml.level > 14 and mml.level <= 19 limit 100"
             if ($list1) {
                 foreach ($list1 as $_list1) {
                     if ($openTime < 1604207488) { //0.88
-                        echo "update sl_gold_miner_red_packets_log set packet_amount = ". 0.88 * $_list1['packet_num']. " where id = '{$_list1['id']} limit 1';<br>";
+                        echo "update sl_gold_miner_red_packets_log set packet_amount = " . 0.88 * $_list1['packet_num'] . " where id = '{$_list1['id']} limit 1';<br>";
                         $fixamount -= (0.88 * $_list1['packet_num']);
                     } elseif ($openTime >= 1604207488 && $openTime < 1604207504) { // 1.68
-                        echo "update sl_gold_miner_red_packets_log set packet_amount = ". 1.68 * $_list1['packet_num']. " where id = '{$_list1['id']} limit 1';<br>";
+                        echo "update sl_gold_miner_red_packets_log set packet_amount = " . 1.68 * $_list1['packet_num'] . " where id = '{$_list1['id']} limit 1';<br>";
                         $fixamount -= (1.68 * $_list1['packet_num']);
                     } elseif ($openTime >= 1604207504) { // 1.26
-                        echo "update sl_gold_miner_red_packets_log set packet_amount = ". 1.26 * $_list1['packet_num']. " where id = '{$_list1['id']} limit 1';<br>";
+                        echo "update sl_gold_miner_red_packets_log set packet_amount = " . 1.26 * $_list1['packet_num'] . " where id = '{$_list1['id']} limit 1';<br>";
                         $fixamount -= (1.26 * $_list1['packet_num']);
                     }
                 }
@@ -427,9 +428,9 @@ where mml.member_id > {$id} and mml.level > 14 and mml.level <= 19 limit 100"
             $unit = floor($fixamount * 100 / $num) / 100;
             foreach ($list2 as $_list2) {
                 if ($num == $_list2['packet_num']) {
-                    echo "update sl_gold_miner_red_packets_log set packet_amount = ". $fixamount . " where id = '{$_list2['id']} limit 1';<br>";
+                    echo "update sl_gold_miner_red_packets_log set packet_amount = " . $fixamount . " where id = '{$_list2['id']} limit 1';<br>";
                 } else {
-                    echo "update sl_gold_miner_red_packets_log set packet_amount = ". $unit * $_list2['packet_num']. " where id = '{$_list2['id']} limit 1';<br>";
+                    echo "update sl_gold_miner_red_packets_log set packet_amount = " . $unit * $_list2['packet_num'] . " where id = '{$_list2['id']} limit 1';<br>";
                     $fixamount -= ($unit * $_list2['packet_num']);
                 }
                 $num -= $_list2['packet_num'];
@@ -442,6 +443,7 @@ where mml.member_id > {$id} and mml.level > 14 and mml.level <= 19 limit 100"
         //var_dump($data);
 
     }
+
     public function test112Action()
     {
         $sql = "select data from sl_store_update_aptitude where status >= 0 limit 300";
@@ -452,13 +454,13 @@ where mml.member_id > {$id} and mml.level > 14 and mml.level <= 19 limit 100"
             foreach ($a['other_qualification'] as $_v) {
                 if (strpos($_v, '/G0/')) {
                     $data[] = $_v;
-                    echo $_v.'<br>';
+                    echo $_v . '<br>';
                 }
             }
             foreach ($a['qualification'] as $__v) {
                 if (strpos($__v['aptitude_image'], '/G0/')) {
                     $data[] = $__v['aptitude_image'];
-                    echo $__v['aptitude_image'].'<br>';
+                    echo $__v['aptitude_image'] . '<br>';
                 }
             }
         }
@@ -500,7 +502,7 @@ where mml.member_id > {$id} and mml.level > 14 and mml.level <= 19 limit 100"
                     foreach ($ship['district'] as $_v) {
                         if ($_v['postage'] >= 20) {
                             $data[] = [
-                                '供应链商品id' => $_list['supplier_goods_id']."\t",
+                                '供应链商品id' => $_list['supplier_goods_id'] . "\t",
                                 '商品id' => $_list['goods_id'],
                                 '商品名称' => $_list['title'],
                                 '件数' => $_v['start'],
@@ -518,7 +520,7 @@ where mml.member_id > {$id} and mml.level > 14 and mml.level <= 19 limit 100"
                     foreach ($ship['district'] as $_v) {
                         if ($_v['postage'] >= 20) {
                             $data[] = [
-                                '供应链商品id' => $_list['supplier_goods_id']."\t",
+                                '供应链商品id' => $_list['supplier_goods_id'] . "\t",
                                 '商品id' => $_list['goods_id'],
                                 '商品名称' => $_list['title'],
                                 '件数' => '',
@@ -541,7 +543,7 @@ where mml.member_id > {$id} and mml.level > 14 and mml.level <= 19 limit 100"
         //设置表名
         $csv->setTableName('202091');
         //设置表头
-        $csv->setTableHead(['code', 'zi_gou', 'title', 'pcs','fee', 'zero', 'weg','fee', 'zero']);
+        $csv->setTableHead(['code', 'zi_gou', 'title', 'pcs', 'fee', 'zero', 'weg', 'fee', 'zero']);
         //导出数据
         $csv->putout($data);
         /*
@@ -626,42 +628,452 @@ where mml.member_id > {$id} and mml.level > 14 and mml.level <= 19 limit 100"
    </body>
 </html>
 HTML;
- //$html = file_get_contents('http://tablesorter.com/docs/');
+        //$html = file_get_contents('http://tablesorter.com/docs/');
         $hta = new \hl\library\Tools\Html2Array\HLHtmlToArray($html);
         \hl\library\Functions\Helper::dump($hta->toJson());
         \hl\library\Functions\Helper::dump($hta->toArray());
         /**
- * Get html source from tablesorter.com
- */
-echo '<hr>';
-/**
- * Print array of table rows for each table
- */
-print_r($hta->getArrayOfTr());
-echo '<hr>';
-/**
- * Print array of table columns for each table
- */
-print_r($hta->getArrayOfTd(true));
-echo '<hr>';
-/**
- * Print array of table headers for each table
- */
-print_r($hta->getArrayOfTh(true));
-echo '<hr>';
-/**
- * Returns array of tables
- *
- * @param bool $get_only_text (optional)
- * @return array
- */
-print_r($hta->getArrayOfTables(false));
-echo '<hr>';
+         * Get html source from tablesorter.com
+         */
+        echo '<hr>';
+        /**
+         * Print array of table rows for each table
+         */
+        print_r($hta->getArrayOfTr());
+        echo '<hr>';
+        /**
+         * Print array of table columns for each table
+         */
+        print_r($hta->getArrayOfTd(true));
+        echo '<hr>';
+        /**
+         * Print array of table headers for each table
+         */
+        print_r($hta->getArrayOfTh(true));
+        echo '<hr>';
+        /**
+         * Returns array of tables
+         *
+         * @param bool $get_only_text (optional)
+         * @return array
+         */
+        print_r($hta->getArrayOfTables(false));
+        echo '<hr>';
         $str = exampleServices::getInstance()->todo();
 
         $str = \hl\library\Functions\Helper::alert('sdfsdf', 'sfsdfsd', 'http://mysweet95.com');
         //传递值到模板
         \hl\HLView::param('out', $str);
 //        \hl\library\Functions\Helper::dump('sdf');
+    }
+
+    public function test624Action()
+    {
+        $time = time();
+        $cates = exampleModels::getInstance()->aa(
+            "select DISTINCT member_id from sl_mtree_award"
+        );
+        $memberIds = array_column($cates, 'member_id');
+        $memberIdStr = implode(',', $memberIds);
+        echo time() - $time;
+        echo '<br>';
+        $orderList = exampleModels::getInstance()->aa(
+            "select o.member_id,o.shareid,og.price,og.qty_remain,og.qty,og.real_amount,og.promotion_type,og.goods_id,o.create_time from sl_order o
+left join sl_order_goods og on og.order_id = o.id
+where o.pay_status = 1 and og.promotion_type <> 13 and og.qty_remain > 0 and o.order_type = 0 and o.create_time between UNIX_TIMESTAMP('2021-06-18') and UNIX_TIMESTAMP('2021-06-19')
+"
+        );
+        echo time() - $time;
+        echo '<br>';
+        $self = []; //自购
+        $son = []; //儿子
+        $person = [];
+        $amount = 0;
+        if (!empty($orderList)) {
+            //排除超级爆品
+            $orderList = array_filter($orderList, function ($row) {
+                if ($row['promotion_type'] == 12) {
+                    return false;
+                }
+                return true;
+            });
+            echo time() - $time;
+            echo '<br>';
+            //排除指定积分商品
+            $configList = exampleModels::getInstance()->aa(
+                "select goods_id,started_at,end_at from sl_point_activity_config where started_at < UNIX_TIMESTAMP('2021-06-19') and end_at > UNIX_TIMESTAMP('2021-06-18') and status = 1"
+            );
+            echo time() - $time;
+            echo '<br>';
+            if (!empty($configList)) {
+                $orderList = array_filter($orderList, function ($row) use ($configList) {
+                    foreach ($configList as $config) {
+                        if ($row['goods_id'] == $config['goods_id']) {
+                            //判断时间
+                            if ($row['create_time'] >= $config['started_at']
+                                && $row['create_time'] < $config['end_at']
+                            ) {
+                                return false;
+                            }
+                        }
+                    }
+                    return true;
+                });
+            }
+            echo time() - $time;
+            echo '<br>';
+            $memberIdsKey = array_fill_keys($memberIds, '1');
+            echo time() - $time;
+            echo '<br>';
+            foreach ($orderList as $order) {
+                if (isset($memberIdsKey[$order['member_id']])) {
+                    $person[] = $order['member_id'];
+                    if (isset($self[$order['member_id']])) {
+                        $self[$order['member_id']] += $order['price'] * $order['qty_remain'];
+                    } else {
+                        $self[$order['member_id']] = $order['price'] * $order['qty_remain'];
+                    }
+                }
+                if (isset($memberIdsKey[$order['shareid']])) {
+                    $person[] = $order['shareid'];
+                    $person[] = $order['member_id'];
+                    if (isset($son[$order['shareid']])) {
+                        $son[$order['shareid']] += $order['price'] * $order['qty_remain'];
+                    } else {
+                        $son[$order['shareid']] = $order['price'] * $order['qty_remain'];
+                    }
+                    if (isset($self[$order['member_id']])) {
+                        $self[$order['member_id']] += $order['price'] * $order['qty_remain'];
+                    } else {
+                        $self[$order['member_id']] = $order['price'] * $order['qty_remain'];
+                    }
+                }
+                $amount += $order['price'] * $order['qty_remain'];
+            }
+            echo time() - $time;
+            echo '<br>';
+        }
+        $person = array_unique($person);
+        $data = [
+            'self' => $self,
+            'son' => $son,
+            'num' => count($person),
+            'amount' => $amount,
+            'person' => $person
+        ];
+        var_dump($data);
+        die;
+    }
+
+    public function test618Action()
+    {
+        $list = wampModels::getInstance()->aa(
+            "select * from sl_goods_3"
+        );
+        $data = [];
+        foreach ($list as $_list) {
+            if (isset($data[$_list['cate_3']])) {
+                $data[$_list['cate_3']]['attr'] = array_unique(
+                    array_merge($data[$_list['cate_3']]['attr'], explode(',', $_list['attr']))
+                );
+            } else {
+                $data[$_list['cate_3']] = [
+                    'cate_1_name' => $_list['cate_1_name'],
+                    'cate_2_name' => $_list['cate_2_name'],
+                    'cate_3_name' => $_list['cate_3_name'],
+                    'attr' => explode(',', $_list['attr'])
+                ];
+            }
+        }
+        foreach ($data as $_data) {
+            $_data['attr'] = implode(',', $_data['attr']);
+            $out[] = $_data;
+        }
+        //var_dump($data);
+        //实例化类
+        $csv = new \hl\library\Tools\Excel\HLPutoutCsv();
+        //设置表名
+        $csv->setTableName('2021616');
+        //设置表头
+        $csv->setTableHead(['cate_1', 'cate_2', 'cate_3', 'attr']);
+        //导出数据
+        $csv->putout($out);
+        //var_dump($data);
+        die;
+    }
+
+    public function test6126Action()
+    {
+        ini_set('max_execution_time', '3600');
+        $cates = exampleModels::getInstance()->aa(
+            "select id,name from sl_goods_categories"
+        );
+        $cates = array_column($cates, 'name', 'id');
+        $id = 17611;
+        while ($rows = exampleModels::getInstance()->aa(
+            "select seller_id,store_id from sl_seller where web_site = 'SRM' and seller_id > {$id} order by seller_id asc limit 10"
+        )) {
+            foreach ($rows as $row) {
+                $goods = exampleModels::getInstance()->aa(
+                    "select id,cate_1,cate_2,cate_3 from sl_goods where seller_id = {$row['seller_id']} and store_id = {$row['store_id']}"
+                );
+                if (!empty($goods)) {
+                    foreach ($goods as $_goods) {
+                        $attr = exampleModels::getInstance()->aa(
+                            "select attrs from sl_goods_body where goods_id = {$_goods['id']}"
+                        );
+                        $attrs = json_decode($attr[0]['attrs'], true);
+                        $outattr = [];
+                        foreach ($attrs as $_attr) {
+                            $outattr = array_merge($outattr, array_keys($_attr));
+                        }
+
+                        $has = wampModels::getInstance()->aa("select id,attr where cate_1 = {$_goods['cate_1']} and cate_2 = {$_goods['cate_2']} and cate_3 = {$_goods['cate_3']}");
+                        if ($has) {
+                            wampModels::getInstance()->update(
+                                'sl_goods_3',
+                                ['attr' => implode(',', array_unique(array_merge(explode(',', $has[0]['attr']), $outattr)))],
+                                ['id' => $has[0]['id']]
+                            );
+                        } else {
+                            wampModels::getInstance()->insert(
+                                'sl_goods_3',
+                                [
+                                    'cate_1' => $_goods['cate_1'],
+                                    'cate_1_name' => $cates[$_goods['cate_1']] ?? '',
+                                    'cate_2' => $_goods['cate_2'],
+                                    'cate_2_name' => $cates[$_goods['cate_2']] ?? '',
+                                    'cate_3' => $_goods['cate_3'],
+                                    'cate_3_name' => $cates[$_goods['cate_3']] ?? '',
+                                    'attr' => implode(',', $outattr)
+                                ]
+                            );
+                        }
+                    }
+                }
+                $id = $row['seller_id'];
+            }
+            echo '===>' . $id . '<===<br>';
+        }
+
+    }
+
+    public function test616Action()
+    {
+        ini_set('max_execution_time', '3600');
+        $stores = [];
+        $s_c = [];
+        $s_c_n = [];
+        $s_c_2 = [];
+        $s_c_2_n = [];
+        $id = 0;
+        $cates = exampleModels::getInstance()->aa(
+            "select id,name from sl_goods_categories where top_id = 0"
+        );
+        $cates = array_column($cates, 'name', 'id');
+
+        while ($rows = exampleModels::getInstance()->aa(
+            "select * from sl_goods where id > {$id} and status = 1 and is_delete = 0 order by id asc limit 100"
+        )) {
+            foreach ($rows as $row) {
+                if (!isset($s_c[$row['store_id']])) {
+                    $store = exampleModels::getInstance()->aa("select sc_id,store_name from sl_store where store_id = {$row['store_id']}");
+                    $stores[$row['store_id']] = $store[0]['store_name'];
+                    $s_c[$row['store_id']] = $store[0]['sc_id'];
+                    $s_c_n[$row['store_id']] = $cates[$store[0]['sc_id']] ?? '';
+                    $bind = exampleModels::getInstance()->aa("select class1_id from sl_store_bind_class where store_id = {$row['store_id']}");
+                    if ($bind) {
+                        foreach ($bind as $_bind) {
+                            $s_c_2[$row['store_id']][] = $_bind['class1_id'];
+                            $s_c_2_n[$row['store_id']][] = $cates[$_bind['class1_id']] ?? '';
+                        }
+                    }
+                }
+                if ($row['cate_1'] != $s_c[$row['store_id']] && !in_array($row['cate_1'], $s_c_2[$row['store_id']])) {
+                    $data = [
+                        'store_id' => $row['store_id'],
+                        'goods_id' => $row['id'],
+                        'title' => $row['title'],
+                        'cate_1' => $row['cate_1'],
+                        'store_name' => $stores[$row['store_id']] ?? '',
+                        'cate_1_name' => $cates[$row['cate_1']] ?? '',
+                        's_cate_name' => $s_c_n[$row['store_id']] ?? '',
+                        's_cate' => implode(',', $s_c_2_n[$row['store_id']] ?? [])
+                    ];
+                    //var_dump($data);
+                    wampModels::getInstance()->insert('sl_goods_2', $data);
+                }
+                $id = $row['id'];
+            }
+        }
+    }
+    public function testAction()
+    {
+        ini_set('max_execution_time', '3600');
+        $id = 77668;
+        while ($rows = exampleModels::getInstance()->aa(
+            "select id,play_time,member_id,helper_number_ids from sl_mtree_help where helper_number_ids != '' and id > {$id} limit 10"
+        )) {
+            foreach ($rows as $row) {
+                $data = [
+                    'play_time' => $row['play_time'],
+                    'member_id' => $row['member_id'],
+                    'helper_number_ids' => $row['helper_number_ids'],
+                    'create_time' => count(explode(',', $row['helper_number_ids']))
+                ];
+                wampModels::getInstance()->insert('sl_mtree_help', $data);
+                $id = $row['id'];
+            }
+        }
+    }
+
+
+    public function test6282Action()
+    {
+        ini_set('max_execution_time', '3600');
+        $id = 97445257;
+        while ($rows = exampleModels::getInstance()->aa(
+            "select member_id from sl_mtree_member_level where member_id > {$id} limit 100"
+        )) {
+            foreach ($rows as $row) {
+                $member = exampleModels::getInstance()->aa(
+                    "select member_id,level_type,FROM_UNIXTIME(create_time, '%d') as t from sl_mtree_red_packets_log where member_id = {$row['member_id']} and level_type in (1,2,3)"
+                );
+                if (!empty($member)) {
+                    $data = [];
+                    foreach ($member as $_v) {
+                        $data['member_id'] = $_v['member_id'];
+                        $data['cate_'.$_v['level_type']] = $_v['t'];
+                    }
+
+                }
+                $id = $row['member_id'];
+            }
+        }
+    }
+
+    public function test628Action()
+    {
+        ini_set('max_execution_time', '3600');
+        $stores = [];
+        $cates = [];
+        $id = 976413;
+        $time = time();
+        $act = exampleModels::getInstance()->aa(
+            "select goods_id,prom_type,prom_id from sl_activity_summary where status = 1 and end_time > {$time} and prom_type in (5,6)"
+        );
+        $act = array_combine(array_column($act, 'goods_id'), $act);
+                //var_dump($act);
+
+        while ($rows = exampleModels::getInstance()->aa(
+            "select * from sl_goods where id > {$id} and status = 1 and is_delete = 0 order by id asc limit 100"
+        )) {
+            foreach ($rows as $row) {
+                if (!isset($stores[$row['store_id']])) {
+                    $store = exampleModels::getInstance()->aa("select store_name,store_profit from sl_store where store_id = {$row['store_id']}");
+                    $stores[$row['store_id']] = $store[0];
+                }
+                if (!isset($cates[$row['cate_2']])) {
+                    $cate = exampleModels::getInstance()->aa("select id,name,profit from sl_goods_categories where id in ({$row['cate_1']},{$row['cate_2']})");
+                    if (!empty($cate)) {
+                        foreach ($cate as $_cate) {
+                            $cates[$_cate['id']] = $_cate;
+                        }
+                    }
+                }
+                $p = [bcmul(bcdiv(bcsub($row['price'], $row['cost_price'], 2), $row['price'], 2), 100, 2)];
+                $sku = exampleModels::getInstance()->aa("select * from sl_goods_sku where goods_id = {$row['id']}");
+                if (!empty($sku)) {
+                    foreach ($sku as $_sku) {
+                        $p[] = bcmul(bcdiv(bcsub($_sku['price'], $_sku['cost_price'], 2), $_sku['price'], 2), 100, 2);
+                    }
+                }
+                $c_p = min($p);
+                if ($c_p < $cates[$row['cate_2']]['profit']) {//where goods_id = {$row['id']}
+                    if (isset($act[$row['id']])) {
+                        $prom_type = $act[$row['id']]['prom_type'];
+                        $prom_id = $act[$row['id']]['prom_id'];
+                        if ($prom_type == 5) {
+                            $every = exampleModels::getInstance()->aa(
+                                "select act_time from sl_activity_every_day_special_entry where id = {$prom_id}"
+                            );
+                            $act_title = date('Y-m-d', $every[0]['act_time']);
+                        } elseif ($prom_type == 6)  {
+                            $com1 = exampleModels::getInstance()->aa(
+                                "select act_id from sl_activity_common_entry where id = {$prom_id}"
+                            );
+                            $com2 = exampleModels::getInstance()->aa(
+                                "select act_title from sl_activity_common where id = {$com1[0]['act_id']}"
+                            );
+                            $act_title = $com2[0]['act_title'];
+                        }
+                    } else {
+                        $prom_type = 0;
+                        $prom_id = 0;
+                        $act_title = '';
+                    }
+                    $data = [
+                        'store_id' => $row['store_id'],
+                        'store_name' => $stores[$row['store_id']]['store_name'] ?? '',
+                        'cate_1' => $row['cate_1'],
+                        'cate_2' => $row['cate_2'],
+                        'cate_1_name' => $cates[$row['cate_1']]['name'] ?? '',
+                        'cate_2_name' => $cates[$row['cate_2']]['name'] ?? '',
+                        'goods_id' => $row['id'],
+                        'title' => $row['title'],
+                        'g_profit' => $c_p,
+                        's_profit' => $stores[$row['store_id']]['store_profit'] ?? 0,
+                        'c_profit' => $cates[$row['cate_2']]['profit'] ?? '',
+                        'prom_type' => $prom_type,
+                        'prom_id' => $prom_id,
+                        'act_title' => $act_title,
+                    ];
+                    wampModels::getInstance()->insert('sl_goods', $data);
+                }
+                $id = $row['id'];
+            }
+        }
+
+
+
+       // var_dump($rows);
+        echo 'ok';
+        die;
+    }
+
+    /*
+    ** 兆骏用程序
+    */
+    public function test202162Action()
+    {
+        $out = [];
+        $path = 'lrd.csv';
+        $csv = new \hl\library\Tools\Excel\HLCsvReader();
+        $data = $csv->getData($path);
+        foreach ($data as $k => $v) {
+            //echo $v[0].'-'.$v[3];
+            //echo '<br>';
+            $sql = "select AVG((sku.price-sku.cost_price)/sku.price ) as 'yongjin',AVG((sku.cost_price-sku.seller_cost_price)/sku.cost_price ) as 'lirun' from srm_goods_sku as sku 
+left join srm_goods  on sku.goods_id=srm_goods.id
+ where srm_goods.store_id= {$v[0]} and srm_goods.cate_1 = {$v[3]}";
+            $row = example2Models::getInstance()->aa($sql);
+            $out[] = [
+                'store_id' => $v[0],
+                'cate_1' => $v[3],
+                'yj' => $row[0]['yongjin'],
+                'lr' => $row[0]['lirun']
+            ];
+            //var_dump($row);
+        }
+        //实例化类
+        $csv = new \hl\library\Tools\Excel\HLPutoutCsv();
+        //设置表名
+        $csv->setTableName('202091');
+        //设置表头
+        $csv->setTableHead(['store_id', 'cate_1', 'yj', 'lr']);
+        //导出数据
+        $csv->putout($out);
+        //var_dump($data);
+        die;
     }
 }
