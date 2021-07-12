@@ -23,6 +23,29 @@ class IndexController extends HLController
     public function indexAction()
     {
         //框架欢迎页
+        $body_param = '{"scene":"19","page":"pages/common/redirect","width":null,"auto_color":null,"line_color":null}';
+        $url = 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=46_G-zH5sa-qvB-YXlpMZ-qzFny5J6p5liXRAyawq7WMGey4Ek4Yd-zPj07ch2RacYrVzgiBawZ2RkleTd0XbJN9LgkRBZrJOSWgWJqULlhIuf619vY45_uNldpnBiEW6-nboEau_lUcWPaRJXcDDJcABAQQW';
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $body_param);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+		$data = curl_exec($ch);
+		$responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		if ($data == NULL) {
+		    $errInfo = "call http err :" . curl_errno($ch) . " - " . curl_error($ch);
+		    curl_close($ch);
+        } elseif($responseCode  != "200") {
+		    $errInfo = "call http err httpcode=" . $responseCode;
+		    curl_close($ch);
+        } else {
+		    curl_close($ch);
+        }
+//        curl_close($ch);
+		var_dump($errInfo);
+		var_dump($data);
     }
 
     //安装
@@ -907,7 +930,7 @@ where o.pay_status = 1 and og.promotion_type <> 13 and og.qty_remain > 0 and o.o
             }
         }
     }
-    public function testAction()
+    public function test79Action()
     {
         ini_set('max_execution_time', '3600');
         $id = 77668;
@@ -952,18 +975,28 @@ where o.pay_status = 1 and og.promotion_type <> 13 and og.qty_remain > 0 and o.o
         }
     }
 
-    public function test628Action()
+    public function testAction()
     {
         ini_set('max_execution_time', '3600');
         $stores = [];
         $cates = [];
-        $id = 976413;
+        $id = 928841;
         $time = time();
         $act = exampleModels::getInstance()->aa(
             "select goods_id,prom_type,prom_id from sl_activity_summary where status = 1 and end_time > {$time} and prom_type in (5,6)"
         );
         $act = array_combine(array_column($act, 'goods_id'), $act);
                 //var_dump($act);
+        //单独设置利润点
+        $storeCate = exampleModels::getInstance()->aa(
+            "select store_id,cate_2,profit from sl_store_cate_profit where status = 1 and end_time > {$time} and start_time < {$time}"
+        );
+        $storeCates = [];
+        if (!empty($storeCate)) {
+            foreach ($storeCate as $_cate) {
+                $storeCates[$_cate['store_id']][$_cate['cate_2']] = $_cate['profit'];
+            }
+        }
 
         while ($rows = exampleModels::getInstance()->aa(
             "select * from sl_goods where id > {$id} and status = 1 and is_delete = 0 order by id asc limit 100"
@@ -989,7 +1022,8 @@ where o.pay_status = 1 and og.promotion_type <> 13 and og.qty_remain > 0 and o.o
                     }
                 }
                 $c_p = min($p);
-                if ($c_p < $cates[$row['cate_2']]['profit']) {//where goods_id = {$row['id']}
+                if ((isset($storeCates[$row['store_id']][$row['cate_2']]) && $c_p < $storeCates[$row['store_id']][$row['cate_2']]) ||
+                    (!isset($storeCates[$row['store_id']][$row['cate_2']]) && $c_p < $cates[$row['cate_2']]['profit'])) {
                     if (isset($act[$row['id']])) {
                         $prom_type = $act[$row['id']]['prom_type'];
                         $prom_id = $act[$row['id']]['prom_id'];
@@ -1012,6 +1046,9 @@ where o.pay_status = 1 and og.promotion_type <> 13 and og.qty_remain > 0 and o.o
                         $prom_id = 0;
                         $act_title = '';
                     }
+//                    if (!in_array($row['store_id'], [5973, 5974, 5975, 5983, 5984, 5994, 5997, 6001, 6002, 6003, 6004, 6006, 6080, 6081])) {
+//
+//                    }
                     $data = [
                         'store_id' => $row['store_id'],
                         'store_name' => $stores[$row['store_id']]['store_name'] ?? '',

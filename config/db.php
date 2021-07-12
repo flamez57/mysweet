@@ -3,7 +3,7 @@
 return [
     'wamp' => [
         'host' => 'localhost',
-        'dbname' => 'shunlian',
+        'dbname' => 'blog',
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
