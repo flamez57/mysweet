@@ -129,8 +129,16 @@ class IndexController extends BaseController
     public function friendLinkAction()
     {
         $this->data = [
-            ['title' => 'baidu', 'url' => 'http://www.baidu.com'],
-            ['title' => 'baidu', 'url' => 'http://www.baidu.com'],
+            ['title' => '花絮web ', 'url' => 'http://mysweet95.com/we/web.html'],
+            ['title' => '花絮index ', 'url' => 'http://mysweet95.com/we/index.html'],
+            [
+                'title' => '婚礼纪邀请函 ',
+                'url' => 'https://www.hunliji.com/m/ling-xi/new-card/index.html?card_id=NTIxNTU2NjBmaXJlX2Nsb3Vk&openid=o7420wRXhfoHOUPMnedYZbGVfKc8&unionId=44409e6f3080de8d9e6fc31884d33e46#/'
+            ],
+            ['title' => '我的照片index ', 'url' => 'http://mysweet95.com/my_photo/index.html'],
+            ['title' => '我的照片pc ', 'url' => 'http://mysweet95.com/my_photo/pc.html'],
+            ['title' => '我的照片web ', 'url' => 'http://mysweet95.com/my_photo/web.html'],
+            ['title' => '邀请函 ', 'url' => 'http://mysweet95.com/invitation/index.html?name=亲爱的你'],
         ];
         HLResponse::json($this->code, $this->message, $this->data);
     }
