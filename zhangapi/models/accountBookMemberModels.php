@@ -20,6 +20,14 @@ class accountBookMemberModels extends HLModel
     ** 数据表
     */
     public $tableName = 'yx_account_book_member';
+    /*
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `mobile` varchar(20) NOT NULL DEFAULT '' COMMENT '账号手机号',
+  `password` varchar(80) NOT NULL DEFAULT '' COMMENT '密码',
+  `salt` char(8) NOT NULL DEFAULT '' COMMENT '密码加密盐',
+  `account_book_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '当前使用的账本id',
+  `sex` tinyint(1) NOT NULL DEFAULT '1' COMMENT '性别：0女士 1男士',
+     */
     
     public function __construct()
     {

@@ -23,7 +23,7 @@ class IndexController extends HLController
     public function indexAction()
     {
         //框架欢迎页
-        $body_param = '{"scene":"19","page":"pages/common/redirect","width":null,"auto_color":null,"line_color":null}';
+        /*$body_param = '{"scene":"19","page":"pages/common/redirect","width":null,"auto_color":null,"line_color":null}';
         $url = 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=46_G-zH5sa-qvB-YXlpMZ-qzFny5J6p5liXRAyawq7WMGey4Ek4Yd-zPj07ch2RacYrVzgiBawZ2RkleTd0XbJN9LgkRBZrJOSWgWJqULlhIuf619vY45_uNldpnBiEW6-nboEau_lUcWPaRJXcDDJcABAQQW';
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -45,7 +45,7 @@ class IndexController extends HLController
         }
 //        curl_close($ch);
 		var_dump($errInfo);
-		var_dump($data);
+		var_dump($data);*/
     }
 
     //安装
@@ -980,7 +980,7 @@ where o.pay_status = 1 and og.promotion_type <> 13 and og.qty_remain > 0 and o.o
         ini_set('max_execution_time', '3600');
         $stores = [];
         $cates = [];
-        $id = 928841;
+        $id = 985592;
         $time = time();
         $act = exampleModels::getInstance()->aa(
             "select goods_id,prom_type,prom_id from sl_activity_summary where status = 1 and end_time > {$time} and prom_type in (5,6)"

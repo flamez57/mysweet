@@ -20,6 +20,11 @@ class accountBookModels extends HLModel
     ** 数据表
     */
     public $tableName = 'yx_account_book';
+    /*
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `member_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建人',
+  `created_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+    */
     
     public function __construct()
     {
