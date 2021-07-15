@@ -42,5 +42,6 @@ class accountBookMemberModels extends HLModel
     public function insert($param = [])
     {
         $this->db->insert($this->tableName, $param);
+        return $this->db->getInsertId();
     }
 }

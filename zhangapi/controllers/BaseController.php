@@ -1,11 +1,8 @@
 <?php
-namespace blogapi\controllers;
+namespace zhangapi\controllers;
 
-use blogapi\models\memberModels;
 use hl\HLApi;
-use hl\library\Functions\Jwt;
 use hl\library\Session\HLSession;
-use hl\library\Session\HLSessionImpRedis;
 use hl\library\Tools\HLResponse;
 
 /**
@@ -31,15 +28,15 @@ class BaseController extends HLApi
     {
         $token = $this->getToken();
         if (!empty($token)) {
-            $session = HLSession::getInstance(self::$config['token']['blogapi'])->init($token);
+            $session = HLSession::getInstance(self::$config['token']['zhangapi'])->init($token);
         } else {
-            $session = HLSession::getInstance(self::$config['token']['blogapi'])->init();
+            $session = HLSession::getInstance(self::$config['token']['zhangapi'])->init();
         }
         $memberId = $session->get('member_id');
-        $btoken = $session->get('token'); //表里的token
-        $token = $session->getToken(); //客户端用
         if (empty($memberId) && $this->needLogin) {
             // 未登录状态
+            //销毁session
+            HLSession::getInstance(self::$config['token']['zhangapi'])->init()->destroy();
             HLResponse::json('-1', '请先登陆', new \stdClass());
             die;
         } else {

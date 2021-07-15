@@ -1,12 +1,7 @@
 <?php
-namespace blogapi\controllers;
+namespace zhangapi\controllers;
 
-use blogapi\services\commentServices;
-use blogapi\services\memberServices;
-use blogapi\services\cateServices;
-use blogapi\services\tagServices;
-use blogapi\services\articleServices;
-use blogapi\services\diaryServices;
+use zhangapi\services\memberServices;
 use hl\library\Tools\HLResponse;
 /**
 ** @ClassName: IndexController
@@ -25,113 +20,35 @@ class IndexController extends BaseController
     }
 
     /*
-    ** 分类 http://mysweet.com/index.php?m=blogapi&c=index&a=cateList&code=123
+    ** 注册 http://mysweet.com/index.php?m=zhangapi&c=index&a=register
     */
-    public function cateListAction()
+    public function registerAction()
     {
-        $code = $this->getQuery('code', '');
-        $this -> data = cateServices::getInstance()->getFrontCateList($code);
+        $params['mobile'] = $this->getPost('mobile', '');
+        $params['pwd'] = $this->getPost('pwd', '');
+        $params['sex'] = $this->getPost('sex', 0);
+        memberServices::getInstance()->register($params, $this->code, $this->message, $this->data);
         HLResponse::json($this->code, $this->message, $this->data);
     }
 
     /*
-    ** 标签 http://mysweet.com/index.php?m=blogapi&c=index&a=tagList&code=123
-    */
-    public function tagListAction()
-    {
-        $code = $this->getQuery('code', '');
-        $this -> data = tagServices::getInstance()->getFrontTagList($code);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 文章列表 http://mysweet.com/index.php?m=blogapi&c=index&a=articleList&code=123
-    */
-    public function articleListAction()
-    {
-        $param['code'] = $this->getQuery('code', '');
-        $param['page'] = $this->getQuery('page', 1);
-        $param['page_size'] = $this->getQuery('page_size', 20);
-        $param['tag_id'] = $this->getQuery('tag_id', 0);
-        $param['cate_id'] = $this->getQuery('cate_id', 0);
-        $param['keyword'] = $this->getQuery('keyword', '');
-        $this -> data = articleServices::getInstance()->getFrontArticleList($param);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 用户信息 http://mysweet.com/index.php?m=blogapi&c=index&a=memberInfo&code=123
-    */
-    public function memberInfoAction()
-    {
-        $code = $this->getQuery('code', '');
-        $this -> data = memberServices::getInstance()->getMemberInfo($code);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 详情 http://mysweet.com/index.php?m=blogapi&c=index&a=articleDetail&id=1
-    */
-    public function articleDetailAction()
-    {
-        $id = $this->getQuery('id', 0);
-        $this -> data = articleServices::getInstance()->getFrontArticleDetail($id, $this->memberId);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 发表看法
-    */
-    public function addCommentAction()
-    {
-        $articleId = $this->getPost('article_id', 0);
-        $content = $this->getPost('content', '');
-        $nickname = $this->getPost('nickname', '佚名');
-        $this->data = commentServices::getInstance()->addComment($articleId, $content, $nickname);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 回复
-    */
-    public function replyAction()
-    {
-        $id = $this->getPost('id', 0);
-        $content = $this->getPost('content', '');
-        $this -> data = commentServices::getInstance()->reply($id, $content, $this->memberId);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 档案
-    */
-    public function diaryAction()
-    {
-        $code = $this->getQuery('code', '');
-        $this -> data = diaryServices::getInstance()->getFrontList($code);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 登陆
+    ** 登录 http://mysweet.com/index.php?m=zhangapi&c=index&a=login
     */
     public function loginAction()
     {
-        $code = $this->getPost('code', '');
+        $mobile = $this->getPost('mobile', '');
         $pwd = $this->getPost('pwd', '');
-        memberServices::getInstance()->login($code, $pwd, $this->code, $this->message, $this->data);
+        memberServices::getInstance()->login($mobile, $pwd, $this->code, $this->message, $this->data);
         HLResponse::json($this->code, $this->message, $this->data);
     }
 
     /*
-    ** 友情链接
+    ** 忘记密码 http://mysweet.com/index.php?m=zhangapi&c=index&a=forget
     */
-    public function friendLinkAction()
+    public function forgetAction()
     {
-        $this->data = [
-            ['title' => 'baidu', 'url' => 'http://www.baidu.com'],
-            ['title' => 'baidu', 'url' => 'http://www.baidu.com'],
-        ];
+        $mobile = $this->getPost('mobile', '');
+        memberServices::getInstance()->forget($mobile, $this->code, $this->message, $this->data);
         HLResponse::json($this->code, $this->message, $this->data);
     }
 }
