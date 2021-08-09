@@ -1,5 +1,5 @@
 <?php
-namespace blogapi\controllers;
+namespace zhangapi\controllers;
 
 use blogapi\services\articleServices;
 use blogapi\services\cateServices;
@@ -7,6 +7,8 @@ use blogapi\services\diaryServices;
 use blogapi\services\memberServices;
 use blogapi\services\tagServices;
 use hl\library\Tools\HLResponse;
+use zhangapi\services\bookServices;
+
 /**
 ** @ClassName: ManageController
 ** @Description: 管理控制器必须是登陆状态下
@@ -18,28 +20,55 @@ use hl\library\Tools\HLResponse;
 class ManageController extends BaseController
 {
     /*
-    ** 个人信息详情编辑用  http://mysweet.com/index.php?m=blogapi&c=manage&a=memberInfoForEdit
+    ** 今日账单 http://mysweet.com/index.php?m=zhangapi&c=manage&a=getTodayList
     */
-    public function memberInfoForEditAction()
+    public function getTodayListAction()
     {
-        $this->data = memberServices::getInstance()->memberInfoForEdit($this->memberId);
+        $this->data = bookServices::getInstance()->getTodayList($this->bookId);
         HLResponse::json($this->code, $this->message, $this->data);
     }
 
     /*
-    ** 个人信息编辑保存
+    ** 详情 http://mysweet.com/index.php?m=zhangapi&c=manage&a=getDetail
     */
-    public function saveMemberInfoAction()
+    public function getDetailAction()
     {
-        $param['nickname'] = $this->getPost('nickname', '');
-        $param['avatar'] = $this->getPost('avatar', '');
-        $param['motto'] = $this->getPost('motto', '');
-        $param['home_page'] = $this->getPost('home_page', '');
-        $param['github'] = $this->getPost('github', '');
-        $param['qq'] = $this->getPost('qq', '');
-        $param['email'] = $this->getPost('email', '');
+        $id = $this->getQuery('id', '');
+        $this->data = bookServices::getInstance()->getDetail($id, $this->memberId);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
+    /*
+    ** 保存  http://mysweet.com/index.php?m=zhangapi&c=manage&a=save
+    */
+    public function saveAction()
+    {
+        $id = $this->getPost('id', 0);
+        if ($id == 0) {
+            $param['account_book_id'] = $this->bookId;
+            $param['year'] = date('Y');
+            $param['month'] = date('m');
+            $param['day'] = date('d');
+            $param['created_at'] = TIMESTAMP;
+            $param['sex'] = $this->sex;
+            $param['member_id'] = $this->memberId;
+        }
+        $param['title'] = $this->getPost('title', '');
+        $param['status'] = $this->getPost('status', '0');
+        $param['type'] = $this->getPost('type', '0');
+        $param['obj'] = $this->getPost('obj', '0');
+        $param['money'] = $this->getPost('money', '0');
         $param['content'] = $this->getPost('content', '');
-        memberServices::getInstance()->saveMemberInfo($param, $this->memberId);
+        $this->data = bookServices::getInstance()->save($param, $id);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
+    //统计   http://mysweet.com/index.php?m=zhangapi&c=manage&a=collect
+    public function collectAction()
+    {
+        $year = $this->getQuery('year', date('Y'));
+        $month = $this->getQuery('month', date('m'));
+        $this->data = bookServices::getInstance()->getAllList($this->bookId, $year, $month);
         HLResponse::json($this->code, $this->message, $this->data);
     }
 
@@ -106,21 +135,6 @@ class ManageController extends BaseController
     {
         $id = $this->getQuery('id', 0);
         $this->data = articleServices::getInstance()->articleDetail($id, $this->memberId);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 文章保存
-    */
-    public function saveAction()
-    {
-        $id = $this->getPost('id', 0);
-        $param['cate_id'] = $this->getPost('cate_id', 0);
-        $param['title'] = $this->getPost('title', '');
-        $param['drafts_content'] = $this->getPost('content', '');
-        $param['status'] = $this->getPost('status', 0);
-        $param['tags'] = $this->getPost('tags', []);
-        $this->data = articleServices::getInstance()->articleSave($id, $param, $this->memberId);
         HLResponse::json($this->code, $this->message, $this->data);
     }
 

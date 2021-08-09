@@ -4,6 +4,7 @@ namespace zhangapi\controllers;
 use hl\HLApi;
 use hl\library\Session\HLSession;
 use hl\library\Tools\HLResponse;
+use zhangapi\models\accountBookMemberModels;
 
 /**
 ** @ClassName: IndexController
@@ -16,6 +17,8 @@ use hl\library\Tools\HLResponse;
 class BaseController extends HLApi
 {
     public $memberId = 0;
+    public $bookId = 0;
+    public $sex = 0;
     public $needLogin = true;
 
     public function __construct()
@@ -41,6 +44,9 @@ class BaseController extends HLApi
             die;
         } else {
             $this->memberId = $memberId;
+            $member = accountBookMemberModels::getInstance()->getByWhere(['id' => $memberId], 'account_book_id,sex');
+            $this->bookId = $member['account_book_id'] ?? 0;
+            $this->sex = $member['sex'] ?? 0;
         }
     }
 
