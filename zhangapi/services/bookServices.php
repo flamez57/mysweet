@@ -235,142 +235,37 @@ class bookServices extends HLServices
     {
         $member = accountBookMemberModels::getInstance()->getByWhere(['id' => $memberId], 'mobile');
         $list1 = accountBookMsgModels::getInstance()->getByWhere(
-            ['accept_member_id' => $memberId, 'accept_mobile' => ''],
+            ['accept_member_id' => $memberId],
             'id,type,created_at',
             '',
             '',
             100
         );
         $list2 = accountBookMsgModels::getInstance()->getByWhere(
-            ['accept_member_id' => 0, 'accept_mobile' => $member['mobile']],
+            ['accept_mobile' => $member['mobile']],
             'id,type,created_at',
             '',
             '',
             100
         );
         $list = [];
+        $ids = [];
         if (!empty($list1)) {
             foreach ($list1 as $_v) {
                 $_v['type_desc'] = accountBookMsgModels::TYPE_MAP[$_v['type']];
                 $list[] = $_v;
+                $ids[] = $_v['id'];
             }
         }
         if (!empty($list2)) {
             foreach ($list2 as $__v) {
-                $__v['type_desc'] = accountBookMsgModels::TYPE_MAP[$__v['type']];
-                $list[] = $__v;
-            }
-        }
-        return ['list' => $list];
-    }
-
-    /*
-    ** 文章编辑详情
-    */
-    public function articleDetail($id, $memberId)
-    {
-        $article = articleModels::getInstance()->getByWhere(
-            ['id' => $id, 'member_id' => $memberId],
-            'id,cate_id,title,drafts_content'
-        );
-        if (empty($article)) {
-            $article = ['id' => 0, 'cate_id' => 0, 'title' => '', 'drafts_content' => '', 'tags' => []];
-        } else {
-            $tr = tagsRelevanceModels::getInstance()->getByWhere(['article_id' => $id], 'tag_id', '', '', 20);
-            $tagIds = array_column($tr, 'tag_id');
-            if (!empty($tagIds)) {
-                $article['tags'] = tagsModels::getInstance()->getByWhere(['id' => ['in', $tagIds]], 'id,name', ' sort ASC ', '', 20);
-            } else {
-                $article['tags'] = [];
-            }
-        }
-        return $article;
-    }
-
-    /*
-    ** 文章保存
-    */
-    public function articleSave($id, $param, $memberId)
-    {
-        $param['member_id'] = $memberId;
-        $param['created_at'] = TIMESTAMP;
-        $param['updated_at'] = TIMESTAMP;
-        if ($param['status'] == 1) {
-            $param['content'] = $param['drafts_content'];
-        }
-        $tags = $param['tags'];
-        unset($param['tags']);
-        if ($id == 0) {
-            $id = articleModels::getInstance()->insert($param);
-        } else {
-            articleModels::getInstance()->updateById($id, $param);
-        }
-        //暂时最多10个标签
-        $trs = tagsRelevanceModels::getInstance()->getByWhere(['article_id' => $id], 'id,tag_id', '', '', 10);
-        $trs = array_column($trs, 'id', 'tag_id');
-        if (!empty($tags)) {
-            foreach ($tags as $_tag) {
-                if ($_tag['id'] == 0) {
-                    $tag = tagsModels::getInstance()->getByWhere(['name' => $_tag['name']], 'id,name');
-                    if (empty($tag)) {
-                        $_tag['id'] = tagsModels::getInstance()->insert(
-                            [
-                                'name' => $_tag['name'],
-                                'status' => 1
-                            ]
-                        );
-                    } else {
-                        $_tag = $tag;
-                    }
-                }
-                if (isset($trs[$_tag['id']])) { //已经有的排除
-                    unset($trs[$_tag['id']]);
-                } else { //没有的插入
-                    tagsRelevanceModels::getInstance()->insert(['article_id' => $id, 'tag_id' => $_tag['id']]);
+                if (!in_array($__v['id'], $ids)) {
+                    $__v['type_desc'] = accountBookMsgModels::TYPE_MAP[$__v['type']];
+                    $list[] = $__v;
+                    $ids[] = $__v['id'];
                 }
             }
         }
-        if (!empty($trs)) { //多余的删除
-            foreach ($trs as $_k => $_v) {
-                tagsRelevanceModels::getInstance()->delById($_v);
-            }
-        }
-    }
-
-    /*
-    ** 删除文章
-    */
-    public function delArticle($id, $memberId, &$code, &$message)
-    {
-        $article = articleModels::getInstance()->getByWhere(['id' => $id], 'member_id');
-        if ($memberId != $article['member_id']) {
-            $code = -1;
-            $message = '只有作者本人可以删除';
-        } else {
-            articleModels::getInstance()->updateById($id, ['deleted_at' => TIMESTAMP]);
-        }
-        return new \stdClass();
-    }
-
-    /*
-    ** 发布于撤回
-    */
-    public function updateStatus($id, $status, $memberId, &$code, &$message)
-    {
-        $article = articleModels::getInstance()->getByWhere(['id' => $id], 'member_id,drafts_content');
-        if ($memberId != $article['member_id']) {
-            $code = -1;
-            $message = '只有作者本人可以操作';
-        } else {
-            if ($status == 1) { //发布
-                articleModels::getInstance()->updateById(
-                    $id,
-                    ['content' => $article['drafts_content'], 'status' => 1, 'updated_at' => TIMESTAMP]
-                );
-            } else { //撤回
-                articleModels::getInstance()->updateById($id, ['status' => 0, 'updated_at' => TIMESTAMP]);
-            }
-        }
-        return new \stdClass();
+        return ['list' => $list, 'mobile' => $member['mobile']];
     }
 }

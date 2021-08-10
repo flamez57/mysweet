@@ -11,6 +11,7 @@ use blogapi\models\memberModels;
 use hl\HLServices;
 use hl\library\Functions\Password;
 use hl\library\Session\HLSession;
+use Yaf\Exception;
 use zhangapi\models\accountBookMemberModels;
 use zhangapi\models\accountBookMsgModels;
 
@@ -58,6 +59,9 @@ class memberServices extends HLServices
         try {
             if (empty($member)) {
                 throw new \Exception('用户不存在', '-1');
+            }
+            if (empty($pwd)) {
+                $pwd = '888888';
             }
             if (Password::makePassword($pwd, $member['salt']) == $member['password']) {
                 $token = md5($mobile.$member['salt'].TIMESTAMP);
@@ -112,57 +116,111 @@ class memberServices extends HLServices
         return new \stdClass();
     }
 
-    /*
-    ** 编辑用用户信息
-    */
-    public function memberInfoForEdit($memberId)
-    {
-        $memberInfo = memberModels::getInstance()->getByWhere(
-            ['id' => $memberId],
-            'code,nickname,avatar,motto,home_page,github,qq,email,content'
-        );
-        return ['member_info' => $memberInfo];
-    }
-
-    /*
-    ** 修改信息
-    */
-    public function saveMemberInfo($param, $memberId)
-    {
-        $data = [
-            'nickname' => $param['nickname'],
-            'avatar' => $param['avatar'],
-            'motto' => $param['motto'],
-            'home_page' => $param['home_page'],
-            'github' => $param['github'],
-            'qq' => $param['qq'],
-            'email' => $param['email'],
-            'content' => $param['content'],
-        ];
-        memberModels::getInstance()->updateById($memberId, $data);
-    }
-
-    /*
-    ** 修改密码
-    */
-    public function setPwd($pwd, $pwdnew, $memberId, &$errCode, &$errMessage, &$data)
+    //改手机号
+    public function setMobile($mobile, $memberId, &$errCode, &$errMessage)
     {
         try {
-            $member = memberModels::getInstance()->getByWhere(['id' => $memberId], 'id,password,salt,status');
+            $member = accountBookMemberModels::getInstance()->getByWhere(
+                ['mobile' => $mobile],
+                'id'
+            );
+            if ($memberId != $member['id']) {
+                throw new \Exception('手机号已被使用过', '-1');
+            }
+            accountBookMemberModels::getInstance()->updateById($memberId, ['mobile' => $mobile]);
+            $errMessage = '修改成功';
+        } catch (\Exception $ex) {
+            $errCode = $ex->getCode();
+            $errMessage = $ex->getMessage();
+        }
+    }
+
+    //修改密码
+    public function setPwd($pwd, $memberId, &$errCode, &$errMessage)
+    {
+        try {
+            $member = accountBookMemberModels::getInstance()->getByWhere(['id' => $memberId], 'id');
             if (empty($member)) {
                 throw new \Exception('用户不存在', '-1');
             }
-            if ($member['status'] == 0) {
-                throw new \Exception('用户已被禁用', '-1');
-            }
-            if (Password::makePassword($pwd, $member['salt']) != $member['password']) {
-                throw new \Exception('原密码错误', '-1');
-            }
 
             $data['salt'] = Password::makeSalt();
-            $data['password'] = Password::makePassword($pwdnew, $data['salt']);
-            memberModels::getInstance()->updateById($memberId, $data);
+            $data['password'] = Password::makePassword($pwd, $data['salt']);
+            accountBookMemberModels::getInstance()->updateById($memberId, $data);
             $errMessage = '修改成功';
+        } catch (\Exception $ex) {
+            $errCode = $ex->getCode();
+            $errMessage = $ex->getMessage();
+        }
+    }
+
+    //申请改性别
+    public function setSex($memberId, &$code, &$message)
+    {
+         $member = accountBookMemberModels::getInstance()->getByWhere(
+            ['id' => $memberId],
+            'id,account_book_id,sex'
+        );
+        //查询另一半
+        $member['sex'] ^= 1;
+        $otherMember = accountBookMemberModels::getInstance()->getByWhere(
+            $member,
+            'id,mobile'
+        );
+        if (empty($otherMember)) { //不存在另一半直接改
+            accountBookMemberModels::getInstance()->updateById($memberId, $member);
+            $code = '1';
+            $message = '更改成功';
+        } else {
+            $data['type'] = accountBookMsgModels::TYPE_1;
+            $data['send_member_id'] = $member['id'];
+            $data['created_at'] = TIMESTAMP;
+            $data['accept_member_id'] = $otherMember['id'] ?? 1;
+            $data['accept_mobile'] = $otherMember['mobile'] ?? '17758023364';
+            accountBookMsgModels::getInstance()->insert($data);
+            $code = '1';
+            $message = '等待审核通过就可以更改性别';
+        }
+    }
+
+    /*
+        self::TYPE_2 => '对方请求退出账单',
+        self::TYPE_3 => '对方请求将您移出账单',
+        self::TYPE_4 => '对方请求加入您得账单',
+        self::TYPE_5 => '对方邀请您得账单（放弃自己账单加入）',
+        self::TYPE_6 => '您还没有关联账单是否创建新账单',*/
+    public function checkMsg($id, $status, $memberId, &$errCode, &$errMessage)
+    {
+        try {
+            $msg = accountBookMsgModels::getInstance()->getByWhere(['id' => $id], 'id,type,accept_member_id,send_member_id,accept_mobile');
+            $member = accountBookMemberModels::getInstance()->getByWhere(
+                ['id' => $memberId],
+                'id,mobile,sex'
+            );
+            if (empty($msg)) {
+                throw new \Exception('用户不存在', '-1');
+            }
+            if ($msg['accept_member_id'] != $memberId && $msg['accept_mobile'] != $member['mobile']) {
+                throw new \Exception('用户不存在', '-1');
+            }
+            if ($status == 0) { // 拒绝
+                accountBookMemberModels::getInstance()->delById($id);
+            } elseif ($status == 1) { //同意
+                switch ($msg['type']) {
+                    case accountBookMsgModels::TYPE_1:
+                        accountBookMemberModels::getInstance()->updateById($msg['send_member_id'], ['sex' => $member['sex']]);
+                        $member['sex'] ^= 1;
+                        accountBookMemberModels::getInstance()->updateById($memberId, ['sex' => $member['sex']]);
+                        $errMessage = '修改成功';
+                        break;
+                    case accountBookMsgModels::TYPE_7:
+                        $data['salt'] = Password::makeSalt();
+                        $data['password'] = Password::makePassword('888888', $data['salt']);
+                        accountBookMemberModels::getInstance()->updateById($msg['send_member_id'], $data);
+                        $errMessage = '初始化成功';
+                        break;
+                }
+            }
         } catch (\Exception $ex) {
             $errCode = $ex->getCode();
             $errMessage = $ex->getMessage();

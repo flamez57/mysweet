@@ -1,11 +1,7 @@
 <?php
 namespace zhangapi\controllers;
 
-use blogapi\services\articleServices;
-use blogapi\services\cateServices;
-use blogapi\services\diaryServices;
-use blogapi\services\memberServices;
-use blogapi\services\tagServices;
+use zhangapi\services\memberServices;
 use hl\library\Tools\HLResponse;
 use zhangapi\services\bookServices;
 
@@ -100,166 +96,39 @@ class ManageController extends BaseController
         HLResponse::json($this->code, $this->message, $this->data);
     }
 
-    /*
-    ** 修改密码保存
-    */
+    //改手机号
+    public function setMobileAction()
+    {
+        $mobile = $this->getPost('mobile', '');
+        memberServices::getInstance()->setMobile($mobile, $this->memberId, $this->code, $this->message);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
+    //改密码
     public function setPwdAction()
     {
         $pwd = $this->getPost('pwd', '');
-        $pwdnew = $this->getPost('pwd_new', '');
-        $pwdnew2 = $this->getPost('pwd_new2', '');
-        if ($pwdnew == $pwdnew2) {
-            memberServices::getInstance()->setPwd($pwd, $pwdnew, $this->memberId, $this->code, $this->message, $this->data);
-        } else {
-            $this->code = -1;
-            $this->message = '两次输入的密码不一致';
-        }
+        memberServices::getInstance()->setPwd($pwd, $this->memberId, $this->code, $this->message);
         HLResponse::json($this->code, $this->message, $this->data);
     }
 
-    /*
-    ** 图片上传
-    */
-    public function uploadImgAction()
+    //改性别
+    public function setSexAction()
     {
-        $y = date('Y');
-        $m = date('m');
-        $d = date('d');
-        $path = "./upload/{$y}/{$m}/{$d}/";
-        $upload = new \hl\library\Tools\Files\HLUploadFile($path, 'jpg,jpeg,png,gif,pdf');
-        if ($upload->upload('img')) {
-            $this->data['path'] = trim($path, '.');
-            //上传后的文件信息 name size type
-            $this->data['info'] = $upload->getFileInfo();
-            //上传后的文件名
-            $this->data['name'] = $upload->getFileName();
-            $this->data['domain'] = self::$config['common']['domain'];
-            $this->data['full_path'] = $this->data['domain'].$this->data['path'].$this->data['name'];
-        } else {
-            //失败的错误信息
-            $this->code = -1;
-            $this->message = $upload->getErrorMsg();
-        }
+        memberServices::getInstance()->setSex($this->memberId, $this->code, $this->message);
         HLResponse::json($this->code, $this->message, $this->data);
     }
 
-    /*
-    ** 文章列表
-    */
-    public function articleListAction()
-    {
-        $keyword = $this->getQuery('keyword', '');
-        $page = $this->getQuery('page', 1);
-        $pageSize = $this->getQuery('page_size', 20);
-        $type = $this->getQuery('type', 0); //0全部  1草稿  2发布  3回收站
-        $this->data = articleServices::getInstance()->articleList($page, $pageSize, $keyword, $type, $this->memberId);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
+    //移除
+    //邀请
+    //加入
 
-    /*
-    ** 文章详情
-    */
-    public function detailAction()
-    {
-        $id = $this->getQuery('id', 0);
-        $this->data = articleServices::getInstance()->articleDetail($id, $this->memberId);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 删除文章
-    */
-    public function delArticleAction()
-    {
-        $id = $this->getPost('id', 0);
-        $this->data = articleServices::getInstance()->delArticle($id, $this->memberId, $this->code, $this->message);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 发布退回文章
-    */
-    public function updateStatusAction()
+    //审核消息
+    public function checkMsgAction()
     {
         $id = $this->getPost('id', 0);
         $status = $this->getPost('status', 0);
-        $this->data = articleServices::getInstance()->updateStatus($id, $status, $this->memberId, $this->code, $this->message);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 分类下拉
-    */
-    public function cateSelectAction()
-    {
-        $this->data = cateServices::getInstance()->cateSelect();
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 标签下拉
-    */
-    public function tagSelectAction()
-    {
-        $this->data = tagServices::getInstance()->tagSelect();
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 分类列表
-    */
-    public function cateListAction()
-    {
-        $page = $this->getQuery('page', 1);
-        $pageSize = $this->getQuery('page_size', 20);
-        $this->data = cateServices::getInstance()->cateList($page, $pageSize, $this->memberId);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 分类详情
-    */
-    public function cateDetailAction()
-    {
-        $id = $this->getQuery('id', 0);
-        $this->data = cateServices::getInstance()->cateDetail($id);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 分类保存
-    */
-    public function saveCateAction()
-    {
-        $id = $this->getPost('id', 0);
-        $param['name'] = $this->getPost('name', '');
-        $param['sort'] = $this->getPost('sort', 0);
-        $param['status'] = $this->getPost('status', 1);
-        $this->data = cateServices::getInstance()->saveCate($id, $param, $this->code, $this->message);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 日记列表
-    */
-    public function diaryListAction()
-    {
-        $page = $this->getQuery('page', 1);
-        $pageSize = $this->getQuery('page_size', 20);
-        $param['year'] = $this->getQuery('year', date('Y'));
-        $param['mon'] = $this->getQuery('mon', '');
-        $param['day'] = $this->getQuery('day', '');
-        $this->data = diaryServices::getInstance()->diaryList($page, $pageSize, $param, $this->memberId);
-        HLResponse::json($this->code, $this->message, $this->data);
-    }
-
-    /*
-    ** 日记保存
-    */
-    public function addDiaryAction()
-    {
-        $content = $this->getPost('content', '');
-        $this->data = diaryServices::getInstance()->addDiary($content, $this->memberId);
+        memberServices::getInstance()->checkMsg($id, $status, $this->memberId, $this->code, $this->message);
         HLResponse::json($this->code, $this->message, $this->data);
     }
 
