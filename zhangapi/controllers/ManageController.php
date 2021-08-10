@@ -128,7 +128,20 @@ class ManageController extends BaseController
     }
 
     //邀请
+    public function inviteAction()
+    {
+        $mobile = $this->getPost('mobile', '');
+        memberServices::getInstance()->invite($mobile, $this->memberId, $this->code, $this->message);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
     //加入
+    public function joininAction()
+    {
+        $mobile = $this->getPost('mobile', '');
+        memberServices::getInstance()->joinin($mobile, $this->memberId, $this->code, $this->message);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
 
     //审核消息
     public function checkMsgAction()

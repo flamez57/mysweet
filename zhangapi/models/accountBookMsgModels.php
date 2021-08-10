@@ -32,7 +32,7 @@ class accountBookMsgModels extends HLModel
         self::TYPE_2 => '对方请求退出账单',
         self::TYPE_3 => '对方请求将您移出账单',
         self::TYPE_4 => '对方请求加入您得账单',
-        self::TYPE_5 => '对方邀请您得账单（放弃自己账单加入）',
+        self::TYPE_5 => '对方邀请您加入账单（放弃自己账单加入）',
         self::TYPE_6 => '您还没有关联账单是否创建新账单',
         self::TYPE_7 => '对方忘记密码，请求初始化密码',
     ];

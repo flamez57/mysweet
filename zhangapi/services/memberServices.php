@@ -221,9 +221,84 @@ class memberServices extends HLServices
         }
     }
 
-    /*
-        self::TYPE_4 => '对方请求加入您得账单',
-        self::TYPE_5 => '对方邀请您得账单（放弃自己账单加入）',*/
+    //邀请
+    public function invite($mobile, $memberId, &$errCode, &$errMessage)
+    {
+        try {
+            if ($this->checkMember($memberId, 0)) {
+                $data['type'] = accountBookMsgModels::TYPE_5;
+                $data['send_member_id'] = $memberId;
+                $data['created_at'] = TIMESTAMP;
+                $data['accept_member_id'] = 0;
+                $data['accept_mobile'] = $mobile;
+                accountBookMsgModels::getInstance()->insert($data);
+                $errCode = '1';
+                $errMessage = '等待审核通过就可以加入';
+            } else {
+                throw new \Exception('请先移除另一半', '-1');
+            }
+        } catch (\Exception $ex) {
+            $errCode = $ex->getCode();
+            $errMessage = $ex->getMessage();
+        }
+    }
+
+    //加入
+    public function joinin($mobile, $memberId, &$errCode, &$errMessage)
+    {
+        try {
+            if ($this->checkMember($memberId, 0)) {
+                $data['type'] = accountBookMsgModels::TYPE_4;
+                $data['send_member_id'] = $memberId;
+                $data['created_at'] = TIMESTAMP;
+                $data['accept_member_id'] = 0;
+                $data['accept_mobile'] = $mobile;
+                accountBookMsgModels::getInstance()->insert($data);
+            } else {
+                throw new \Exception('请先退出原来账单', '-1');
+            }
+        } catch (\Exception $ex) {
+            $errCode = $ex->getCode();
+            $errMessage = $ex->getMessage();
+        }
+    }
+
+    //检测双方都是单
+    private function checkMember($memberId, $memberId2)
+    {
+        $member = accountBookMemberModels::getInstance()->getByWhere(
+            ['id' => $memberId],
+            'id,account_book_id,sex'
+        );
+        //查询另一半
+        $member['sex'] ^= 1;
+        $otherMember = accountBookMemberModels::getInstance()->getByWhere(
+            $member,
+            'id,mobile'
+        );
+        if (!empty($otherMember)) {
+            return false;
+        }
+
+        $member2 = accountBookMemberModels::getInstance()->getByWhere(
+            ['id' => $memberId2],
+            'id,account_book_id,sex'
+        );
+        //查询另一半
+        if (!empty($member2)) {
+            $member2['sex'] ^= 1;
+            $otherMember2 = accountBookMemberModels::getInstance()->getByWhere(
+                $member2,
+                'id,mobile'
+            );
+            if (!empty($otherMember2)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // 处理信息
     public function checkMsg($id, $status, $memberId, &$errCode, &$errMessage)
     {
         try {
@@ -241,7 +316,7 @@ class memberServices extends HLServices
 
             $member = accountBookMemberModels::getInstance()->getByWhere(
                 ['id' => $memberId],
-                'id,mobile,sex'
+                'id,mobile,sex,account_book_id'
             );
             if (empty($msg)) {
                 throw new \Exception('不存在', '-1');
@@ -268,6 +343,33 @@ class memberServices extends HLServices
                         $book = accountBookModels::getInstance()->getByWhere(['member_id' => $memberId], 'id');
                         accountBookMemberModels::getInstance()->updateById($memberId, ['account_book_id' => $book['id'] ?? 0]);
                         $errMessage = '移除成功';
+                        break;
+                    case accountBookMsgModels::TYPE_4:
+                        if ($this->checkMember($memberId, $msg['send_member_id'])) {
+                            accountBookMemberModels::getInstance()->updateById(
+                                $msg['send_member_id'],
+                                ['account_book_id' => $member['account_book_id'], 'sex' => $member['sex']^1]
+                            );
+                            $errMessage = '加入成功';
+                        } else {
+                            throw new \Exception('请先退出原来账单', '-1');
+                        }
+                        break;
+                    case accountBookMsgModels::TYPE_5:
+                        if ($this->checkMember($memberId, $msg['send_member_id'])) {
+                            //对方信息
+                            $otherMember = accountBookMemberModels::getInstance()->getByWhere(
+                                ['id' => $msg['send_member_id']],
+                                'id,mobile,sex,account_book_id'
+                            );
+                            accountBookMemberModels::getInstance()->updateById(
+                                $memberId,
+                                ['account_book_id' => $otherMember['account_book_id'], 'sex' => $otherMember['sex']^1]
+                            );
+                            $errMessage = '加入成功';
+                        } else {
+                            throw new \Exception('请先退出原来账单', '-1');
+                        }
                         break;
                     case accountBookMsgModels::TYPE_6:
                         $bookId = accountBookModels::getInstance()->insert(['member_id' => $memberId, 'created_at' => TIMESTAMP]);
