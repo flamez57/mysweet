@@ -16,6 +16,8 @@ use blogapi\models\tagsRelevanceModels;
 use blogapi\models\tagsModels;
 use hl\HLServices;
 use zhangapi\models\accountBookLogModels;
+use zhangapi\models\accountBookMemberModels;
+use zhangapi\models\accountBookMsgModels;
 
 class bookServices extends HLServices
 {
@@ -182,6 +184,84 @@ class bookServices extends HLServices
         }
         $data['list'] = $list;
         return $data;
+    }
+
+    //类型列表
+    public function typeList()
+    {
+        $map = accountBookLogModels::TYPE_MAP;
+        foreach ($map as $_k => $_map) {
+            $maps[] = ['id' => $_k, 'name' => $_map];
+        }
+        return ['list' => $maps];
+    }
+
+    //对象列表
+    public function objList()
+    {
+        $obj = accountBookLogModels::OBJ_MAP;
+        foreach ($obj as $_k => $_obj) {
+            $objs[] = ['id' => $_k, 'name' => $_obj];
+        }
+        return ['list' => $objs];
+    }
+
+    //年月选项
+    public function yearMonth()
+    {
+        $nowYear = date('Y');
+        for ($i = 2021; $i <= $nowYear; $i++) {
+            $years[] = ['id' => $i, 'name' => $i.'年'];
+        }
+        $months = [
+            ['id' => '01', 'name' => '一月'],
+            ['id' => '02', 'name' => '二月'],
+            ['id' => '03', 'name' => '三月'],
+            ['id' => '04', 'name' => '四月'],
+            ['id' => '05', 'name' => '五月'],
+            ['id' => '06', 'name' => '六月'],
+            ['id' => '07', 'name' => '七月'],
+            ['id' => '08', 'name' => '八月'],
+            ['id' => '09', 'name' => '九月'],
+            ['id' => '10', 'name' => '十月'],
+            ['id' => '11', 'name' => '冬月'],
+            ['id' => '12', 'name' => '腊月'],
+        ];
+        return ['years' => $years, 'month' => $months];
+    }
+
+    //消息列表
+    public function messageList($memberId)
+    {
+        $member = accountBookMemberModels::getInstance()->getByWhere(['id' => $memberId], 'mobile');
+        $list1 = accountBookMsgModels::getInstance()->getByWhere(
+            ['accept_member_id' => $memberId, 'accept_mobile' => ''],
+            'id,type,created_at',
+            '',
+            '',
+            100
+        );
+        $list2 = accountBookMsgModels::getInstance()->getByWhere(
+            ['accept_member_id' => 0, 'accept_mobile' => $member['mobile']],
+            'id,type,created_at',
+            '',
+            '',
+            100
+        );
+        $list = [];
+        if (!empty($list1)) {
+            foreach ($list1 as $_v) {
+                $_v['type_desc'] = accountBookMsgModels::TYPE_MAP[$_v['type']];
+                $list[] = $_v;
+            }
+        }
+        if (!empty($list2)) {
+            foreach ($list2 as $__v) {
+                $__v['type_desc'] = accountBookMsgModels::TYPE_MAP[$__v['type']];
+                $list[] = $__v;
+            }
+        }
+        return ['list' => $list];
     }
 
     /*

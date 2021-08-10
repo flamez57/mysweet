@@ -72,6 +72,34 @@ class ManageController extends BaseController
         HLResponse::json($this->code, $this->message, $this->data);
     }
 
+    //类型选项 http://mysweet.com/index.php?m=zhangapi&c=manage&a=typeList
+    public function typeListAction()
+    {
+        $this->data = bookServices::getInstance()->typeList();
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
+    //对象选项 http://mysweet.com/index.php?m=zhangapi&c=manage&a=objList
+    public function objListAction()
+    {
+        $this->data = bookServices::getInstance()->objList();
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
+    //年月下拉选项 http://mysweet.com/index.php?m=zhangapi&c=manage&a=yearMonth
+    public function yearMonthAction()
+    {
+        $this->data = bookServices::getInstance()->yearMonth();
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
+    //待审核消息
+    public function messageAction()
+    {
+        $this->data = bookServices::getInstance()->messageList($this->memberId);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
     /*
     ** 修改密码保存
     */
