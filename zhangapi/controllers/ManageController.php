@@ -120,6 +120,13 @@ class ManageController extends BaseController
     }
 
     //移除
+    public function moveAction()
+    {
+        $self = $this->getPost('self', 0);
+        memberServices::getInstance()->move($self, $this->memberId, $this->code, $this->message);
+        HLResponse::json($this->code, $this->message, $this->data);
+    }
+
     //邀请
     //加入
 

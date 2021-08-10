@@ -233,7 +233,7 @@ class bookServices extends HLServices
     //消息列表
     public function messageList($memberId)
     {
-        $member = accountBookMemberModels::getInstance()->getByWhere(['id' => $memberId], 'mobile');
+        $member = accountBookMemberModels::getInstance()->getByWhere(['id' => $memberId], 'mobile,account_book_id');
         $list1 = accountBookMsgModels::getInstance()->getByWhere(
             ['accept_member_id' => $memberId],
             'id,type,created_at',
@@ -249,6 +249,16 @@ class bookServices extends HLServices
             100
         );
         $list = [];
+        $book = accountBookModels::getInstance()->getByWhere(['member_id' => $memberId], 'id');
+        if ($member['account_book_id'] == 0 && empty($book)) {
+            $list[] = [
+                'id' => '0',
+                'type' => accountBookMsgModels::TYPE_6,
+                'type_desc' => accountBookMsgModels::TYPE_MAP[accountBookMsgModels::TYPE_6],
+                'created_at' => TIMESTAMP
+            ];
+        }
+
         $ids = [];
         if (!empty($list1)) {
             foreach ($list1 as $_v) {

@@ -13,6 +13,7 @@ use hl\library\Functions\Password;
 use hl\library\Session\HLSession;
 use Yaf\Exception;
 use zhangapi\models\accountBookMemberModels;
+use zhangapi\models\accountBookModels;
 use zhangapi\models\accountBookMsgModels;
 
 class memberServices extends HLServices
@@ -183,25 +184,70 @@ class memberServices extends HLServices
         }
     }
 
+    //移除
+    public function move($self, $memberId, &$errCode, &$errMessage)
+    {
+        $member = accountBookMemberModels::getInstance()->getByWhere(
+            ['id' => $memberId],
+            'id,account_book_id,sex'
+        );
+        //查询另一半
+        $member['sex'] ^= 1;
+        $otherMember = accountBookMemberModels::getInstance()->getByWhere(
+            $member,
+            'id,mobile'
+        );
+        if (empty($otherMember)) { //不存在另一半直接改
+            $errCode = '-1';
+            $errMessage = '无法移除';
+        } else {
+            $book = accountBookModels::getInstance()->getByWhere(['id' => $member['account_book_id']], 'member_id');
+            if ($self == 1 && $book['member_id'] == $memberId) {
+                $errCode = '-1';
+                $errMessage = '无法移除';
+            } elseif ($self == 0 && $book['member_id'] == $otherMember['id']) {
+                $errCode = '-1';
+                $errMessage = '无法移除';
+            } else {
+                $data['type'] = $self == 1 ? accountBookMsgModels::TYPE_2 : accountBookMsgModels::TYPE_3;
+                $data['send_member_id'] = $member['id'];
+                $data['created_at'] = TIMESTAMP;
+                $data['accept_member_id'] = $otherMember['id'] ?? 1;
+                $data['accept_mobile'] = $otherMember['mobile'] ?? '17758023364';
+                accountBookMsgModels::getInstance()->insert($data);
+                $errCode = '1';
+                $errMessage = '等待审核通过就可以移除';
+            }
+        }
+    }
+
     /*
-        self::TYPE_2 => '对方请求退出账单',
-        self::TYPE_3 => '对方请求将您移出账单',
         self::TYPE_4 => '对方请求加入您得账单',
-        self::TYPE_5 => '对方邀请您得账单（放弃自己账单加入）',
-        self::TYPE_6 => '您还没有关联账单是否创建新账单',*/
+        self::TYPE_5 => '对方邀请您得账单（放弃自己账单加入）',*/
     public function checkMsg($id, $status, $memberId, &$errCode, &$errMessage)
     {
         try {
-            $msg = accountBookMsgModels::getInstance()->getByWhere(['id' => $id], 'id,type,accept_member_id,send_member_id,accept_mobile');
+            if ($id == 0) {
+                $msg = [
+                    'id' => 0,
+                    'type' => accountBookMsgModels::TYPE_6,
+                ];
+            } else {
+                $msg = accountBookMsgModels::getInstance()->getByWhere(
+                    ['id' => $id],
+                    'id,type,accept_member_id,send_member_id,accept_mobile'
+                );
+            }
+
             $member = accountBookMemberModels::getInstance()->getByWhere(
                 ['id' => $memberId],
                 'id,mobile,sex'
             );
             if (empty($msg)) {
-                throw new \Exception('用户不存在', '-1');
+                throw new \Exception('不存在', '-1');
             }
             if ($msg['accept_member_id'] != $memberId && $msg['accept_mobile'] != $member['mobile']) {
-                throw new \Exception('用户不存在', '-1');
+                throw new \Exception('不存在', '-1');
             }
             if ($status == 0) { // 拒绝
                 accountBookMemberModels::getInstance()->delById($id);
@@ -212,6 +258,21 @@ class memberServices extends HLServices
                         $member['sex'] ^= 1;
                         accountBookMemberModels::getInstance()->updateById($memberId, ['sex' => $member['sex']]);
                         $errMessage = '修改成功';
+                        break;
+                    case accountBookMsgModels::TYPE_2:
+                        $book = accountBookModels::getInstance()->getByWhere(['member_id' => $msg['send_member_id']], 'id');
+                        accountBookMemberModels::getInstance()->updateById($msg['send_member_id'], ['account_book_id' => $book['id'] ?? 0]);
+                        $errMessage = '移除成功';
+                        break;
+                    case accountBookMsgModels::TYPE_3:
+                        $book = accountBookModels::getInstance()->getByWhere(['member_id' => $memberId], 'id');
+                        accountBookMemberModels::getInstance()->updateById($memberId, ['account_book_id' => $book['id'] ?? 0]);
+                        $errMessage = '移除成功';
+                        break;
+                    case accountBookMsgModels::TYPE_6:
+                        $bookId = accountBookModels::getInstance()->insert(['member_id' => $memberId, 'created_at' => TIMESTAMP]);
+                        accountBookMemberModels::getInstance()->updateById($memberId, ['account_book_id' => $bookId]);
+                        $errMessage = '创建成功';
                         break;
                     case accountBookMsgModels::TYPE_7:
                         $data['salt'] = Password::makeSalt();
